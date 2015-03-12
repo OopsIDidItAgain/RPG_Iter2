@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Items;
+package com.oopsididitagain.rpg_iter2.models.items;
 
 /**
  * Created by parango on 3/11/15.
