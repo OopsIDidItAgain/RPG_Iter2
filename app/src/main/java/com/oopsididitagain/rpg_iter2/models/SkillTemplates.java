@@ -13,8 +13,8 @@ import com.oopsididitagain.rpg_iter2.models.Items.Item;
 
 
 public class SkillTemplates {
-	public static void applySkill(Item item, Discount discount){
-		item.applyDiscount(discount);
+	public static void applySkill(Inventory inventory, Discount discount){
+		inventory.applyDiscount(discount);
 	}
 
 	public static void applySkill(Entity entity, EntityStatusModifier modifier){

@@ -1,4 +1,5 @@
 package com.oopsididitagain.rpg_iter2.models;
+import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
 /*
  * This is the class that holds a particular skill, I specified that all
  * skills multipliers would initially be set to one, but we can change that if 
@@ -14,12 +15,15 @@ public class Skill {
 	Effect effect;
 	boolean passive;
 	
-	public Skill(String name, Effect effect){//add the passive thingy
-		this.effect = effect;
+	public Skill(String name ){//add the passive thingy
 		this.name = name;
 		this.multiplier = 1;
 		applyMultiplier();
 	}
+	public void setEffect(Effect effect){
+		this.effect = effect;	
+	}
+	
 	public String getName(){
 		return name;
 	}
@@ -29,6 +33,9 @@ public class Skill {
 	public void increaseMultiplier(){
 		this.multiplier++;
 		applyMultiplier();
+	}
+	public Effect getEffect() {
+		return effect;
 	}
 
 }

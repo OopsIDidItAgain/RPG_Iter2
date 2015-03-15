@@ -7,7 +7,7 @@ import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
  * Tess added the price, I think every Item should have a price
  * so that every entity can trade.
  */
-public abstract class Item {
+public class Item {
 	double price;
 	public Item(double price){
 		this.price = price;

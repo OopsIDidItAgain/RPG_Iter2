@@ -1,15 +1,15 @@
 package com.oopsididitagain.rpg_iter2.models.Entities;
-
+import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Effects.EntityStatusModifier;
-
 
 /**
  * Created by parango on 3/11/15.
  */
 public abstract class Entity {
-	private EntityStatus entityStatus;
-	private Position position;
+	protected EntityStatus entityStatus;
+	protected Position position;
+	Inventory inventory;
 	public Entity(Position position){
 		this.position = position;
 		this.entityStatus = new EntityStatus(EntityStatus.PLAYING);
@@ -31,5 +31,9 @@ public abstract class Entity {
 	}
 	public void setEntityStatus(EntityStatus entityStatus) {
 		this.entityStatus = entityStatus;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
 	}
 }

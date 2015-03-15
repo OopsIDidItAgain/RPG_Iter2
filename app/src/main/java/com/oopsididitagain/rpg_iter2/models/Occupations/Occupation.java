@@ -1,5 +1,8 @@
 package com.oopsididitagain.rpg_iter2.models.Occupations;
 
-public abstract class Occupation {
+import java.util.Map;
+import com.oopsididitagain.rpg_iter2.models.Skill;
 
+public abstract class Occupation {
+	public abstract void giveSkills(Map<String,Skill> skillMap);
 }
