@@ -71,6 +71,6 @@ public class AvatarCreationController extends Controller{
 	private void switchControllers(GameController controller){
 		controller.setAvatar(this.avatar);
 		controller.setMap(this.gameMap);
-		
+		//gameMap.notifyObserver();
 	}
 }
