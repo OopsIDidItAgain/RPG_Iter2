@@ -1,24 +1,20 @@
 package com.oopsididitagain.rpg_iter2.views;
 
+import java.util.LinkedList;
+
 import com.oopsididitagain.rpg_iter2.Menu.MainMenu;
-import com.oopsididitagain.rpg_iter2.utils.Observer;
+import com.oopsididitagain.rpg_iter2.utils.MenuObserver;
 
 /**
  * Main Menu when game sta
  *
  * Created by parango on 3/11/15.
  */
-public class MainMenuView implements Observer{
-	MainMenu menu = new MainMenu();
-	int currentOption;
-	public MainMenuView(MainMenu menu){
-		this.menu = menu;
-		this.currentOption = menu.getCurrentOption();
-	}
+public class MainMenuView implements MenuObserver{
+	
 	@Override
-	public void update() {
-		currentOption = menu.getOption();
-		
+	public void update(LinkedList<String>options, int size, int currentOption) {
+	
 		
 	}
 }

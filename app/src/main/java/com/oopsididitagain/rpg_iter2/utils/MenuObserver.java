@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.utils;
 
-import java.awt.List;
+import java.util.LinkedList;
 
 public interface MenuObserver {
-	public void update(List<String> options,int size, int currentOption);
+	public void update(LinkedList<String> options,int size, int currentOption);
 }
