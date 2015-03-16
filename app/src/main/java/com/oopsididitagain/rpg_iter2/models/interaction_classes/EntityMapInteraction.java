@@ -1,10 +1,10 @@
-package com.oopsididitagain.rpg_iter2.models.InteractionClasses;
+package com.oopsididitagain.rpg_iter2.models.interaction_classes;
 
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.Entities.SkilledEntity;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 /*

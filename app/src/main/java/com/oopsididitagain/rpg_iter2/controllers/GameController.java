@@ -1,8 +1,8 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.Entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.InteractionClasses.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 
 /**
  * In charge of handling input while playing game

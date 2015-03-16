@@ -3,12 +3,10 @@ package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.InteractionClasses.EntityMapInteraction;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Smasher;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Sneak;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Summoner;
-import com.oopsididitagain.rpg_iter2.utils.KeyCode;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
+import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
+import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
 
 public class AvatarCreationController extends Controller{
 	public static AvatarCreationController instance;

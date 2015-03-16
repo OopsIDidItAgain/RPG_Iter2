@@ -1,7 +1,7 @@
-package com.oopsididitagain.rpg_iter2.models.Entities;
+package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 
 /**
  * Created by parango on 3/11/15.

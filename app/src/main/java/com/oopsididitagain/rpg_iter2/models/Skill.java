@@ -1,5 +1,5 @@
 package com.oopsididitagain.rpg_iter2.models;
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
+
 /*
  * This is the class that holds a particular skill, I specified that all
  * skills multipliers would initially be set to one, but we can change that if 
@@ -7,7 +7,8 @@ import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
  * It has a name so that, we can look up the skill in the hashmap of the avatar,
  * we might want to predefine them though, to protect from mispelling.
  */
-import com.oopsididitagain.rpg_iter2.models.Effects.Effect;
+import com.oopsididitagain.rpg_iter2.models.effects.Effect;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 
 public class Skill {
 	String name;

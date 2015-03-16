@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Effects;
+package com.oopsididitagain.rpg_iter2.models.effects;
 
 /*
  * This class is used to change the status of an Entity with "enchant", we can
@@ -8,8 +8,8 @@ package com.oopsididitagain.rpg_iter2.models.Effects;
  */
 import java.util.Timer;
 import java.util.TimerTask;
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.Entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 
 public class EntityStatusModifier implements Effect{
 	int secondsAlterationInEffect = 5;

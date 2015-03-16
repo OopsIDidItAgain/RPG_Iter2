@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Effects;
+package com.oopsididitagain.rpg_iter2.models.effects;
 /*
  * This is the class that all effects of skills should implement
  * 

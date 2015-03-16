@@ -1,6 +1,6 @@
-package com.oopsididitagain.rpg_iter2.models.Items;
+package com.oopsididitagain.rpg_iter2.models.items;
 
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 
 /**
  * Created by parango on 3/11/15.

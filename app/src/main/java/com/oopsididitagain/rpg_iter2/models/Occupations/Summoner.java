@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Occupations;
+package com.oopsididitagain.rpg_iter2.models.occupations;
 
 import java.util.Map;
 

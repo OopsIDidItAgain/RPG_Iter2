@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Effects;
+package com.oopsididitagain.rpg_iter2.models.effects;
 /*
  * This class is used to discount items when using the bargain effect
  * I'm imagining that the entities can set the discount they want to apply to all

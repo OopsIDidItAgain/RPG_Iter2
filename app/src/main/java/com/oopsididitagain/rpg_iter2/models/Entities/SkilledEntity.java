@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Entities;
+package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.utils.Direction;

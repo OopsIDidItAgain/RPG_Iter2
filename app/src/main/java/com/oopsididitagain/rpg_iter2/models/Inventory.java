@@ -7,8 +7,8 @@ package com.oopsididitagain.rpg_iter2.models;
 
 import java.util.LinkedList;
 
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
-import com.oopsididitagain.rpg_iter2.models.Items.Item;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.items.Item;
 
 public class Inventory {
 
