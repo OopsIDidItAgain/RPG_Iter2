@@ -1,6 +1,4 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
-
-import java.util.LinkedList;
 import java.util.Observable;
 
 /**
