@@ -29,9 +29,17 @@ import java.util.Observable;
 
 
 public class MainMenu extends Observable {
-	LinkedList<String> options;
-	int size;
-	int currentOption;
+	private String options[];
+	private int size;
+	private int currentOption;
+
+    public MainMenu(){
+        options = new String[]{"New Game", "Load Game"};
+        size = 2;
+        currentOption = 0;
+        notifyObservers();
+    }
+
 
 
 }
