@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.controllers;
+package com.oopsididitagain.rpg_iter2.controllers.menus;
 
 /**
  * Handles input while in pause menus

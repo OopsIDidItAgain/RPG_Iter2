@@ -3,40 +3,31 @@ package com.oopsididitagain.rpg_iter2.models;
 import java.util.ArrayList;
 import java.lang.IndexOutOfBoundsException;
 import java.lang.NullPointerException;
-import com.oopsididitagain.rpg_iter2.models.Items.Item;
-/**
- * Created by parango on 3/11/15.
- * 
- */
-
-import java.util.LinkedList;
-
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.items.Item;
 
 public class Inventory {
-<<<<<<< HEAD
 	
-	private ArrayList<Item> itemList;
+	private ArrayList<Item> inventory;
 	private int selected;
 	
 	public Inventory() {
-		itemList = new ArrayList<Item>();
+        inventory = new ArrayList<Item>();
 		selected = -1;
 	}
 	
 	public void add(Item item) {
-		itemList.add(item);
+        inventory.add(item);
 	}
 	
 	public boolean remove(Item item) {
-		return itemList.remove(item);
+		return inventory.remove(item);
 	}
 	
 	public Item getItem(int index) throws NullPointerException {
 		Item item = null;
 		try {
-			item = itemList.get(index);
+			item = inventory.get(index);
 		} catch(IndexOutOfBoundsException e) {
 			/*
 			 * Should never happen.
@@ -56,7 +47,7 @@ public class Inventory {
 	public Item getSelectedItem() {
 		Item item = null;
 		if(selected > -1) {
-			item = itemList.get(selected);
+			item = inventory.get(selected);
 		}
 		return item;
 	}
@@ -66,17 +57,9 @@ public class Inventory {
 	}
 	
 	public int getNumberOfItems() {
-		return itemList.size();
+		return inventory.size();
 	}
-	
-}
-=======
 
-	private LinkedList<Item> inventory = new LinkedList<Item>();
-
-	public Inventory() {
-
-	}
 
 	public void addItem(Item item){
 		inventory.add(item);
@@ -89,4 +72,3 @@ public class Inventory {
 
 	}
 }
->>>>>>> f6e0f8d26bd89dbb00281c4bdd0726b55307d17f
