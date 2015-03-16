@@ -9,20 +9,22 @@ import java.util.Map;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
-import com.oopsididitagain.rpg_iter2.models.Effects.Effect;
 import com.oopsididitagain.rpg_iter2.models.Occupations.Occupation;
+import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.Stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
+import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 
-public class Avatar extends Entity implements SkilledEntity{
+public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 
 	private Map<String, Skill> map = new HashMap<String, Skill>();
 	private Occupation occupation;
+	private StatCollection stats;
 
 	public Avatar(Position position) {
 		super(position);
 	}
-
-
 
 	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;
@@ -62,13 +64,14 @@ public class Avatar extends Entity implements SkilledEntity{
 		return map.get(skill);
 	}
 
-
+	public void accept(InstantStatModifier modifier) {
+		stats.mergeBlob(modifier.statBlob());
+	}
 
 	@Override
-	public Position getPostion() {
-		return position;
+	public StatBlob statBlob() {
+		return stats.getBlob();
 	}
-	
 	
 
 }
