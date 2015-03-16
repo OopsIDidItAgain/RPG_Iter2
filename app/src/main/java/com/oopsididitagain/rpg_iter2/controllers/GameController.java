@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
-import com.oopsididitagain.rpg_iter2.controllers.menus.AvatarCreationMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;

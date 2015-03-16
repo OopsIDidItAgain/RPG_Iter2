@@ -6,7 +6,7 @@ import com.oopsididitagain.rpg_iter2.utils.observable.Observer;
 
 
 /**
- * Main menus when game starts
+ * Main menu_controllers when game starts
  *
  * Created by parango on 3/11/15.
  */
