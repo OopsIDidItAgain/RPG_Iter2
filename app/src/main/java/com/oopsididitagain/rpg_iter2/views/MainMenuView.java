@@ -1,20 +1,21 @@
 package com.oopsididitagain.rpg_iter2.views;
 
 import java.util.LinkedList;
-
-import com.oopsididitagain.rpg_iter2.utils.observable.Observer;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
- * Main menu_controllers when game starts
  *
- * Created by parango on 3/11/15.
+ * void	update(Observable o, Object arg) This method is called whenever the observed object is changed.
+ *
  */
 public class MainMenuView implements Observer {
-	
-	@Override
-	public void update(LinkedList<String>options, int size, int currentOption) {
-	
-		
-	}
+
+
+    @Override
+    public void update(Observable obj, Object arg) {
+
+
+    }
 }
