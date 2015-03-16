@@ -4,24 +4,19 @@ import java.util.Collection;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
-import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
+import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
-public class TakeableItem extends PositionedItem implements EntityVisitable {
+public class TakeableItem extends PositionedItem implements EntityVisitable, Priceable {
 
 	private boolean taken;
+	private double price;
 
-	public TakeableItem(String id, Position position) {
+	public TakeableItem(String id, Position position, double price) {
 		super(id, position);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public Direction getDirection() {
-		// TODO Auto-generated method stub
-		return null;
+		this.price = price;
 	}
 
 	@Override
@@ -37,6 +32,11 @@ public class TakeableItem extends PositionedItem implements EntityVisitable {
 	public void take() throws ItemAlreadyTakenException {
 		if (taken) throw new ItemAlreadyTakenException("Item: " + getId());
 		taken = true;
+	}
+
+	@Override
+	public double price() {
+		return price;
 	}
 
 }

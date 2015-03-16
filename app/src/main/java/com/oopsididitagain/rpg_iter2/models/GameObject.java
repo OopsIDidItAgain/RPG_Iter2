@@ -3,7 +3,7 @@ package com.oopsididitagain.rpg_iter2.models;
 public abstract class GameObject {
 	private String id;
 
-	public GameObject(String id) {
+	protected GameObject(String id) {
 		this.id = id;
 	}
 	

@@ -67,8 +67,8 @@ public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 	}
 
 	@Override
-	public void accept(InstantStatModifier modifier) {
-		modifier.affect(this);
+	public void visit(InstantStatModifier modifier) {
+		modifier.affect(statBlob());
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 			ex.printStackTrace();
 			return;
 		}
-		inventory.addItem(item);
+		inventory.add(item);
 	}
 	
 
