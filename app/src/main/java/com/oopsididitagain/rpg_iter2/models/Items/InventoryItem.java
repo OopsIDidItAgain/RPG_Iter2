@@ -8,6 +8,7 @@ public abstract class InventoryItem extends GameObject {
 		super(id);
 	}
 	
+	// Should this be Tile destination?
 	//public abstract PositionedItem drop(Position destination);
 
 }

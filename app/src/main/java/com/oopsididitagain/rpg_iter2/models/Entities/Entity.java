@@ -2,7 +2,9 @@ package com.oopsididitagain.rpg_iter2.models.Entities;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
 
 /**
@@ -48,4 +50,8 @@ public abstract class Entity implements Positionable {
 	public Inventory getInventory() {
 		return inventory;
 	}
+	
+	public abstract void visit(TakeableItem item);
+	public abstract void visit(InstantStatModifier modifier);
+	
 }

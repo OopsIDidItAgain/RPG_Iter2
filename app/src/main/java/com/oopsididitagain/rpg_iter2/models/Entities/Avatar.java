@@ -9,11 +9,13 @@ import java.util.Map;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.Occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
+import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 
 public class Avatar extends Entity implements SkilledEntity, StatModifiable {
@@ -64,13 +66,25 @@ public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 		return map.get(skill);
 	}
 
+	@Override
 	public void accept(InstantStatModifier modifier) {
-		stats.mergeBlob(modifier.statBlob());
+		modifier.affect(this);
 	}
 
 	@Override
 	public StatBlob statBlob() {
 		return stats.getBlob();
+	}
+
+	@Override
+	public void visit(TakeableItem item) {
+		try {
+			item.take();
+		} catch (ItemAlreadyTakenException ex) {
+			ex.printStackTrace();
+			return;
+		}
+		inventory.addItem(item);
 	}
 	
 
