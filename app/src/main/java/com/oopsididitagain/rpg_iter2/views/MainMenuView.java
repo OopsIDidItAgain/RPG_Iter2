@@ -2,11 +2,11 @@ package com.oopsididitagain.rpg_iter2.views;
 
 import java.util.LinkedList;
 
-import com.oopsididitagain.rpg_iter2.Menu.MainMenu;
-import com.oopsididitagain.rpg_iter2.utils.MenuObserver;
+import com.oopsididitagain.rpg_iter2.Observable.MenuObserver;
+
 
 /**
- * Main Menu when game sta
+ * Main Menu when game starts
  *
  * Created by parango on 3/11/15.
  */

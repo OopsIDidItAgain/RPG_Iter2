@@ -2,8 +2,9 @@ package com.oopsididitagain.rpg_iter2.Menu;
 
 import java.util.LinkedList;
 
-import com.oopsididitagain.rpg_iter2.utils.MenuObservable;
-import com.oopsididitagain.rpg_iter2.utils.MenuObserver;
+import com.oopsididitagain.rpg_iter2.Observable.MenuObservable;
+import com.oopsididitagain.rpg_iter2.Observable.MenuObserver;
+
 
 
 
