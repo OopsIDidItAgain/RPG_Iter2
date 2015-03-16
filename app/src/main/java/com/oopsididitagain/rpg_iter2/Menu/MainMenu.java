@@ -2,24 +2,24 @@ package com.oopsididitagain.rpg_iter2.Menu;
 
 import java.util.LinkedList;
 
-import com.oopsididitagain.rpg_iter2.Observable.MenuObservable;
-import com.oopsididitagain.rpg_iter2.Observable.MenuObserver;
+import com.oopsididitagain.rpg_iter2.utils.observable.Observable;
+import com.oopsididitagain.rpg_iter2.utils.observable.Observer;
 
 
 
 
-public class MainMenu implements MenuObservable{
+public class MainMenu implements Observable {
 	LinkedList<String> options;
 	int size;
 	int currentOption;
-	MenuObserver observer;
+	Observer observer;
 	@Override
-	public void register(MenuObserver observer) {
+	public void register(Observer observer) {
 		this.observer = observer;
 	}
 
 	@Override
-	public void unregister(MenuObserver o) {
+	public void unregister(Observer o) {
 		// TODO Auto-generated method stub
 		
 	}
