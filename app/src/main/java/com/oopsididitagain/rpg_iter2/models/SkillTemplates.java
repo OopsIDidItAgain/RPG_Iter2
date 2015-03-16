@@ -6,15 +6,15 @@ package com.oopsididitagain.rpg_iter2.models;
  * apply similar effects can use the same method.
  */
 
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
-import com.oopsididitagain.rpg_iter2.models.Effects.EntityStatusModifier;
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.Items.Item;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.items.Item;
 
 
 public class SkillTemplates {
-	public static void applySkill(Item item, Discount discount){
-		item.applyDiscount(discount);
+	public static void applySkill(Inventory inventory, Discount discount){
+		inventory.applyDiscount(discount);
 	}
 
 	public static void applySkill(Entity entity, EntityStatusModifier modifier){

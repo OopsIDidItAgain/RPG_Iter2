@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.views;
 
 /**
- * Shows Pause Menu
+ * Shows Pause menus
  *
  * Created by parango on 3/11/15.
  */

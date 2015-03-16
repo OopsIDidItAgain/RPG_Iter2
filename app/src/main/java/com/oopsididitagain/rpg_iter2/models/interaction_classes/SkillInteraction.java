@@ -1,4 +1,11 @@
-package com.oopsididitagain.rpg_iter2.models.InteractionClasses;
+package com.oopsididitagain.rpg_iter2.models.interaction_classes;
+
+import com.oopsididitagain.rpg_iter2.models.Inventory;
+import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.SkillTemplates;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.effects.Effect;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 
 /*
  * This should hold the interaction between the entities and skills
@@ -26,6 +33,13 @@ package com.oopsididitagain.rpg_iter2.models.InteractionClasses;
  */
 
 public class SkillInteraction {
+
+	public void bargain(Entity e, Skill bargain) {
+		Inventory inventory = e.getInventory();
+		Effect d = bargain.getEffect();
+		SkillTemplates.applySkill(inventory, (Discount)d);
+		
+	}
 
 
 }

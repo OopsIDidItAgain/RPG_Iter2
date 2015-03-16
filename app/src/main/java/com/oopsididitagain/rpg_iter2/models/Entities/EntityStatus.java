@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Entities;
+package com.oopsididitagain.rpg_iter2.models.entities;
 /*
  * This class holds the current status of the entity. 
  * We can make him sleep play prance cartwheel THE POSSIBILITIES ARE ENDLESS.
