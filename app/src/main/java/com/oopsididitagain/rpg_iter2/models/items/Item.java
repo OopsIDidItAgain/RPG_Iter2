@@ -15,4 +15,7 @@ public class Item {
 	public void applyDiscount(Discount d){
 		this.price = d.applyDiscount(this.price);
 	}
+	public void displayItem(){
+		System.out.println(price);
+	}
 }

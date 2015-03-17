@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.models.interaction_classes;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
@@ -22,12 +23,16 @@ public class EntityMapInteraction {
 		this.skillInteraction = new SkillInteraction();
 	}
 
-	public void bargain(SkilledEntity entity) {
-		Direction d = entity.getDirection();
-		Position p = entity.getPostion();
-		Entity e = getEntityAt(p,d);
-		Skill bargain = entity.getSkill("bargain");
-		skillInteraction.bargain(e,bargain);
+	public void setUpSkill( SkilledEntity entity,String skill) {
+		switch(skill){
+		case"bargain":
+			Direction d = entity.getDirection();
+			Position p = entity.getPostion();
+			Entity e = getEntityAt(p,d);
+			Skill bargain = entity.getSkill("bargain");
+			skillInteraction.bargain(e,bargain);
+		}
+		
 		
 	}
 
@@ -35,5 +40,6 @@ public class EntityMapInteraction {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

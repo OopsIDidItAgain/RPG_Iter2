@@ -2,8 +2,9 @@ package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
 
 /**
  * In charge of handling input while playing game
@@ -35,7 +36,7 @@ public class GameController extends Controller{
 		case 1:
 			//this skill would not happen here, it would probably happen
 			//in "skillSelectionController"
-			entityMapInteraction.bargain(avatar);
+			entityMapInteraction.setUpSkill(avatar, "bargain");
 		case 2:
 		
 		case 3:

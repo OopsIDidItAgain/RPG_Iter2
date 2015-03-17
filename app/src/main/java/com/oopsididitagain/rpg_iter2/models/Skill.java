@@ -19,10 +19,10 @@ public class Skill {
 	public Skill(String name ){//add the passive thingy
 		this.name = name;
 		this.multiplier = 1;
-		applyMultiplier();
 	}
 	public void setEffect(Effect effect){
 		this.effect = effect;	
+		applyMultiplier();
 	}
 	
 	public String getName(){

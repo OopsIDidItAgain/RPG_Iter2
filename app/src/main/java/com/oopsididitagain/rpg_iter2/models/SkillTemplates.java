@@ -8,6 +8,7 @@ package com.oopsididitagain.rpg_iter2.models;
 
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.items.Item;
 
@@ -21,4 +22,8 @@ public class SkillTemplates {
 		entity.changeStatus(modifier);
 	}
 	
+	public static void applySkill(Inventory stealingEntity,Inventory robbedEntity, PickPocket pickpocket){
+		pickpocket.pickPocket(stealingEntity,robbedEntity);
+		
+	}
 }

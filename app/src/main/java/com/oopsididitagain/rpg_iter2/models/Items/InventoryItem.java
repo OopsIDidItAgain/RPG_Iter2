@@ -25,6 +25,11 @@ public class InventoryItem extends GameObject implements Priceable {
 	public void applyDiscount(Discount discount) {
 		discount.applyDiscount(price);
 	}
+
+	public void displayItem() {
+		System.out.println(price);
+		
+	}
 	
 	// Should this be Tile destination?
 	//public abstract PositionedItem drop(Position destination);
