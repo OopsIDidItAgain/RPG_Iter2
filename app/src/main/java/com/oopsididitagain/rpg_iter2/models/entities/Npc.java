@@ -3,7 +3,8 @@ import java.util.Collection;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
-import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.Storyline;
+import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
@@ -11,7 +12,8 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
  * Created by parango on 3/11/15.
  */
 public class Npc extends Entity {
-
+	
+	Storyline story;
 	public Npc(Position position) {
 		super(position);
 		// TODO Auto-generated constructor stub

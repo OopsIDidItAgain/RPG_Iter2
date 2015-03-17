@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Items;
+package com.oopsididitagain.rpg_iter2.models.items;
 
 import com.oopsididitagain.rpg_iter2.models.GameObject;
 import com.oopsididitagain.rpg_iter2.models.Inventory;

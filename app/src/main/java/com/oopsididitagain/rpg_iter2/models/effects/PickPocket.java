@@ -1,9 +1,11 @@
 package com.oopsididitagain.rpg_iter2.models.effects;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.oopsididitagain.rpg_iter2.models.Inventory;
-import com.oopsididitagain.rpg_iter2.models.items.Item;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
+
 
 public class PickPocket implements Effect{
 	int numberOfItemsStolen = 1;
@@ -16,7 +18,7 @@ public class PickPocket implements Effect{
 
 
 	public void pickPocket(Inventory stealingEntity, Inventory robbedEntity) {
-		ArrayList<Item> stolenItems = robbedEntity.getItems(numberOfItemsStolen);
+		LinkedList<InventoryItem> stolenItems = robbedEntity.getItems(numberOfItemsStolen);
 		stealingEntity.add(stolenItems);
 	}
 

@@ -26,11 +26,13 @@ public class EntityMapInteraction {
 	public void setUpSkill( SkilledEntity entity,String skill) {
 		switch(skill){
 		case"bargain":
+			/*
 			Direction d = entity.getDirection();
 			Position p = entity.getPostion();
 			Entity e = getEntityAt(p,d);
 			Skill bargain = entity.getSkill("bargain");
 			skillInteraction.bargain(e,bargain);
+			*/
 		}
 		
 		
