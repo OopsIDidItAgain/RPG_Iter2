@@ -3,10 +3,12 @@ package com.oopsididitagain.rpg_iter2.models.Entities;
  * Created by parango on 3/11/15.
  */
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
@@ -17,6 +19,7 @@ import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
+import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
 public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 
@@ -86,6 +89,25 @@ public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 		}
 		inventory.add(item);
 	}
-	
 
+	@Override
+	public void accept(Entity entity) {
+		
+	}
+
+	@Override
+	public void visit(Entity other) {
+		other.accept(this);
+	}
+
+	@Override
+	public void attemptRemoveFrom(Collection<Tileable> tileables) {
+		tileables.remove(this);
+	}
+
+	@Override
+	public void accept(Probe probe) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -14,13 +14,9 @@ import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
 public class Inventory {
 
 	private LinkedList<InventoryItem> contents = new LinkedList<InventoryItem>();
-
-	public void add(TakeableItem item){
-		contents.add(new InventoryItem(item));
-	}
 	
-	public void add(InventoryItem item){
-		contents.add(item);
+	public void add(TakeableItem item){
+		contents.add(item.toInventoryItem());
 	}
 	
 	public void remove(InventoryItem item) {

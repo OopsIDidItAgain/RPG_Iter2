@@ -4,16 +4,19 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
+import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
 /**
  * Created by parango on 3/11/15.
  */
-public abstract class Entity implements Positionable {
+public abstract class Entity implements Positionable, EntityVisitable, Tileable {
 	protected EntityStatus entityStatus;
 	protected Position position;
 	protected Inventory inventory;
+	protected boolean isCurrentlyFlying;
 
 	public Entity(Position position){
 		this.position = position;
@@ -51,7 +54,21 @@ public abstract class Entity implements Positionable {
 		return inventory;
 	}
 	
+	@Override
+	public void accept(Entity other) {
+		other.visit(this);
+	}
+
+	public abstract void visit(Entity other);
 	public abstract void visit(TakeableItem item);
 	public abstract void visit(InstantStatModifier modifier);
+
+	public boolean isCurrentlyFlying() {
+		return isCurrentlyFlying;
+	}
+	
+	public void toggleFlight() {
+		isCurrentlyFlying = !isCurrentlyFlying;
+	}
 	
 }

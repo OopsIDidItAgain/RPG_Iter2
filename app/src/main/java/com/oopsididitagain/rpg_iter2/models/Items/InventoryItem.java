@@ -5,7 +5,7 @@ import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 
-public abstract class InventoryItem extends GameObject implements Priceable {
+public class InventoryItem extends GameObject implements Priceable {
 	protected double price;
 	
 	public InventoryItem(TakeableItem item) {

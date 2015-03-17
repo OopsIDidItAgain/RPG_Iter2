@@ -3,13 +3,14 @@ package com.oopsididitagain.rpg_iter2.models.Items;
 import java.util.Collection;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
-import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
+import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
-public class OneShotItem extends PositionedItem implements InstantStatModifier {
+public class OneShotItem extends PositionedGameObject implements InstantStatModifier, Tileable, MovementPermitter {
 	private StatBlob blob;
 
 	public OneShotItem(String id, Position position, StatBlob blob) {
@@ -33,9 +34,14 @@ public class OneShotItem extends PositionedItem implements InstantStatModifier {
 	}
 
 	@Override
-	public void affect(StatModifiable target) {
-		// Law of Demeter...
-		target.statBlob().merge(blob);
+	public void affect(StatBlob target) {
+		target.merge(statBlob());
 	}
+
+	@Override
+	public void accept(Probe probe) {
+		probe.visit(this);
+	}
+
 
 }

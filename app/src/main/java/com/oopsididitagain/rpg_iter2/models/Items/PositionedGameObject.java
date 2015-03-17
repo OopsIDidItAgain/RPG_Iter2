@@ -4,12 +4,12 @@ import com.oopsididitagain.rpg_iter2.models.GameObject;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
-import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
-public abstract class PositionedItem extends GameObject implements Positionable, Tileable {
-	protected Position position;
+public abstract class PositionedGameObject extends GameObject
+		implements Positionable {
+	private Position position;
 
-	public PositionedItem(String id, Position position) {
+	public PositionedGameObject(String id, Position position) {
 		super(id);
 		this.position = position;
 	}
@@ -23,7 +23,7 @@ public abstract class PositionedItem extends GameObject implements Positionable,
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-	
+
 	@Override
 	public Direction getDirection() {
 		return position.getDirection();
