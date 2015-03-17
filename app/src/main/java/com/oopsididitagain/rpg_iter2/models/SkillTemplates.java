@@ -6,11 +6,33 @@ package com.oopsididitagain.rpg_iter2.models;
  * apply similar effects can use the same method.
  */
 
+import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
+import com.oopsididitagain.rpg_iter2.models.effects.StatModifier;
+import com.oopsididitagain.rpg_iter2.models.effects.TimedStatModifier;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
-import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
+/*
+ * skills:
+ * bind Wounds X
+ * bargain X
+ * observation ?
+ * 1 -
+ * 2 -
+ * brawl -
+ * long range -
+ * enchant X
+ * boon X
+ * bane X
+ * staff X
+ * pick pocket X
+ * detect and remove trap ?
+ * creep X
+ * 
+ * 
+ * 
+ */
 
 
 public class SkillTemplates {
@@ -24,10 +46,22 @@ public class SkillTemplates {
 	
 	public static void applySkill(Inventory stealingEntity,Inventory robbedEntity, PickPocket pickpocket){
 		pickpocket.pickPocket(stealingEntity,robbedEntity);
+	}
+	
+	public static void applySkill(StatBlob targetStatblob, StatModifier statModifier){
+		statModifier.affect(targetStatblob);
+	}
+	
+	public static void applySkill(StatBlob targetStatblob, TimedStatModifier statModifier){
 		
 	}
 	
-	public static void applySkill(Entity entity, InstantStatModifier statModifier){
-		
+	
+	
+	/* The only difference between these, this has to check if a weapon is in use
+	public static void applySkill(WeaponHolder avatar, StatModifier statModifier){
+		//statModifier.affect(targetStatblob);
+		statModifier.affect(avatar);
 	}
+	*/
 }

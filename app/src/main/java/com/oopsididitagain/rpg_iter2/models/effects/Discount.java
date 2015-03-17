@@ -5,17 +5,18 @@ package com.oopsididitagain.rpg_iter2.models.effects;
  * their items.
  */
 public class Discount implements Effect{
+	double baseDiscount;
 	double discount;
-	public Discount(double discount){
-		this.discount = discount;
+	public Discount(double baseDiscount){
+		this.baseDiscount = baseDiscount;
 	}
 	
 	public double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
-		this.discount = discount;
+	public void setDiscount(double baseDiscount) {
+		this.baseDiscount = baseDiscount;
 	}
 
 	public double applyDiscount(double price){
@@ -23,7 +24,7 @@ public class Discount implements Effect{
 	}
 	@Override
 	public void applyMultiplier(int m){
-		this.discount *= m;
+		this.discount = baseDiscount * m;
 	}
 	
 

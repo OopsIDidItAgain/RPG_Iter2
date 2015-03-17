@@ -13,6 +13,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 
 public class EntityStatusModifier implements Effect{
 	int secondsAlterationInEffect = 5;
+	int baseSecondsAlterationInEffect = 5;
 	EntityStatus changeStatusTo;
 	
 	EntityStatusModifier(EntityStatus changeStatusTo){
@@ -21,7 +22,7 @@ public class EntityStatusModifier implements Effect{
 	}
 	@Override
 	public void applyMultiplier(int m) {
-		this.secondsAlterationInEffect *= m;
+		this.secondsAlterationInEffect = baseSecondsAlterationInEffect * m;
 		
 	}
 	public void changeStatus(final Entity entity) {
