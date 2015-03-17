@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.Items;
 
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;

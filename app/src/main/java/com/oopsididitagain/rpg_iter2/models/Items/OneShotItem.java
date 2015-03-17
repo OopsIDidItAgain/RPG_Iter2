@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;

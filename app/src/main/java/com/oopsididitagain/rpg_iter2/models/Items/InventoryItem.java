@@ -2,7 +2,7 @@ package com.oopsididitagain.rpg_iter2.models.Items;
 
 import com.oopsididitagain.rpg_iter2.models.GameObject;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 
 public class InventoryItem extends GameObject implements Priceable {

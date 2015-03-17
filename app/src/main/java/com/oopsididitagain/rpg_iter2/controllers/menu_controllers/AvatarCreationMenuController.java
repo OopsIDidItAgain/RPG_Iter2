@@ -1,37 +1,37 @@
-package com.oopsididitagain.rpg_iter2.controllers;
+package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 
+import com.oopsididitagain.rpg_iter2.controllers.Controller;
+import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.InteractionClasses.EntityMapInteraction;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Smasher;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Sneak;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Summoner;
-import com.oopsididitagain.rpg_iter2.utils.KeyCode;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
+import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
+import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
 
-public class AvatarCreationController extends Controller{
-	public static AvatarCreationController instance;
+public class AvatarCreationMenuController extends Controller {
+	public static AvatarCreationMenuController instance;
 	Avatar avatar;
 	GameMap gameMap;
 
 	
-	private AvatarCreationController(){
+	private AvatarCreationMenuController(){
 		createAvatar();
 		createGameMap();
 
 	}
 	
-	public static AvatarCreationController getInstance() {
+	public static AvatarCreationMenuController getInstance() {
 		if ( instance == null ){
-			instance = new AvatarCreationController();
+			instance = new AvatarCreationMenuController();
 		}
 		return instance;
 	}
 	
 	@Override
 	public Controller takeInputAndUpdate(int key) {
-		Controller controller = AvatarCreationController.getInstance();
+		Controller controller = AvatarCreationMenuController.getInstance();
 		switch(key){
 		case 1:
 			assignSmasher();
@@ -71,6 +71,6 @@ public class AvatarCreationController extends Controller{
 	private void switchControllers(GameController controller){
 		controller.setAvatar(this.avatar);
 		controller.setMap(this.gameMap);
-		
+		//gameMap.notifyObserver();
 	}
 }

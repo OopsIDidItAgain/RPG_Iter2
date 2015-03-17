@@ -1,24 +1,30 @@
 package com.oopsididitagain.rpg_iter2.views;
 
-import com.oopsididitagain.rpg_iter2.Menu.MainMenu;
-import com.oopsididitagain.rpg_iter2.utils.Observer;
+import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
+
+import javax.swing.*;
+import java.util.Observable;
+import java.util.Observer;
+
 
 /**
- * Main Menu when game sta
  *
- * Created by parango on 3/11/15.
+ * void	update(Observable o, Object arg) This method is called whenever the observed object is changed.
+ *
  */
-public class MainMenuView implements Observer{
-	MainMenu menu = new MainMenu();
-	int currentOption;
-	public MainMenuView(MainMenu menu){
-		this.menu = menu;
-		this.currentOption = menu.getCurrentOption();
-	}
-	@Override
-	public void update() {
-		currentOption = menu.getOption();
-		
-		
-	}
+public class MainMenuView extends JPanel implements Observer {
+
+    private MainMenu menu = null;
+
+
+    @Override
+    public void update(Observable obj, Object arg) {
+        menu = (MainMenu)obj;
+    }
+
+    public MainMenuView(){
+        menu = new MainMenu();
+
+    }
+
 }

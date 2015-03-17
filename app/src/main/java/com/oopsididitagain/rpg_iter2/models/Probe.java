@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 

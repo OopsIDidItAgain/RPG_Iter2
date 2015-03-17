@@ -1,8 +1,9 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.Entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.InteractionClasses.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 
 /**
  * In charge of handling input while playing game
@@ -29,7 +30,7 @@ public class GameController extends Controller{
 
 	@Override
 	public Controller takeInputAndUpdate(int key) {
-		Controller controller = AvatarCreationController.getInstance();
+		Controller controller = AvatarCreationMenuController.getInstance();
 		switch(key){
 		case 1:
 			//this skill would not happen here, it would probably happen

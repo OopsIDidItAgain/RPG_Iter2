@@ -3,7 +3,7 @@ package com.oopsididitagain.rpg_iter2.models;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.oopsididitagain.rpg_iter2.models.Entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;

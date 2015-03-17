@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Entities;
+package com.oopsididitagain.rpg_iter2.models.entities;
 /**
  * Created by parango on 3/11/15.
  */
@@ -10,11 +10,11 @@ import java.util.Map;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
-import com.oopsididitagain.rpg_iter2.models.Occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.Stats.StatCollection;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;

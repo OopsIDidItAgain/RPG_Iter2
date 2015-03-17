@@ -7,9 +7,10 @@ package com.oopsididitagain.rpg_iter2.models;
 
 import java.util.LinkedList;
 
-import com.oopsididitagain.rpg_iter2.models.Effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.Items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.Items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+
 
 public class Inventory {
 
@@ -25,7 +26,7 @@ public class Inventory {
 
 	public void applyDiscount(Discount discount) {
 		for(InventoryItem item: contents){
-			item.applyDiscount(discount);
+			item.applyDiscount(discount); // Fix this tess TODO
 		}
 	}
 }

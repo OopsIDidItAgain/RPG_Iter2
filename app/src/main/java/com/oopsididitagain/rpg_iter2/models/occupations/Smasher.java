@@ -1,10 +1,10 @@
-package com.oopsididitagain.rpg_iter2.models.Occupations;
+package com.oopsididitagain.rpg_iter2.models.occupations;
 
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
 
-public class Sneak extends Occupation{
+public class Smasher extends Occupation{
 
 	@Override
 	public void giveSkills(Map<String, Skill> skillMap) {
