@@ -10,7 +10,7 @@ import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.items.Item;
+import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
 
 public class SkillTemplates {
@@ -24,6 +24,10 @@ public class SkillTemplates {
 	
 	public static void applySkill(Inventory stealingEntity,Inventory robbedEntity, PickPocket pickpocket){
 		pickpocket.pickPocket(stealingEntity,robbedEntity);
+		
+	}
+	
+	public static void applySkill(Entity entity, InstantStatModifier statModifier){
 		
 	}
 }
