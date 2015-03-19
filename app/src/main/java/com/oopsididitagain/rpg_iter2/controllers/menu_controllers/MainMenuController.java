@@ -18,6 +18,7 @@ import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 public class MainMenuController extends Controller{
 	private static MainMenu mainMenu;
 	public static MainMenuController instance;
+	static boolean cached = false;
 	
 	private MainMenuController(){
 
@@ -28,8 +29,10 @@ public class MainMenuController extends Controller{
 			instance = new MainMenuController();
 		}
 		mainMenu = new MainMenu();
+		cached = false;
 		return instance;
 	}
+	
 	@Override
 	public Controller takeInputAndUpdate(int key) {
 		// TODO Auto-generated method stub

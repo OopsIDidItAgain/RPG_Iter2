@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2;
 
 import java.awt.Component;
 
+import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
@@ -18,11 +19,19 @@ public class GameLoop {
 		this.keyBoardInput = new KeyBoardInput();
 		view.addKeyListener(keyBoardInput);
 		view.requestFocus();
-		while(controller != ExitGameController.getInstance()){
+		boolean firstRun = true;
+		ModelViewInteraction modelViewInteraction = null;
+		while(!controller.equals(ExitGameController.getInstance())){
 			int command = keyBoardInput.getInput();
+			Controller temp = controller;
 			controller = controller.takeInputAndUpdate(command);
-			ModelViewInteraction modelViewInteraction = controller.populateInteraction();
+			
+			if(!controller.equals(temp) || firstRun){
+				modelViewInteraction = controller.populateInteraction();
+			}
+			
 			view.render(modelViewInteraction);
+			firstRun = false;
 		}
 	}
 
