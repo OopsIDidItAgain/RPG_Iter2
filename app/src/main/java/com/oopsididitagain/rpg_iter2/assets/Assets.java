@@ -35,13 +35,17 @@ public class Assets extends Panel {
 
 	static HashMap<Integer, String> imgToPath; // image id -> path
 	static HashMap<Integer, Integer> objToImg; // game object id -> image id
+	static HashMap<Integer, BufferedImage> images; // game object id -> image id
 	
 	public Assets() {
 		imgToPath = new HashMap<Integer, String>();
 		objToImg = new HashMap<Integer, Integer>();
+		images = new HashMap<Integer, BufferedImage>();
+		initialize();
+		
 	}
 	
-	public void initialize() {
+	public void initialize(){
 		// start it by populating it fully
 		
 		try {
@@ -72,20 +76,29 @@ public class Assets extends Panel {
 			System.out.println("Your images failed to load");
 			ex.printStackTrace();
 		}
+		createImages();
 	}
 	
-	public static BufferedImage getBufferedImage(int gameObjID) {
-		File f = new File("src"+getPath(gameObjID));
-		try {
-			return (BufferedImage)ImageIO.read(f);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Image failed to load");
-			e.printStackTrace();
-		} return null;
+	private void createImages(){
+		for(int i = 0; i!= 2; ++i){
+		
+			File f = new File("src"+getPath(i));
+			try {
+				BufferedImage buff = (BufferedImage)ImageIO.read(f);
+				images.put(i,buff);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Image failed to load");
+				e.printStackTrace();
+			} 
+		}
+	}
+	public BufferedImage getBufferedImage(int gameObjID) {
+		return images.get(gameObjID);
+		
 	}
 	
-	public static String getPath(int gameObjID) {
+	public String getPath(int gameObjID) {
 		return 	imgToPath.get(
 					objToImg.get(gameObjID));
 	}

@@ -11,17 +11,17 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.Stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
-import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
-import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
-public class Avatar extends Entity implements SkilledEntity, StatModifiable {
+public class Avatar extends Entity implements StatModifiable {
 
 	private Map<String, Skill> map = new HashMap<String, Skill>();
 	private Occupation occupation;
@@ -64,7 +64,7 @@ public class Avatar extends Entity implements SkilledEntity, StatModifiable {
 		return this.map;
 	}
 
-	@Override
+	
 	public Skill getSkill(String skill) {
 		return map.get(skill);
 	}
