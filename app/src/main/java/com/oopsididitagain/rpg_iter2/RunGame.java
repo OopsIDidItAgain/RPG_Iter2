@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
 import java.awt.*;
 import java.util.Observer;
 
@@ -12,39 +13,31 @@ import java.util.Observer;
 public class RunGame extends JFrame{
 
 
-    JPanel MainWindow;
+private static GameLoop loop;
+	
+	public static void main(String[] args) {
+		loop = new GameLoop();
+	    SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				RunGame runGame = new RunGame();
+				runGame.initialize();
+			}
+	    });
 
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        RunGame runGame = new RunGame("The Best RPG in the Business!");
-
-        runGame.setSize(640, 480);
-        runGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        runGame.setResizable(false);
-        runGame.setVisible(true);
-        runGame.updateMainWindow();
-    }
-
-    private RunGame(String s){
-        super (s);
-
-        MainWindow = new JPanel(new BorderLayout(5,5));
-
-        JPanel centerPanel = new JPanel(new BorderLayout(5,5));
-        centerPanel.add(MainWindow, BorderLayout.CENTER);
-
-        setLayout(new BorderLayout(5,5));
-    }
-
-
-
-    public void updateMainWindow(){
-        MainWindow.removeAll();
-
-        MainWindow.revalidate();
-        MainWindow.repaint();
-    }
-
+		loop.runGame();
+	}
+	
+	private void initialize() {
+		//this.setLayout(new MigLayout("", "[grow, fill]", "[grow, fill]"));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(600, 700);
+		this.setLocationRelativeTo(null); // places frame into center of screen
+		this.setTitle("OOPs I Did It Again!");
+		this.setVisible(true);
+		this.setResizable(false);
+		this.add(loop.getView());
+		
+	}
 
 }
