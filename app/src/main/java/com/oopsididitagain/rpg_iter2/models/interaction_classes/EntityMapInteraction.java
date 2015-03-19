@@ -2,8 +2,7 @@ package com.oopsididitagain.rpg_iter2.models.interaction_classes;
 
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
@@ -22,6 +21,11 @@ public class EntityMapInteraction {
 		this.gameMap = gameMap;
 		this.skillInteraction = new SkillInteraction();
 	}
+	
+	public void move(Entity entity, Direction direction) {
+		Probe movementProbe = new Probe(entity);
+		
+	}
 
 	public void setUpSkill( SkilledEntity entity,String skill) {
 		switch(skill){
@@ -34,8 +38,6 @@ public class EntityMapInteraction {
 			skillInteraction.bargain(e,bargain);
 			*/
 		}
-		
-		
 	}
 
 	private Entity getEntityAt(Position p, Direction d) {

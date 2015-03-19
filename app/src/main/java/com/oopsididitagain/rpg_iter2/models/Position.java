@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models;
 
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
 
 /*
  * It holds the position of an Entity
@@ -50,5 +51,10 @@ public class Position {
 
 	public Direction getDirection() {
 		return facing;
+	}
+
+	public void checkBounds(int width, int height) throws PositionOutOfBoundsException {
+		if (y >= height || x >= width || x < 0 || y < 0)
+			throw new PositionOutOfBoundsException("Position (" + x + ", " +y + ") is out of bounds!");
 	}
 }
