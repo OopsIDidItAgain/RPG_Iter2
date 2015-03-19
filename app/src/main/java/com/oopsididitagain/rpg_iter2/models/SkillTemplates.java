@@ -6,7 +6,6 @@ package com.oopsididitagain.rpg_iter2.models;
  * apply similar effects can use the same method.
  */
 
-import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
@@ -33,6 +32,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
  * 
  * 
  */
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 
 
 public class SkillTemplates {

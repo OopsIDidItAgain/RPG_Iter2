@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.effects;
 
-import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 
 public class TimedStatModifier implements Effect{
 	StatBlob baseStatblob;

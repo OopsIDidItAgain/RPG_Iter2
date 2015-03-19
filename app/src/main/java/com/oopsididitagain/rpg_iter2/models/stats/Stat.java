@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.models.Stats;
+package com.oopsididitagain.rpg_iter2.models.stats;
 
 public class Stat {
 

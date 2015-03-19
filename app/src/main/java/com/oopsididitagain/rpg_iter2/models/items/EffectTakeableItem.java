@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.StatBlobHolder;
 
 public class EffectTakeableItem extends TakeableItem implements

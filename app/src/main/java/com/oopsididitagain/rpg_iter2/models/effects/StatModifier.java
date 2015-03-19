@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.effects;
 
-import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
 public class StatModifier implements Effect, InstantStatModifier{
