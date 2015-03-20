@@ -57,4 +57,29 @@ public class Position {
 		if (y >= upperHeight || x >= upperWidth || x < lowerWidth || y < lowerHeight)
 			throw new PositionOutOfBoundsException("Position (" + x + ", " +y + ") is out of bounds!");
 	}
+	
+	public Position createPositionAtDirection(Direction direction) {
+		Position targetPosition;
+		switch(direction) {
+		case EAST: targetPosition = new Position(this.getY(), this.getX() + 1);
+			break;
+		case NORTH: targetPosition = new Position(this.getY() - 1, this.getX());
+			break;
+		case NORTHEAST:targetPosition = new Position(this.getY() - 1, this.getX() + 1);
+			break;
+		case NORTHWEST:targetPosition = new Position(this.getY() - 1, this.getX() - 1);
+			break;
+		case SOUTH:targetPosition = new Position(this.getY() + 1, this.getX());
+			break;
+		case SOUTHEAST:targetPosition = new Position(this.getY() + 1, this.getX() + 1);
+			break;
+		case SOUTHWEST:  targetPosition = new Position(this.getY() + 1, this.getX() - 1); 
+			break;
+		case WEST:targetPosition = new Position(this.getY(), this.getX() - 1);
+			break;
+		default:
+			targetPosition = this;
+		}
+		return targetPosition;
+	}
 }

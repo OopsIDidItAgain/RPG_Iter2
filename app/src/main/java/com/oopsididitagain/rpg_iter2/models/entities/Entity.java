@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.models.entities;
 
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
@@ -74,5 +75,12 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	@Override
 	public TileablePriority getTileablePriority() {
 		return TileablePriority.HIGH;
+	}
+
+	public void move(Tile fromTile, Tile targetTile) {
+		fromTile.remove(this);
+		this.setPosition(targetTile.getPosition());
+		targetTile.add(this);
+		targetTile.interact(this);
 	}
 }

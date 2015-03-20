@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -102,8 +102,9 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 
 	@Override
-	public void accept(Probe probe) {
-		probe.deny(); // Yes or No?
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.denyMovement();
+		movementProbe.addEntity(this);
 	}
 
 	@Override

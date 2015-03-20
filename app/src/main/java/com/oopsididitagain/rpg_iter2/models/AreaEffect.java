@@ -51,4 +51,9 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 		return TileablePriority.MIDDLE;
 	}
 
+	@Override
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.addPositionedGameObject(this);
+	}
+
 }

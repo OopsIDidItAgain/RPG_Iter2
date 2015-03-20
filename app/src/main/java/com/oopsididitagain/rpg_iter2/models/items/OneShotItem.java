@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
@@ -44,6 +45,11 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	@Override
 	public void accept(Entity entity) {
 		entity.visit(this);
+	}
+
+	@Override
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.addPositionedGameObject(this);
 	}
 
 

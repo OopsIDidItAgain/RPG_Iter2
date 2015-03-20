@@ -1,7 +1,7 @@
 
 package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -21,7 +21,7 @@ public class Npc extends Entity {
 	}
 
 	@Override
-	public void accept(Probe probe) {
+	public void accept(MovementProbe movementProbe) {
 		// TODO Auto-generated method stub
 		
 	}

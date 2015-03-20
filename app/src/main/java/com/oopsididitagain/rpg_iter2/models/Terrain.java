@@ -21,14 +21,14 @@ public class Terrain implements Assetable, Tileable, MovementInhibitor {
 	}
 	
 	@Override
-	public void attemptInhibition(Probe probe) {
-		if (probe.onGround() && inhibitGround) probe.deny();
-		if (probe.inAir() && inhibitAir) probe.deny();
+	public void attemptInhibition(MovementProbe movementProbe) {
+		if (movementProbe.onGround() && inhibitGround) movementProbe.denyMovement();
+		if (movementProbe.inAir() && inhibitAir) movementProbe.denyMovement();
 	}
 
 	@Override
-	public void accept(Probe probe) {
-		probe.visit(this);
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.visit(this);
 	}
 
 	@Override
