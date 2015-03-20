@@ -14,8 +14,8 @@ public class MapDatabase {
 	File objectsFile;
 	
 	public MapDatabase(String filepath) {
-		gridFile = new File("src/levels/"+filepath+"/grid.csv");
-		objectsFile = new File("src/levels/"+filepath+"/tileables.csv");
+		gridFile = new File(getClass().getResource("/levels/"+filepath+"/grid.csv").getPath());
+		objectsFile = new File(getClass().getResource("levels/"+filepath+"/tileables.csv").getPath());
 		
 		try { 
 			gridReader = new BufferedReader(new FileReader(gridFile));

@@ -9,8 +9,8 @@ import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 /*
  * This should hold the interaction between entities and the map,
- * it will check if an entity can move, return the closest entities
- *  to another entity
+ * it will check if an avatar can move, return the closest entities
+ *  to another avatar
  * 
  */
 public class EntityMapInteraction {
@@ -31,10 +31,10 @@ public class EntityMapInteraction {
 		switch(skill){
 		case"bargain":
 			/*
-			Direction d = entity.getDirection();
-			Position p = entity.getPostion();
+			Direction d = avatar.getDirection();
+			Position p = avatar.getPostion();
 			Entity e = getEntityAt(p,d);
-			Skill bargain = entity.getSkill("bargain");
+			Skill bargain = avatar.getSkill("bargain");
 			skillInteraction.bargain(e,bargain);
 			*/
 		}
