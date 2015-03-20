@@ -22,7 +22,7 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
 	}
 	@Override
 	public void drawModel(Graphics g) {
-		BufferedImage bf = assets.getBufferedImage(0);
+		BufferedImage bf = assets.getBufferedImage("avatar");
 		g.drawImage(bf, 0, 0, null);
 		
 		
