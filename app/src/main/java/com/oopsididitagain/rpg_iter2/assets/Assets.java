@@ -21,64 +21,77 @@ import javax.imageio.ImageIO;
 // - animations (maybe)
 
 
-public class Assets extends Panel {
+public  class Assets extends Panel {
 	// static BufferedImage b; // for testing purposes
 	
 	static String imgIDtoPathFile;
 
-	static HashMap<String, String> imgToPath; // image id -> path
+	static HashMap<String, String> paths; // image id -> path
 	static HashMap<String, BufferedImage> images; // game object id -> image id
 	
 	public Assets() {
-		imgToPath = new HashMap<String, String>();
-		images = new HashMap<String, BufferedImage>();
-		initialize();
-		
+		paths = new HashMap<>();
+		images = new HashMap<>();
+		loadPaths();
+        loadImages();
 	}
 	
-	public void initialize(){
+	public void loadPaths(){
 
         imgIDtoPathFile =  getClass().getResource("/assets/ImageIDsAndPaths.csv").getPath();
 		// start it by populating it fully
 		
 		try {
-			BufferedReader 	imgToPathReader = new BufferedReader(new FileReader(imgIDtoPathFile));
-			
-			imgToPathReader.readLine(); // skip first line
+			BufferedReader 	pathReader = new BufferedReader(new FileReader(imgIDtoPathFile));
+
+            pathReader.readLine(); // skip first line
 			
 			String line;
-			while ((line = imgToPathReader.readLine()) != null) {
+			while ((line = pathReader.readLine()) != null) {
+
 				String[] split = line.split(",");
-				imgToPath.put(split[0], split[1]);
+                System.out.println(split[1]);
+                System.out.println(getClass().getResource(split[1]).getPath());
+				paths.put(split[0], getClass().getResource(split[1]).getPath());
 			}
-			
-			imgToPathReader.close();
+
+            pathReader.close();
 		}
 		catch (IOException ex) {
 			System.out.println("Your images failed to load");
 			ex.printStackTrace();
 		}
-		createImages();
 	}
 	
-	private void createImages(){
+	private void loadImages(){
 		String s = "avatar";
 		File f = new File(getPath(s));
 		try {
 			BufferedImage buff = ImageIO.read(f);
 			images.put(s,buff);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Image failed to load");
 			e.printStackTrace();
-		} 
+		}
 	}
+
 	public BufferedImage getBufferedImage(String gameObjID) {
-		return images.get(gameObjID);
+        if(!images.containsKey(gameObjID)){
+            System.out.println("loading"+gameObjID);
+            File f = new File(getPath(gameObjID));
+            try {
+                BufferedImage buff = ImageIO.read(f);
+                images.put(gameObjID, buff);
+            } catch (IOException e) {
+                System.out.println("Image failed to load");
+                e.printStackTrace();
+            }
+        }
+        return images.get(gameObjID);
 		
 	}
 	
 	public String getPath(String gameObjID) {
-        return getClass().getResource(imgToPath.get(gameObjID)).getPath();
+        return paths.get(gameObjID);
 	}
 }

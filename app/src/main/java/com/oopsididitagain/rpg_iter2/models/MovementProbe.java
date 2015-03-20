@@ -5,10 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
-import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.utils.MovementProbeStatus;
 import com.oopsididitagain.rpg_iter2.utils.TileContentsProbeStatus;
 
