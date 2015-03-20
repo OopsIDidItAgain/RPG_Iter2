@@ -1,14 +1,18 @@
 package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
+import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 public class MainMenuViewInteraction extends ModelViewInteraction{
 	private MainMenu mainMenu;
+	Assets assets;
 	public void setMenu(MainMenu mainMenu) {
 		this.mainMenu = mainMenu;
+		this.assets = new Assets();
 		
 	}
 	@Override
@@ -18,7 +22,9 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
 	}
 	@Override
 	public void drawModel(Graphics g) {
-		g.drawRect(0, 0, 100, 100);
+		BufferedImage bf = assets.getBufferedImage("avatar");
+		g.drawImage(bf, 0, 0, null);
+		
 		
 	}
 

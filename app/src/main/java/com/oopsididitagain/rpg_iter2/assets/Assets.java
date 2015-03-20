@@ -31,95 +31,58 @@ public class Assets extends Panel {
 	// static BufferedImage b; // for testing purposes
 	
 	static String imgIDtoPathFile = "src/Assets/ImageIDsAndPaths.csv";
-	static String gameIDtoimgIDFile = "src/Assets/GameIDAndImageID.csv";
 
-	static HashMap<Integer, String> imgToPath; // image id -> path
-	static HashMap<Integer, Integer> objToImg; // game object id -> image id
+	static HashMap<String, String> imgToPath; // image id -> path
+	static HashMap<String, BufferedImage> images; // game object id -> image id
 	
 	public Assets() {
-		imgToPath = new HashMap<Integer, String>();
-		objToImg = new HashMap<Integer, Integer>();
+		imgToPath = new HashMap<String, String>();
+		images = new HashMap<String, BufferedImage>();
+		initialize();
+		
 	}
 	
-	public void initialize() {
+	public void initialize(){
 		// start it by populating it fully
 		
 		try {
-			BufferedReader 	imgToPathReader = new BufferedReader(new FileReader(imgIDtoPathFile)),
-							objToImgReader = new BufferedReader(new FileReader(gameIDtoimgIDFile));
+			BufferedReader 	imgToPathReader = new BufferedReader(new FileReader(imgIDtoPathFile));
 			
 			imgToPathReader.readLine(); // skip first line
-			objToImgReader.readLine();  // skip first line
 			
 			String line;
 			while ((line = imgToPathReader.readLine()) != null) {
 				String[] split = line.split(",");
-				int id = Integer.parseInt(split[0]);
-				imgToPath.put(id, split[1]);
-			}
-			
-			while ((line = objToImgReader.readLine()) != null) {
-				String[] split = line.split(",");
-				int objID = Integer.parseInt(split[0]);
-				int imgID = Integer.parseInt(split[1]);
-				objToImg.put(objID, imgID);
+				imgToPath.put(split[0], split[1]);
 			}
 			
 			imgToPathReader.close();
-			objToImgReader.close();
 		}
 		catch (IOException ex) {
 			System.out.println("Your images failed to load");
 			ex.printStackTrace();
 		}
+		createImages();
 	}
 	
-	public static BufferedImage getBufferedImage(int gameObjID) {
-		File f = new File("src"+getPath(gameObjID));
+	private void createImages(){
+		String s = "avatar";
+		File f = new File(getPath(s));
 		try {
-			return (BufferedImage)ImageIO.read(f);
+			BufferedImage buff = (BufferedImage)ImageIO.read(f);
+			images.put(s,buff);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Image failed to load");
 			e.printStackTrace();
-		} return null;
+		} 
+	}
+	public BufferedImage getBufferedImage(String gameObjID) {
+		return images.get(gameObjID);
+		
 	}
 	
-	public static String getPath(int gameObjID) {
-		return 	imgToPath.get(
-					objToImg.get(gameObjID));
+	public String getPath(String gameObjID) {
+		return 	imgToPath.get(gameObjID);
 	}
-	
-	
-	
-	
-	
-	/* --------------------
-	 * FOR TESTNG PURPOSES
-	 * -------------------- */
-	
-	/*public static void main(String[] args) {
-		// create
-		Assets a = new Assets();
-		a.initialize();
-		
-		// display its name
-		int rando = (int)(Math.random() * 10);
-		String path = a.getPath(rando);
-		System.out.println(a.getPath(rando));
-		
-		// display the picture
-		
-		JFrame frame = new JFrame("ShowImage");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(600,400);
-
-		// b = getBufferedImage(rando);
-		frame.setContentPane(a); 
-		frame.setVisible(true); 
-	}
-	
-	public void paint(Graphics g) {
-	  g.drawImage( b, 0, 0, null);// buffered image
-	}*/
 }

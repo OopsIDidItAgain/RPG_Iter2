@@ -53,8 +53,8 @@ public class Position {
 		return facing;
 	}
 
-	public void checkBounds(int width, int height) throws PositionOutOfBoundsException {
-		if (y >= height || x >= width || x < 0 || y < 0)
+	public void checkBounds(int lowerWidth, int lowerHeight, int upperWidth, int upperHeight) throws PositionOutOfBoundsException {
+		if (y >= upperHeight || x >= upperWidth || x < lowerWidth || y < lowerHeight)
 			throw new PositionOutOfBoundsException("Position (" + x + ", " +y + ") is out of bounds!");
 	}
 }

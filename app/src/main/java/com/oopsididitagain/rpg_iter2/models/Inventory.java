@@ -1,12 +1,11 @@
 package com.oopsididitagain.rpg_iter2.models;
 
 import java.util.LinkedList;
+import java.util.Random;
 
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
-import java.util.Random;
-import java.lang.IndexOutOfBoundsException;
-import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 
 
 public class Inventory {

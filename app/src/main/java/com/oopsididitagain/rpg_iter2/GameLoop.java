@@ -19,16 +19,24 @@ public class GameLoop {
 		this.keyBoardInput = new KeyBoardInput();
 		view.addKeyListener(keyBoardInput);
 		view.requestFocus();
-		while(controller != ExitGameController.getInstance()){
+		boolean firstRun = true;
+		ModelViewInteraction modelViewInteraction = null;
+		while(!controller.equals(ExitGameController.getInstance())){
 			int command = keyBoardInput.getInput();
+			Controller temp = controller;
 			controller = controller.takeInputAndUpdate(command);
-			ModelViewInteraction modelViewInteraction = controller.populateInteraction();
+			
+			if(!controller.equals(temp) || firstRun){
+				modelViewInteraction = controller.populateInteraction();
+			}
+			
 			view.render(modelViewInteraction);
 			try {
 				TimeUnit.MILLISECONDS.sleep(18);
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}
+			firstRun = false;
 		}
 	}
 

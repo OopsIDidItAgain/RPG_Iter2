@@ -22,10 +22,10 @@ public class View extends JPanel{
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		modelViewInteraction.drawModel(g);
-		
-		
-		
+		if(modelViewInteraction != null){
+			modelViewInteraction.drawModel(g);
+		}
+
 	}
 
 	public void visit(MainMenuViewInteraction mainMenuViewInteraction) {
