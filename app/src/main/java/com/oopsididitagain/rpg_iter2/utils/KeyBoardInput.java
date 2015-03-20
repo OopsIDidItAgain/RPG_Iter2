@@ -22,52 +22,46 @@ public class KeyBoardInput implements KeyListener {
 		}
 		switch (e.getKeyChar()) {
 		case 'q':
-			input = KeyCode.NORTH_WEST;
+			input = Commands.MOVE_NORTH_WEST;
 			break;
 		case 'w':
-			input = KeyCode.NORTH;
+			input = Commands.MOVE_NORTH;
 			break;
 		case 'e':
-			input = KeyCode.NORTH_EAST;
+			input = Commands.MOVE_NORTH_EAST;
 			break;
 		case 'd':
-			input = KeyCode.EAST;
+			input = Commands.MOVE_EAST;
 			break;
 		case 'c':
-			input = KeyCode.SOUTH_EAST;
+			input = Commands.MOVE_SOUTH_EAST;
 			break;
 		case 'x':
-			input = KeyCode.SOUTH;
+			input = Commands.MOVE_SOUTH;
 			break;
 		case 'z':
-			input = KeyCode.SOUTH_WEST;
+			input = Commands.MOVE_SOUTH_WEST;
 			break;
 		case 'a':
-			input = KeyCode.WEST;
+			input = Commands.MOVE_WEST;
 			break;
 		case 's':
-			input = KeyCode.USE;
+			input = Commands.USE;
 			break;
 		case 'p':
-			input = KeyCode.PAUSE;
+			input = Commands.PAUSE;
 			break;
 		case KeyEvent.VK_ENTER:
-			input = KeyCode.ENTER;
+			input = Commands.ENTER;
 			break;
 		case 'i':
-			input = KeyCode.INVENTORY;
+			input = Commands.INVENTORY;
 			break;
 		case 'j':
-			input = KeyCode.EQUIP;
+			input = Commands.EQUIP;
 			break;
 		case 'k':
-			input = KeyCode.DROP;
-			break;
-		case 'f':
-			input = KeyCode.FLY;
-			break;
-		case 'g':
-			input = KeyCode.FARM;
+			input = Commands.DROP;
 			break;
 		}
 	}
