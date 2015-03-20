@@ -48,6 +48,7 @@ public class Inventory {
 		
 	}
 
+	/* Wouldn't this be in the view? --Joe */
 	public void displayInventory() {
 		for(InventoryItem i: contents){
 			i.displayItem();
