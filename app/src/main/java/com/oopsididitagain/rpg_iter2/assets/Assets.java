@@ -1,21 +1,14 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Panel;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 
 // this "assets" package will hold objects of all of our resources
