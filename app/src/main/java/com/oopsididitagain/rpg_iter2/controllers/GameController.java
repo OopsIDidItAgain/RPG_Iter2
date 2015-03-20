@@ -1,14 +1,10 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
-import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
-import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
+import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.GameKeyboardInput;
 import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
@@ -19,9 +15,9 @@ import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
  */
 public class GameController extends Controller{
 	public static GameController instance;
-	Avatar avatar;
-	GameMap gameMap;
-	EntityMapInteraction entityMapInteraction;
+	private Avatar avatar;
+	private GameMap gameMap;
+	private EntityMapInteraction entityMapInteraction;
 
 	private GameController(){
 		createEntityMapInteraction();
@@ -48,6 +44,11 @@ public class GameController extends Controller{
 		entityMapInteraction = new EntityMapInteraction(gameMap);
 		
 	}
+
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
 	}
