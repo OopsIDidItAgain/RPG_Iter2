@@ -12,8 +12,8 @@ avatar_west,/images/entities/avatar/w.png
 cape_item,/images/items/cape.png
 carrot_item,/images/items/carrot.png
 chainsaw_item,/images/items/chainsaw.png
-mushroom_item,/images/items/mushroom.png
-potion_item,/images/items/potion.png
+mushroom_item,/images/items/mushroom.jpg
+potion_item,/images/items/potion.jpg
 powerblock_item,/images/items/powerblock.png
 rock_item,/images/items/rock.png
 sword_item,/images/items/sword.png
@@ -22,7 +22,7 @@ heart_decal,/images/decals/heart_decal.png
 instant_death_decal,/images/decals/instant_death.png
 level_up_decal,/images/decals/level_up.png
 take_damage_decal,/images/decals/take_damage.png
-grass_terrain,/images/terrain/grass.jpg
-mountain_terrain,/images/terrain/mountain.jpg
-soil_terrain,/images/terrain/soil.jpg
-water_terrain,/images/terrain/water.jpg
+G,/images/terrains/grass.jpg
+M,/images/terrains/mountain.jpg
+S,/images/terrains/soil.jpg
+W,/images/terrains/water.jpg
