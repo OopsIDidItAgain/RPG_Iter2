@@ -19,4 +19,9 @@ public class EffectTakeableItem extends TakeableItem implements
 		return statBlob;
 	}
 
+	@Override
+	public InventoryUsableItem toInventoryItem() {
+		InventoryUsableItem item = new InventoryUsableItem(this);
+		return item;
+	}
 }
