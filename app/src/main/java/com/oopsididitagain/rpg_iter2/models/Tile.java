@@ -1,30 +1,36 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.utils.Assetable;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
+import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
 
-public class Tile implements Positionable {
-	private List<Tileable> tileables;
+public class Tile implements Assetable, Positionable {
+	private SortedSet<TiledEntityVisitable> entityVisitables;
+	private SortedSet<TiledProbeVisitable> probeVisitables;
 	private Position position;
 	private Terrain terrain;
 
 	public Tile(Position position, Terrain terrain) {
-		this.tileables = new LinkedList<Tileable>();
+		this.entityVisitables = new TreeSet<TiledEntityVisitable>();
+		this.probeVisitables = new TreeSet<TiledProbeVisitable>();
 		this.position = position;
 		this.terrain = terrain;
 	}
 	
 	public void interact(Entity entity) {
-		for (Tileable t: tileables) {
+		for (TiledEntityVisitable entityVisitable: entityVisitables) {
 			try {
-				t.accept(entity);
-				t.attemptRemoveFrom(tileables);
+				entityVisitable.accept(entity);
+				if (entityVisitable.removeable())
+					entityVisitables.remove(entityVisitable);
 			} catch(InvalidMovementException ex) {
 				ex.printStackTrace();
 			}
@@ -33,9 +39,8 @@ public class Tile implements Positionable {
 
 	public void checkMovable(Probe probe) {
 		terrain.accept(probe);
-		for (Tileable t: tileables) {
-			t.accept(probe);
-		}
+		for (TiledProbeVisitable probeVisitable: probeVisitables) 
+			probeVisitable.accept(probe);
 	}
 
 	@Override
@@ -53,11 +58,32 @@ public class Tile implements Positionable {
 		return position.getDirection();
 	}
 
-	public void add(Tileable tileable) {
-		tileables.add(tileable);
+	public void add(TiledProbeVisitable tileable) {
+		probeVisitables.add(tileable);
+	}
+	
+	public void add(TiledEntityVisitable tileable) {
+		entityVisitables.add(tileable);
 	}
 
-	public void remove(Tileable tileable) {
-		tileable.attemptRemoveFrom(tileables);
+	public void remove(TiledEntityVisitable tileable) {
+		entityVisitables.remove(tileable);
+	}
+
+	public void remove(TiledProbeVisitable tileable) {
+		probeVisitables.remove(tileable);
+	}
+
+	@Override
+	public String getId() {
+		return terrain.getId();
+	}
+	
+	public SortedSet<Tileable> getTilebles()	 {
+		SortedSet<Tileable> tileables = new TreeSet<Tileable>();
+		tileables.add(terrain);
+		tileables.addAll(entityVisitables);
+		tileables.addAll(probeVisitables);
+		return tileables;
 	}
 }

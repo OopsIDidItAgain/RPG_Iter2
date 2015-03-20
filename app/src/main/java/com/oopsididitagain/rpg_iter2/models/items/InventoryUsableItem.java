@@ -8,6 +8,11 @@ import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 public class InventoryUsableItem extends InventoryItem implements EntityVisitable, InstantStatModifier {
 	private StatBlob statBlob;
 	
+	public InventoryUsableItem(String id, double price, StatBlob statBlob) {
+		super(id, price);
+		this.statBlob = statBlob;
+	}
+
 	public InventoryUsableItem(EffectTakeableItem item) {
 		super(item);
 		this.statBlob = item.statBlob();

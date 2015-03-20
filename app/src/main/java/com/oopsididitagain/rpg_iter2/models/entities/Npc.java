@@ -1,6 +1,5 @@
-package com.oopsididitagain.rpg_iter2.models.entities;
-import java.util.Collection;
 
+package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
@@ -14,25 +13,13 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
 public class Npc extends Entity {
 	
 	Storyline story;
-	public Npc(Position position) {
-		super(position);
+	public Npc(String id, Position position) {
+		super(id, position);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void accept(Probe probe) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visit(Entity other) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -47,5 +34,15 @@ public class Npc extends Entity {
 	public void visit(InstantStatModifier modifier) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(getTileablePriority());
+	}
+
+	@Override
+	public boolean removeable() {
+		return false;
 	}
 }

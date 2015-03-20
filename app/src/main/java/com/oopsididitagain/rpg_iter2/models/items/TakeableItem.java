@@ -1,16 +1,15 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
-import java.util.Collection;
-
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
-import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
-public class TakeableItem extends PositionedGameObject implements Tileable, Priceable, MovementPermitter {
+public class TakeableItem extends PositionedGameObject implements TiledEntityVisitable, Priceable {
 
 	private boolean taken = false;
 	private double price;
@@ -21,15 +20,10 @@ public class TakeableItem extends PositionedGameObject implements Tileable, Pric
 	}
 
 	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		if (taken) tileables.remove(this);
+	public boolean removeable() {
+		return taken;
 	}
 
-	@Override
-	public void accept(Entity entity) {
-		entity.visit(this);
-	}
-	
 	public void take() throws ItemAlreadyTakenException {
 		if (taken) throw new ItemAlreadyTakenException("Item: " + getId());
 		taken = true;
@@ -46,8 +40,18 @@ public class TakeableItem extends PositionedGameObject implements Tileable, Pric
 	}
 
 	@Override
-	public void accept(Probe probe) {
-		probe.visit(this);
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(o.getTileablePriority());
+	}
+
+	@Override
+	public TileablePriority getTileablePriority() {
+		return TileablePriority.MIDDLE;
+	}
+
+	@Override
+	public void accept(Entity entity) throws InvalidMovementException {
+		entity.visit(this);
 	}
 
 }

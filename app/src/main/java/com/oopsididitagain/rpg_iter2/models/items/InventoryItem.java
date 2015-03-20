@@ -8,6 +8,11 @@ import com.oopsididitagain.rpg_iter2.utils.Priceable;
 public class InventoryItem extends GameObject implements Priceable {
 	protected double price;
 	
+	public InventoryItem(String id, double price) {
+		super(id);
+		this.price = price;
+	}
+	
 	public InventoryItem(TakeableItem item) {
 		super(item.getId());
 		this.price = item.price();

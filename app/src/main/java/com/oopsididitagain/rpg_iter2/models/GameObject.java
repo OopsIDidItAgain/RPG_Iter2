@@ -1,6 +1,8 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-public abstract class GameObject {
+import com.oopsididitagain.rpg_iter2.utils.Assetable;
+
+public abstract class GameObject implements Assetable {
 	private String id;
 
 	protected GameObject(String id) {

@@ -4,12 +4,12 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.StatBlobHolder;
 
-public class EffectTakeableItem extends TakeableItem implements
-		StatBlobHolder {
+public abstract class EquipableTakeableItem extends TakeableItem
+		implements StatBlobHolder {
 	private StatBlob statBlob;
 
-	public EffectTakeableItem(String id, Position position, double price, 
-			StatBlob statBlob) {
+	public EquipableTakeableItem(String id, Position position,
+			double price, StatBlob statBlob) {
 		super(id, position, price);
 		this.statBlob = statBlob;
 	}
@@ -18,10 +18,7 @@ public class EffectTakeableItem extends TakeableItem implements
 	public StatBlob statBlob() {
 		return statBlob;
 	}
+	
+	public abstract InventoryEquippableItem toInventoryItem();
 
-	@Override
-	public InventoryUsableItem toInventoryItem() {
-		InventoryUsableItem item = new InventoryUsableItem(this);
-		return item;
-	}
 }

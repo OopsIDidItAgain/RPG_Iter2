@@ -37,13 +37,17 @@ public class AvatarCreationMenuController extends Controller {
 		switch(key){
 		case 1:
 			assignSmasher();
+			break;
 		case 2:
 			assignSummoner();
+			break;
 		case 3:
 			assignSneak();
+			break;
 		case 4:
 			controller = GameController.getInstance();
 			switchControllers((GameController)controller);
+			break;
 		}
 		return controller;	
 	}
@@ -67,7 +71,7 @@ public class AvatarCreationMenuController extends Controller {
 	}
 	private void createAvatar() {
 		Position position = new Position(0,0);
-		avatar = new Avatar(position);
+		avatar = new Avatar("Avatar", position);
 		
 	}
 	private void switchControllers(GameController controller){
