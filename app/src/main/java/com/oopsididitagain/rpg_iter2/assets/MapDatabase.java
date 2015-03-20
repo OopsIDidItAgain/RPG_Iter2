@@ -102,7 +102,7 @@ public class MapDatabase {
     }
 
     private void readObjects(){
-
+        //TODO
         String s;
         //while ((s = readObjectsLine()).equals("")) {
             // String[] array = s.split(",");
