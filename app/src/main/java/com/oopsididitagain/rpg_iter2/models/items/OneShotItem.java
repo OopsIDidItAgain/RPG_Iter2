@@ -1,17 +1,14 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
-import java.util.Collection;
-
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
-import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
-public class OneShotItem extends PositionedGameObject implements InstantStatModifier, Tileable, MovementPermitter {
+public class OneShotItem extends PositionedGameObject implements InstantStatModifier, TiledEntityVisitable {
 	private StatBlob blob;
 
 	public OneShotItem(String id, Position position, StatBlob blob) {
@@ -25,34 +22,28 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	}
 
 	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		tileables.remove(this);
-	}
-
-	@Override
-	public void accept(Entity entity) {
-		entity.visit(this);
-	}
-
-	@Override
 	public void affect(StatBlob target) {
 		target.merge(statBlob());
 	}
 
 	@Override
-	public void accept(Probe probe) {
-		probe.visit(this);
-	}
-
-	@Override
 	public int compareTo(Tileable o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getTileablePriority().compareTo(o.getTileablePriority());
 	}
 
 	@Override
 	public TileablePriority getTileablePriority() {
 		return TileablePriority.MIDDLE;
+	}
+
+	@Override
+	public boolean removeable() {
+		return true;
+	}
+
+	@Override
+	public void accept(Entity entity) {
+		entity.visit(this);
 	}
 
 

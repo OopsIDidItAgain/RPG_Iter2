@@ -1,13 +1,11 @@
-package com.oopsididitagain.rpg_iter2.models.entities;
-import java.util.Collection;
 
+package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
-import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 /**
  * Created by parango on 3/11/15.
@@ -21,19 +19,7 @@ public class Npc extends Entity {
 	}
 
 	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void accept(Probe probe) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visit(Entity other) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -53,5 +39,10 @@ public class Npc extends Entity {
 	@Override
 	public int compareTo(Tileable o) {
 		return getTileablePriority().compareTo(getTileablePriority());
+	}
+
+	@Override
+	public boolean removeable() {
+		return false;
 	}
 }

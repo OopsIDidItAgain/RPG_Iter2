@@ -3,7 +3,6 @@ package com.oopsididitagain.rpg_iter2.models.entities;
  * Created by parango on 3/11/15.
  */
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,28 +90,17 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 
 	@Override
-	public void accept(Entity entity) {
-		
-	}
-
-	@Override
-	public void visit(Entity other) {
-		other.accept(this);
-	}
-
-	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		tileables.remove(this);
-	}
-
-	@Override
 	public void accept(Probe probe) {
-		System.out.println("Denying an entity!");
 		probe.deny(); // Yes or No?
 	}
 
 	@Override
 	public int compareTo(Tileable o) {
 		return getTileablePriority().compareTo(o.getTileablePriority());
+	}
+
+	@Override
+	public boolean removeable() {
+		return false;
 	}
 }

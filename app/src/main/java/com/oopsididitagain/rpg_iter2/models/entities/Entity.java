@@ -5,16 +5,15 @@ import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
-import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
-import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
+import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
 
 /**
  * Created by parango on 3/11/15.
  */
-public abstract class Entity extends PositionedGameObject implements Positionable, EntityVisitable, Tileable {
+public abstract class Entity extends PositionedGameObject implements Positionable, TiledProbeVisitable {
 	protected EntityStatus entityStatus;
 	protected Position position;
 	protected Inventory inventory;
@@ -55,13 +54,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	public Inventory getInventory() {
 		return inventory;
 	}
-	
-	@Override
-	public void accept(Entity other) {
-		other.visit(this);
-	}
 
-	public abstract void visit(Entity other);
 	public abstract void visit(TakeableItem item);
 	public abstract void visit(InstantStatModifier modifier);
 

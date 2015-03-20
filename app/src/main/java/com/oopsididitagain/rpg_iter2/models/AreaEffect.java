@@ -8,11 +8,11 @@ import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
-import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
-public class AreaEffect extends PositionedGameObject implements Tileable, InstantStatModifier, MovementPermitter {
+public class AreaEffect extends PositionedGameObject implements TiledEntityVisitable, InstantStatModifier {
 
 	private AreaEffectType type;
 	
@@ -24,11 +24,6 @@ public class AreaEffect extends PositionedGameObject implements Tileable, Instan
 	@Override
 	public void accept(Entity entity) throws InvalidMovementException {
 		entity.visit(this);
-	}
-
-	@Override
-	public void accept(Probe probe) {
-		probe.visit(this);
 	}
 
 	@Override
@@ -47,9 +42,8 @@ public class AreaEffect extends PositionedGameObject implements Tileable, Instan
 	}
 
 	@Override
-	public void attemptRemoveFrom(Collection<Tileable> tileables) {
-		// Not removable, should I rethink this? -- Joe
-		System.out.println("Won't Remove an AreaEffect!");
+	public boolean removeable() {
+		return false;
 	}
 
 	@Override
