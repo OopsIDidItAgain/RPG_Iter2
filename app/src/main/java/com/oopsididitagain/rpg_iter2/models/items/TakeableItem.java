@@ -35,7 +35,7 @@ public class TakeableItem extends PositionedGameObject implements TiledEntityVis
 	}
 	
 	public InventoryItem toInventoryItem() {
-		InventoryItem inventoryItem = new InventoryItem(this);
+		InventoryItem inventoryItem = new InventoryUnusableItem(this);
 		return inventoryItem;
 	}
 

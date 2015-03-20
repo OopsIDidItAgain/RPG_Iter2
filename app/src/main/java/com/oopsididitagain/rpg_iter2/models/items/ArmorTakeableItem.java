@@ -15,7 +15,7 @@ public class ArmorTakeableItem extends EquipableTakeableItem {
 	}
 
 	@Override
-	public InventoryEquippableItem toInventoryItem() {
+	public InventoryEquipableItem toInventoryItem() {
 		InventoryArmorItem item = new InventoryArmorItem(this);
 		return item;
 	}

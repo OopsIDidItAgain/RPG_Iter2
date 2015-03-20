@@ -6,11 +6,15 @@ package com.oopsididitagain.rpg_iter2.models.entities;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
@@ -62,12 +66,20 @@ public class Avatar extends Entity implements StatModifiable {
 	public Map<String, Skill> getSkills() {
 		return this.map;
 	}
-
 	
 	public Skill getSkill(String skill) {
 		return map.get(skill);
 	}
+	
+	public void visit(InventoryEquipableItem item) {
+		// ArmoryStuff
+		// armory.add(item);
+	}
 
+	public void visit(InventoryUnusableItem item) {
+		JOptionPane.showMessageDialog(null, "Can't Use Here!");
+	}
+	
 	@Override
 	public void visit(InstantStatModifier modifier) {
 		modifier.affect(statBlob());
