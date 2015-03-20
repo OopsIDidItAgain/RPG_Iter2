@@ -38,7 +38,7 @@ public class Assets extends Panel {
 	
 	public void initialize(){
 
-        imgIDtoPathFile =  getClass().getResource("/assets2/ImageIDsAndPaths.csv").getPath();
+        imgIDtoPathFile =  getClass().getResource("/assets/ImageIDsAndPaths.csv").getPath();
 		// start it by populating it fully
 		
 		try {
