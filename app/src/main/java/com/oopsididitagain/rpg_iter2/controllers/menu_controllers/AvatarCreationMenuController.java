@@ -10,6 +10,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
+import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
 public class AvatarCreationMenuController extends Controller {
 	public static AvatarCreationMenuController instance;
@@ -77,6 +78,12 @@ public class AvatarCreationMenuController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KeyBoardInput getKeyBoardInput() {
 		// TODO Auto-generated method stub
 		return null;
 	}

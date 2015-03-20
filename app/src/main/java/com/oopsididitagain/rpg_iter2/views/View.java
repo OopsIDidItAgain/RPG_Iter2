@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 
@@ -26,6 +27,12 @@ public class View extends JPanel{
 			modelViewInteraction.drawModel(g);
 		}
 
+	}
+	public void visit(GameViewInteraction gameViewInteraction) {
+		this.modelViewInteraction = gameViewInteraction;
+		this.repaint();
+		
+		
 	}
 
 	public void visit(MainMenuViewInteraction mainMenuViewInteraction) {

@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.stats;
 
+
 public class StatCollection {
 	//Armory of Entity in order to use it's equipped weapons and armor to calculate some stats
 	//Armory armory;

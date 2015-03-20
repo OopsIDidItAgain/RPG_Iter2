@@ -1,12 +1,16 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
+import com.oopsididitagain.rpg_iter2.utils.GameKeyboardInput;
+import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
 /**
  * In charge of handling input while playing game
@@ -33,20 +37,11 @@ public class GameController extends Controller{
 
 	@Override
 	public Controller takeInputAndUpdate(int key) {
-		Controller controller = AvatarCreationMenuController.getInstance();
-		switch(key){
-		case 1:
-			//this skill would not happen here, it would probably happen
-			//in "skillSelectionController"
-			//entityMapInteraction.setUpSkill(avatar, "bargain");
-		case 2:
-		
-		case 3:
-		
-		case 4:
-			
+		Controller c = this;
+		if(key == 1){
+			c = MainMenuController.getInstance();
 		}
-		return controller;	
+		return c;
 	}
 	
 	private void createEntityMapInteraction() {
@@ -63,8 +58,16 @@ public class GameController extends Controller{
 
 	@Override
 	public GameViewInteraction populateInteraction() {
-		// TODO Auto-generated method stub
-		return null;
+		GameViewInteraction gameInteraction = new GameViewInteraction();
+		return gameInteraction;
 	}
+
+	@Override
+	public KeyBoardInput getKeyBoardInput() {
+		// TODO Auto-generated method stub
+		return new GameKeyboardInput();
+	}
+
+	
 
 }

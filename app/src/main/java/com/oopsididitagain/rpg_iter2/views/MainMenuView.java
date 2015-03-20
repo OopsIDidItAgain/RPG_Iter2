@@ -14,7 +14,12 @@ import java.util.Observer;
  */
 public class MainMenuView extends JPanel implements Observer {
 
-    private MainMenu menu = null;
+    private MainMenu menu;
+    
+    public MainMenuView(){//Constructor
+        menu = new MainMenu();
+
+    }
 
 
     @Override
@@ -22,9 +27,5 @@ public class MainMenuView extends JPanel implements Observer {
         menu = (MainMenu)obj;
     }
 
-    public MainMenuView(){
-        menu = new MainMenu();
-
-    }
-
+ 
 }

@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.stats;
 
+
 public class StatBlob {
 
 	public final static StatBlob SNEAK_DEFAULT = new StatBlob(0, 10, 50, 20, 20, 0, 50, 0, 0);

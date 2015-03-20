@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
+import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
 
 public class ExitGameController extends Controller{
@@ -27,6 +28,12 @@ public class ExitGameController extends Controller{
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KeyBoardInput getKeyBoardInput() {
 		// TODO Auto-generated method stub
 		return null;
 	}

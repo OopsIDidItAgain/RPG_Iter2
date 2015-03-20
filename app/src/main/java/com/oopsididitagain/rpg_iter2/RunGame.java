@@ -14,8 +14,8 @@ public class RunGame extends JFrame{
 
 
 private static GameLoop loop;
-	
-	public static void main(String[] args) {
+//private static MainMenu
+	public static void main(String[] args) throws InterruptedException {
 		loop = new GameLoop();
 	    SwingUtilities.invokeLater(new Runnable() {
 			@Override

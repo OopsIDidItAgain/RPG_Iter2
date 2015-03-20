@@ -28,16 +28,28 @@ import java.util.Observable;
 
 public class MainMenu extends Observable {
 	private String options[];
-	private int size;
 	private int currentOption;
 
     public MainMenu(){
-        options = new String[]{"New Game", "Load Game"};
-        size = 2;
-        currentOption = 0;
+        options = new String[]{"New Game", "Load Game", "Controls", "none"};
+        
+        currentOption = 3;
         notifyObservers();
     }
+    
+    public void setOption(int option){
+    	
+    	currentOption = option;
+    }
+    
+    public int getCurrentOption(){
+    	
+    	return currentOption;
+    }
+    public String getOptions(int i){
+    	return options[i];
 
+    }
 
 
 }

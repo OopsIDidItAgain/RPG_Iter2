@@ -1,6 +1,8 @@
 package com.oopsididitagain.rpg_iter2;
 
 import java.awt.Component;
+import java.awt.event.KeyListener;
+import java.util.concurrent.TimeUnit;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
@@ -12,27 +14,51 @@ import com.oopsididitagain.rpg_iter2.views.View;
 
 public class GameLoop {
 	View view;
-	KeyBoardInput keyBoardInput;
-	public void runGame(){
-		Controller controller = MainMenuController.getInstance();
+	KeyBoardInput keyboardInput;
+	ModelViewInteraction modelViewInteraction;
+	Controller controller;
+	
+	
+	
+	public GameLoop(){   //GameLoop constructor
+	    
+		
+	
+		controller = MainMenuController.getInstance();
+		
+	
+		this.modelViewInteraction = controller.populateInteraction();
+		keyboardInput =  controller.getKeyBoardInput();
 		this.view = new View();
-		this.keyBoardInput = new KeyBoardInput();
-		view.addKeyListener(keyBoardInput);
-		view.requestFocus();
-		boolean firstRun = true;
-		ModelViewInteraction modelViewInteraction = null;
+		view.addKeyListener( keyboardInput);
+		view.addMouseListener(keyboardInput);
+		
+		view.setFocusable(true);
+		view.requestFocusInWindow();
+		
+	}
+	public void runGame() throws InterruptedException{   //Our main gameloop logic
+		
+
 		while(!controller.equals(ExitGameController.getInstance())){
-			int command = keyBoardInput.getInput();
-			Controller temp = controller;
-			controller = controller.takeInputAndUpdate(command);
-			
-			if(!controller.equals(temp) || firstRun){
-				modelViewInteraction = controller.populateInteraction();
-			}
-			
+			update();
 			view.render(modelViewInteraction);
-			firstRun = false;
+			TimeUnit.MILLISECONDS.sleep(18);
 		}
+	}
+	public void update(){
+		
+		Controller temp = controller;
+		
+		controller = controller.takeInputAndUpdate(keyboardInput.getInput());
+		
+
+		if(!controller.equals(temp)){
+			
+			modelViewInteraction = controller.populateInteraction();
+		}
+		
+		
 	}
 
 	public Component getView() {
