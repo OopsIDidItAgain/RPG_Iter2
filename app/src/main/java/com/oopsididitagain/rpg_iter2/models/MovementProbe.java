@@ -19,6 +19,8 @@ public class MovementProbe {
 	public MovementProbe(Entity entity) {
 		this.entity = entity;
 	}
+	
+	public MovementProbe(){}
 
 	public void inspect(Tile targetTile) {
 		targetTile.checkMovable(this);
@@ -59,6 +61,12 @@ public class MovementProbe {
 	public void addEntity(Entity entity) {
 		this.entity = entity;
 		tileFlags.add(TileContentsProbeStatus.ENTITY_DETECTED);
+	}
+	public boolean checkStatus(TileContentsProbeStatus status){
+		return tileFlags.contains(status);
+	}
+	public Entity getEntity(){
+		return this.entity;
 	}
 	
 }

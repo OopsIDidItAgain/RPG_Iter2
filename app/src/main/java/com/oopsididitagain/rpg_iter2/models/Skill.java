@@ -9,25 +9,26 @@ package com.oopsididitagain.rpg_iter2.models;
  */
 import com.oopsididitagain.rpg_iter2.models.effects.Effect;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 public class Skill {
-	String name;
+
 	int multiplier;
 	Effect effect;
-	boolean passive;
+	boolean active;
 	
-	public Skill(String name ){//add the passive thingy
-		this.name = name;
+	public Skill(boolean active){
+		this.active = active;
 		this.multiplier = 1;
 	}
+	
 	public void setEffect(Effect effect){
 		this.effect = effect;	
 		applyMultiplier();
 	}
 	
-	public String getName(){
-		return name;
-	}
 	public void applyMultiplier(){
 		effect.applyMultiplier(multiplier);
 	}
@@ -37,6 +38,16 @@ public class Skill {
 	}
 	public Effect getEffect() {
 		return effect;
+	}
+
+	public int getRadius() {
+		return effect.getRadius();
+	}
+
+		
+	public void applySkill(Avatar avatar, MiniMap tiles,SkillProbe skillProbe) {
+		applyMultiplier();
+		effect.applySkill(avatar,tiles,skillProbe);
 	}
 
 }

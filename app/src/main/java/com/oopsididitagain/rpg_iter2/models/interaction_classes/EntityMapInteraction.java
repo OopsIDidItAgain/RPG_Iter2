@@ -1,29 +1,37 @@
 package com.oopsididitagain.rpg_iter2.models.interaction_classes;
 
 
+
 import com.oopsididitagain.rpg_iter2.models.GameMap;
+import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
+import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.MovementProbeStatus;
 import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
 
 /*
  * This should hold the interaction between entities and the map,
- * it will check if an avatar can move, return the closest entities
- *  to another avatar
+ * it will check if an entity can move, return the closest entities
+ *  to another entity
  * 
  */
 public class EntityMapInteraction {
+
 	private GameMap gameMap;
-	private SkillInteraction skillInteraction;
+	private SkillProbe skillProbe;
+
 	
 	public EntityMapInteraction(GameMap gameMap){
 		this.gameMap = gameMap;
-		this.skillInteraction = new SkillInteraction();
+		this.skillProbe = new SkillProbe();
+		
 	}
 	
 	public void move(Entity entity, Position toPosition) {
@@ -52,23 +60,23 @@ public class EntityMapInteraction {
 		}
 	}
 
-	public void setUpSkill( SkilledEntity entity,String skill) {
-		switch(skill){
-		case"bargain":
-			/*
-			Direction d = avatar.getDirection();
-			Position p = avatar.getPostion();
-			Entity e = getEntityAt(p,d);
-			Skill bargain = avatar.getSkill("bargain");
-			skillInteraction.bargain(e,bargain);
-			*/
-		}
-	}
 
 	private Entity getEntityAt(Position p, Direction d) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void applySkill(Avatar avatar, Skill skill) {
+		int radius = skill.getRadius();
+		MiniMap tiles = getTilesFor(avatar.getPosition(),radius);
+		skill.applySkill(avatar,tiles,skillProbe);
+	}
+	
+	
+	private MiniMap getTilesFor(Position position, int radius){
+		return gameMap.getTiles(position.getY(),position.getX(),radius);
+	}
+	
 
 
 }

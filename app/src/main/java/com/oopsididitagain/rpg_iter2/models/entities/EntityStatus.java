@@ -7,7 +7,7 @@ public class EntityStatus {
 	public static int PLAYING = 0;
 	public static int SLEEPING = 1;
 	private int status;
-	EntityStatus(int state){
+	public EntityStatus(int state){
 		this.status = state;
 	}
 	public int getStatus() {

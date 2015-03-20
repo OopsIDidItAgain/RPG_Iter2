@@ -8,21 +8,30 @@ package com.oopsididitagain.rpg_iter2.models.effects;
  */
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.oopsididitagain.rpg_iter2.models.MiniMap;
+import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 public class EntityStatusModifier implements Effect{
-	int secondsAlterationInEffect = 5;
+	int secondsAlterationInEffect;
 	int baseSecondsAlterationInEffect = 5;
+	int baseRadius = 3;
+	int radius;
 	EntityStatus changeStatusTo;
 	
-	EntityStatusModifier(EntityStatus changeStatusTo){
+	public EntityStatusModifier(EntityStatus changeStatusTo){
 		this.changeStatusTo = changeStatusTo;
 
 	}
 	@Override
 	public void applyMultiplier(int m) {
 		this.secondsAlterationInEffect = baseSecondsAlterationInEffect * m;
+		this.radius = baseRadius * m;
 		
 	}
 	public void changeStatus(final Entity entity) {
@@ -38,5 +47,13 @@ public class EntityStatusModifier implements Effect{
 		Timer timer = new Timer();
 		System.out.println("Entity is asleep!");
 		timer.schedule(timertask, secondsAlterationInEffect * 1000);
+	}
+	@Override
+	public int getRadius() {
+		return this.radius;
+	}
+	@Override
+	public void applySkill(Avatar avatar, MiniMap tiles,SkillProbe skillProbe) {
+		skillProbe.performSkill(this,avatar,tiles);
 	}
 }

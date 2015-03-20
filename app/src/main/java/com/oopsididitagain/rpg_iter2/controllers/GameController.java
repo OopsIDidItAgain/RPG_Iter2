@@ -3,6 +3,9 @@ package com.oopsididitagain.rpg_iter2.controllers;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
+
+import com.oopsididitagain.rpg_iter2.models.Skill;
+
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.GameKeyboardInput;
@@ -32,14 +35,25 @@ public class GameController extends Controller{
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(int command) {
 		Controller c = this;
-		if(key == 1){
-			c = MainMenuController.getInstance();
+		performSkillCommand(command);
+		switch(command){
+		
 		}
+		
 		return c;
 	}
 	
+	
+
+	private void performSkillCommand(int command) {
+		Skill skill = avatar.getActiveSkill(command);
+		if(skill != null){
+			entityMapInteraction.applySkill(avatar,skill);
+		}
+	}
+
 	private void createEntityMapInteraction() {
 		entityMapInteraction = new EntityMapInteraction(gameMap);
 		

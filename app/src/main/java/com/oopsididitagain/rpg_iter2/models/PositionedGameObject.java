@@ -5,7 +5,7 @@ import com.oopsididitagain.rpg_iter2.utils.Positionable;
 
 public abstract class PositionedGameObject extends GameObject
 		implements Positionable {
-	private Position position;
+	protected Position position;
 
 	public PositionedGameObject(String id, Position position) {
 		super(id);

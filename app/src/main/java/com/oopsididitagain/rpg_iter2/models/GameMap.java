@@ -9,12 +9,12 @@ import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
 public class GameMap {
 	private Tile[][] tiles;
 	
-	/*
+	
 	public GameMap(Tile[][] tiles) {
 		this.tiles = tiles;
-		this.HEIGHT = tiles.length;
-		this.WIDTH = tiles[HEIGHT - 1].length;
-	}*/
+		//this.HEIGHT = tiles.length;
+		//this.WIDTH = tiles[HEIGHT - 1].length;
+	}
 	
 	public Tile getTileAt(Position position) throws PositionOutOfBoundsException {
 		position.checkBounds(0, 0, getWidth(), getHeight());
@@ -78,6 +78,47 @@ public class GameMap {
 	
 	public int getWidth() {
 		return (tiles == null) ? 0 : tiles[0].length;
+	}
+	
+	public MiniMap getTiles(int y, int x, int radius) {
+	
+		int upperBoundHeight = y + radius;
+		if(upperBoundHeight > tiles.length){
+			upperBoundHeight = tiles.length;
+		}
+		int lowerBoundHeight = y - radius;
+		if(lowerBoundHeight < 0){
+			lowerBoundHeight = 0;
+		}
+		int newHeight = upperBoundHeight - lowerBoundHeight;
+		
+		int upperBoundWidth = x + radius;
+		if(upperBoundWidth > tiles[0].length){
+			upperBoundWidth = tiles[0].length;
+		}
+		int lowerBoundWidth = x - radius;
+		if(lowerBoundWidth < 0){
+			lowerBoundWidth = 0;
+		}
+		int newWidth = upperBoundWidth - lowerBoundWidth;
+		Tile[][] returningTiles = new Tile[newHeight][newWidth];
+		MiniMap minimap = new MiniMap();
+		int startingX = 0;
+		int startingY = 0;
+		for(int i =lowerBoundHeight; i != upperBoundHeight; ++i){
+			for(int j = lowerBoundWidth; j != upperBoundWidth; ++j){
+				if(i == y && j == x){
+					Position center = new Position(startingY,startingY);
+					minimap.setCenter(center);
+				}
+				returningTiles[startingY][startingX] = tiles[i][j];
+				++startingX;
+			}
+			startingX = 0;
+			++startingY;
+		}
+		minimap.setTiles(returningTiles);
+		return minimap;
 	}
 	
 }

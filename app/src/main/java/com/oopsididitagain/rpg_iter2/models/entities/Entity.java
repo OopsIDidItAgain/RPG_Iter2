@@ -19,7 +19,6 @@ import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
  */
 public abstract class Entity extends PositionedGameObject implements Positionable, TiledProbeVisitable {
 	protected EntityStatus entityStatus;
-	protected Position position;
 	protected Inventory inventory;
 	protected boolean isCurrentlyFlying;
 
@@ -30,7 +29,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	
 	@Override
 	public Position getPosition() {
-		return position;
+		return this.position;
 	}
 
 	@Override
