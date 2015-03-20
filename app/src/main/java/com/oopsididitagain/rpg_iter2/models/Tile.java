@@ -81,6 +81,7 @@ public class Tile implements Assetable, Positionable {
 	
 	public SortedSet<Tileable> getTilebles()	 {
 		SortedSet<Tileable> tileables = new TreeSet<Tileable>();
+		tileables.add(terrain);
 		tileables.addAll(entityVisitables);
 		tileables.addAll(probeVisitables);
 		return tileables;
