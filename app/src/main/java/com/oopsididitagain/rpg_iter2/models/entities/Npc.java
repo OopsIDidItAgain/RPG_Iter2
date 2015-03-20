@@ -7,6 +7,7 @@ import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 /**
  * Created by parango on 3/11/15.
@@ -14,8 +15,8 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
 public class Npc extends Entity {
 	
 	Storyline story;
-	public Npc(Position position) {
-		super(position);
+	public Npc(String id, Position position) {
+		super(id, position);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,5 +48,10 @@ public class Npc extends Entity {
 	public void visit(InstantStatModifier modifier) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(getTileablePriority());
 	}
 }

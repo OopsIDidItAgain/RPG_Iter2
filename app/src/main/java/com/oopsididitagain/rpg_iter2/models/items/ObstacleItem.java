@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 public class ObstacleItem extends PositionedGameObject implements Tileable, MovementInhibitor {
 
@@ -33,6 +34,16 @@ public class ObstacleItem extends PositionedGameObject implements Tileable, Move
 	@Override
 	public void attemptRemoveFrom(Collection<Tileable> tileables) {
 		System.out.println("Can't remove a Obstacle Item !");
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(o.getTileablePriority());
+	}
+
+	@Override
+	public TileablePriority getTileablePriority() {
+		return TileablePriority.MIDDLE;
 	}
 	
 	

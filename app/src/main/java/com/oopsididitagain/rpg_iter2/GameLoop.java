@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2;
 
 import java.awt.Component;
+import java.util.concurrent.TimeUnit;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
@@ -23,6 +24,11 @@ public class GameLoop {
 			controller = controller.takeInputAndUpdate(command);
 			ModelViewInteraction modelViewInteraction = controller.populateInteraction();
 			view.render(modelViewInteraction);
+			try {
+				TimeUnit.MILLISECONDS.sleep(18);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 

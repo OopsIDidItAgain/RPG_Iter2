@@ -1,16 +1,19 @@
 package com.oopsididitagain.rpg_iter2.models;
 
+import com.oopsididitagain.rpg_iter2.utils.Assetable;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 
-public enum Terrain implements MovementInhibitor {
-	GRASS(false, false),
-	WATER(true, false),
-	MOUNTAIN(true, true);
+public enum Terrain implements Assetable, MovementInhibitor {
+	GRASS("G", false, false),
+	WATER("W", true, false),
+	MOUNTAIN("M", true, true);
 
 	private boolean inhibitGround;
 	private boolean inhibitAir;
+	private String id;
 
-	private Terrain(boolean inhibitGround, boolean inhibitAir) {
+	private Terrain(String id, boolean inhibitGround, boolean inhibitAir) {
+		this.id = id;
 		this.inhibitGround = inhibitGround;
 		this.inhibitAir = inhibitAir;
 	}
@@ -24,6 +27,11 @@ public enum Terrain implements MovementInhibitor {
 	@Override
 	public void accept(Probe probe) {
 		probe.visit(this);
+	}
+
+	@Override
+	public String getId() {
+		return id;
 	}
 
 }

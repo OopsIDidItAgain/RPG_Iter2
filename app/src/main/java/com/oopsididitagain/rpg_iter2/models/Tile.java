@@ -1,21 +1,22 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.utils.Assetable;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
-public class Tile implements Positionable {
-	private List<Tileable> tileables;
+public class Tile implements Assetable, Positionable {
+	private SortedSet<Tileable> tileables;
 	private Position position;
 	private Terrain terrain;
 
 	public Tile(Position position, Terrain terrain) {
-		this.tileables = new LinkedList<Tileable>();
+		this.tileables = new TreeSet<Tileable>();
 		this.position = position;
 		this.terrain = terrain;
 	}
@@ -59,5 +60,10 @@ public class Tile implements Positionable {
 
 	public void remove(Tileable tileable) {
 		tileable.attemptRemoveFrom(tileables);
+	}
+
+	@Override
+	public String getId() {
+		return terrain.getId();
 	}
 }

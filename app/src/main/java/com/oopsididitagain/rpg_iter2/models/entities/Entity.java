@@ -1,25 +1,27 @@
 package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
+import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 /**
  * Created by parango on 3/11/15.
  */
-public abstract class Entity implements Positionable, EntityVisitable, Tileable {
+public abstract class Entity extends PositionedGameObject implements Positionable, EntityVisitable, Tileable {
 	protected EntityStatus entityStatus;
 	protected Position position;
 	protected Inventory inventory;
 	protected boolean isCurrentlyFlying;
 
-	public Entity(Position position){
-		this.position = position;
+	public Entity(String id, Position position){
+		super(id, position);
 		this.entityStatus = new EntityStatus(EntityStatus.PLAYING);
 	}
 	
@@ -70,5 +72,9 @@ public abstract class Entity implements Positionable, EntityVisitable, Tileable 
 	public void toggleFlight() {
 		isCurrentlyFlying = !isCurrentlyFlying;
 	}
-	
+
+	@Override
+	public TileablePriority getTileablePriority() {
+		return TileablePriority.HIGH;
+	}
 }

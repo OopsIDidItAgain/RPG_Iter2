@@ -10,11 +10,11 @@ import java.util.Map;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
-import com.oopsididitagain.rpg_iter2.models.Stats.StatBlob;
-import com.oopsididitagain.rpg_iter2.models.Stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
@@ -27,8 +27,8 @@ public class Avatar extends Entity implements StatModifiable {
 	private Occupation occupation;
 	private StatCollection stats;
 
-	public Avatar(Position position) {
-		super(position);
+	public Avatar(String id, Position position) {
+		super(id, position);
 	}
 
 	public void setOccupation(Occupation occupation) {
@@ -107,7 +107,12 @@ public class Avatar extends Entity implements StatModifiable {
 
 	@Override
 	public void accept(Probe probe) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Denying an entity!");
+		probe.deny(); // Yes or No?
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(o.getTileablePriority());
 	}
 }

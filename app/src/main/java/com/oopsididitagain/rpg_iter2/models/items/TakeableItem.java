@@ -9,6 +9,7 @@ import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 public class TakeableItem extends PositionedGameObject implements Tileable, Priceable, MovementPermitter {
 
@@ -48,6 +49,16 @@ public class TakeableItem extends PositionedGameObject implements Tileable, Pric
 	@Override
 	public void accept(Probe probe) {
 		probe.visit(this);
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		return getTileablePriority().compareTo(o.getTileablePriority());
+	}
+
+	@Override
+	public TileablePriority getTileablePriority() {
+		return TileablePriority.MIDDLE;
 	}
 
 }

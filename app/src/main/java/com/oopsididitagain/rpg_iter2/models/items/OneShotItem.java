@@ -9,6 +9,7 @@ import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.MovementPermitter;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 
 public class OneShotItem extends PositionedGameObject implements InstantStatModifier, Tileable, MovementPermitter {
 	private StatBlob blob;
@@ -41,6 +42,17 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	@Override
 	public void accept(Probe probe) {
 		probe.visit(this);
+	}
+
+	@Override
+	public int compareTo(Tileable o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public TileablePriority getTileablePriority() {
+		return TileablePriority.MIDDLE;
 	}
 
 
