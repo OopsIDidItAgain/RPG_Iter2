@@ -9,7 +9,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.menus.InventoryMenu;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
-import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 public class InventoryController extends Controller {
 	private static InventoryController instance;

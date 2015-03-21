@@ -8,7 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.stats.Stat;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
-import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 public class ObserverController extends Controller{
 	private static ObserverController instance;

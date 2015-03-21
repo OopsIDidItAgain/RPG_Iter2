@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.utils;
+package com.oopsididitagain.rpg_iter2.utils.keyboardInput;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
