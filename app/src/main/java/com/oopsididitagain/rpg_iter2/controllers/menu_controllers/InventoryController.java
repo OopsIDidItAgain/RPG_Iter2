@@ -73,7 +73,7 @@ public class InventoryController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		InventoryViewInteraction inventoryViewInteraction = new InventoryViewInteraction(inventoryMenu);
+		InventoryViewInteraction inventoryViewInteraction = new InventoryViewInteraction(inventoryMenu, inventory);
 		return inventoryViewInteraction;
 	}
 

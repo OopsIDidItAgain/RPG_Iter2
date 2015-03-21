@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 
@@ -22,5 +23,10 @@ public class InventoryUnusableItem extends InventoryItem {
 	public TakeableItem toTakeableItem(Position position) {
 		TakeableItem item = new TakeableItem(getId(), position, price());
 		return item;
+	}
+
+	@Override
+	public void accept(InventoryViewInteraction inventoryViewInteraction) {
+		inventoryViewInteraction.visit(this);
 	}
 }

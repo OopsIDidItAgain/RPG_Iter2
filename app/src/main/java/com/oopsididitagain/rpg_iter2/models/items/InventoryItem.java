@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameObject;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
@@ -41,7 +42,6 @@ public abstract class InventoryItem extends GameObject implements Priceable {
 	
 	public abstract TakeableItem toTakeableItem(Position position);
 
-	// Should this be Tile destination?
-	//public abstract PositionedItem drop(Position destination);
+	public abstract void accept(InventoryViewInteraction inventoryViewInteraction);
 
 }

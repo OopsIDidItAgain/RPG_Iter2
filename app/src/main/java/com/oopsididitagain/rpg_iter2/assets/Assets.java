@@ -1,6 +1,5 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
-import java.awt.Panel;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,26 +20,23 @@ import javax.imageio.ImageIO;
 // - animations (maybe)
 
 
-public  class Assets extends Panel {
-	// static BufferedImage b; // for testing purposes
-	
-	private static final long serialVersionUID = -1756652494794014880L;
+public  class Assets {
 
-	static String imgIDtoPathFile;
-
-	static HashMap<String, String> paths; // image id -> path
-	static HashMap<String, BufferedImage> images; // game object id -> image id
-	
-	public Assets() {
-		paths = new HashMap<>();
-		images = new HashMap<>();
+	private static String imgIDtoPathFile;
+	private static HashMap<String, String> paths; // image id -> path
+	private static HashMap<String, BufferedImage> images;  // game object id -> image id
+	static {
+		paths = new HashMap<String, String>(); 
+		images = new HashMap<String, BufferedImage>();
 		loadPaths();
         loadImages();
 	}
 	
-	public void loadPaths(){
+	public Assets() { }
+	
+	private static void loadPaths(){
 
-        imgIDtoPathFile =  getClass().getResource("/assets/ImageIDsAndPaths.csv").getPath();
+        imgIDtoPathFile =  Assets.class.getClass().getResource("/assets/ImageIDsAndPaths.csv").getPath();
 		// start it by populating it fully
 		
 		try {
@@ -53,8 +49,8 @@ public  class Assets extends Panel {
 
 				String[] split = line.split(",");
                 System.out.println(split[1]);
-                System.out.println(getClass().getResource(split[1]).getPath());
-				paths.put(split[0], getClass().getResource(split[1]).getPath());
+                System.out.println(Assets.class.getClass().getResource(split[1]).getPath());
+				paths.put(split[0], Assets.class.getClass().getResource(split[1]).getPath());
 			}
 
             pathReader.close();
@@ -65,7 +61,7 @@ public  class Assets extends Panel {
 		}
 	}
 	
-	private void loadImages(){
+	private static void loadImages(){
 		String s = "avatar";
 		File f = new File(getPath(s));
 		try {
@@ -90,10 +86,9 @@ public  class Assets extends Panel {
             }
         }
         return images.get(gameObjID);
-		
 	}
 	
-	public String getPath(String gameObjID) {
+	public static String getPath(String gameObjID) {
         return paths.get(gameObjID);
 	}
 }

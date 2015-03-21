@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
@@ -55,6 +56,9 @@ public class GameController extends Controller{
 		case Commands.MOVE_NORTH_WEST: targetDirection = Direction.NORTHWEST; 
 			break;
 		case Commands.MOVE_NORTH_EAST: targetDirection = Direction.NORTHEAST; 
+			break;
+		case Commands.INVENTORY: 
+			c = InventoryController.getInstance();
 			break;
 		}
 		Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);

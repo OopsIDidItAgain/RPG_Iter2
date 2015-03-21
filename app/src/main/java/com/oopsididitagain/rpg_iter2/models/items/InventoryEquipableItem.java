@@ -1,10 +1,12 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.StatBlobHolder;
 
 public abstract class InventoryEquipableItem extends InventoryItem implements StatBlobHolder {
 	private StatBlob statBlob;
+	private boolean isEquipped = false;
 
 	public InventoryEquipableItem(String id, double price, StatBlob statBlob) {
 		super(id, price);
@@ -16,8 +18,17 @@ public abstract class InventoryEquipableItem extends InventoryItem implements St
 		this.statBlob = item.statBlob();
 	}
 	
+	public boolean isEquipped() {
+		return isEquipped;
+	}
+	
 	@Override
 	public StatBlob statBlob() {
 		return statBlob;
+	}
+	
+	@Override
+	public void accept(InventoryViewInteraction inventoryViewInteraction) {
+		inventoryViewInteraction.visit(this);
 	}
 }

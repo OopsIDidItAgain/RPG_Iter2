@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
@@ -38,6 +39,11 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 	public EffectTakeableItem toTakeableItem(Position position) {
 		EffectTakeableItem item = new EffectTakeableItem(getId(), position, price(), statBlob);
 		return item;
+	}
+
+	@Override
+	public void accept(InventoryViewInteraction inventoryViewInteraction) {
+		inventoryViewInteraction.visit(this);
 	}
 
 }
