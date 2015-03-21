@@ -1,11 +1,13 @@
-package com.oopsididitagain.rpg_iter2.controllers;
+package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 
-import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
-import com.oopsididitagain.rpg_iter2.models.menus.InventoryMenu;
+import com.oopsididitagain.rpg_iter2.controllers.Controller;
+import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
+import com.oopsididitagain.rpg_iter2.models.menus.InventoryMenu;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
@@ -71,7 +73,8 @@ public class InventoryController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		return null;
+		InventoryViewInteraction inventoryViewInteraction = new InventoryViewInteraction(inventoryMenu);
+		return inventoryViewInteraction;
 	}
 
 	@Override

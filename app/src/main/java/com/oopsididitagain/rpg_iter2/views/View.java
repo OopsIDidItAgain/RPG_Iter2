@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
@@ -31,18 +32,20 @@ public class View extends JPanel{
 	public void visit(GameViewInteraction gameViewInteraction) {
 		this.modelViewInteraction = gameViewInteraction;
 		this.repaint();
-		
-		
 	}
 
 	public void visit(MainMenuViewInteraction mainMenuViewInteraction) {
 		this.modelViewInteraction = mainMenuViewInteraction;
 		this.repaint();
-		
-		
 	}
+
 	public void paint(MainMenuViewInteraction mainMenuView, Graphics g){
 		
+	}
+
+	public void visit(InventoryViewInteraction inventoryViewInteraction) {
+		this.modelViewInteraction = inventoryViewInteraction;
+		this.repaint();
 	}
 
 }
