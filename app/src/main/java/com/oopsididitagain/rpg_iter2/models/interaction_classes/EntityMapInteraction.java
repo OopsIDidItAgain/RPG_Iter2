@@ -48,6 +48,7 @@ public class EntityMapInteraction {
 		MovementProbe movementProbe = new MovementProbe(entity);
 		movementProbe.inspect(targetTile);
 		
+		// Step 3a: If we can, go ahead and Perform movement 
 		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
 			Tile fromTile;
 			try {
@@ -56,14 +57,11 @@ public class EntityMapInteraction {
 				e.printStackTrace();
 				return;
 			}
-			entity.move(fromTile, targetTile);
+			entity.move(fromTile, targetTile, toPosition);
 		}
-	}
-
-
-	private Entity getEntityAt(Position p, Direction d) {
-		// TODO Auto-generated method stub
-		return null;
+		// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
+		else
+			entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));
 	}
 
 	public void applySkill(Avatar avatar, Skill skill) {
@@ -72,11 +70,8 @@ public class EntityMapInteraction {
 		skill.applySkill(avatar,tiles,skillProbe);
 	}
 	
-	
 	private MiniMap getTilesFor(Position position, int radius){
 		return gameMap.getTiles(position.getY(),position.getX(),radius);
 	}
-	
-
 
 }

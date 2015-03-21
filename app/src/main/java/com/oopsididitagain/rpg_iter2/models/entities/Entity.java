@@ -76,9 +76,9 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		return TileablePriority.HIGH;
 	}
 
-	public void move(Tile fromTile, Tile targetTile) {
+	public void move(Tile fromTile, Tile targetTile, Position updatedPosition) {
 		fromTile.remove(this);
-		this.setPosition(targetTile.getPosition());
+		setPosition(updatedPosition);
 		targetTile.add(this);
 		targetTile.interact(this);
 	}
