@@ -1,6 +1,8 @@
 package com.oopsididitagain.rpg_iter2;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  *

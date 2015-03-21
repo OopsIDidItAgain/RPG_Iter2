@@ -10,12 +10,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.oopsididitagain.rpg_iter2.models.MiniMap;
-import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
-import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 public class EntityStatusModifier implements Effect{
 	int secondsAlterationInEffect;

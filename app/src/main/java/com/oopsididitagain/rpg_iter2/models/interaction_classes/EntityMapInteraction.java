@@ -1,7 +1,5 @@
 package com.oopsididitagain.rpg_iter2.models.interaction_classes;
 
-
-
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
@@ -10,9 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.entities.SkilledEntity;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
-import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.MovementProbeStatus;
 import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
 
@@ -36,8 +32,9 @@ public class EntityMapInteraction {
 	
 	public void move(Entity entity, Position toPosition) {
 		// Step 1: Make Sure Position is on the Map.
-		Tile targetTile;
+		Tile targetTile, fromTile;
 		try {
+			fromTile = gameMap.getTileAt(entity.getPosition());
 			targetTile = gameMap.getTileAt(toPosition);
 		} catch (PositionOutOfBoundsException ex) {
 			ex.printStackTrace();
@@ -49,16 +46,9 @@ public class EntityMapInteraction {
 		movementProbe.inspect(targetTile);
 		
 		// Step 3a: If we can, go ahead and Perform movement 
-		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
-			Tile fromTile;
-			try {
-				fromTile = gameMap.getTileAt(entity.getPosition());
-			} catch (PositionOutOfBoundsException e) {
-				e.printStackTrace();
-				return;
-			}
+		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) 
 			entity.move(fromTile, targetTile, toPosition);
-		}
+
 		// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
 		else
 			entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));

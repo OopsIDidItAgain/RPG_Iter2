@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 
 public class MainMenuKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener  {

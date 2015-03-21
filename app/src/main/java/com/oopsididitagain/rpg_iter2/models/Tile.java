@@ -3,13 +3,11 @@ package com.oopsididitagain.rpg_iter2.models;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.Assetable;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
-import com.oopsididitagain.rpg_iter2.utils.ProjectileVisitable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;

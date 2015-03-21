@@ -1,10 +1,11 @@
 package com.oopsididitagain.rpg_iter2.views;
 
-import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
-
-import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JPanel;
+
+import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 
 
 /**

@@ -1,12 +1,12 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
-import com.oopsididitagain.rpg_iter2.models.Terrain;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.oopsididitagain.rpg_iter2.models.Terrain;
 
 public class MapDatabase {
 	BufferedReader gridReader;

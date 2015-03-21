@@ -7,7 +7,6 @@ import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
-import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 
 public class PickPocket implements Effect{

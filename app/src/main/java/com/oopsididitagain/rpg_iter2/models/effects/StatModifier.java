@@ -4,7 +4,6 @@ import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
-import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
 public class StatModifier implements Effect, InstantStatModifier{
