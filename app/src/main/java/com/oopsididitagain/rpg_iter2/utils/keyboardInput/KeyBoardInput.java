@@ -1,9 +1,11 @@
-package com.oopsididitagain.rpg_iter2.utils;
+package com.oopsididitagain.rpg_iter2.utils.keyboardInput;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 
 public class KeyBoardInput implements KeyListener, MouseListener {
 

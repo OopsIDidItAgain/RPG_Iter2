@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.utils;
+package com.oopsididitagain.rpg_iter2.utils.keyboardInput;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -61,6 +61,11 @@ public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements Ke
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		/*
+		this.newGameButton = new Rectangle(width/2 - 100 , height/2, 200, 50);
+		this.loadGameButton = new Rectangle(width/2 - 100, height/2 + 50 + padding, 200, 50);
+		this.controlsButton = nexw Rectangle(width/2 - 100, height/2 + 110 + padding, 200, 50);
+       */
 		int mouseX = e.getX();
 
 		if ((mouseX > 0) && (mouseX < View.WIDTH / 3))

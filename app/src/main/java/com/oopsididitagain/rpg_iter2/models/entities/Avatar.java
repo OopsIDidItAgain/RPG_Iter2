@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -39,22 +41,30 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;
+		giveBaseSkills();
 		occupation.giveSkills(gameSkillList,fightSkillList,passiveSkillList);
 		
 	}
 
 	private void giveBaseSkills() {
-		//bargain
-		/*
-		Skill bargain = new Skill("bargain");
+		//bargain passive
+		
+		Skill bargain = new Skill();
 		Discount discount = new Discount(.05);
 		bargain.setEffect(discount);
-		addSkill(bargain);
-		*/
-		//observe
-		//bind wounds
+		passiveSkillList.put(Skill.BARGAIN, bargain);
+		
+		//observe active
+		
+		Skill observe = new Skill();
+		Observe obs = new Observe();
+		observe.setEffect(obs);
+		gameSkillList.add(observe);
+		
+		//bind wounds regular active fight
 		
 	}
+	
 
 	public Direction getDirection(){
 		return position.getDirection();
