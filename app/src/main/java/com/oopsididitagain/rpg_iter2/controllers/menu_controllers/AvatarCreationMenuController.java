@@ -3,19 +3,25 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
+import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
+import com.oopsididitagain.rpg_iter2.utils.AvatarCreationMenuKeyboardInput;
 import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
 public class AvatarCreationMenuController extends Controller {
 	public static AvatarCreationMenuController instance;
 	Avatar avatar;
 	GameMap gameMap;
+	private static AvatarCreationMenu avatarCreationMenu;
 
 	
 	private AvatarCreationMenuController(){
@@ -27,18 +33,23 @@ public class AvatarCreationMenuController extends Controller {
 	public static AvatarCreationMenuController getInstance() {
 		if ( instance == null ){
 			instance = new AvatarCreationMenuController();
+			avatarCreationMenu = new AvatarCreationMenu();
 		}
 		return instance;
 	}
 	
 	@Override
 	public Controller takeInputAndUpdate(int key) {
+		System.out.println(key);
 		Controller controller = AvatarCreationMenuController.getInstance();
 		switch(key){
+		
 		case 1:
+			
 			assignSmasher();
 			break;
 		case 2:
+			controller = GameController.getInstance();
 			assignSummoner();
 			break;
 		case 3:
@@ -46,7 +57,7 @@ public class AvatarCreationMenuController extends Controller {
 			break;
 		case 4:
 			controller = GameController.getInstance();
-			switchControllers((GameController)controller);
+			//switchControllers((GameController)controller);
 			break;
 		}
 		return controller;	
@@ -82,13 +93,13 @@ public class AvatarCreationMenuController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		// TODO Auto-generated method stub
-		return null;
+		AvatarCreationMenuViewInteraction avatarCreationMenuViewInteraction = new AvatarCreationMenuViewInteraction(this.avatarCreationMenu);
+		return avatarCreationMenuViewInteraction;
 	}
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
 		// TODO Auto-generated method stub
-		return null;
+		return new AvatarCreationMenuKeyboardInput(avatarCreationMenu);
 	}
 }

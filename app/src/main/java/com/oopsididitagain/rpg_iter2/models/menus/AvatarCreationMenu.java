@@ -1,16 +1,13 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
-
-
-
-public class MainMenu {
+public class AvatarCreationMenu {
 	private String options[];
 	private int currentOption;
 
-    public MainMenu(){
-        options = new String[]{"New Game", "Load Game", "Controls", "none"};
+    public AvatarCreationMenu(){
+        options = new String[]{"Sneak", "Summoner", "Smasher"};
         
-        currentOption = 3;
+        currentOption = 0;
        
     }
     
@@ -27,6 +24,4 @@ public class MainMenu {
     	return options[i];
 
     }
-
-
 }

@@ -4,18 +4,18 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 
 public class View extends JPanel{
 	//abstract out viewports later
-	MainMenuView mainMenuView;
 	ModelViewInteraction modelViewInteraction;
 	
 	
 	public View(){
-		this.mainMenuView = new MainMenuView();
+		
 	}
 	public void render(ModelViewInteraction mv) {
 		mv.accept(this);
@@ -37,6 +37,12 @@ public class View extends JPanel{
 
 	public void visit(MainMenuViewInteraction mainMenuViewInteraction) {
 		this.modelViewInteraction = mainMenuViewInteraction;
+		this.repaint();
+		
+		
+	}
+	public void visit(AvatarCreationMenuViewInteraction avatarCreationMenuViewInteration) {
+		this.modelViewInteraction = avatarCreationMenuViewInteration;
 		this.repaint();
 		
 		

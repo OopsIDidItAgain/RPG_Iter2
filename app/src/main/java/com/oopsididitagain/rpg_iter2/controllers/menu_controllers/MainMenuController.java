@@ -28,7 +28,7 @@ public class MainMenuController extends Controller {
 	public static MainMenuController instance;
 	static boolean cached = false;
 	private MainMenuController(){
-
+ 
 	}
 	
 
@@ -49,10 +49,10 @@ public class MainMenuController extends Controller {
 	public Controller takeInputAndUpdate(int key) {
 		Controller c = this;
 		if(key == 1){
-			c = ExitGameController.getInstance();
+			c = MainMenuController.getInstance();
 		}if(key == 2){
 			
-			c = GameController.getInstance();		
+			c = AvatarCreationMenuController.getInstance();		
 		}
 		return c;
 	}
