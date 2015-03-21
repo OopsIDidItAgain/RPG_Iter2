@@ -15,21 +15,19 @@ import com.oopsididitagain.rpg_iter2.utils.MainMenuKeyboardInput;
 public class MainMenuController extends Controller {
 	private static MainMenu mainMenu;
 	public static MainMenuController instance;
+	private MainMenuKeyboardInput keyboardInput;
+
 	private MainMenuController(){
- 
+		this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
 	}
 	
-
 	public static MainMenuController getInstance() {
 		if ( instance == null ){
-			instance = new MainMenuController();
 			mainMenu = new MainMenu();
+			instance = new MainMenuController();
 		}
 		return instance;
 	}
-	
-    
-
 
 	@Override
 	public Controller takeInputAndUpdate(int key) {
@@ -52,7 +50,7 @@ public class MainMenuController extends Controller {
 
 	@Override
 	public MainMenuKeyboardInput getKeyBoardInput(){
-		return new MainMenuKeyboardInput(this.mainMenu);
+		return keyboardInput;
 	}
 	
 }

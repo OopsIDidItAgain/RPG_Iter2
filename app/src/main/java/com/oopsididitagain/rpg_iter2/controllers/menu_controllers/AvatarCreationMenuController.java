@@ -22,25 +22,24 @@ public class AvatarCreationMenuController extends Controller {
 	Avatar avatar;
 	GameMap gameMap;
 	private static AvatarCreationMenu avatarCreationMenu;
-
+	private AvatarCreationMenuKeyboardInput keyboardInput;
 	
 	private AvatarCreationMenuController(){
 		createAvatar();
 		createGameMap();
-
+		this.keyboardInput = new AvatarCreationMenuKeyboardInput(avatarCreationMenu);
 	}
 	
 	public static AvatarCreationMenuController getInstance() {
 		if ( instance == null ){
-			instance = new AvatarCreationMenuController();
 			avatarCreationMenu = new AvatarCreationMenu();
+			instance = new AvatarCreationMenuController();
 		}
 		return instance;
 	}
 	
 	@Override
 	public Controller takeInputAndUpdate(int key) {
-		System.out.println(key);
 		Controller controller = AvatarCreationMenuController.getInstance();
 		switch(key){
 		
@@ -99,7 +98,6 @@ public class AvatarCreationMenuController extends Controller {
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return new AvatarCreationMenuKeyboardInput(avatarCreationMenu);
+		return keyboardInput;
 	}
 }

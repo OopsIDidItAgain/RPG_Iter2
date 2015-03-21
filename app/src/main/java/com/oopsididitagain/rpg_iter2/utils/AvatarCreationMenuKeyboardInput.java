@@ -7,11 +7,12 @@ import java.awt.event.MouseListener;
 
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
+import com.oopsididitagain.rpg_iter2.views.View;
 
 public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener{
-	
 	int input;
 	AvatarCreationMenu avatarCreationMenu;
+
 	public AvatarCreationMenuKeyboardInput( AvatarCreationMenu avatarCreationMenu){
 		this.avatarCreationMenu = avatarCreationMenu;
 		input = -5;
@@ -29,9 +30,7 @@ public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements Ke
 		
 		case 'w':
 			input = 1;
-		
 			break;
-
 		case 'x':
 			input = 2; 
 			break;
@@ -63,28 +62,14 @@ public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements Ke
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		/*
-		this.newGameButton = new Rectangle(width/2 - 100 , height/2, 200, 50);
-		this.loadGameButton = new Rectangle(width/2 - 100, height/2 + 50 + padding, 200, 50);
-		this.controlsButton = new Rectangle(width/2 - 100, height/2 + 110 + padding, 200, 50);
-       */
 		int mouseX = e.getX();
-		int mouseY = e.getY();
-		
-		if((mouseX >= 200) && (mouseX <= 400)){
-			if((mouseY >= 350) && (mouseY <= 400)){
-				//handle newGameButton
-				avatarCreationMenu.setOption(0);
-			}else if((mouseY >= 410) && (mouseY <= 460)){
-				
-				//handle loadGameButton
-				avatarCreationMenu.setOption(1);
-			}else if((mouseY >= 470) && (mouseY <= 520)){
-				
-				//handle controlsButton
-				avatarCreationMenu.setOption(2);
-			}
-		}
+
+		if ((mouseX > 0) && (mouseX < View.WIDTH / 3))
+			avatarCreationMenu.setOption(0);
+		else if ((mouseX >= View.WIDTH / 3) && (mouseX < (2 * View.WIDTH) / 3))
+			avatarCreationMenu.setOption(1);
+		else
+			avatarCreationMenu.setOption(2);
 	}
 
 	@Override

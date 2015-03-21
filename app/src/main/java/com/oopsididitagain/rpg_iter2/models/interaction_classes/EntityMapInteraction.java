@@ -30,7 +30,7 @@ public class EntityMapInteraction {
 		
 	}
 	
-	public void move(Entity entity, Position toPosition) {
+	public boolean move(Entity entity, Position toPosition) {
 		// Step 1: Make Sure Position is on the Map.
 		Tile targetTile, fromTile;
 		try {
@@ -38,7 +38,7 @@ public class EntityMapInteraction {
 			targetTile = gameMap.getTileAt(toPosition);
 		} catch (PositionOutOfBoundsException ex) {
 			ex.printStackTrace();
-			return;
+			return false;
 		}
 		
 		// Step 2: Can we Move to the Tile there?
@@ -46,12 +46,16 @@ public class EntityMapInteraction {
 		movementProbe.inspect(targetTile);
 		
 		// Step 3a: If we can, go ahead and Perform movement 
-		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) 
+		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
 			entity.move(fromTile, targetTile, toPosition);
+			return true;
+		}
 
 		// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
-		else
+		else {
 			entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));
+			return false;
+		} 
 	}
 
 	public void applySkill(Avatar avatar, Skill skill) {

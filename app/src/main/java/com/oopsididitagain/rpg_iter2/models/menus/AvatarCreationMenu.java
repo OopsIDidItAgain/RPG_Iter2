@@ -14,6 +14,7 @@ public class AvatarCreationMenu {
     public void setOption(int option){
     	
     	currentOption = option;
+    	System.out.println(option);
     }
     
     public int getCurrentOption(){

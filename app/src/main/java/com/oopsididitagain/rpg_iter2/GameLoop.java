@@ -19,43 +19,38 @@ public class GameLoop {
 	
 	
 	public GameLoop(){   //GameLoop constructor
-	    
-		
-	
 		controller = MainMenuController.getInstance();
-		
-	
 		this.modelViewInteraction = controller.populateInteraction();
 		keyboardInput =  controller.getKeyBoardInput();
 		this.view = new View();
-		view.addKeyListener( keyboardInput);
+		view.addKeyListener(keyboardInput);
 		view.addMouseListener(keyboardInput);
-		
 		view.setFocusable(true);
 		view.requestFocusInWindow();
-		
 	}
-	public void runGame() throws InterruptedException{   //Our main gameloop logic
-		
 
+	public void runGame() throws InterruptedException{   //Our main gameloop logic
 		while(!controller.equals(ExitGameController.getInstance())){
 			update();
 			view.render(modelViewInteraction);
 			TimeUnit.MILLISECONDS.sleep(18);
 		}
 	}
+
 	public void update(){
 		
 		Controller temp = controller;
 		
 		controller = controller.takeInputAndUpdate(keyboardInput.getInput());
-		
+		keyboardInput = controller.getKeyBoardInput();
 
 		if(!controller.equals(temp)){
-			
+			view.addKeyListener(keyboardInput);
+			view.addMouseListener(keyboardInput);
+			view.requestFocusInWindow();
 			modelViewInteraction = controller.populateInteraction();
 		}
-		
+
 		
 	}
 

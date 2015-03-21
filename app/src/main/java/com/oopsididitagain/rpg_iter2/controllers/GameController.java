@@ -63,9 +63,12 @@ public class GameController extends Controller{
 		}
 		Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
 		if (targetDirection != null) {
-			entityMapInteraction.move(avatar, toPosition);
+			boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
+			/*if (successfulMove) {
+				for (Npc npc: npcList)
+					entityMapInteraction.move(npc, npc.rollDice());
+			}*/
 		}
-		
 		return c;
 	}
 	

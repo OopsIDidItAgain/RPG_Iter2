@@ -11,6 +11,9 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteract
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 
 public class View extends JPanel{
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 700;
+
 	//abstract out viewports later
 	ModelViewInteraction modelViewInteraction;
 	
