@@ -33,8 +33,8 @@ public class Avatar extends Entity implements StatModifiable {
 	private Occupation occupation;
 	private StatCollection stats;
 
-	public Avatar(String id, Position position) {
-		super(id, position);
+	public Avatar(String id, Position position,StatBlob statblob) {
+		super(id, position,statblob);
 	}
 
 	public void setOccupation(Occupation occupation) {
@@ -116,6 +116,11 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public void drop(InventoryItem selectedItem) {
 		Position position = this.position.createPositionAtDirection(getDirection());
+
+	}
+	public void attemptInhibition(MovementProbe movementProbe) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

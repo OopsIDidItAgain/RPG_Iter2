@@ -6,6 +6,7 @@ import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
@@ -15,15 +16,15 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
 public class Npc extends Entity {
 	
 	Storyline story;
-	public Npc(String id, Position position) {
-		super(id, position);
+	public Npc(String id, Position position, StatBlob statblob) {
+		super(id, position,statblob);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
-		// TODO Auto-generated method stub
-		
+		movementProbe.denyMovement();
+		movementProbe.addEntity(this);
 	}
 
 	@Override
@@ -59,4 +60,11 @@ public class Npc extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void attemptInhibition(MovementProbe movementProbe) {
+		movementProbe.denyMovement();
+	}
+
+	
 }

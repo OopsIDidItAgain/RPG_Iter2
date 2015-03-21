@@ -5,8 +5,13 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Terrain;
+import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.GameKeyboardInput;
@@ -24,6 +29,27 @@ public class GameController extends Controller{
 	private EntityMapInteraction entityMapInteraction;
 
 	private GameController(){
+		Tile[][] tiles = new Tile[50][50];
+		StatBlob st = new StatBlob(0, 0, 0, 0, 20, 0, 0, 0, 0);
+		Position position = new Position(0,0,Direction.SOUTH);
+		this.avatar = new Avatar("hi", position,st);
+		Position postion1 = new Position(1,0);
+		Npc npc = new Npc("yo",postion1,st);
+		for(int i = 0; i!= 50; ++i){
+			for(int j = 0; j!= 50; ++j){
+				Position p = new Position(i,j);
+				tiles[i][j] = new Tile(null, Terrain.GRASS);
+				if( i == 1 && j == 0){
+					tiles[i][j].add(npc);
+				}
+				else if( i == 0 && j == 0){
+					tiles[i][j].add(avatar);
+				}
+				
+			}
+		}
+		this.gameMap = new GameMap(tiles);
+		
 		createEntityMapInteraction();
 
 	}
@@ -68,6 +94,12 @@ public class GameController extends Controller{
 				for (Npc npc: npcList)
 					entityMapInteraction.move(npc, npc.rollDice());
 			}*/
+			/*
+			((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
+			((ObserverController) c).setAvatar(avatar);
+			((ObserverController) c).setSkill(observe);
+			*/
+
 		}
 		return c;
 	}

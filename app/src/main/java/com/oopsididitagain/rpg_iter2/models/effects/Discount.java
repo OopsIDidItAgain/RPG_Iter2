@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.effects;
 
+import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
@@ -26,8 +27,11 @@ public class Discount implements Effect{
 		this.baseDiscount = baseDiscount;
 	}
 
+	public void applyDiscount(Inventory inventory){
+		inventory.applyDiscount(this);;
+	}
 	public double applyDiscount(double price){
-		return (price - this.discount);
+		return price - discount;
 	}
 	@Override
 	public void applyMultiplier(int m){
@@ -41,7 +45,7 @@ public class Discount implements Effect{
 
 	@Override
 	public void applySkill(Avatar avatar, MiniMap tiles, SkillProbe skillProbe) {
-		// TODO Auto-generated method stub
+		skillProbe.setUpSkill(this, avatar, tiles);
 		
 	}
 	

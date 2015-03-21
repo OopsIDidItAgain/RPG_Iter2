@@ -8,22 +8,27 @@ import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
+import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
+import com.oopsididitagain.rpg_iter2.utils.StatBlobHolder;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
 
 /**
  * Created by parango on 3/11/15.
  */
-public abstract class Entity extends PositionedGameObject implements Positionable, TiledProbeVisitable {
+public abstract class Entity extends PositionedGameObject implements Positionable, TiledProbeVisitable, StatBlobHolder,MovementInhibitor {
 	protected EntityStatus entityStatus;
 	protected Inventory inventory;
 	protected boolean isCurrentlyFlying;
+	protected StatBlob statblob;
 
-	public Entity(String id, Position position){
+	public Entity(String id, Position position,StatBlob statblob){
 		super(id, position);
+		this.statblob = statblob;
 		this.entityStatus = new EntityStatus(EntityStatus.PLAYING);
 	}
 	
@@ -82,4 +87,11 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		targetTile.add(this);
 		targetTile.interact(this);
 	}
+	
+	@Override
+	public StatBlob statBlob() {
+		return this.statblob;
+	}
+
+	
 }
