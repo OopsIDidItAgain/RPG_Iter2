@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
@@ -113,6 +114,10 @@ public class Avatar extends Entity implements StatModifiable {
 	@Override
 	public boolean removeable() {
 		return false;
+	}
+
+	public void drop(InventoryItem selectedItem) {
+		Position position = this.position.createPositionAtDirection(getDirection());
 	}
 
 	

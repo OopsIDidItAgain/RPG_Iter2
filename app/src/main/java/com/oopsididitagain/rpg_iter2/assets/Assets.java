@@ -24,6 +24,8 @@ import javax.imageio.ImageIO;
 public  class Assets extends Panel {
 	// static BufferedImage b; // for testing purposes
 	
+	private static final long serialVersionUID = -1756652494794014880L;
+
 	static String imgIDtoPathFile;
 
 	static HashMap<String, String> paths; // image id -> path

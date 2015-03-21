@@ -58,6 +58,9 @@ public class Inventory {
 		for(InventoryItem i: contents){
 			i.displayItem();
 		}
-		
+	}
+
+	public int size() {
+		return contents.size();
 	}
 }

@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
-
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
@@ -26,6 +26,12 @@ public class InventoryWeaponItem extends InventoryEquipableItem {
 	@Override
 	public void accept(Entity entity) {
 		entity.visit(this);
+	}
+
+	@Override
+	public WeaponTakeableItem toTakeableItem(Position position) {
+		WeaponTakeableItem item = new WeaponTakeableItem(getId(), position, price(), statBlob(), type);
+		return item;
 	}
 
 }
