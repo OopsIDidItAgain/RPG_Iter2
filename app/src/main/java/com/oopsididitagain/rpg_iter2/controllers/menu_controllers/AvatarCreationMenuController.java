@@ -57,24 +57,6 @@ public class AvatarCreationMenuController extends Controller {
 			controller = GameController.getInstance();
 			break;
 		}
-		/*switch(key){
-		case 1:
-			controller = GameController.getInstance();
-			assignSmasher();
-			break;
-		case 2:
-			controller = GameController.getInstance();
-			assignSummoner();
-			break;
-		case 3:
-			controller = GameController.getInstance();
-			assignSneak();
-			break;
-		case 4:
-			controller = GameController.getInstance();
-			//switchControllers((GameController)controller);
-			break;
-		}*/
 		return controller;	
 	}
 	
