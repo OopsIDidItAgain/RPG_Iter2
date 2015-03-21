@@ -10,7 +10,11 @@ public class Smasher extends Occupation{
 	@Override
 	public void giveSkills(ArrayList<Skill> skillMap,
 			ArrayList<Skill> fightSkillList, Map<String, Skill> passiveSkillList) {
-		// TODO Auto-generated method stub
+		//One handed passive
+		//TwoHanded passive
+		//Brawl passive
+		//TODO
+		
 		
 	}
 

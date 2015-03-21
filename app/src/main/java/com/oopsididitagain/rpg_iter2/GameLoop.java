@@ -8,7 +8,7 @@ import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
-import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 public class GameLoop {

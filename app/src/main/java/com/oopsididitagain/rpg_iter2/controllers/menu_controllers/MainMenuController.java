@@ -5,7 +5,7 @@ import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
-import com.oopsididitagain.rpg_iter2.utils.MainMenuKeyboardInput;
+import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 /**
  * In charge of handling input in main menu_controllers

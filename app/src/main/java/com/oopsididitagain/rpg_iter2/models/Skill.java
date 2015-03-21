@@ -15,12 +15,18 @@ import com.oopsididitagain.rpg_iter2.utils.Direction;
 
 public class Skill {
 
+	public static String BARGAIN = "bargin";
+	public static String ONEHAND = "oneHand";
+	public static String TWOHAND = "oneHand";
+	public static String BRAWL = "brawl";
+	public static String RANGED = "ranged";
+	
+	
 	int multiplier;
 	Effect effect;
 	boolean active;
 	
-	public Skill(boolean active){
-		this.active = active;
+	public Skill(){
 		this.multiplier = 1;
 	}
 	
@@ -49,5 +55,6 @@ public class Skill {
 		applyMultiplier();
 		effect.applySkill(avatar,tiles,skillProbe);
 	}
+	
 
 }

@@ -1,4 +1,4 @@
-package com.oopsididitagain.rpg_iter2.utils;
+package com.oopsididitagain.rpg_iter2.utils.keyboardInput;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,7 +28,6 @@ public class MainMenuKeyboardInput extends KeyBoardInput implements KeyListener,
 		
 		case 'w':
 			input = 1;
-		
 			break;
 
 		case 'x':

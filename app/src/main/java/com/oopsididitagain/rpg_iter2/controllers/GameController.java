@@ -14,8 +14,10 @@ import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInterac
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
-import com.oopsididitagain.rpg_iter2.utils.GameKeyboardInput;
-import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
+
+
+
 
 /**
  * In charge of handling input while playing game
@@ -49,7 +51,6 @@ public class GameController extends Controller{
 			}
 		}
 		this.gameMap = new GameMap(tiles);
-		
 		createEntityMapInteraction();
 
 	}
