@@ -50,7 +50,7 @@ public class AvatarCreationMenuController extends Controller {
 				assignSneak();
 				break;
 			case 1:
-				System.out.println("summ");
+				System.out.println("summoner");
 				assignSummoner();
 				break;
 			case 2:
@@ -59,8 +59,9 @@ public class AvatarCreationMenuController extends Controller {
 				break;
 			}
 			Game game = new Game(this.avatar);
-			controller = GameController.getInstance();
-			
+			GameController gc = GameController.getInstance();
+			gc.setGame(game);
+			controller = gc;
 			
 			break;
 		}

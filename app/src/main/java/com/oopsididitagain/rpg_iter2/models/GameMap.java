@@ -16,8 +16,10 @@ public class GameMap {
 		//this.WIDTH = tiles[HEIGHT - 1].length;
 	}
 	
-	public Tile getTileAt(Position position) throws PositionOutOfBoundsException {
+	public Tile getTileAt(Position position)  {
+		try{
 		position.checkBounds(0, 0, getWidth(), getHeight());
+		}catch( PositionOutOfBoundsException e){}
 		return tiles[position.getY()][position.getX()];
 	}
 

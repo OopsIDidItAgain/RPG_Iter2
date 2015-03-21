@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
+import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Tile;
@@ -14,16 +15,16 @@ import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.views.View;
 
-public class GameViewInteraction extends ModelViewInteraction{
-    Assets assets;
-    GameMap gameMap;
-    Avatar avatar;
 
-    public GameViewInteraction(){
+public class GameViewInteraction extends ModelViewInteraction{
+  
+
+    private Game game;
+    private Assets assets; 
+    
+    public GameViewInteraction(Game game){ //Constructor
     	assets = new Assets();
-        gameMap = new GameMap(new MapDatabase("level1"));
-        avatar = GameController.getInstance().getAvatar();
-    	
+    	this.game = game;
     }
 	@Override
 	public void accept(View view) {
@@ -42,7 +43,7 @@ public class GameViewInteraction extends ModelViewInteraction{
         for(int y = Yi; y <= Yf; y++ ){
             for(int x = Xi; x<= Xf; x++){
                 try{
-                    drawTile(g, gameMap.getTileAt(new Position(y, x)), x, y);
+                    drawTile(g, game.getGameMap().getTileAt(new Position(y, x)), x, y);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -33,13 +33,8 @@ public class EntityMapInteraction {
 	public boolean move(Entity entity, Position toPosition) {
 		// Step 1: Make Sure Position is on the Map.
 		Tile targetTile, fromTile;
-		try {
-			fromTile = gameMap.getTileAt(entity.getPosition());
-			targetTile = gameMap.getTileAt(toPosition);
-		} catch (PositionOutOfBoundsException ex) {
-			ex.printStackTrace();
-			return false;
-		}
+		fromTile = gameMap.getTileAt(entity.getPosition());
+		targetTile = gameMap.getTileAt(toPosition);
 		
 		// Step 2: Can we Move to the Tile there?
 		MovementProbe movementProbe = new MovementProbe(entity);

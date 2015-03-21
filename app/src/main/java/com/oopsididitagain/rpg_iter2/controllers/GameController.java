@@ -27,7 +27,7 @@ import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
  */
 public class GameController extends Controller{
 	public static GameController instance;
-	private static Game game;
+	private Game game;
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
@@ -57,7 +57,7 @@ public class GameController extends Controller{
 
 	}
 
-	public static void setGame(Game g){
+	public void setGame(Game g){
 		
 		game = g;
 	}
@@ -139,7 +139,7 @@ public class GameController extends Controller{
 
 	@Override
 	public GameViewInteraction populateInteraction() {
-		GameViewInteraction gameInteraction = new GameViewInteraction();
+		GameViewInteraction gameInteraction = new GameViewInteraction(game);
 		return gameInteraction;
 	}
 
