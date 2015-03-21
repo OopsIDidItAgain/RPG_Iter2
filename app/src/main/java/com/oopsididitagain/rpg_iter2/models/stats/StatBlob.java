@@ -1,5 +1,9 @@
 package com.oopsididitagain.rpg_iter2.models.stats;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Random;
+
 
 public class StatBlob {
 
@@ -17,19 +21,40 @@ public class StatBlob {
 	private Stat movement;
 	private Stat lifeAmount;
 	private Stat manaAmount;
+	private HashMap<Integer,Stat> statMap = new HashMap<Integer,Stat>();
+	private HashMap<Integer,String> statStringMap = new HashMap<Integer,String>();
 	
 	public StatBlob(double livesLeft, double strength, double agility, 
 			double intellect, double hardiness, double experience, double movement,
 			double lifeAmount, double manaAmount) {
 		this.livesLeft = new Stat(livesLeft);
+		statMap.put(1, this.livesLeft);
+		statStringMap.put(1,"Lives Left");
 		this.strength = new Stat(strength);
+		statMap.put(2, this.strength);
+		statStringMap.put(2,"Strength");
 		this.agility = new Stat(agility);
+		statMap.put(3, this.agility);
+		statStringMap.put(3,"Agility");
 		this.intellect = new Stat(intellect);
+		statMap.put(4, this.intellect);
+		statStringMap.put(4,"Intellect");
 		this.hardiness = new Stat(hardiness);
+		statMap.put(5, this.hardiness);
+		statStringMap.put(5,"Hardiness");
 		this.experience = new Stat(experience);
+		statMap.put(6, this.experience);
+		statStringMap.put(6,"Experience");
 		this.movement = new Stat(movement);
+		statMap.put(7, this.movement);
+		statStringMap.put(7,"Movement");
 		this.lifeAmount = new Stat(lifeAmount);
+		statMap.put(8, this.lifeAmount);
+		statStringMap.put(8,"Life Amount");
 		this.manaAmount = new Stat(manaAmount);
+		statMap.put(9, this.manaAmount);
+		statStringMap.put(9,"Mana Amount");
+	
 	}
 	
 	public StatBlob(StatBlob other) {
@@ -80,6 +105,18 @@ public class StatBlob {
 		return lifeAmount.getValue();
 	}
 	
+	public LinkedList<String> getRandomStats(int numberOfStats){
+		Random random = new Random();
+		LinkedList<String> stats = new LinkedList<String>();
+		for(int i = 0; i!= numberOfStats; ++i){
+			int number = random.nextInt(9) + 1;
+			String statType = (statStringMap.get(number));
+			String statNumber = (statMap.get(number)).toString();
+			String finalStat = statType + ": " + statNumber;
+			stats.add(finalStat);
+		}
+		return stats;
+	}
 	
 	/* RETURN STAT METHODS */
 	public Stat getLivesLeftStat(){

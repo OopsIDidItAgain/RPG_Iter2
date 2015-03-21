@@ -9,10 +9,16 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuVi
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
 
 public class View extends JPanel{
 	//abstract out viewports later
-	ModelViewInteraction modelViewInteraction;
+	public static final int pHeight = 700;
+	public static final int pWidth = 600;
+	private ModelViewInteraction modelViewInteraction;
+	private GameViewInteraction background;
+	private boolean drawMapBackground = false;
+
 	
 	public View(){
 		
@@ -22,15 +28,27 @@ public class View extends JPanel{
 		mv.accept(this);
 		
 	}
+
+	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if(modelViewInteraction != null){
+			if(drawMapBackground){
+				background.drawModel(g);
+				drawMapBackground = false;
+			}
 			modelViewInteraction.drawModel(g);
 		}
 
 	}
+
 	public void visit(InventoryViewInteraction inventoryViewInteraction) {
 		this.modelViewInteraction = inventoryViewInteraction;
+	}
+
+	public void visit(GameViewInteraction gameViewInteraction) {
+		this.modelViewInteraction = gameViewInteraction;
+		this.background = gameViewInteraction;
 		this.repaint();
 	}
 
@@ -44,9 +62,11 @@ public class View extends JPanel{
 		this.repaint();
 	}
 
-	public void visit(GameViewInteraction gameViewInteraction) {
-		this.modelViewInteraction = gameViewInteraction;
+	public void visit(ObserverViewInteraction observerViewInteraction) {
+		this.modelViewInteraction = observerViewInteraction;
+		drawMapBackground = true;
 		this.repaint();
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
+import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
@@ -23,10 +24,8 @@ public class GameLoop {
 		
 	
 		controller = MainMenuController.getInstance();
-		
-	
 		this.modelViewInteraction = controller.populateInteraction();
-		keyboardInput =  controller.getKeyBoardInput();
+		keyboardInput =  new KeyBoardInput();
 		this.view = new View();
 		view.addKeyListener( keyboardInput);
 		view.addMouseListener(keyboardInput);
@@ -52,7 +51,7 @@ public class GameLoop {
 		
 
 		if(!controller.equals(temp)){
-			
+	
 			modelViewInteraction = controller.populateInteraction();
 		}
 		

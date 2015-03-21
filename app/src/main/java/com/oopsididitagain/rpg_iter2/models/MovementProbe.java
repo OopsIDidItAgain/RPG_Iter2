@@ -11,6 +11,7 @@ import com.oopsididitagain.rpg_iter2.utils.MovementProbeStatus;
 import com.oopsididitagain.rpg_iter2.utils.TileContentsProbeStatus;
 
 public class MovementProbe {
+	private Entity returnedEntity;
 	private Entity entity;
 	private MovementProbeStatus movementProbeStatus = MovementProbeStatus.MOVEMENT_OK;
 	private Set<TileContentsProbeStatus> tileFlags = new HashSet<TileContentsProbeStatus>();
@@ -59,14 +60,19 @@ public class MovementProbe {
 	}
 
 	public void addEntity(Entity entity) {
-		this.entity = entity;
+		this.returnedEntity = entity;
 		tileFlags.add(TileContentsProbeStatus.ENTITY_DETECTED);
 	}
 	public boolean checkStatus(TileContentsProbeStatus status){
 		return tileFlags.contains(status);
 	}
-	public Entity getEntity(){
-		return this.entity;
+	public Entity getReturnedEntity(){
+		return this.returnedEntity;
+	}
+
+	public void setEntityFlag() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
