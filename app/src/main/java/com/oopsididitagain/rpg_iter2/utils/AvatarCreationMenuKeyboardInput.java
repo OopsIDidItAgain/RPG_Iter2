@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
-import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener{
@@ -34,8 +33,8 @@ public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements Ke
 		case 'x':
 			input = 2; 
 			break;
-		case 'g':
-			input = 4; 
+		case KeyEvent.VK_ENTER:
+			input = 4;
 			break;
 
 		}

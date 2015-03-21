@@ -4,18 +4,17 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
-import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
-import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
-import com.oopsididitagain.rpg_iter2.utils.AvatarCreationMenuKeyboardInput;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.AvatarCreationMenuKeyboardInput;
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
 
 public class AvatarCreationMenuController extends Controller {
@@ -42,10 +41,25 @@ public class AvatarCreationMenuController extends Controller {
 	@Override
 	public Controller takeInputAndUpdate(int key) {
 		Controller controller = AvatarCreationMenuController.getInstance();
-		switch(key){
-		
+		switch(key) {
+		case 4:
+			switch (avatarCreationMenu.getCurrentOption()) {
+			case 0:
+				assignSneak();
+				break;
+			case 1:
+				assignSummoner();
+				break;
+			case 2:
+				assignSmasher();
+				break;
+			}
+			controller = GameController.getInstance();
+			break;
+		}
+		/*switch(key){
 		case 1:
-			
+			controller = GameController.getInstance();
 			assignSmasher();
 			break;
 		case 2:
@@ -53,13 +67,14 @@ public class AvatarCreationMenuController extends Controller {
 			assignSummoner();
 			break;
 		case 3:
+			controller = GameController.getInstance();
 			assignSneak();
 			break;
 		case 4:
 			controller = GameController.getInstance();
 			//switchControllers((GameController)controller);
 			break;
-		}
+		}*/
 		return controller;	
 	}
 	
@@ -89,7 +104,6 @@ public class AvatarCreationMenuController extends Controller {
 	private void switchControllers(GameController controller){
 		controller.setAvatar(this.avatar);
 		controller.setMap(this.gameMap);
-		//gameMap.notifyObserver();
 	}
 
 	@Override
