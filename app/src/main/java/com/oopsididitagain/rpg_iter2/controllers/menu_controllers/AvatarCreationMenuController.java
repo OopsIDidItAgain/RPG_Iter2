@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
+import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
@@ -54,7 +55,10 @@ public class AvatarCreationMenuController extends Controller {
 				assignSmasher();
 				break;
 			}
+			Game game = new Game(this.avatar);
 			controller = GameController.getInstance();
+			
+			
 			break;
 		}
 		return controller;	

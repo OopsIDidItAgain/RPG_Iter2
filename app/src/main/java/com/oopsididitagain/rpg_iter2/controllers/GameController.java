@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
+import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
@@ -24,6 +25,7 @@ import com.oopsididitagain.rpg_iter2.utils.KeyBoardInput;
  */
 public class GameController extends Controller{
 	public static GameController instance;
+	private static Game game;
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
@@ -54,6 +56,10 @@ public class GameController extends Controller{
 
 	}
 
+	public static void setGame(Game g){
+		
+		game = g;
+	}
 	public static GameController getInstance() {
 		if ( instance == null ){
 			instance = new GameController();
@@ -138,7 +144,7 @@ public class GameController extends Controller{
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
+		
 		return new GameKeyboardInput();
 	}
 
