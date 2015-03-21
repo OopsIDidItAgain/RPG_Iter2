@@ -1,8 +1,10 @@
 
 package com.oopsididitagain.rpg_iter2.models.entities;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
@@ -19,7 +21,7 @@ public class Npc extends Entity {
 	}
 
 	@Override
-	public void accept(Probe probe) {
+	public void accept(MovementProbe movementProbe) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -44,5 +46,17 @@ public class Npc extends Entity {
 	@Override
 	public boolean removeable() {
 		return false;
+	}
+
+	@Override
+	public void visit(InventoryEquipableItem item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InventoryUnusableItem item) {
+		// TODO Auto-generated method stub
+		
 	}
 }

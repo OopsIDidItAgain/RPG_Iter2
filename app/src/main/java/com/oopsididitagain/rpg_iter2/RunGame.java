@@ -1,10 +1,8 @@
 package com.oopsididitagain.rpg_iter2;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-
-import java.awt.*;
-import java.util.Observer;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -12,9 +10,9 @@ import java.util.Observer;
  */
 public class RunGame extends JFrame{
 
+	private static final long serialVersionUID = 6868516152488185382L;
+	private static GameLoop loop;
 
-private static GameLoop loop;
-//private static MainMenu
 	public static void main(String[] args) throws InterruptedException {
 		loop = new GameLoop();
 	    SwingUtilities.invokeLater(new Runnable() {
@@ -30,14 +28,13 @@ private static GameLoop loop;
 	
 	private void initialize() {
 		//this.setLayout(new MigLayout("", "[grow, fill]", "[grow, fill]"));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize(600, 700);
 		this.setLocationRelativeTo(null); // places frame into center of screen
-		this.setTitle("OOPs I Did It Again!");
+		this.setTitle("Demeter Lays Down the Law 2: Tell, Don't Ask");
 		this.setVisible(true);
 		this.setResizable(false);
 		this.add(loop.getView());
-		
 	}
 
 }

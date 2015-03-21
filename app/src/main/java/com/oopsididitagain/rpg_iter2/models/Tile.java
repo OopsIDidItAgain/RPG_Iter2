@@ -37,10 +37,17 @@ public class Tile implements Assetable, Positionable {
 		}
 	}
 
-	public void checkMovable(Probe probe) {
-		terrain.accept(probe);
+	public void checkMovable(MovementProbe movementProbe) {
+		terrain.accept(movementProbe);
 		for (TiledProbeVisitable probeVisitable: probeVisitables) 
-			probeVisitable.accept(probe);
+			probeVisitable.accept(movementProbe);
+	}
+	
+	public void checkTileContents(MovementProbe movementProbe) {
+		for (TiledEntityVisitable tev: entityVisitables) 
+			tev.accept(movementProbe);
+		for (TiledProbeVisitable tpv: probeVisitables) 
+			tpv.accept(movementProbe);
 	}
 
 	@Override

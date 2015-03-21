@@ -1,7 +1,8 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Probe;
+import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -14,13 +15,13 @@ public class ObstacleItem extends PositionedGameObject implements TiledProbeVisi
 	}
 
 	@Override
-	public void accept(Probe probe) {
-		probe.visit(this);
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.visit(this);
 	}
 
 	@Override
-	public void attemptInhibition(Probe probe) {
-		probe.deny();
+	public void attemptInhibition(MovementProbe movementProbe) {
+		movementProbe.denyMovement();
 	}
 
 	@Override

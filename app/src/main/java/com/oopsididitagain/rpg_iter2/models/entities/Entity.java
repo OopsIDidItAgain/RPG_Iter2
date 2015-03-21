@@ -1,8 +1,12 @@
 package com.oopsididitagain.rpg_iter2.models.entities;
+
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
+import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
-import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
@@ -15,7 +19,6 @@ import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
  */
 public abstract class Entity extends PositionedGameObject implements Positionable, TiledProbeVisitable {
 	protected EntityStatus entityStatus;
-	protected Position position;
 	protected Inventory inventory;
 	protected boolean isCurrentlyFlying;
 
@@ -26,7 +29,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	
 	@Override
 	public Position getPosition() {
-		return position;
+		return this.position;
 	}
 
 	@Override
@@ -57,6 +60,8 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 
 	public abstract void visit(TakeableItem item);
 	public abstract void visit(InstantStatModifier modifier);
+	public abstract void visit(InventoryEquipableItem item);
+	public abstract void visit(InventoryUnusableItem item);
 
 	public boolean isCurrentlyFlying() {
 		return isCurrentlyFlying;
@@ -69,5 +74,12 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	@Override
 	public TileablePriority getTileablePriority() {
 		return TileablePriority.HIGH;
+	}
+
+	public void move(Tile fromTile, Tile targetTile, Position updatedPosition) {
+		fromTile.remove(this);
+		setPosition(updatedPosition);
+		targetTile.add(this);
+		targetTile.interact(this);
 	}
 }

@@ -1,14 +1,18 @@
 package com.oopsididitagain.rpg_iter2.models.effects;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import com.oopsididitagain.rpg_iter2.models.Inventory;
+import com.oopsididitagain.rpg_iter2.models.MiniMap;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
+import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 
 
 public class PickPocket implements Effect{
 	int numberOfItemsStolen = 1;
 	int baseNumberOfItemsStolen = 1;
+	int radius;
 	
 	@Override
 	public void applyMultiplier(int m) {
@@ -17,8 +21,24 @@ public class PickPocket implements Effect{
 
 
 	public void pickPocket(Inventory stealingEntity, Inventory robbedEntity) {
-		LinkedList<InventoryItem> stolenItems = robbedEntity.getItems(numberOfItemsStolen);
+		List<InventoryItem> stolenItems = robbedEntity.getItems(numberOfItemsStolen);
 		stealingEntity.add(stolenItems);
 	}
+
+
+	@Override
+	public int getRadius() {
+		return this.radius;
+	}
+
+
+	@Override
+	public void applySkill(Avatar avatar, MiniMap tiles, SkillProbe skillProbe) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 
 }

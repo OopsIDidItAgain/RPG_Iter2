@@ -1,10 +1,8 @@
 package com.oopsididitagain.rpg_iter2;
 
 import java.awt.Component;
-import java.awt.event.KeyListener;
 import java.util.concurrent.TimeUnit;
 
-import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.MainMenuController;

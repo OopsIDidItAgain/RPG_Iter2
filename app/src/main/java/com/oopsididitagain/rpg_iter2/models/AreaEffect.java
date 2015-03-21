@@ -1,9 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-import java.util.Collection;
-
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
-import com.oopsididitagain.rpg_iter2.models.items.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
@@ -49,6 +46,11 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	@Override
 	public TileablePriority getTileablePriority() {
 		return TileablePriority.MIDDLE;
+	}
+
+	@Override
+	public void accept(MovementProbe movementProbe) {
+		movementProbe.addPositionedGameObject(this);
 	}
 
 }

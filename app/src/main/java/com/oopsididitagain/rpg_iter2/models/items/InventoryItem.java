@@ -2,11 +2,13 @@ package com.oopsididitagain.rpg_iter2.models.items;
 
 import com.oopsididitagain.rpg_iter2.models.GameObject;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
+import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 
-public class InventoryItem extends GameObject implements Priceable {
-	protected double price;
+public abstract class InventoryItem extends GameObject implements Priceable {
+	private double price;
 	
 	public InventoryItem(String id, double price) {
 		super(id);
@@ -33,9 +35,12 @@ public class InventoryItem extends GameObject implements Priceable {
 
 	public void displayItem() {
 		System.out.println(price);
-		
 	}
 	
+	public abstract void accept(Entity entity);
+	
+	public abstract TakeableItem toTakeableItem(Position position);
+
 	// Should this be Tile destination?
 	//public abstract PositionedItem drop(Position destination);
 

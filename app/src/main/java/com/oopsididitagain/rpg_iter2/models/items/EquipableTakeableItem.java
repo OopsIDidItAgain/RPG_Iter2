@@ -19,6 +19,6 @@ public abstract class EquipableTakeableItem extends TakeableItem
 		return statBlob;
 	}
 	
-	public abstract InventoryEquippableItem toInventoryItem();
+	public abstract InventoryEquipableItem toInventoryItem();
 
 }
