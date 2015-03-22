@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 
@@ -83,7 +84,7 @@ public class AvatarCreationMenuController extends Controller {
 		
 	}
 	private void createAvatar() {
-		Position position = new Position(0,0);
+		Position position = new Position(0,0,Direction.SOUTH);
 		StatBlob statBlob = new StatBlob(0, 0, 0, 0, 0, 0, 0, 20, 20);
 		avatar = new Avatar("avatar", position,statBlob );
 		

@@ -29,7 +29,7 @@ public String getTitle(){
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		System.out.println("CLICK, CLICK, CLICK");
 		
 	}
 

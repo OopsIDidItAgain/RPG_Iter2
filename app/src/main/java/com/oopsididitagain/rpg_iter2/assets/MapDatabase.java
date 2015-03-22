@@ -1,7 +1,6 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,6 +36,11 @@ public class MapDatabase {
 
     public int getMapX() {
         return mapX;
+    }
+
+    public String getObjectsAtYX(int y, int x){
+
+        return mapGrid[y][x];
     }
 
     private void readTerrain(){

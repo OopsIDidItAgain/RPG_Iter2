@@ -8,45 +8,25 @@ import java.awt.event.MouseListener;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 
-public class GameKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener {
-
+public class ObserveKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener  {
 	int input = -5;
-	public GameKeyboardInput(){
+
+	public ObserveKeyboardInput(){
 		input = -5;
 	}
-
 	
-
 	@Override
 	public void keyTyped(KeyEvent e) {
+	
 		// TODO Auto-generated method stub
 		
 	}
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()){
-		case '1':
-			input = Commands.SKILLONE;
-			break;
-		case '2':
-			input = Commands.SKILLTWO; 
-			break;
-		case '3':
-			input = Commands.SKILLTHREE; 
-			break;
-		case '4':
-			input = Commands.SKILLFOUR; 
-			break;
-		case '5':
-			input = Commands.SKILLFIVE; 
-			break;
-		case '6':
-			input = Commands.SKILLSIX; 
-			break;
 		case KeyEvent.VK_ENTER:
 			input = Commands.ENTER;
 			break;
-
 		}
 	}
 	@Override
@@ -91,5 +71,6 @@ public class GameKeyboardInput extends KeyBoardInput implements KeyListener, Mou
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
