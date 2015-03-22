@@ -133,7 +133,7 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	@Override
 	public void visit(InstantStatModifier modifier) {
-		modifier.affect(statBlob());
+		stats.mergeBlob(modifier.statBlob());
 	}
 
 	@Override
@@ -177,8 +177,12 @@ public class Avatar extends Entity implements StatModifiable {
 		
 	}
 	
-	public String StatToString(){
-		return stats.primaryViewport() + stats.derivedViewport();
+	public String[] primaryStats() {
+		return stats.primaryStatArray();
+	}
+	
+	public String[] derivedStats() {
+		return stats.derivedStatArray();
 	}
 
 	public void minusUnusedSkillPoints() {
