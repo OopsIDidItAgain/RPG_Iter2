@@ -45,10 +45,10 @@ public class AvatarCreationMenuController extends Controller {
 
 		switch (key) {
 		case Commands.MOVE_EAST:
-			avatarCreationMenu.rightOption();
+			avatarCreationMenu.nextOption();
 			break;
 		case Commands.MOVE_WEST:
-			avatarCreationMenu.leftOption();
+			avatarCreationMenu.previousOption();
 			break;
 		case Commands.ENTER:
 		case Commands.USE:

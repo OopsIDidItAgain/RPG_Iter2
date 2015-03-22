@@ -27,7 +27,7 @@ public class AvatarCreationMenu {
        
     }
 
-	public void leftOption() {
+	public void previousOption() {
 		switch (currentOption) {
 		case Sneak:
 			break;
@@ -42,7 +42,7 @@ public class AvatarCreationMenu {
 		}
 	}
 
-	public void rightOption() {
+	public void nextOption() {
 		switch (currentOption) {
 		case Sneak:
 			currentOption = Option.Summoner;
