@@ -39,8 +39,12 @@ public class ObserverController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
-		if(command == Command.ENTER){
+		switch(command) {
+		case ENTER: 
+		case EXIT: 
 			c = GameController.getInstance();
+			break;
+		default: break;
 		}
 		return c;
 	}

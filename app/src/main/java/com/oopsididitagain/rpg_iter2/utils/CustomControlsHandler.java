@@ -25,7 +25,7 @@ public class CustomControlsHandler {
 		controls.put(67, Command.MOVE_SOUTHEAST); // c
 		controls.put(90, Command.MOVE_SOUTHWEST);
 		controls.put(80, Command.PAUSE);
-		controls.put(13, Command.ENTER);
+		controls.put(10, Command.ENTER);
 		controls.put(73, Command.INVENTORY);
 		controls.put(83, Command.USE);
 		controls.put(75, Command.DROP);
