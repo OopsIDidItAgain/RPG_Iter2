@@ -31,36 +31,19 @@ public class GameController extends Controller{
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
+	private GameKeyboardInput keyboardInput;
 
 	private GameController(){
-		Tile[][] tiles = new Tile[50][50];
-		StatBlob st = new StatBlob(0, 0, 0, 0, 20, 0, 0, 0, 0);
-		Position position = new Position(0,0,Direction.SOUTH);
-		this.avatar = new Avatar("hi", position,st);
-		Position postion1 = new Position(1,0);
-		Npc npc = new Npc("yo",postion1,st);
-		for(int i = 0; i!= 50; ++i){
-			for(int j = 0; j!= 50; ++j){
-				Position p = new Position(i,j);
-				tiles[i][j] = new Tile(null, Terrain.GRASS);
-				if( i == 1 && j == 0){
-					tiles[i][j].add(npc);
-				}
-				else if( i == 0 && j == 0){
-					tiles[i][j].add(avatar);
-				}
-				
-			}
-		}
-		this.gameMap = new GameMap(tiles);
-		createEntityMapInteraction();
+		this.keyboardInput = new GameKeyboardInput();
 
 	}
 
 	public void setGame(Game g){
-		
 		game = g;
 		this.avatar = g.getAvatar();
+		this.gameMap = g.getGameMap();
+		createEntityMapInteraction();
+
 	}
 	public static GameController getInstance() {
 		if ( instance == null ){
@@ -72,7 +55,9 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(int command) {
 		Controller c = this;
-		//performSkillCommand(command);
+
+		c = performSkillCommand(command);
+
 		Direction targetDirection = null;
 		switch(command){
 		case Commands.MOVE_EAST: targetDirection = Direction.EAST; 
@@ -95,7 +80,6 @@ public class GameController extends Controller{
 			c = InventoryController.getInstance();
 			break;
 		}
-		
 		if (targetDirection != null) {
 			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
 			boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
@@ -103,11 +87,7 @@ public class GameController extends Controller{
 				for (Npc npc: npcList)
 					entityMapInteraction.move(npc, npc.rollDice());
 			}*/
-			/*
-			((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
-			((ObserverController) c).setAvatar(avatar);
-			((ObserverController) c).setSkill(observe);
-			*/
+		
 
 		}
 		return c;
@@ -115,11 +95,20 @@ public class GameController extends Controller{
 	
 	
 
-	private void performSkillCommand(int command) {
+	private Controller performSkillCommand(int command) {
+		Controller c = this;
 		Skill skill = avatar.getActiveSkill(command);
 		if(skill != null){
+			
 			entityMapInteraction.applySkill(avatar,skill);
+			if(command == 1);{
+				c = ObserverController.getInstance();
+				((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
+				((ObserverController) c).setAvatar(avatar);
+				((ObserverController) c).setSkill(skill);
+			}
 		}
+		return c;
 	}
 
 	private void createEntityMapInteraction() {
@@ -141,14 +130,14 @@ public class GameController extends Controller{
 
 	@Override
 	public GameViewInteraction populateInteraction() {
+
 		GameViewInteraction gameInteraction = new GameViewInteraction(game);
 		return gameInteraction;
 	}
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
-		
-		return new GameKeyboardInput();
+		return keyboardInput;
 	}
 
 	

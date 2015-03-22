@@ -5,6 +5,7 @@ package com.oopsididitagain.rpg_iter2.models.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
@@ -41,28 +43,32 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 
 	public void setOccupation(Occupation occupation) {
+		int currentFightIndex = 0;
+		int currentSkillIndex = 0;
 		this.occupation = occupation;
-		giveBaseSkills();
+		giveBaseSkills(currentFightIndex,currentSkillIndex);
 		occupation.giveSkills(gameSkillList,fightSkillList,passiveSkillList);
 		
 	}
 
-	private void giveBaseSkills() {
+	private void giveBaseSkills(int fightIndex, int skillIndex) {
 		//bargain passive
 		
-		Skill bargain = new Skill();
+		Skill bargain = new Skill(Skill.BARGAIN);
 		Discount discount = new Discount(.05);
 		bargain.setEffect(discount);
 		passiveSkillList.put(Skill.BARGAIN, bargain);
-		
 		//observe active
 		
-		Skill observe = new Skill();
+		Skill observe = new Skill(Skill.OBSERVATION);
 		Observe obs = new Observe();
 		observe.setEffect(obs);
 		gameSkillList.add(observe);
+	
 		
 		//bind wounds regular active fight
+		//SKILLTWO
+		//SKILLFIGHTONE
 		
 	}
 	
@@ -75,9 +81,40 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 	
 	public Skill getActiveSkill(int command) {//this needs to differentiate between the states
-		return gameSkillList.get(command);
+		if(command < gameSkillList.size() && command > 0){
+			--command;
+			return gameSkillList.get(command);
+		}
+		return null;
 	}
-
+	public Skill getActiveFightSkill(int command) {//this needs to differentiate between the states
+		if(command < fightSkillList.size() && command > 0){
+			--command;
+			return fightSkillList.get(command);
+		}
+		return null;
+	}
+	public Skill getPassiveSkill(String skill) {//this needs to differentiate between the states
+		return passiveSkillList.get(skill);
+	}
+	
+	public LinkedList<String> getActiveSkillList(){
+		LinkedList<String> skillStrings = new LinkedList<String>();
+		for(Skill s: gameSkillList){
+			skillStrings.add(s.getName());
+		}
+		return skillStrings;
+	}
+	
+	public LinkedList<String> getFightSkillList(){
+		LinkedList<String> skillStrings = new LinkedList<String>();
+		for(Skill s: fightSkillList){
+			skillStrings.add(s.getName());
+		}
+		return skillStrings;
+	}
+	
+	
 	
 	public void visit(InventoryEquipableItem item) {
 		// ArmoryStuff

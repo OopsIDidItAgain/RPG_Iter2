@@ -11,13 +11,13 @@ import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 public class Sneak extends Occupation{
 
 	@Override
-	public void giveSkills(ArrayList<Skill> skillMap,
+	public void giveSkills(ArrayList<Skill> skillMap,//START SKILL AT THREE AND FIGHT AT TWO
 			ArrayList<Skill> fightSkillList, Map<String, Skill> passiveSkillList) {
 		// TODO Auto-generated method stub
 		
 		//pickpocket active
 		
-		Skill pickpocket = new Skill();
+		Skill pickpocket = new Skill(Skill.PICKPOCKET);
 		PickPocket pick = new PickPocket();
 		pickpocket.setEffect(pick);
 		skillMap.add(pickpocket);

@@ -1,7 +1,9 @@
 package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
@@ -20,11 +22,15 @@ public class GameViewInteraction extends ModelViewInteraction{
   
 
     private Game game;
+    private Avatar avatar;
+    private GameMap gameMap;
     private Assets assets; 
     
     public GameViewInteraction(Game game){ //Constructor
     	assets = new Assets();
     	this.game = game;
+    	this.gameMap = game.getGameMap();
+    	this.avatar = game.getAvatar();
     }
 	@Override
 	public void accept(View view) {
@@ -42,8 +48,9 @@ public class GameViewInteraction extends ModelViewInteraction{
         for(int y = Yi; y <= Yf; y++ ){
             for(int x = Xi; x<= Xf; x++){
                 try{
-                	
-                    drawTile(g, game.getGameMap().getTileAt(new Position(y, x)), x, y);
+
+                    drawTile(g, gameMap.getTileAt(new Position(y, x)), x, y);
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -51,9 +58,24 @@ public class GameViewInteraction extends ModelViewInteraction{
             }
 
         }
+        drawSkills(g);
 	}
 
-    private void drawTile(Graphics g, Tile t, int x, int y){
+    private void drawSkills(Graphics g) {
+		LinkedList<String> skills = avatar.getActiveSkillList();
+		g.setColor(Color.black);
+		g.fillRect(0, 500, View.pWidth, 60);
+		int startingWidth = 0;
+		int i = 1;
+		for(String s: skills){
+			g.setColor(Color.white);
+			g.drawString(i + ": " + s, startingWidth, 530);
+			startingWidth += 100;
+			++i;
+		}
+		
+	}
+	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
         
         	
