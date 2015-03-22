@@ -5,6 +5,8 @@ import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
+import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 /**
@@ -14,23 +16,22 @@ import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
  */
 public class MainMenuController extends Controller {
 
-	public static MainMenuController instance;
+	private static MainMenuController instance;
 
-    private static MainMenu mainMenu;
-    private MainMenuViewInteraction mainMenuView;
+	private static MainMenu mainMenu;
+	private MainMenuViewInteraction mainMenuView;
 
 	private MainMenuKeyboardInput keyboardInput;
 
-    private Controller controllerToReturn;
+	private Controller controllerToReturn;
 
+	private MainMenuController() {
 
-	private MainMenuController(){
-
-        this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
+		this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
 	}
 
 	public static MainMenuController getInstance() {
-		if ( instance == null ){
+		if (instance == null) {
 			mainMenu = new MainMenu();
 			instance = new MainMenuController();
 		}
@@ -41,45 +42,40 @@ public class MainMenuController extends Controller {
 	public Controller takeInputAndUpdate(int key) {
 		controllerToReturn = this;
 
-        switch(key){
-            case 0:
-                break;
-            case 1:
-                mainMenu.selectedOptionUp();
-                break;
-            case 2:
-                break;
-
-
-            case 3:
-                break;
-            case 4:
-                doSelectedOption();
-                break;
-            case 5:
-                break;
-
-
-            case 6:
-                break;
-            case 7:
-                mainMenu.selectedOptionDown();
-                break;
-            case 8:
-                break;
-        }
+		switch (key) {
+		case Commands.MOVE_SOUTH:
+			mainMenu.nextOption();
+			break;
+		case Commands.MOVE_NORTH:
+			mainMenu.previousOption();
+			break;
+		case Commands.ENTER:
+		case Commands.USE:
+			doSelectedOption();
+			break;
+		default:
+			break;
+		}
 
 		return controllerToReturn;
 	}
 
-    private void doSelectedOption(){
-        String selectedOption = mainMenu.getSelectedOption();
-        switch(selectedOption){
-            case "New Game":
-                controllerToReturn = AvatarCreationMenuController.getInstance();
-                break;
-        }
-    }
+	private void doSelectedOption() {
+		Option selectedOption = mainMenu.getCurrentOption();
+		switch (selectedOption) {
+		case New:
+			controllerToReturn = AvatarCreationMenuController.getInstance();
+			break;
+		case ExitGame:
+			break;
+		case Load:
+			break;
+		case Options:
+			break;
+		default:
+			break;
+		}
+	}
 
 	@Override
 	public MainMenuViewInteraction populateInteraction() {
@@ -87,9 +83,8 @@ public class MainMenuController extends Controller {
 		return mainMenuView;
 	}
 
-
 	@Override
-	public MainMenuKeyboardInput getKeyBoardInput(){
+	public MainMenuKeyboardInput getKeyBoardInput() {
 		return keyboardInput;
 	}
 

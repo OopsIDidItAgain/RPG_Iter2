@@ -21,7 +21,7 @@ public class GameLoop {
 	
 	
 	public GameLoop(){   //GameLoop constructor
-		controller = AvatarCreationMenuController.getInstance();
+		controller = MainMenuController.getInstance();
 		this.modelViewInteraction = controller.populateInteraction();
 		keyboardInput =  new KeyBoardInput();
 		this.view = new View();

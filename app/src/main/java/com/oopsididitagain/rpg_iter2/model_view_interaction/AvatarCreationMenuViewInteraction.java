@@ -7,16 +7,12 @@ import java.awt.Graphics2D;
 
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu.Option;
-import com.oopsididitagain.rpg_iter2.models.menus.MenuButton;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 public class AvatarCreationMenuViewInteraction extends ModelViewInteraction {
 	int padding = 10;
 
-	AvatarCreationMenu avatarCreationMenu;
-	MenuButton summonerButton;
-	MenuButton smasherButton;
-	MenuButton sneakButton;
+	private AvatarCreationMenu avatarCreationMenu;
 
 	public AvatarCreationMenuViewInteraction(
 			AvatarCreationMenu avatarCreationMenu) {
@@ -51,14 +47,14 @@ public class AvatarCreationMenuViewInteraction extends ModelViewInteraction {
 		for (int i = 0; i < options.length; i++) {
 			Option o = options[i];
 			if (avatarCreationMenu.getCurrentOption().equals(o)) {
-				g.setColor(Color.BLUE);
+				g.setColor(Color.WHITE);
 				g2d.fillRect(i * widthDivLength, 0, widthDivLength, height);
 				g.setFont(f);
 				g.setColor(Color.BLACK);
 				g.drawString(o.toString(), i * widthDivLength + 30, 0 + 35);
 			} else {
-				g2d.draw(new MenuButton(o.toString(), i * View.WIDTH
-						/ 3, 0, widthDivLength, height));
+				g.setColor(Color.LIGHT_GRAY);
+				g2d.fillRect(i * widthDivLength, 0, widthDivLength, height);
 				g.setFont(f);
 				g.setColor(Color.BLACK);
 				g.drawString(o.toString(), i * widthDivLength + 30, 0 + 35);
