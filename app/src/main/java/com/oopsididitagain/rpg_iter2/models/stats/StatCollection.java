@@ -36,6 +36,7 @@ public class StatCollection {
 		offensiveRating = new Stat((blob.getStrength() + armory.getEquippedWeaponRank()) * this.level.getValue()); 
 		defensiveRating = new Stat(blob.getAgility() * this.level.getValue());
 		armorRating = new Stat(blob.getHardiness()  * armory.getEquippedArmorRank()); 
+		System.out.println(blob);
 	}
 
 	public StatBlob getBlob() {

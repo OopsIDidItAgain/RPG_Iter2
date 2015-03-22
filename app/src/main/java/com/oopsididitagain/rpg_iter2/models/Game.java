@@ -19,7 +19,7 @@ public class Game {
 		this.avatar = avatar;
 		gameMap = new GameMap(new MapDatabase(1));
 		Position position2 = new Position(3,0);
-		StatBlob statBlob = new StatBlob(0, 0, 0, 0, 0, 0, 0, 20, 20);
+		StatBlob statBlob = new StatBlob(0, 30, 0, 0, 0, 0, 0, 20, 20);
 		WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", position2, 4.05,statBlob, 5, WeaponItemType.ONE_HANDED_WEAPON);
 		gameMap.getTileAt((new Position(0,0))).add(avatar);
 		gameMap.getTileAt(position2).add(pgo);

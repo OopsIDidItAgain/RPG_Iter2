@@ -114,22 +114,25 @@ public class Avatar extends Entity implements StatModifiable {
 		InventoryWeaponItem conflict;
 		if (item.isEquipped())
 			conflict = armory.unequip(item);
-		else
+		else {
 			conflict = armory.equip(item);
+			stats.mergeBlob(item.statBlob());
+		}
+
 		if (conflict != null) 
 			stats.detachBlob(conflict.statBlob());
-		stats.mergeBlob(item.statBlob());
 	}
 
 	public void visit(InventoryArmorItem item) {
 		InventoryArmorItem conflict;
 		if (item.isEquipped())
 			conflict = armory.unequip(item);
-		else
+		else {
 			conflict = armory.equip(item);
+			stats.mergeBlob(item.statBlob());
+		}
 		if (conflict != null) 
 			stats.detachBlob(conflict.statBlob());
-		stats.mergeBlob(item.statBlob());
 	}
 
 	public void visit(InventoryUnusableItem item) {
