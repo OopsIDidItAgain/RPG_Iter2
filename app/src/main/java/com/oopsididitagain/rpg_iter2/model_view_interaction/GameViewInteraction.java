@@ -38,35 +38,102 @@ public class GameViewInteraction extends ModelViewInteraction{
 
 	@Override
 	public void drawModel(Graphics g) {
-        int Xi = avatar.getPosition().getX() - 5;
-        int Yi = avatar.getPosition().getY() - 4;
-
-        int Xf =  avatar.getPosition().getX() + 6;
-        int Yf =  avatar.getPosition().getY() + 5;
-
-        for(int y = Yi; y <= Yf; y++ ){
-            for(int x = Xi; x<= Xf; x++){
-            	if(gameMap.tileInbounds(new Position(x,y))){
-	                try{
-	
-	                    drawTile(g, gameMap.getTileAt(new Position(y, x)), x, y);
-	
-	                }catch (Exception e){
-	                    e.printStackTrace();
-	                }
-            	}else{
-            		   drawEmptyTile(g, x, y);
-            		
-            	}
-            }
-
-        }
+		int left = avatar.getX() - 5;
+		int right = avatar.getX() + 6;
+		int top = avatar.getY() - 4 ;
+		int bottom = avatar.getY() + 6;
+		
+		drawTopLeft(g, top, left);
+		drawBottomLeft(g, bottom, left);
+		drawTopRight(g, top, right);
+		drawBottomRight(g, bottom, right);
+       
         drawSkills(g);
+        
+	}
+private void drawTopRight(Graphics g, int top, int right){
+		
+		int x = 5;
+		int y = 0;
+		for(int i = avatar.getX(); i <= right; i++){
+			y= 0;
+			for(int j = top; j <= avatar.getY(); j++){
+				
+				if(gameMap.tileInbounds(new Position(j,i))){
+					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
+				}else{
+					
+					drawEmptyTile(g, x, y);	
+				}
+				y++;
+			}
+			x++;
+		}
+	}
+private void drawBottomRight(Graphics g, int bottom, int right){
+		
+		int x = 5;
+		int y = 4;
+		for(int i = avatar.getX(); i <= right; i++){
+			 y = 4;
+			for(int j = avatar.getY(); j <= bottom; j++){
+				
+				if(gameMap.tileInbounds(new Position(j,i))){
+					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
+				}else{
+					
+					drawEmptyTile(g, x, y);	
+				}
+				y++;
+			}
+			x++;
+		}
+	}
+private void drawBottomLeft(Graphics g, int bottom, int left){
+		
+		int x = 0;
+		int y = 4;
+		for(int i = left; i < avatar.getX(); i++){
+			 y = 4;
+			for(int j = avatar.getY(); j < bottom; j++){
+				
+				if(gameMap.tileInbounds(new Position(j,i))){
+					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
+				}else{
+					
+					drawEmptyTile(g, x, y);	
+				}
+				y++;
+			}
+			x++;
+		}
+	}
+	private void drawTopLeft(Graphics g, int top, int left){
+		
+		int x = 0;
+		int y = 0;
+		for(int i = left; i < avatar.getX(); i++){
+			 y = 0;
+			for(int j = top; j < avatar.getY(); j++){
+				System.out.println(x + ", " + y);
+				if(gameMap.tileInbounds(new Position(j,i))){
+					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
+				}else{
+					
+					drawEmptyTile(g, x, y);	
+				}
+				y++;
+			}
+			x++;
+		}
 	}
 	private void drawEmptyTile(Graphics g, int x, int y){
 		g.setColor(Color.BLACK);
-		g.fillRect(x* 50, y * 50, 50, 50);
 		
+		
+
+		g.fillRect(x * 50, y  * 50, 50, 50);
+
 		
 	}
 
@@ -89,7 +156,8 @@ public class GameViewInteraction extends ModelViewInteraction{
         Entity entity = t.getEntity();
         	
         Image bf = assets.getImage(tileables.first().getId());
-        g.drawImage(bf, x*50,y*50,50,50,null);
+       // System.out.println(x + "," + y);
+        g.drawImage(bf, x *50,y *50,50,50,null);
 
         if(entity!=null){
         	String id = entity.getId();
@@ -98,10 +166,13 @@ public class GameViewInteraction extends ModelViewInteraction{
         	}
             Image b2 = assets.getImage(id);
             
-            g.drawImage(b2, x*50,y*50,50,50,null);
+            g.drawImage(b2, x *50, y *50,50,50,null);
 
         	
         }
     }
+	
+
+
 
 }
