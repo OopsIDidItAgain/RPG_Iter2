@@ -54,13 +54,43 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
         for(int i =0; i<options.length; i++){
         	Option option = options[i];
             if (option.equals(mainMenu.getCurrentOption())){
-                g.setColor(Color.WHITE);
+            	Color bgColor = Color.WHITE;
+            	Color textColor = Color.BLACK;
+            	
+            	switch(option) {
+            		case New:
+            			bgColor = Color.RED;
+            			break;
+            		case Load:
+            			bgColor = Color.BLUE;
+            			break;
+            		case ExitGame:
+            			bgColor = Color.GREEN;
+            		default:
+            			break;
+            	}
+            	            	
+                g.setColor(bgColor);
                 g2d.fillRect(buttonX,buttonY,200,50);
-                g.setColor(Color.BLACK);
+                g.setColor(textColor);
                 g.drawString(option.toString(), buttonX+30, buttonY+35);
             }else{
-
-                g.setColor(Color.WHITE);
+            	Color color = Color.WHITE;
+            	
+            	switch(option) {
+            		case New:
+            			color = Color.RED;
+            			break;
+            		case Load:
+            			color = Color.BLUE;
+            			break;
+            		case ExitGame:
+            			color = Color.GREEN;
+            		default:
+            			break;
+            	}
+            	
+                g.setColor(color);
                 g2d.drawRect(buttonX,buttonY,200,50);
                 g.drawString(option.toString(), buttonX+30, buttonY+35);
             }
