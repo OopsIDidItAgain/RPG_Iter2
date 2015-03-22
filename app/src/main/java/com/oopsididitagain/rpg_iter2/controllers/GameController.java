@@ -33,6 +33,7 @@ public class GameController extends Controller{
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
+	private boolean isFlying = false;
 
 	private GameController(){
 
@@ -87,6 +88,10 @@ public class GameController extends Controller{
 			break;
 		case SKILLALLOCATION:
 			c = SkillPointAllocationController.getInstance();
+		case FLIGHT:
+			avatar.setFlying(isFlying);
+			isFlying = !isFlying;
+			break;
 		default:
 			break;
 		}
@@ -198,6 +203,12 @@ public class GameController extends Controller{
 		this.gameMap = gameMap;
 	}
 
+	//public void toggleFlight(){
+		//if(!gameMap.getTileAt(avatar.getPosition()).getTerrain().isWater()) {
+		//	avatar.setFlying(!avatar.isFlying());
+		//}
+	//}
+	
 	@Override
 	public GameViewInteraction populateInteraction() {
 

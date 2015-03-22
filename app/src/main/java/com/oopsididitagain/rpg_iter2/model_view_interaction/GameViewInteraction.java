@@ -203,6 +203,9 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 
         if(entity!=null){
         	String id = entity.getId();
+        	if(entity.isCurrentlyFlying()){
+        		id+="_flying";
+        	}
         	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
         		id+="_sleeping";
         	}
