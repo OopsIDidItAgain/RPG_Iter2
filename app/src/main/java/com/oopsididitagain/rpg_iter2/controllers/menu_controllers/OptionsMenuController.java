@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.OptionsMenu;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.KeyBoardInput;
 
 public class OptionsMenuController extends Controller {
@@ -21,19 +22,13 @@ public class OptionsMenuController extends Controller {
 	}
 	
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
 		// TODO Auto-generated method stub
 		return null;
 	}

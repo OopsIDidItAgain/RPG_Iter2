@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 
 
@@ -22,7 +22,7 @@ public class ExitGameController extends Controller{
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,12 +32,5 @@ public class ExitGameController extends Controller{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

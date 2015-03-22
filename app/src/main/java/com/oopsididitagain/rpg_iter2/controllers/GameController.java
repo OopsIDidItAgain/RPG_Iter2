@@ -7,17 +7,10 @@ import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.Terrain;
-import com.oopsididitagain.rpg_iter2.models.Tile;
-import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
-import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
-import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 
 
@@ -33,10 +26,8 @@ public class GameController extends Controller{
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
-	private GameKeyboardInput keyboardInput;
 
 	private GameController(){
-		this.keyboardInput = new GameKeyboardInput();
 
 	}
 
@@ -55,48 +46,39 @@ public class GameController extends Controller{
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int command) {
+	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
-		if(command == 2){
-			System.out.println("hi");
-		}
 		c = performSkillCommand(command);
 
 		Direction targetDirection = null;
 		switch(command){
-		case 7: 
+		case MOVE_SOUTH: 
 			targetDirection = Direction.SOUTH;
 			break;
-		case 6: 
+		case MOVE_NORTH: 
 			targetDirection = Direction.NORTH;
 			break;
-		case 5: 
+		case MOVE_WEST: 
 			targetDirection = Direction.WEST;
 			break;
-		case 4: 
+		case MOVE_EAST: 
 			targetDirection = Direction.EAST;
 			break;
-		case Commands.MOVE_EAST: targetDirection = Direction.EAST; 
+		case MOVE_SOUTHWEST: targetDirection = Direction.SOUTHWEST; 
 			break;
-		case Commands.MOVE_WEST: targetDirection = Direction.WEST; 
+		case MOVE_SOUTHEAST: targetDirection = Direction.SOUTHEAST; 
 			break;
-		case Commands.MOVE_NORTH: targetDirection = Direction.NORTH; 
+		case MOVE_NORTHWEST: targetDirection = Direction.NORTHWEST; 
 			break;
-		case Commands.MOVE_SOUTH: targetDirection = Direction.SOUTH; 
+		case MOVE_NORTHEAST: targetDirection = Direction.NORTHEAST; 
 			break;
-		case Commands.MOVE_SOUTH_WEST: targetDirection = Direction.SOUTHWEST; 
-			break;
-		case Commands.MOVE_SOUTH_EAST: targetDirection = Direction.SOUTHEAST; 
-			break;
-		case Commands.MOVE_NORTH_WEST: targetDirection = Direction.NORTHWEST; 
-			break;
-		case Commands.MOVE_NORTH_EAST: targetDirection = Direction.NORTHEAST; 
-			break;
-		case Commands.INVENTORY: 
+		case INVENTORY: 
 			c = InventoryController.getInstance();
 			break;
-		case Commands.PAUSE:
+		case PAUSE:
 			c = PauseMenuController.getInstance();
+			break;
+		default:
 			break;
 		}
 		if (targetDirection != null) {
@@ -121,13 +103,13 @@ public class GameController extends Controller{
 	
 	
 
-	private Controller performSkillCommand(int command) {
+	private Controller performSkillCommand(Command command) {
 		Controller c = this;
 		Skill skill = avatar.getActiveSkill(command);
 		if(skill != null){
-			
 			entityMapInteraction.applySkill(avatar,skill);
-			if(command == 1){
+			// I think Command.SKILLONE will always point to observe
+			if(command == Command.SKILLONE){
 				c = ObserverController.getInstance();
 				((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
 				((ObserverController) c).setAvatar(avatar);
@@ -160,12 +142,5 @@ public class GameController extends Controller{
 		GameViewInteraction gameInteraction = new GameViewInteraction(game);
 		return gameInteraction;
 	}
-
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		return keyboardInput;
-	}
-
-	
 
 }

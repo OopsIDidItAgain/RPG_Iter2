@@ -11,10 +11,10 @@ import java.util.Iterator;
 
 public class CustomControlsHandler {
 	
-	private static HashMap<Integer, Integer> controls;
+	private static HashMap<Integer, Command> controls;
 	
 	static {
-		controls = new HashMap<Integer, Integer>();
+		controls = new HashMap<Integer, Command>();
 	}
 	
 	public static void bind(Integer key, Integer command) {
@@ -28,14 +28,13 @@ public class CustomControlsHandler {
 			controls.remove(prevKey);
 		}
 		controls.remove(newKey);
-		controls.put(newKey, command);
 	}
 	
-	public static Integer getKeyboardKeyCommand(Integer key) {
+	public static Command getKeyboardKeyCommand(Integer key) {
 		return controls.get(key);
 	}
 	
-	public static void saveControls(HashMap<Integer, Integer> controls, File file) {
+	public static void saveControls(HashMap<Integer, Command> controls, File file) {
 		BufferedWriter writer = null;
 		try {
 			if(file.createNewFile()) {
@@ -47,8 +46,8 @@ public class CustomControlsHandler {
 			Iterator<Integer> iterator = controls.keySet().iterator();
 			while(iterator.hasNext()) {
 				Integer key = iterator.next();
-				Integer command = controls.get(key);
-				writer.write(key + "," + command + "\n");
+				Command command = controls.get(key);
+				writer.write(key + "," + command.toString() + "\n");
 				iterator.remove();
 			}
 			writer.flush();
@@ -65,8 +64,8 @@ public class CustomControlsHandler {
 		}
 	}
 	
-	public static HashMap<Integer, Integer> loadControls(File file) {
-		HashMap<Integer, Integer> controls = new HashMap<Integer, Integer>();
+	public static HashMap<Integer, Command> loadControls(File file) {
+		HashMap<Integer, Command> controls = new HashMap<Integer, Command>();
 		
 		BufferedReader reader = null;
 		if(file.exists()) {
@@ -77,7 +76,8 @@ public class CustomControlsHandler {
 				String line;
 				while((line = reader.readLine()) != null) {
 					String[] split = line.split(",");
-					controls.put(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+					String enumerationId = split[1];
+					controls.put(Integer.parseInt(split[0]), Command.fromString(enumerationId));
 				}
 			} catch(IOException ioe) {
 				System.err.println("Error loading custom controls");
@@ -97,7 +97,7 @@ public class CustomControlsHandler {
 		return controls;
 	}
 	
-	public static void setControls(HashMap<Integer, Integer> newControls) {
+	public static void setControls(HashMap<Integer, Command> newControls) {
 		controls = newControls;
 	}
 	

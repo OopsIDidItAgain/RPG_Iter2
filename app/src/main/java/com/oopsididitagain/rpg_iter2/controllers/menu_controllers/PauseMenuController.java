@@ -5,11 +5,9 @@ import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInteraction;
-import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu.Option;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.KeyBoardInput;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 /**
  * Handles input while in pause menu_controllers
@@ -31,18 +29,18 @@ public class PauseMenuController extends Controller{
 	}
 	
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		Controller controller = PauseMenuController.getInstance();
 
-        switch(key){
-            case Commands.MOVE_NORTH:
+        switch(command){
+            case MOVE_NORTH:
             	pauseMenu.upOption();
                 break;
-            case Commands.MOVE_SOUTH:
+            case MOVE_SOUTH:
             	pauseMenu.downOption();
                 break;
-            case Commands.ENTER:
-            case Commands.USE:
+            case ENTER:
+            case USE:
             	Option o = pauseMenu.getCurrentOption();
             	switch(o) {
 				case ExitGame:
@@ -61,7 +59,7 @@ public class PauseMenuController extends Controller{
 					break;
             	}
                 break;
-            case Commands.EXIT:
+            case EXIT:
             	controller = GameController.getInstance();
             	break;
             default:
@@ -77,10 +75,5 @@ public class PauseMenuController extends Controller{
 		return PauseMenuViewInteraction;
 	}
 
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }

@@ -1,11 +1,9 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
-import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
-import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 /**
  * In charge of handling input in main menu_controllers
@@ -19,14 +17,11 @@ public class MainMenuController extends Controller {
     private static MainMenu mainMenu;
     private MainMenuViewInteraction mainMenuView;
 
-	private MainMenuKeyboardInput keyboardInput;
-
     private Controller controllerToReturn;
 
 
 	private MainMenuController(){
 
-        this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
 	}
 
 	public static MainMenuController getInstance() {
@@ -38,35 +33,21 @@ public class MainMenuController extends Controller {
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		controllerToReturn = this;
 
-        switch(key){
-            case 0:
-                break;
-            case 1:
+        switch(command){
+            case MOVE_NORTH:
                 mainMenu.selectedOptionUp();
                 break;
-            case 2:
-                break;
-
-
-            case 3:
-                break;
-            case 4:
+            case USE:
+            case ENTER:
                 doSelectedOption();
                 break;
-            case 5:
-                break;
-
-
-            case 6:
-                break;
-            case 7:
+            case MOVE_SOUTH:
                 mainMenu.selectedOptionDown();
                 break;
-            case 8:
-                break;
+            default: break;
         }
 
 		return controllerToReturn;
@@ -87,10 +68,5 @@ public class MainMenuController extends Controller {
 		return mainMenuView;
 	}
 
-
-	@Override
-	public MainMenuKeyboardInput getKeyBoardInput(){
-		return keyboardInput;
-	}
 
 }

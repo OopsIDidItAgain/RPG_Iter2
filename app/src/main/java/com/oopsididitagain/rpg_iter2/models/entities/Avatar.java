@@ -22,7 +22,7 @@ import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
@@ -80,20 +80,57 @@ public class Avatar extends Entity implements StatModifiable {
 		return occupation;
 	}
 	
-	public Skill getActiveSkill(int command) {//this needs to differentiate between the states
-		if(command <= gameSkillList.size() && command > 0){
-			int tempcommand = command - 1;
-			return gameSkillList.get(tempcommand);
+	public Skill getActiveSkill(Command command) {//this needs to differentiate between the states
+		Skill skill = null;
+		try {
+			switch(command) {
+			case SKILLONE: skill = gameSkillList.get(0);
+			break;
+			case SKILLTWO: skill = gameSkillList.get(1);
+			break;
+			case SKILLTHREE: skill = gameSkillList.get(2);
+			break;
+			case SKILLFOUR: skill = gameSkillList.get(3);
+			break;
+			case SKILLFIVE: skill = gameSkillList.get(4);
+			break;
+			case SKILLSIX: skill = gameSkillList.get(5);
+			break;
+			default: return null;
+			}
+		} catch(Exception ex) {
+			System.out.println("Probably tried to press a skill that wasn't existent!");
+			ex.printStackTrace();
+			return null;
 		}
-		return null;
+		return skill;
 	}
-	public Skill getActiveFightSkill(int command) {//this needs to differentiate between the states
-		if(command <= fightSkillList.size() && command > 0){
-			int tempcommand = command - 1;
-			return fightSkillList.get(tempcommand);
+	public Skill getActiveFightSkill(Command command) {//this needs to differentiate between the states
+		Skill skill = null;
+		try {
+			switch(command) {
+			case SKILLONE: skill = fightSkillList.get(0);
+			break;
+			case SKILLTWO: skill = fightSkillList.get(1);
+			break;
+			case SKILLTHREE: skill = fightSkillList.get(2);
+			break;
+			case SKILLFOUR: skill = fightSkillList.get(3);
+			break;
+			case SKILLFIVE: skill = fightSkillList.get(4);
+			break;
+			case SKILLSIX: skill = fightSkillList.get(5);
+			break;
+			default: return null;
+			}
+		} catch(Exception ex) {
+			System.out.println("Probably tried to press a skill that wasn't existent!");
+			ex.printStackTrace();
+			return null;
 		}
-		return null;
+		return skill;
 	}
+
 	public Skill getPassiveSkill(String skill) {//this needs to differentiate between the states
 		return passiveSkillList.get(skill);
 	}
@@ -113,8 +150,6 @@ public class Avatar extends Entity implements StatModifiable {
 		}
 		return skillStrings;
 	}
-	
-	
 	
 	public void visit(InventoryEquipableItem item) {
 		// ArmoryStuff
@@ -164,8 +199,8 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public void drop(InventoryItem selectedItem) {
 		Position position = this.position.createPositionAtDirection(getDirection());
-
 	}
+
 	public void attemptInhibition(MovementProbe movementProbe) {
 		// TODO Auto-generated method stub
 		
