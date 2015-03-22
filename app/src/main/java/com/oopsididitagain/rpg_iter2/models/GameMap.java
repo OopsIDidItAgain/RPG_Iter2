@@ -17,9 +17,14 @@ public class GameMap {
 	}
 	
 	public Tile getTileAt(Position position)  {
-		try{
-		position.checkBounds(0, 0, getWidth(), getHeight());
-		}catch( PositionOutOfBoundsException e){}
+		
+		try {
+			position.checkBounds(0, 0, getWidth(), getHeight());
+		} catch (PositionOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return tiles[position.getY()][position.getX()];
 	}
 
@@ -39,6 +44,19 @@ public class GameMap {
         readObjectsFromMapDB(mDb);
         readTerrainsFromMapDB(mDb);
 
+    }
+    public boolean tileInbounds(Position p){
+    	if((p.getX() > tiles[0].length - 1) ||(p.getX() < 0)) {
+    		
+    		return false;
+    	} else if((p.getY() > tiles.length - 1) ||(p.getY() < 0)){
+    		
+    		return false;
+    	}else{
+    		
+    		return true;
+    	}
+    	
     }
 
     private void readTerrainsFromMapDB(MapDatabase mDb){

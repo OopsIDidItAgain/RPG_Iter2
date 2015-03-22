@@ -15,6 +15,7 @@ import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInterac
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 
@@ -60,6 +61,18 @@ public class GameController extends Controller{
 
 		Direction targetDirection = null;
 		switch(command){
+		case 7: 
+			targetDirection = Direction.SOUTH;
+			break;
+		case 6: 
+			targetDirection = Direction.NORTH;
+			break;
+		case 5: 
+			targetDirection = Direction.WEST;
+			break;
+		case 4: 
+			targetDirection = Direction.EAST;
+			break;
 		case Commands.MOVE_EAST: targetDirection = Direction.EAST; 
 			break;
 		case Commands.MOVE_WEST: targetDirection = Direction.WEST; 
@@ -81,12 +94,19 @@ public class GameController extends Controller{
 			break;
 		}
 		if (targetDirection != null) {
+			
 			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
-			boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
+			
+		    entityMapInteraction.move(avatar, toPosition);
+			
+				// TODO Auto-generated catch block
+			
 			/*if (successfulMove) {
 				for (Npc npc: npcList)
 					entityMapInteraction.move(npc, npc.rollDice());
 			}*/
+				// TODO Auto-generated catch block
+			
 		
 
 		}

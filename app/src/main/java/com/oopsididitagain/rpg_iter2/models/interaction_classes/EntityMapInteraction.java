@@ -30,27 +30,32 @@ public class EntityMapInteraction {
 		
 	}
 	
-	public boolean move(Entity entity, Position toPosition) {
+	public void move(Entity entity, Position toPosition)   {
 		// Step 1: Make Sure Position is on the Map.
-		Tile targetTile, fromTile;
-		fromTile = gameMap.getTileAt(entity.getPosition());
-		targetTile = gameMap.getTileAt(toPosition);
 		
-		// Step 2: Can we Move to the Tile there?
-		MovementProbe movementProbe = new MovementProbe(entity);
-		movementProbe.inspect(targetTile);
+		if(gameMap.tileInbounds(toPosition)){
+			
+			
 		
-		// Step 3a: If we can, go ahead and Perform movement 
-		if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
-			entity.move(fromTile, targetTile, toPosition);
-			return true;
+			Tile targetTile, fromTile;
+			fromTile = gameMap.getTileAt(entity.getPosition());
+			targetTile = gameMap.getTileAt(toPosition);
+			
+			
+			// Step 2: Can we Move to the Tile there?
+			MovementProbe movementProbe = new MovementProbe(entity);
+			movementProbe.inspect(targetTile);
+			
+			// Step 3a: If we can, go ahead and Perform movement 
+			if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
+				entity.move(fromTile, targetTile, toPosition);
+			}
+	
+			// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
+			else {
+				entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));
+			} 
 		}
-
-		// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
-		else {
-			entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));
-			return false;
-		} 
 	}
 
 	public void applySkill(Avatar avatar, Skill skill) {

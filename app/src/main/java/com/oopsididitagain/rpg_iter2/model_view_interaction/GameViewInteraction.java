@@ -39,26 +39,36 @@ public class GameViewInteraction extends ModelViewInteraction{
 
 	@Override
 	public void drawModel(Graphics g) {
-        int Xi = 0;
-        int Yi = 0;
+        int Xi = avatar.getPosition().getX() - 5;
+        int Yi = avatar.getPosition().getY() - 4;
 
-        int Xf = 9;
-        int Yf = 9;
+        int Xf =  avatar.getPosition().getX() + 6;
+        int Yf =  avatar.getPosition().getY() + 5;
 
         for(int y = Yi; y <= Yf; y++ ){
             for(int x = Xi; x<= Xf; x++){
-                try{
-
-                    drawTile(g, gameMap.getTileAt(new Position(y, x)), x, y);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
+            	if(gameMap.tileInbounds(new Position(x,y))){
+	                try{
+	
+	                    drawTile(g, gameMap.getTileAt(new Position(y, x)), x, y);
+	
+	                }catch (Exception e){
+	                    e.printStackTrace();
+	                }
+            	}else{
+            		   drawEmptyTile(g, x, y);
+            		
+            	}
             }
 
         }
         drawSkills(g);
+	}
+	private void drawEmptyTile(Graphics g, int x, int y){
+		g.setColor(Color.BLACK);
+		g.fillRect(x* 50, y * 50, 50, 50);
+		
+		
 	}
 
     private void drawSkills(Graphics g) {
@@ -82,12 +92,8 @@ public class GameViewInteraction extends ModelViewInteraction{
         BufferedImage bf = assets.getBufferedImage(tileables.first().getId());
         g.drawImage(bf, x*50,y*50,50,50,null);
 
-        if(t.getEntity()!=null){
-            BufferedImage b2 = assets.getBufferedImage(t.getEntity().getId());
-            g.drawImage(b2, x*50,y*50,50,50,null);
-
         	
-        }
+        
     }
 
 }

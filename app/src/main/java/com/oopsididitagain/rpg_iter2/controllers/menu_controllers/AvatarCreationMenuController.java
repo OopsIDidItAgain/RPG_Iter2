@@ -46,20 +46,23 @@ public class AvatarCreationMenuController extends Controller {
 		case 4:
 			switch (avatarCreationMenu.getCurrentOption()) {
 			case 0:
-				assignSummoner();
+				System.out.println("sneak");
+				assignSneak();
 				break;
 			case 1:
-				assignSmasher();
+				System.out.println("summoner");
+				assignSummoner();
 				break;
 			case 2:
-				assignSneak();
+				System.out.println("smash");
+				assignSmasher();
 				break;
 			}
 			Game game = new Game(this.avatar);
 			GameController gc = GameController.getInstance();
 			gc.setGame(game);
 			controller = gc;
-
+			
 			break;
 		}
 		return controller;	
@@ -90,7 +93,7 @@ public class AvatarCreationMenuController extends Controller {
 	}
 	private void switchControllers(GameController controller){
 		controller.setAvatar(this.avatar);
-		//controller.setMap(this.gameMap);
+		controller.setMap(this.gameMap);
 	}
 
 	@Override

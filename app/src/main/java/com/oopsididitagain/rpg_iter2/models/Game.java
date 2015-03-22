@@ -10,7 +10,7 @@ public class Game {
 	private GameMap gameMap;
 	
 	
-	public Game(Avatar avatar){
+	public Game(Avatar avatar)  {
 		
 		this.avatar = avatar;
 		gameMap = new GameMap(new MapDatabase(1));

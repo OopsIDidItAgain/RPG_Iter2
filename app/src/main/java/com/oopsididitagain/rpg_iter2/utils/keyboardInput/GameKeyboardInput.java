@@ -9,7 +9,12 @@ import com.oopsididitagain.rpg_iter2.utils.Commands;
 
 public class GameKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener {
 
-
+	int input;
+	public GameKeyboardInput(){
+		input = -5;
+		
+		
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -25,17 +30,17 @@ public class GameKeyboardInput extends KeyBoardInput implements KeyListener, Mou
 		case '2':
 			input = 2; 
 			break;
-		case '3':
-			input = 3; 
-			break;
-		case '4':
+		case 'd':
 			input = 4; 
 			break;
-		case '5':
+		case 'a':
 			input = 5; 
 			break;
-		case '6':
+		case 'w':
 			input = 6; 
+			break;
+		case 'x':
+			input = 7; 
 			break;
 		case KeyEvent.VK_ENTER:
 			input = 'e';
