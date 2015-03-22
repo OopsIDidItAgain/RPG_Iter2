@@ -40,7 +40,11 @@ public class Game {
 		gameMap.getTileAt(position4).add(pgo3);
 		Position position = new Position(2,0);
 		Position position5 = new Position(4,4);
-
+		Npc buddy = new Npc("buddy",position,  statBlob1);
+		buddy.setStoryline(new Storyline(" >> I'm Luigi."));
+		buddy.getInventory().add(pgo);
+		
+		
 		NonTradingNPC sheep = new NonTradingNPC("sheep", position5, statBlob1);
 		
 		TradingNPC shopkeeper = new TradingNPC("shopkeeper", position7, statBlob1);
@@ -49,7 +53,7 @@ public class Game {
 		
 		shopkeeper.setStoryline(new Storyline(" >> Hey, I haven't seen you around before... "));
 		shopkeeper.getInventory().add(pgo);
-		
+		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
 	}
