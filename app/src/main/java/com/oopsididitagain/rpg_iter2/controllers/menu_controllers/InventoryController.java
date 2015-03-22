@@ -48,6 +48,8 @@ public class InventoryController extends Controller {
 				int selectedOption = inventoryMenu.getSelectedOption();
 				InventoryItem selectedItem = inventory.getItemAtIndex(selectedOption);
 				selectedItem.accept(avatar);
+				if (selectedItem.removeable()) // Mixed Instance Cohesion :'(
+					inventory.remove(selectedItem);
 			} catch (IndexOutOfBoundsException ex) {
 				ex.printStackTrace();
 				break;

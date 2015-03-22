@@ -74,8 +74,8 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 
 		int x = 130, y = 90;
 		String[] s = { "OPTION: " + option,
-				"Press 'j' or your 'use' key to select/unselect item",
-				"Press 'i' to close inventory", "Press 'i' to close inventory" };
+				"Press USE or your 'use' key to select/unselect item",
+				"Press INVENTORY to close inventory", "Press INVENTORY to close inventory" };
 		for (int i = 0; i < 3; i++)
 			g2.drawString(s[i], x, y += g2.getFontMetrics().getHeight());
 		
@@ -118,7 +118,7 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 	}
 
 	public void visit(InventoryUsableItem inventoryUsableItem) {
-		gr.setPaint(Color.blue);
+		gr.setPaint(Color.cyan);
 	}
 
 	public void visit(InventoryUnusableItem inventoryUnusableItem) {

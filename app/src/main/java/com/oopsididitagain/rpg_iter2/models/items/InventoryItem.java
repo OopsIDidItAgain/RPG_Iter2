@@ -44,4 +44,8 @@ public abstract class InventoryItem extends GameObject implements Priceable {
 
 	public abstract void accept(InventoryViewInteraction inventoryViewInteraction);
 
+	public boolean removeable() {
+		return false;
+	}
+
 }
