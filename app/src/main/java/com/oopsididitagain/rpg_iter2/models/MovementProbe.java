@@ -27,13 +27,6 @@ public class MovementProbe {
 		targetTile.checkMovable(this);
 	}
 	
-	/*private void moveEntity(Tile previous, Tile targetTile) {
-		TODO: This is bad OOP, I need to fix this 
-		previous.remove(entity);
-		entity.setPosition(targetTile.getPosition());
-		targetTile.add(entity);
-	}*/
-	
 	public void denyMovement() {
 		this.movementProbeStatus = MovementProbeStatus.MOVEMENT_DENIED;
 	}
@@ -43,10 +36,12 @@ public class MovementProbe {
 	}
 	
 	public boolean inAir() {
+		//if (entity == null) return true;
 		return entity.isCurrentlyFlying();
 	}
 	
 	public boolean onGround() {
+		//if (entity == null) return true;
 		return !entity.isCurrentlyFlying();
 	}
 	

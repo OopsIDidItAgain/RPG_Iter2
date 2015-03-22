@@ -63,4 +63,8 @@ public class Inventory {
 	public int size() {
 		return contents.size();
 	}
+
+	public boolean contains(InventoryItem requirement) {
+		return contents.contains(requirement);
+	}
 }

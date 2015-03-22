@@ -4,8 +4,9 @@ import com.oopsididitagain.rpg_iter2.utils.Assetable;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
+import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
 
-public class Terrain implements Assetable, Tileable, MovementInhibitor {
+public class Terrain implements Assetable, TiledProbeVisitable, MovementInhibitor {
 	public static final Terrain GRASS = new Terrain("G", false, false);
 	public static final Terrain WATER = new Terrain("W", true, false);
 	public static final Terrain MOUNTAIN = new Terrain("M", true, true);

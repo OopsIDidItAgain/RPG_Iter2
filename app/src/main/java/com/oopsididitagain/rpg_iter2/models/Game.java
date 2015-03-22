@@ -3,14 +3,13 @@ package com.oopsididitagain.rpg_iter2.models;
 import java.util.ArrayList;
 
 import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
-import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.entities.NonAttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.NonTradingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.entities.TradingNPC;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.ArmorItemType;
@@ -28,6 +27,7 @@ public class Game {
 		Position position2 = new Position(3,0);
 		Position position3 = new Position(6, 2);
 		Position position4 = new Position(6, 5);
+		Position position6 = new Position(7, 5);
 		Position position7 = new Position(9, 9);
 
 		StatBlob statBlob1 = new StatBlob(0, 30, 0, 0, 0, 0, 0, 20, 20);
@@ -36,6 +36,7 @@ public class Game {
 		WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", position2, 4.05,statBlob1, 5, WeaponItemType.ONE_HANDED_WEAPON);
 		ArmorTakeableItem pgo2 = new ArmorTakeableItem("cape_item", position3, 4.05,statBlob2, 5, ArmorItemType.ARMOR);
 		EffectTakeableItem pgo3 = new EffectTakeableItem("potion_item", position4, 4.05, statBlob3);
+		InteractiveItem pgo4 = new InteractiveItem("leafstone_item", position6, gameMap.getTileAt(new Position(0, 9)), Terrain.GRASS, pgo2.toInventoryItem());
 		gameMap.getTileAt((new Position(0,0))).add(avatar);
 		gameMap.getTileAt(position2).add(pgo);
 		gameMap.getTileAt(position3).add(pgo2);
@@ -58,6 +59,7 @@ public class Game {
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
+		gameMap.getTileAt(position6).add(pgo4);
 		
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);

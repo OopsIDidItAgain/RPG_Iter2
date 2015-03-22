@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
@@ -70,6 +71,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	public abstract void visit(InventoryUnusableItem item);
 	public abstract void visit(InventoryArmorItem item);
 	public abstract void visit(InventoryWeaponItem item);
+	public abstract void visit(InteractiveItem item);
 
 	public boolean isCurrentlyFlying() {
 		return isCurrentlyFlying;

@@ -15,6 +15,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -154,7 +155,7 @@ public class Avatar extends Entity implements StatModifiable {
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
-		movementProbe.denyMovement();
+		attemptInhibition(movementProbe);
 		movementProbe.addEntity(this);
 	}
 
@@ -171,11 +172,6 @@ public class Avatar extends Entity implements StatModifiable {
 	public void drop(InventoryItem selectedItem) {
 		Position position = this.position.createPositionAtDirection(getDirection());
 	}
-
-	public void attemptInhibition(MovementProbe movementProbe) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public String StatToString(){
 		return stats.primaryViewport() + stats.derivedViewport();
@@ -188,6 +184,18 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public int getUnusedPoints() {
 		return stats.getUnusedPoints();
+	}
+
+	@Override
+	public void visit(InteractiveItem item) {
+		item.checkRequirement(inventory);
+		if (item.isFufilled()) 
+			item.activate();
+	}
+
+	@Override
+	public void attemptInhibition(MovementProbe movementProbe) {
+		movementProbe.denyMovement();
 	}
 
 	
