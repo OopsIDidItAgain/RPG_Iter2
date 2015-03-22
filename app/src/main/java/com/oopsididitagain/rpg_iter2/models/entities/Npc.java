@@ -3,8 +3,10 @@ package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
@@ -50,12 +52,6 @@ public class Npc extends Entity {
 	}
 
 	@Override
-	public void visit(InventoryEquipableItem item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void visit(InventoryUnusableItem item) {
 		// TODO Auto-generated method stub
 		
@@ -64,6 +60,18 @@ public class Npc extends Entity {
 	@Override
 	public void attemptInhibition(MovementProbe movementProbe) {
 		movementProbe.denyMovement();
+	}
+
+	@Override
+	public void visit(InventoryArmorItem item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InventoryWeaponItem item) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

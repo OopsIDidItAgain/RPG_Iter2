@@ -10,14 +10,16 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import com.oopsididitagain.rpg_iter2.models.Armory;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
-import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
@@ -36,10 +38,12 @@ public class Avatar extends Entity implements StatModifiable {
 	private Map<String,Skill> passiveSkillList = new HashMap<String,Skill>();
 	private Occupation occupation;
 	private StatCollection stats;
+	private Armory armory;
 
 	public Avatar(String id, Position position,StatBlob statblob) {
 		super(id, position,statblob);
-		
+		this.armory = new Armory();
+		this.stats = new StatCollection(armory);
 	}
 
 	public void setOccupation(Occupation occupation) {
@@ -48,7 +52,6 @@ public class Avatar extends Entity implements StatModifiable {
 		this.occupation = occupation;
 		giveBaseSkills(currentFightIndex,currentSkillIndex);
 		occupation.giveSkills(gameSkillList,fightSkillList,passiveSkillList);
-		
 	}
 
 	private void giveBaseSkills(int fightIndex, int skillIndex) {
@@ -151,9 +154,18 @@ public class Avatar extends Entity implements StatModifiable {
 		return skillStrings;
 	}
 	
-	public void visit(InventoryEquipableItem item) {
-		// ArmoryStuff
-		// armory.add(item);
+	public void visit(InventoryWeaponItem item) {
+		InventoryWeaponItem conflict = armory.equip(item);
+		if (conflict != null) 
+			stats.detachBlob(conflict.statBlob());
+		stats.mergeBlob(item.statBlob());
+	}
+
+	public void visit(InventoryArmorItem item) {
+		InventoryArmorItem conflict = armory.equip(item);
+		if (conflict != null) 
+			stats.detachBlob(conflict.statBlob());
+		stats.mergeBlob(item.statBlob());
 	}
 
 	public void visit(InventoryUnusableItem item) {

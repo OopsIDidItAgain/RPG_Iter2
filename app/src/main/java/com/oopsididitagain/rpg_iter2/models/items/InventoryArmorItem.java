@@ -1,6 +1,5 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
-import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
@@ -10,8 +9,8 @@ public class InventoryArmorItem extends InventoryEquipableItem {
 	private ArmorItemType type;
 
 	public InventoryArmorItem(String id, double price,
-			StatBlob statBlob, ArmorItemType type) {
-		super(id, price, statBlob);
+			StatBlob statBlob, int rank, ArmorItemType type) {
+		super(id, price, statBlob, rank);
 		this.type = type;
 	}
 
@@ -31,7 +30,7 @@ public class InventoryArmorItem extends InventoryEquipableItem {
 
 	@Override
 	public TakeableItem toTakeableItem(Position position) {
-		ArmorTakeableItem item = new ArmorTakeableItem(getId(), position, price(), statBlob(), type);
+		ArmorTakeableItem item = new ArmorTakeableItem(getId(), position, price(), statBlob(), getRank(), type);
 		return item;
 	}
 	
