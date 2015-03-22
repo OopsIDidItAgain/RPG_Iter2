@@ -28,6 +28,10 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 										// RIGHT NOW. DELETE?
 										//
 										// - DANNY
+		
+		// I'M LOCATED IN GAMEVIEW INTERACTION!!!
+
+		
 		/*g.setColor(Color.black);
 		LinkedList<String> skills = occupation.getGameSkillListString();
 		int unusedPoint = avatar.getUnusedPoints();
@@ -44,7 +48,7 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 			g.setColor(Color.black);
 			++i;
 		}*/
-		
+			
 	}
 	
 }

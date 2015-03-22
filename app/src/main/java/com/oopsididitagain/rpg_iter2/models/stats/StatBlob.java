@@ -226,5 +226,5 @@ public class StatBlob {
 		statStringMap.put(9,"Mana Amount");
 		
 	}
-
+	
 }
