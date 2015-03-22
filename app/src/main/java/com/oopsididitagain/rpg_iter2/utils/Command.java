@@ -25,7 +25,8 @@ public enum Command {
 	EXIT("EXIT"),
 	YES("YES"),
 	NO("NO"),
-	UNKNOWN("UNKNOWN");
+	UNKNOWN("UNKNOWN"),
+	FLIGHT("FLIGHT");
 	
 	
 	String identifier; 
@@ -63,6 +64,7 @@ public enum Command {
 		case"SKILLALLOCATION": return SKILLALLOCATION;
 		case"YES":return YES;
 		case"NO": return NO;
+		case"FLIGHT": return FLIGHT;
 		}
 		return UNKNOWN;
 	}

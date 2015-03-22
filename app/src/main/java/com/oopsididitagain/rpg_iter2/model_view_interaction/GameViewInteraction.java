@@ -1,8 +1,10 @@
 package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
@@ -24,12 +26,18 @@ public class GameViewInteraction extends ModelViewInteraction{
     private Avatar avatar;
     private GameMap gameMap;
     private Assets assets; 
+    private HashMap<String, Font> fonts = new HashMap<String, Font>();
     
     public GameViewInteraction(Game game){ //Constructor
     	assets = new Assets();
     	this.game = game;
     	this.gameMap = game.getGameMap();
     	this.avatar = game.getAvatar();
+    	
+    	// put all them fonts in!
+    	fonts.put("default", new Font("TimesRoman", Font.PLAIN, 14));
+    	fonts.put("inventoryheader", new Font("TimesRoman", Font.BOLD, 20));
+    	fonts.put("inventorytext", new Font("TimesRoman", Font.PLAIN, 20));
     }
 	@Override
 	public void accept(View view) {
@@ -160,11 +168,31 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		LinkedList<String> skills = avatar.getActiveSkillList();
 		g.setColor(Color.yellow);
 		g.fillRect(0, 560, View.pWidth, View.pHeight - 560);
-		int startingWidth = 0;
-		String stats = avatar.StatToString();
+		int height = 565, heightjump = 18, width = 10;
+		String[] primaries = avatar.primaryStats();
+		String[] deriveds = avatar.derivedStats();
 		g.setColor(Color.black);
-		g.drawString(stats, 0, 600);
+		for (String s : primaries) {
+			if (s.equals("PRIMARY STATS")) g.setFont(fonts.get("inventoryheader"));
+			
+			g.drawString(s, width, height += heightjump);
+			
+			if (height > 650) { // new line
+				width = 150;
+				height = 565 + heightjump + 10;
+			}
+			
+			if (s.equals("PRIMARY STATS")) {g.setFont(fonts.get("inventorytext")); height+=10;}
+		}
 		
+		width = 340; height = 565;
+		for (String s : deriveds) {
+			if (s.equals("SECONDARY STATS")) g.setFont(fonts.get("inventoryheader"));
+			g.drawString(s, width, height += heightjump);
+			if (s.equals("SECONDARY STATS")) {g.setFont(fonts.get("inventorytext")); height+=10;}
+		}
+		
+		g.setFont(fonts.get("default"));
 	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
@@ -175,6 +203,9 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 
         if(entity!=null){
         	String id = entity.getId();
+        	if(entity.isCurrentlyFlying()){
+        		id+="_flying";
+        	}
         	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
         		id+="_sleeping";
         	}

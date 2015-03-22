@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.models;
 
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Armory {
 	InventoryArmorItem helmet;
@@ -104,6 +105,13 @@ public class Armory {
 		int bootsRank = (boots == null) ? 0 : boots.getRank();
 		int helmetRank = (helmet == null) ? 0 : helmet.getRank();
 		return armorRank + bootsRank + helmetRank;
+	}
+
+	public WeaponItemType getWeaponItemType() {
+		if(weapon != null){
+			return weapon.getWeaponItemType();
+		}
+		return null;
 	}
 
 }

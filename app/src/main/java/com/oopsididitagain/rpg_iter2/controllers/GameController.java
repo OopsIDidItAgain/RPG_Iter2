@@ -1,5 +1,7 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
+import java.util.ArrayList;
+
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
@@ -31,6 +33,7 @@ public class GameController extends Controller{
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
+	private boolean isFlying = false;
 
 	private GameController(){
 
@@ -54,7 +57,7 @@ public class GameController extends Controller{
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
 		c = performSkillCommand(command);
-
+		performPassiveSkills();
 		Direction targetDirection = null;
 		switch(command){
 		case MOVE_SOUTH: 
@@ -85,6 +88,10 @@ public class GameController extends Controller{
 			break;
 		case SKILLALLOCATION:
 			c = SkillPointAllocationController.getInstance();
+		case FLIGHT:
+			avatar.setFlying(isFlying);
+			isFlying = !isFlying;
+			break;
 		default:
 			break;
 		}
@@ -113,15 +120,52 @@ public class GameController extends Controller{
 					
 					
 				}
+				
 			}
 			
-		
-
+			//randomly move npcs
+			ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
+			for(int i = 0; i < listOfNpcs.size(); i++){
+				Direction d = getRandomDirection();
+				if(d != null){
+				Npc npc = listOfNpcs.get(i);
+				Position p = npc.getPosition().createPositionAtDirection(d);
+				
+			    boolean isSuccessful = entityMapInteraction.move(npc, p);
+				}
+			}
 		}
 		return c;
 	}
 	
-	
+	private Direction getRandomDirection(){
+		int randDir = (int) (Math.random() * 16);
+		Direction targetDirection = null;
+		switch(randDir){
+		case 0: 
+			targetDirection = Direction.SOUTH;
+			break;
+		case 1: 
+			targetDirection = Direction.NORTH;
+			break;
+		case 2: 
+			targetDirection = Direction.WEST;
+			break;
+		case 3: 
+			targetDirection = Direction.EAST;
+			break;
+		case 4: targetDirection = Direction.SOUTHWEST; 
+			break;
+		case 5: targetDirection = Direction.SOUTHEAST; 
+			break;
+		case 6: targetDirection = Direction.NORTHWEST; 
+			break;
+		case 7: targetDirection = Direction.NORTHEAST; 
+			break;
+		default: break;
+		}
+		return targetDirection;
+	}
 
 	private Controller performSkillCommand(Command command) {
 		Controller c = this;
@@ -137,6 +181,13 @@ public class GameController extends Controller{
 			}
 		}
 		return c;
+	}
+	public void performPassiveSkills(){
+		ArrayList<Skill> passiveSkill = avatar.getPassiveSkillList();
+		for(Skill skill: passiveSkill)
+		{
+			entityMapInteraction.applySkill(avatar,skill);
+		}
 	}
 
 	private void createEntityMapInteraction() {
@@ -156,6 +207,12 @@ public class GameController extends Controller{
 		this.gameMap = gameMap;
 	}
 
+	//public void toggleFlight(){
+		//if(!gameMap.getTileAt(avatar.getPosition()).getTerrain().isWater()) {
+		//	avatar.setFlying(!avatar.isFlying());
+		//}
+	//}
+	
 	@Override
 	public GameViewInteraction populateInteraction() {
 

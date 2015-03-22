@@ -98,11 +98,18 @@ public class Tile implements Assetable, Positionable {
 		return terrain.getId();
 	}
 	
+	public Terrain getTerrain() {
+		return terrain;
+	}
+	
 	public SortedSet<Tileable> getTilebles()	 {
 		SortedSet<Tileable> tileables = new TreeSet<Tileable>();
 		tileables.add(terrain);
 		tileables.addAll(entityVisitables);
 		tileables.addAll(probeVisitables);
 		return tileables;
+	}
+	public void setTerrain(Terrain terrain) {
+		this.terrain = terrain;
 	}
 }

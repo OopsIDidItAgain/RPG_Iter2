@@ -24,12 +24,15 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 		
 	}
 	@Override
-	public void drawModel(Graphics g) {
-		g.setColor(Color.black);
+	public void drawModel(Graphics g) { // <-- HEY GUYS, LOOKS LIKE THIS ISN'T BEING USED 
+										// RIGHT NOW. DELETE?
+										//
+										// - DANNY
+		/*g.setColor(Color.black);
 		LinkedList<String> skills = occupation.getGameSkillListString();
 		int unusedPoint = avatar.getUnusedPoints();
 		String s = "" + unusedPoint;
-		g.drawString(s, 10, View.pWidth/2);
+		g.drawString(s, 2, View.pWidth/2);
 		int widthOffset = 60;
 		int i = 0;
 		for(String st: skills){
@@ -40,7 +43,7 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 			widthOffset += widthOffset;
 			g.setColor(Color.black);
 			++i;
-		}
+		}*/
 		
 	}
 	

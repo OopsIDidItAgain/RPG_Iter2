@@ -71,7 +71,6 @@ public class StatCollection {
 	}
 	public void mergeBlob(StatBlob blob) {
 		this.blob.merge(blob);
-		
 		// has to be handled here because it contains both primary and derived stats
 		/*if(this.blob.getLifeAmount() <= 0) {
 			//if(this.blob.getLivesLeft() > 0) {
@@ -81,6 +80,7 @@ public class StatCollection {
 			
 		} else */
 		// if ((int)this.blob.getLifeAmount() <= 0) dyingLogic();
+		
 		if(this.blob.getLifeAmount() > lifeCapacity.getValue()) {
 			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
 		}
@@ -127,34 +127,32 @@ public class StatCollection {
 		return sb.toString();
 	}
 	
-	public String primaryViewport() {
-		StringBuilder sb = new StringBuilder("");
-		
-		sb.append(	"PRIMARY STATS"+
-					"\nIntellect: "	+(int)blob.getIntellect()+
-					"\nStrength: "	+(int)blob.getStrength()+
-					"\nAgility: "	+(int)blob.getAgility()+
-					"\nHardiness: "	+(int)blob.getExperience()+
-					"\nMovement: "	+(int)blob.getMovement()+
-					"\nExperience: "+(int)blob.getExperience()+
-					"\nLife: "		+(int)blob.getLifeAmount()+
-									"/"+(int)getLifeCapacity()+
-					"\nMana: "		+(int)blob.getManaAmount()+
-									"/"+(int)getMana());
-		
-		return sb.toString();
-		
+	public String[] primaryStatArray() {
+		String[] stats = {
+				"PRIMARY STATS",
+				"Intellect: "	+(int)blob.getIntellect(),
+				"Strength: "	+(int)blob.getStrength(),
+				"Agility: "		+(int)blob.getAgility(),
+				"Hardiness: "	+(int)blob.getExperience(),
+				"Movement: "	+(int)blob.getMovement(),
+				"Experience: "	+(int)blob.getExperience(),
+				"Life: "		+(int)blob.getLifeAmount()+
+								"/"+(int)getLifeCapacity(),
+				"Mana: "		+(int)blob.getManaAmount()+
+								"/"+(int)getMana()
+		};
+		return stats;
 	}
 	
-	public String derivedViewport() {
-		StringBuilder sb = new StringBuilder("");
-		
-		sb.append(	"SECONDARY STATS"+
-					"\nLevel: "				+(int)getLevel()+
-					"\nOffensive Rating: "	+(int)getOffensiveRating()+
-					"\nDefensiveRating: "	+(int)getDefensiveRating()+
-					"\nArmor Rating: "		+(int)getArmorRating());
-		return sb.toString();
+	public String[] derivedStatArray() {
+		String[] stats = {
+				"SECONDARY STATS",
+				"Level: "			+(int)getLevel(),
+				"Offensive Rating: "+(int)getOffensiveRating(),
+				"DefensiveRating: "	+(int)getDefensiveRating(),
+				"Armor Rating: "	+(int)getArmorRating()
+		};
+		return stats;
 	}
 
 	public void minusUnusedSkillPoints() {

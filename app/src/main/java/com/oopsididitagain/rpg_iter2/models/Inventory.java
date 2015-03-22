@@ -7,6 +7,7 @@ import java.util.Random;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.utils.Priceable;
 
 
 public class Inventory {
@@ -62,5 +63,19 @@ public class Inventory {
 
 	public int size() {
 		return contents.size();
+	}
+
+	public boolean contains(InventoryItem requirement) {
+		return contents.contains(requirement);
+	}
+
+	public void remove(Priceable pricedItem) {
+		contents.remove(pricedItem);
+		
+	}
+
+	public void add(Priceable pricedItem) {
+		contents.add((InventoryItem) pricedItem);//TODO FIX
+		
 	}
 }

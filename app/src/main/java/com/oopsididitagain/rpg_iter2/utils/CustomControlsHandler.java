@@ -29,6 +29,7 @@ public class CustomControlsHandler {
 		controls.put(81, Command.MOVE_NORTHWEST); // q
 		controls.put(67, Command.MOVE_SOUTHEAST); // c
 		controls.put(90, Command.MOVE_SOUTHWEST);
+		controls.put(70, Command.FLIGHT); //f
 		controls.put(80, Command.PAUSE);
 		controls.put(10, Command.ENTER);
 		controls.put(73, Command.INVENTORY);

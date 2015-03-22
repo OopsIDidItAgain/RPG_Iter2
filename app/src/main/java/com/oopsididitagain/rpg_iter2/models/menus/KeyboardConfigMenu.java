@@ -38,6 +38,9 @@ public class KeyboardConfigMenu {
 		case MOVE_SOUTHWEST:
 			selected = Command.PAUSE;
 			break;
+		case FLIGHT:
+			selected = Command.FLIGHT;
+			break;
 		case PAUSE:
 			selected = Command.ENTER;
 			break;
@@ -105,6 +108,9 @@ public class KeyboardConfigMenu {
 			break;
 		case MOVE_SOUTHWEST:
 			selected = Command.MOVE_SOUTHEAST;
+			break;
+		case FLIGHT:
+			selected = Command.FLIGHT;
 			break;
 		case PAUSE:
 			selected = Command.MOVE_SOUTHWEST;

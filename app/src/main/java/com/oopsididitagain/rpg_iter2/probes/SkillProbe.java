@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
+import com.oopsididitagain.rpg_iter2.models.effects.StatModifier;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
@@ -85,6 +86,11 @@ public class SkillProbe {
 		Entity entity = probe.getReturnedEntity();
 		return entity;
 		
+	}
+	
+	public void performSkill(StatModifier statModifier, Avatar avatar,MiniMap tiles) {
+		Entity entity = getEntity(avatar,tiles);
+		statModifier.changeStats(entity,avatar);
 	}
 
 

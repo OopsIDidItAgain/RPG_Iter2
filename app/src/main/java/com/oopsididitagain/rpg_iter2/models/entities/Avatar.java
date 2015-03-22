@@ -16,6 +16,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -29,8 +30,10 @@ import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
+import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Avatar extends Entity implements StatModifiable, Battleable {
 
@@ -48,7 +51,7 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;
 		giveBaseSkills();
-		occupation.giveSkills();
+		occupation.giveSkills(this);
 	}
 
 	private void giveBaseSkills() {
@@ -135,7 +138,7 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 	
 	@Override
 	public void visit(InstantStatModifier modifier) {
-		modifier.affect(statBlob());
+		stats.mergeBlob(modifier.statBlob());
 	}
 
 	@Override
@@ -156,7 +159,7 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
-		movementProbe.denyMovement();
+		attemptInhibition(movementProbe);
 		movementProbe.addEntity(this);
 	}
 
@@ -173,14 +176,13 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 	public void drop(InventoryItem selectedItem) {
 		Position position = this.position.createPositionAtDirection(getDirection());
 	}
-
-	public void attemptInhibition(MovementProbe movementProbe) {
-		// TODO Auto-generated method stub
-		
+	
+	public String[] primaryStats() {
+		return stats.primaryStatArray();
 	}
 	
-	public String StatToString(){
-		return stats.primaryViewport() + stats.derivedViewport();
+	public String[] derivedStats() {
+		return stats.derivedStatArray();
 	}
 
 	public void minusUnusedSkillPoints() {
@@ -194,6 +196,30 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 
 	public void accept(Battle battle) {
 		battle.visit(this);
+	}
+
+	@Override
+	public void visit(InteractiveItem item) {
+		item.checkRequirement(inventory);
+		if (item.isFufilled()) 
+			item.activate();
+	}
+
+	@Override
+	public void attemptInhibition(MovementProbe movementProbe) {
+		movementProbe.denyMovement();
+	}
+
+	public WeaponItemType getWeaponType() {
+		return armory.getWeaponItemType();
+	}
+
+	public ArrayList<Skill> getPassiveSkillList() {
+		return occupation.getPassiveSkillArray();
+	}
+
+	public void setWeapon(InventoryWeaponItem inventoryWeaponItem) {
+		armory.equip(inventoryWeaponItem);
 	}
 	
 }

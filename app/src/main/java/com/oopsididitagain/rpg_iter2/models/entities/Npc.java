@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuCont
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -86,6 +87,12 @@ public class Npc extends Entity {
 
 	@Override
 	public void visit(InventoryWeaponItem item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InteractiveItem item) {
 		// TODO Auto-generated method stub
 		
 	}
