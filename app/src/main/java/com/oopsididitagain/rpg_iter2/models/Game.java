@@ -1,5 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models;
 
+import java.util.ArrayList;
+
 import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
 import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
@@ -18,7 +20,7 @@ public class Game {
 
 	private Avatar avatar;
 	private GameMap gameMap;
-	
+	private ArrayList<Npc> listOfNpcs = new ArrayList<Npc>();
 	
 	public Game(Avatar avatar){
 		this.avatar = avatar;
@@ -56,6 +58,10 @@ public class Game {
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
+		
+		listOfNpcs.add(buddy);
+		listOfNpcs.add(sheep);
+		listOfNpcs.add(shopkeeper);
 	}
 	public Game( Avatar avatar, GameMap gameMap){
 	
@@ -71,5 +77,7 @@ public class Game {
 		
 		return gameMap;
 	}
-	
+	public ArrayList<Npc> getListOfNpcs(){
+		return listOfNpcs;
+	}
 }

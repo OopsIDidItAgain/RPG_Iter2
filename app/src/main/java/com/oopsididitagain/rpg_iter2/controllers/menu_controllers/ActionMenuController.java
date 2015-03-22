@@ -60,6 +60,10 @@ public class ActionMenuController extends Controller {
 				case UseOption:
 					// TODO save logic
 					break;
+				case Exit:
+					actionMenu.reset(); // go back to first option
+					controller = GameController.getInstance();
+					break;
 				default:
 					break;
             	}
