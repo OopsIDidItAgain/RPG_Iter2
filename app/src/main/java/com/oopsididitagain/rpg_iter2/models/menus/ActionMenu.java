@@ -3,8 +3,8 @@ package com.oopsididitagain.rpg_iter2.models.menus;
 
 public class ActionMenu {
 	public enum Option {
-		Talk("Talk"), Attack("Attack"), UseSkill("Use Skill"), UseOption(
-				"Use Option"), Exit("Exit");;
+		Talk("Talk"), Attack("Attack"), Trade("Trade"), UseOption(
+				"Use Option"), Exit("Exit");
 
 		private String name;
 
@@ -31,11 +31,11 @@ public class ActionMenu {
 			case Attack:
 				currentOption = Option.Talk;
 				break;
-			case UseSkill:
+			case Trade:
 				currentOption = Option.Attack;
 				break;
 			case UseOption:
-				currentOption = Option.UseSkill;
+				currentOption = Option.Trade;
 				break;
 			case Exit:
 				currentOption = Option.UseOption;
@@ -50,9 +50,9 @@ public class ActionMenu {
 				currentOption = Option.Attack;
 				break;
 			case Attack:
-				currentOption = Option.UseSkill;
+				currentOption = Option.Trade;
 				break;
-			case UseSkill:
+			case Trade:
 				currentOption = Option.UseOption;
 				break;
 			case UseOption:

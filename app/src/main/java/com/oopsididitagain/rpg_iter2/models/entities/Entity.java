@@ -18,9 +18,11 @@ import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Positionable;
+import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatBlobHolder;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 /**
  * Created by parango on 3/11/15.
@@ -30,14 +32,19 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	protected Inventory inventory;
 	protected boolean isCurrentlyFlying;
 	protected StatBlob statblob;
+	protected Bank bank;
 
 	public Entity(String id, Position position,StatBlob statblob){
 		super(id, position);
 		this.statblob = statblob;
 		this.entityStatus = new EntityStatus(EntityStatus.PLAYING);
 		this.inventory = new Inventory();
+		this.bank = new Bank(10.00);
 	}
 	
+	public Bank getBank(){
+		return bank;
+	}
 	@Override
 	public Position getPosition() {
 		return this.position;
@@ -100,6 +107,14 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	public StatBlob statBlob() {
 		return this.statblob;
 	}
+	public void purchaseItem(Priceable pricedItem) {
+		double price = pricedItem.price();
+		bank.purchaseTransaction(price);
+		inventory.add(pricedItem);
+		
+	}
+
+
 
 	
 }

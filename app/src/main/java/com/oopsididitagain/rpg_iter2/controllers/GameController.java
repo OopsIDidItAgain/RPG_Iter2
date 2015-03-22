@@ -57,7 +57,7 @@ public class GameController extends Controller{
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
 		c = performSkillCommand(command);
-
+		performPassiveSkills();
 		Direction targetDirection = null;
 		switch(command){
 		case MOVE_SOUTH: 
@@ -134,9 +134,6 @@ public class GameController extends Controller{
 			    boolean isSuccessful = entityMapInteraction.move(npc, p);
 				}
 			}
-			
-		
-
 		}
 		return c;
 	}
@@ -184,6 +181,13 @@ public class GameController extends Controller{
 			}
 		}
 		return c;
+	}
+	public void performPassiveSkills(){
+		ArrayList<Skill> passiveSkill = avatar.getPassiveSkillList();
+		for(Skill skill: passiveSkill)
+		{
+			entityMapInteraction.applySkill(avatar,skill);
+		}
 	}
 
 	private void createEntityMapInteraction() {
