@@ -47,16 +47,16 @@ public class AvatarCreationMenuController extends Controller {
 		case 4:
 			switch (avatarCreationMenu.getCurrentOption()) {
 			case 0:
-				System.out.println("sneak");
-				assignSneak();
+				System.out.println("");
+				assignSummoner();
 				break;
 			case 1:
 				System.out.println("summoner");
-				assignSummoner();
+				assignSmasher();
 				break;
 			case 2:
 				System.out.println("smash");
-				assignSmasher();
+				assignSneak();
 				break;
 			}
 			Game game = new Game(this.avatar);

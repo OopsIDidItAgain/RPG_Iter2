@@ -25,6 +25,18 @@ public class GameKeyboardInput extends KeyBoardInput implements KeyListener, Mou
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()){
+		case 'w':
+			input = Commands.MOVE_NORTH;
+			break;
+		case 'x':
+			input = Commands.MOVE_SOUTH;
+			break;
+		case 'a':
+			input = Commands.MOVE_WEST;
+			break;
+		case 'd':
+			input = Commands.MOVE_EAST;
+			break;
 		case '1':
 			input = Commands.SKILLONE;
 			break;
