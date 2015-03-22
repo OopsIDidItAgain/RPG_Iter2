@@ -27,11 +27,6 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 	}
 
 	@Override
-	public void affect(StatBlob target) {
-		target.merge(statBlob());
-	}
-
-	@Override
 	public void accept(Entity entity) {
 		entity.visit(this);
 		removeable = true;

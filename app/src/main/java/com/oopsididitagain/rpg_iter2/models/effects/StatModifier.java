@@ -24,11 +24,6 @@ public class StatModifier implements Effect, InstantStatModifier{
 	public StatBlob statBlob() {
 		return statblob;
 	}
-	@Override
-	public void affect(StatBlob target) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public int getRadius() {
