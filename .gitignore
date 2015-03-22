@@ -34,3 +34,4 @@ log/
 target/
 
 *.orig
+*.un~
