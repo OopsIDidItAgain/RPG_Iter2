@@ -47,7 +47,7 @@ public class InteractiveItem extends PositionedGameObject implements TiledEntity
 
 	@Override
 	public boolean removeable() {
-		return false;
+		return fulfilled;
 	}
 
 	@Override
