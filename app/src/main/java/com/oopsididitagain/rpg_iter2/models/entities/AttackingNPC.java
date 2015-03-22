@@ -21,8 +21,8 @@ public class AttackingNPC extends Npc implements Battleable{
 		return GameController.getInstance();
 	}
 	
-	public void accept(Battle battle) {
-		battle.visit(this);
+	public boolean accept(Battle battle) {
+		return battle.visit(this);
 	}
 
 }

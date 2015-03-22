@@ -32,6 +32,11 @@ public class ActionMenuViewInteraction extends ModelViewInteraction {
 		g.setColor(Color.white);
 		Option[] options = actionMenu.getOptions();
 		for (int i = 0; i < options.length; i++) {
+			if(!actionMenu.canAttack() && options[i].equals(Option.Attack))
+				g.setColor(Color.GRAY);
+			else
+				g.setColor(Color.white);
+					
 			if (actionMenu.getCurrentOption().equals(options[i]))
 				g.drawString(">> " + options[i].toString(), width-18, height
 						+ (i + 1) * heightOffset);

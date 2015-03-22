@@ -35,7 +35,7 @@ import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
-public class Avatar extends Entity implements StatModifiable, Battleable {
+public class Avatar extends Entity implements StatModifiable {
 
 	
 	private Occupation occupation;
@@ -194,9 +194,9 @@ public class Avatar extends Entity implements StatModifiable, Battleable {
 		return stats.getUnusedPoints();
 	}
 
-	public void accept(Battle battle) {
-		battle.visit(this);
-	}
+//	public boolean accept(Battle battle) {
+//		return battle.visit(this);
+//	}
 
 	@Override
 	public void visit(InteractiveItem item) {
