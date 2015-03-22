@@ -23,7 +23,7 @@ public class GameLoop {
 	public GameLoop(){   //GameLoop constructor
 		controller = AvatarCreationMenuController.getInstance();
 		this.modelViewInteraction = controller.populateInteraction();
-		keyboardInput =  controller.getKeyBoardInput();
+		keyboardInput =  new KeyBoardInput();
 		this.view = new View();
 		view.addKeyListener(keyboardInput);
 		view.addMouseListener(keyboardInput);
@@ -42,17 +42,16 @@ public class GameLoop {
 	public void update(){
 		
 		Controller temp = controller;
-		KeyBoardInput keyBoardtemp = controller.getKeyBoardInput();
 		
-		controller = controller.takeInputAndUpdate(controller.getKeyBoardInput().getInput());
-		keyboardInput = controller.getKeyBoardInput();
+		controller = controller.takeInputAndUpdate(keyboardInput.getInput());
+		//keyboardInput = controller.getKeyBoardInput();
 		//System.out.println(controller);
 		//System.out.println(keyboardInput.getInput());
 		if(!controller.equals(temp)){
-			view.removeKeyListener(keyBoardtemp);
-			view.addKeyListener(keyboardInput);
-			view.removeMouseListener(keyBoardtemp);
-			view.addMouseListener(keyboardInput);
+			// view.removeKeyListener(keyBoardtemp);
+			// view.addKeyListener(keyboardInput);
+			// view.removeMouseListener(keyBoardtemp);
+			// view.addMouseListener(keyboardInput);
 			view.requestFocusInWindow();
 			modelViewInteraction = controller.populateInteraction();
 		}

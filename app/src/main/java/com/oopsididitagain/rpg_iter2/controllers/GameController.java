@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
@@ -27,7 +28,7 @@ import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
  * Created by parango on 3/11/15.
  */
 public class GameController extends Controller{
-	public static GameController instance;
+	private static GameController instance;
 	private Game game;
 	private Avatar avatar;
 	private GameMap gameMap;
@@ -93,6 +94,9 @@ public class GameController extends Controller{
 			break;
 		case Commands.INVENTORY: 
 			c = InventoryController.getInstance();
+			break;
+		case Commands.PAUSE:
+			c = PauseMenuController.getInstance();
 			break;
 		}
 		if (targetDirection != null) {

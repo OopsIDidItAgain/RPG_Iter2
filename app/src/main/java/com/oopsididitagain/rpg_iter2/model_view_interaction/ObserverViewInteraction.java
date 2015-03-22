@@ -32,8 +32,9 @@ public class ObserverViewInteraction extends ModelViewInteraction{
 		LinkedList<String> displayedStats = observe.getStats();
 		int heightOffset = 10;
 		g.setColor(Color.white);
-		for(String s: displayedStats){
-			g.drawString(s, width, height + heightOffset);
+		for(int i = 0; i<displayedStats.size();i++){
+			String s = displayedStats.get(i);
+			g.drawString(s, width, height + (i+1)*heightOffset);
 			heightOffset += heightOffset;
 		}
 		
