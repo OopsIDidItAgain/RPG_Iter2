@@ -48,6 +48,8 @@ public class View extends JPanel{
 
 	public void visit(InventoryViewInteraction inventoryViewInteraction) {
 		this.modelViewInteraction = inventoryViewInteraction;
+		drawMapBackground = true;
+		this.repaint();
 	}
 
 	public void visit(GameViewInteraction gameViewInteraction) {

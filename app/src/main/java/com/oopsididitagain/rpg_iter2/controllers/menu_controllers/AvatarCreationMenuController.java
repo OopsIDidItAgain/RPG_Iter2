@@ -42,19 +42,22 @@ public class AvatarCreationMenuController extends Controller {
 		Controller controller = AvatarCreationMenuController.getInstance();
 
 		switch(command){
+		case MOVE_EAST:
+			avatarCreationMenu.nextOption();
+			break;
+		case MOVE_WEST:
+			avatarCreationMenu.previousOption();
+			break;
 		case ENTER:
 		case USE:
 			switch (avatarCreationMenu.getCurrentOption()) {
-			case 0:
-				System.out.println("");
+			case Summoner:
 				assignSummoner();
 				break;
-			case 1:
-				System.out.println("summoner");
+			case Smasher:
 				assignSmasher();
 				break;
-			case 2:
-				System.out.println("smash");
+			case Sneak:
 				assignSneak();
 				break;
 			}

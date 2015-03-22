@@ -22,7 +22,9 @@ public class SkillProbe {
 
 	public void performSkill(EntityStatusModifier entityStatusModifier,Avatar avatar, MiniMap minimap) {
 		Entity entity = getEntity(avatar,minimap);
-		entityStatusModifier.changeStatus(entity);
+		if(entity != null){
+			entityStatusModifier.changeStatus(entity);
+		}
 	}
 
 	public void setUpSkill(Observe observe, Avatar avatar, MiniMap minimap) {//Still working on observe

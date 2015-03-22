@@ -77,5 +77,4 @@ public class InventoryController extends Controller {
 		return inventoryViewInteraction;
 	}
 
-
 }

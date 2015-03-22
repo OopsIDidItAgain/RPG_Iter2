@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
+import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
 /**
@@ -36,31 +37,40 @@ public class MainMenuController extends Controller {
 	public Controller takeInputAndUpdate(Command command) {
 		controllerToReturn = this;
 
-        switch(command){
-            case MOVE_NORTH:
-                mainMenu.selectedOptionUp();
-                break;
-            case USE:
-            case ENTER:
-                doSelectedOption();
-                break;
-            case MOVE_SOUTH:
-                mainMenu.selectedOptionDown();
-                break;
-            default: break;
-        }
+		switch (command) {
+		case MOVE_SOUTH:
+			mainMenu.nextOption();
+			break;
+		case MOVE_NORTH:
+			mainMenu.previousOption();
+			break;
+		case ENTER:
+		case USE:
+			doSelectedOption();
+			break;
+		default:
+			break;
+		}
 
 		return controllerToReturn;
 	}
 
-    private void doSelectedOption(){
-        String selectedOption = mainMenu.getSelectedOption();
-        switch(selectedOption){
-            case "New Game":
-                controllerToReturn = AvatarCreationMenuController.getInstance();
-                break;
-        }
-    }
+	private void doSelectedOption() {
+		Option selectedOption = mainMenu.getCurrentOption();
+		switch (selectedOption) {
+		case New:
+			controllerToReturn = AvatarCreationMenuController.getInstance();
+			break;
+		case ExitGame:
+			break;
+		case Load:
+			break;
+		case Options:
+			break;
+		default:
+			break;
+		}
+	}
 
 	@Override
 	public MainMenuViewInteraction populateInteraction() {

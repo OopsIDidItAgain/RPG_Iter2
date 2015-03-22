@@ -15,6 +15,27 @@ public class CustomControlsHandler {
 	
 	static {
 		controls = new HashMap<Integer, Command>();
+		// Initialize with defaults
+		controls.put(87, Command.MOVE_NORTH); // w
+		controls.put(88, Command.MOVE_SOUTH); // x
+		controls.put(68, Command.MOVE_EAST); // d
+		controls.put(65, Command.MOVE_WEST); // a
+		controls.put(69, Command.MOVE_NORTHEAST); // e
+		controls.put(81, Command.MOVE_NORTHWEST); // q
+		controls.put(67, Command.MOVE_SOUTHEAST); // c
+		controls.put(90, Command.MOVE_SOUTHWEST);
+		controls.put(80, Command.PAUSE);
+		controls.put(13, Command.ENTER);
+		controls.put(73, Command.INVENTORY);
+		controls.put(83, Command.USE);
+		controls.put(75, Command.DROP);
+		controls.put(27, Command.EXIT);
+		controls.put(49, Command.SKILLONE);
+		controls.put(50, Command.SKILLTWO);
+		controls.put(51, Command.SKILLTHREE);
+		controls.put(52, Command.SKILLFOUR);
+		controls.put(53, Command.SKILLFIVE);
+		controls.put(54, Command.SKILLSIX);
 	}
 	
 	public static void bind(Integer key, Integer command) {
@@ -31,7 +52,10 @@ public class CustomControlsHandler {
 	}
 	
 	public static Command getKeyboardKeyCommand(Integer key) {
-		return controls.get(key);
+		if (controls.get(key) == null)
+			return Command.UNKNOWN;
+		else
+			return controls.get(key);
 	}
 	
 	public static void saveControls(HashMap<Integer, Command> controls, File file) {

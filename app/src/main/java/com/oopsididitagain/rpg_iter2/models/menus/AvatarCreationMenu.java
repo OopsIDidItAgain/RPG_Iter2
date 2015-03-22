@@ -1,28 +1,68 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
+import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu.Option;
+
 public class AvatarCreationMenu {
-	private String options[];
-	private int currentOption;
+	
+	public enum Option {
+		Sneak("Sneak"), Summoner("Summoner"), Smasher("Smasher");
+
+		private String name;
+
+		Option(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return this.name;
+		}
+	}
+
+	private Option currentOption;
+
 
     public AvatarCreationMenu(){
-        options = new String[]{"Sneak", "Summoner", "Smasher"};
-        
-        currentOption = 0;
+        currentOption = Option.Sneak;
        
     }
-    
-    public void setOption(int option){
-    	
-    	currentOption = option;
-    	System.out.println(option);
-    }
-    
-    public int getCurrentOption(){
-    	
-    	return currentOption;
-    }
-    public String getOptions(int i){
-    	return options[i];
 
-    }
+	public void previousOption() {
+		switch (currentOption) {
+		case Sneak:
+			break;
+		case Summoner:
+			currentOption = Option.Sneak;
+			break;
+		case Smasher:
+			currentOption = Option.Summoner;
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void nextOption() {
+		switch (currentOption) {
+		case Sneak:
+			currentOption = Option.Summoner;
+			break;
+		case Summoner:
+			currentOption = Option.Smasher;
+			break;
+		case Smasher:
+			break;
+		default:
+			break;
+		}
+	}
+
+	public Option[] getOptions() {
+		return currentOption.getDeclaringClass().getEnumConstants();
+	}
+	
+	public Option getCurrentOption() {
+		return currentOption;
+	}
+    
 }

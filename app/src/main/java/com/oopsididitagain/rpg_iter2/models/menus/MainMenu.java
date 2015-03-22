@@ -1,47 +1,76 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
+import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu.Option;
+
 
 
 
 public class MainMenu {
-	private String options[];
-	private int selectedOption;
+	
+	public enum Option {
+		New("New Game"), Load("Load Game"), Options("Options"), ExitGame(
+				"Exit Game");
 
-    public MainMenu(){
-        options = new String[]{"New Game", "Load Game", "Controls"};
+		private String name;
 
-        selectedOption = 0;
-       
-    }
-    
-    public void selectedOptionUp(){
-    	if(selectedOption > 0 )
-            selectedOption -=1;
-    }
+		Option(String name) {
+			this.name = name;
+		}
 
-    public void selectedOptionDown(){
-        if(selectedOption < options.length-1 )
-            selectedOption +=1;
-    }
-    
-    public int getSelectedOptionIndex(){
-    	
-    	return selectedOption;
-    }
+		@Override
+		public String toString() {
+			return this.name;
+		}
+	}
 
-    public String getSelectedOption(){
+	private Option currentOption;
 
-        return options[selectedOption];
-    }
+	public MainMenu() {
+		currentOption = Option.New;
+	}
 
-    public String getOption(int i){
-    	return options[i];
+	public void previousOption() {
+		switch (currentOption) {
+		case New:
+			break;
+		case Load:
+			currentOption = Option.New;
+			break;
+		case Options:
+			currentOption = Option.Load;
+			break;
+		case ExitGame:
+			currentOption = Option.Options;
+			break;
+		default:
+			break;
+		}
+	}
 
-    }
+	public void nextOption() {
+		switch (currentOption) {
+		case New:
+			currentOption = Option.Load;
+			break;
+		case Load:
+			currentOption = Option.Options;
+			break;
+		case Options:
+			currentOption = Option.ExitGame;
+			break;
+		case ExitGame:
+			break;
+		default:
+			break;
+		}
+	}
 
-    public int getNumOfOptions(){
-        return  options.length;
-    }
-
+	public Option[] getOptions() {
+		return currentOption.getDeclaringClass().getEnumConstants();
+	}
+	
+	public Option getCurrentOption() {
+		return currentOption;
+	}
 
 }

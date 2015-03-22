@@ -34,10 +34,10 @@ public class PauseMenuController extends Controller{
 
         switch(command){
             case MOVE_NORTH:
-            	pauseMenu.upOption();
+            	pauseMenu.previousOption();
                 break;
             case MOVE_SOUTH:
-            	pauseMenu.downOption();
+            	pauseMenu.nextOption();
                 break;
             case ENTER:
             case USE:
