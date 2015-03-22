@@ -3,6 +3,13 @@ package com.oopsididitagain.rpg_iter2.models;
 public class MiniMap {
 	Position center;
 	Tile[][] tiles;
+	
+	public MiniMap(Tile[][] tiles) {
+		this.tiles = tiles;
+	}
+	public MiniMap() {
+		// TODO Auto-generated constructor stub
+	}
 	public Position getCenter() {
 		return center;
 	}

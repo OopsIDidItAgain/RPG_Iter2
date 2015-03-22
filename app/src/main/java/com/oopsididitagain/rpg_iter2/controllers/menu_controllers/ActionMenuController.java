@@ -1,11 +1,12 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
+import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
-import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.controllers.TradeController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
+import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.menus.ActionMenu;
@@ -17,19 +18,28 @@ public class ActionMenuController extends Controller {
 	private static ActionMenuController instance;
 	private ActionMenu actionMenu;
 	private static Npc npc;
+	private Battle battle;
+	private Avatar avatar;
 	
 	private ActionMenuController(ActionMenu actionMenu){
 		this.actionMenu = actionMenu;
+		battle = new Battle();
 	}
 	
 	public static ActionMenuController getInstance() {
 		if ( instance == null ){
-			instance = new ActionMenuController(new ActionMenu());
+			instance = new ActionMenuController(new ActionMenu(false));
 		}
 		return instance;
 	}
 	public void setNpc(Npc npc){
 		this.npc = npc;
+		actionMenu.setCanAttack(npc.accept(battle));
+		battle.addMonster(npc);
+	}
+	public void setAvatar(Avatar avatar){
+		this.avatar = avatar;
+		battle.addPartyMember(avatar);
 	}
 	
 	@Override
@@ -54,7 +64,11 @@ public class ActionMenuController extends Controller {
 					controller = dc;
 					break;
 				case Attack:
-					// TODO Attack logic aka Battle Mode
+					// logic for canAttack in setNpc
+					BattleController bc = BattleController.getInstance();
+					bc.set(battle);
+					
+					controller = bc;
 					break;
 				case Trade:
 					System.out.println("trade");

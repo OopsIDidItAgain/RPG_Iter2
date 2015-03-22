@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import com.oopsididitagain.rpg_iter2.models.Armory;
+import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
@@ -24,6 +25,7 @@ import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
+import com.oopsididitagain.rpg_iter2.utils.Battleable;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
@@ -192,6 +194,10 @@ public class Avatar extends Entity implements StatModifiable {
 		return stats.getUnusedPoints();
 	}
 
+//	public boolean accept(Battle battle) {
+//		return battle.visit(this);
+//	}
+
 	@Override
 	public void visit(InteractiveItem item) {
 		item.checkRequirement(inventory);
@@ -220,7 +226,5 @@ public class Avatar extends Entity implements StatModifiable {
 		// returns false if no lives left and game's over
 		return stats.die();
 	}
-	 
 
-	
 }

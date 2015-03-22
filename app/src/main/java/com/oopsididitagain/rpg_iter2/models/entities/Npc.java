@@ -2,6 +2,7 @@
 package com.oopsididitagain.rpg_iter2.models.entities;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
+import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
@@ -18,7 +19,7 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
 /**
  * Created by parango on 3/11/15.
  */
-public class Npc extends Entity {
+public abstract class Npc extends Entity {
 	
 	Storyline story;
 	public Npc(String id, Position position, StatBlob statblob) {
@@ -96,6 +97,8 @@ public class Npc extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public abstract boolean accept(Battle battle);
 
 	
 }

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
@@ -16,6 +17,7 @@ import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.views.View;
 
@@ -197,8 +199,18 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
         Entity entity = t.getEntity();
-        	
-        Image bf = assets.getImage(tileables.first().getId());
+
+        Image bf = assets.getImage(t.getTerrain().getId());
+        g.drawImage(bf, x *50,y *50,50,50,null);
+
+
+
+        Iterator<Tileable> tileablesIter = tileables.iterator();
+        String tileableToDrawId = tileablesIter.next().getId();
+        if(tileableToDrawId.equals("avatar"))
+            tileableToDrawId = tileablesIter.next().getId();
+
+        bf = assets.getImage(tileableToDrawId);
         g.drawImage(bf, x *50,y *50,50,50,null);
 
         if(entity!=null){
@@ -206,17 +218,43 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
         	if(entity.isCurrentlyFlying()){
         		id+="_flying";
         	}
-        	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
+        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
         		id+="_sleeping";
         	}
-        	if(entity.getEntityStatus().getStatus() == EntityStatus.SMELL){
-        		id+="_badSmell";
+        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SMELL){
+        		 id+="_badSmell";
         	}
-        	if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
+        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
         		id+="_sad";
         	}
+            else if (entity.getDirection() == Direction.NORTHWEST) {
+                id += "_northwest";
+            }
+            else if (entity.getDirection() == Direction.NORTH) {
+                id += "_north";
+            }
+            else if (entity.getDirection() == Direction.NORTHEAST) {
+                id += "_northeast";
+            }
+            else if (entity.getDirection() == Direction.EAST) {
+                id += "_east";
+            }
+            else if (entity.getDirection() == Direction.WEST) {
+                id += "_west";
+            }
+            else if (entity.getDirection() == Direction.SOUTHEAST) {
+                id += "_southeast";
+            }
+            else if (entity.getDirection() == Direction.SOUTH) {
+                id += "_south";
+            }
+            else if (entity.getDirection() == Direction.SOUTHWEST) {
+                id += "_southwest";
+            }
+
+
             Image b2 = assets.getImage(id);
-            
+
             g.drawImage(b2, x *50, y *50,50,50,null);
 
         	

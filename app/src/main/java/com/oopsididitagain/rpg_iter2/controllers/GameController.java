@@ -124,6 +124,7 @@ public class GameController extends Controller{
 					
 					ActionMenuController amc = ActionMenuController.getInstance();
 					amc.setNpc(e);
+					amc.setAvatar(avatar);
 					
 					c =  ActionMenuController.getInstance();
 					

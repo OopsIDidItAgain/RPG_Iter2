@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.models;
 import java.util.ArrayList;
 
 import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
+import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.NonTradingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
@@ -44,7 +45,7 @@ public class Game {
 		gameMap.getTileAt(position4).add(pgo3);
 		Position position = new Position(2,0);
 		Position position5 = new Position(4,4);
-		Npc buddy = new Npc("buddy",position,  statBlob1);
+		Npc buddy = new AttackingNPC("buddy",position,  statBlob1);
 		buddy.setStoryline(new Storyline(" >> I'm Luigi."));
 		buddy.getInventory().add(pgo);
 		
@@ -71,7 +72,6 @@ public class Game {
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
-		gameMap.getTileAt(position6).add(pgo4);
 		
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);
