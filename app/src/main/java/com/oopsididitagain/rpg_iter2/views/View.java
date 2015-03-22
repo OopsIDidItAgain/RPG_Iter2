@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.BattleViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.DialogueViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
@@ -120,6 +121,11 @@ public class View extends JPanel {
 
 	public void visit(QuestionViewInteraction questionViewInteraction) {
 		this.modelViewInteraction = questionViewInteraction;
+		this.repaint();		
+	}
+
+	public void accept(BattleViewInteraction battleViewInteraction) {
+		this.modelViewInteraction = battleViewInteraction;
 		this.repaint();		
 	}
 
