@@ -46,20 +46,22 @@ public class AvatarCreationMenuViewInteraction extends ModelViewInteraction {
 		Font f = new Font("arial", Font.BOLD, 30);
 		g.setColor(Color.WHITE);
 		Option[] options = avatarCreationMenu.getOptions();
+		int widthDivLength = View.WIDTH / options.length;
+		int height = View.HEIGHT;
 		for (int i = 0; i < options.length; i++) {
 			Option o = options[i];
 			if (avatarCreationMenu.getCurrentOption().equals(o)) {
 				g.setColor(Color.BLUE);
-				g2d.fillRect(i * View.WIDTH / 3, 0, View.WIDTH / 3, View.HEIGHT);
+				g2d.fillRect(i * widthDivLength, 0, widthDivLength, height);
 				g.setFont(f);
 				g.setColor(Color.BLACK);
-				g.drawString(o.toString(), i * View.WIDTH / 3 + 30, 0 + 35);
+				g.drawString(o.toString(), i * widthDivLength + 30, 0 + 35);
 			} else {
 				g2d.draw(new MenuButton(o.toString(), i * View.WIDTH
-						/ 3, 0, View.WIDTH / 3, View.HEIGHT));
+						/ 3, 0, widthDivLength, height));
 				g.setFont(f);
 				g.setColor(Color.BLACK);
-				g.drawString(o.toString(), i * View.WIDTH / 3 + 30, 0 + 35);
+				g.drawString(o.toString(), i * widthDivLength + 30, 0 + 35);
 			}
 		}
 	}
