@@ -17,38 +17,50 @@ public class Armory {
 	public InventoryWeaponItem getWeapon()	{ return weapon; }
 	
 	public InventoryWeaponItem equip(InventoryWeaponItem item) {
+		if (item == null) return null;
 		InventoryWeaponItem conflict = null;
 		conflict = this.weapon;
 		this.weapon = item;
+		this.weapon.setEquipped(true);
+		if (conflict != null)
+			conflict.setEquipped(false);
 		return conflict;
 	}
 
 	public InventoryWeaponItem unequip(InventoryWeaponItem item) {
+		if (item == null) return null;
 		InventoryWeaponItem temp = null;
 		temp = this.weapon;
 		this.weapon = null;
+		temp.setEquipped(false);
 		return temp;
 	}
 
 	public InventoryArmorItem equip(InventoryArmorItem item) {
+		if (item == null) return null;
 		InventoryArmorItem conflict = null;
 		switch(item.getArmorItemType()) {
 			case HELMET: {
 				conflict = helmet;
 				helmet = item;
+				helmet.setEquipped(true);
 				break;
 			}
 			case ARMOR: {
 				conflict = armor;
 				armor = item;
+				armor.setEquipped(true);
 				break;
 			}
 			case BOOTS: {
 				conflict = boots;
 				boots = item;
+				boots.setEquipped(true);
 				break;
 			}
 		}
+		if (conflict != null)
+			conflict.setEquipped(false);
 		return conflict;
 	}
 	
@@ -79,6 +91,7 @@ public class Armory {
 			}
 			default: return null;
 		}
+		temp.setEquipped(false);
 		return temp;
 	}
 	

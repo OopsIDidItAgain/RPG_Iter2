@@ -25,6 +25,10 @@ public abstract class InventoryEquipableItem extends InventoryItem implements St
 		return isEquipped;
 	}
 	
+	public void setEquipped(boolean b) {
+		this.isEquipped = b;
+	}
+	
 	@Override
 	public StatBlob statBlob() {
 		return statBlob;

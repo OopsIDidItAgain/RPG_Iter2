@@ -9,18 +9,18 @@ public enum Command {
 	MOVE_NORTHWEST("MOVE_NORTHWEST"),
 	MOVE_SOUTHEAST("MOVE_SOUTHEAST"),
 	MOVE_SOUTHWEST("MOVE_SOUTHWEST"),
+	PAUSE("PAUSE"),
 	ENTER("ENTER"),
+	USE("USE"),
+	INVENTORY("INVENTORY"),
+	EQUIP("EQUIP"),
+	DROP("DROP"),
 	SKILLONE("SKILLONE"),
 	SKILLTWO("SKILLTWO"),
 	SKILLTHREE("SKILLTHREE"),
 	SKILLFOUR("SKILLFOUR"),
 	SKILLFIVE("SKILLFIVE"),
 	SKILLSIX("SKILLSIX"),
-	PAUSE("PAUSE"),
-	INVENTORY("INVENTORY"),
-	USE("USE"),
-	EQUIP("EQUIP"),
-	DROP("DROP"),
 	EXIT("EXIT"),
 	UNKNOWN("UNKNOWN");
 	
@@ -46,16 +46,16 @@ public enum Command {
 		case"MOVE_SOUTHEAST": return MOVE_SOUTHEAST;
 		case"MOVE_SOUTHWEST": return MOVE_SOUTHWEST;
 		case"ENTER": return ENTER;
+		case"USE": return USE;
+		case"DROP": return DROP;
+		case"EQUIP": return EQUIP;
 		case"SKILLONE": return SKILLONE;
 		case"SKILLTWO": return SKILLTWO;
 		case"SKILLTHREE": return SKILLTHREE;
 		case"SKILLFOUR": return SKILLFOUR;
 		case"SKILLFIVE": return SKILLFIVE;
 		case"SKILLSIX": return SKILLSIX;
-		case"USE": return USE;
-		case"EQUIP": return EQUIP;
 		case"EXIT": return EXIT;
-		case"DROP": return DROP;
 		}
 		return UNKNOWN;
 	}
