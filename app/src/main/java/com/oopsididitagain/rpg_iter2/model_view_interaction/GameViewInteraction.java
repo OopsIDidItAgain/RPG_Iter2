@@ -14,6 +14,8 @@ import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.views.View;
 
@@ -77,13 +79,18 @@ public class GameViewInteraction extends ModelViewInteraction{
 	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
-        
+        Entity entity = t.getEntity();
         	
         BufferedImage bf = assets.getBufferedImage(tileables.first().getId());
         g.drawImage(bf, x*50,y*50,50,50,null);
-
-        if(t.getEntity()!=null){
-            BufferedImage b2 = assets.getBufferedImage(t.getEntity().getId());
+        
+        if(entity!=null){
+        	String id = entity.getId();
+        	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
+        		id+="_sleeping";
+        	}
+            BufferedImage b2 = assets.getBufferedImage(id);
+            
             g.drawImage(b2, x*50,y*50,50,50,null);
 
         	

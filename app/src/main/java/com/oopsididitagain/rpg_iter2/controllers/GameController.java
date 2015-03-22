@@ -55,6 +55,9 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(int command) {
 		Controller c = this;
+		if(command == 2){
+			System.out.println("hi");
+		}
 		c = performSkillCommand(command);
 
 		Direction targetDirection = null;
@@ -100,7 +103,7 @@ public class GameController extends Controller{
 		if(skill != null){
 			
 			entityMapInteraction.applySkill(avatar,skill);
-			if(command == 1);{
+			if(command == 1){
 				c = ObserverController.getInstance();
 				((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
 				((ObserverController) c).setAvatar(avatar);
