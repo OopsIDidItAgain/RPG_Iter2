@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.OptionsMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.SkillAllocationViewInteraction;
 
 public class View extends JPanel {
 	public static final int WIDTH = 600;
@@ -101,6 +102,13 @@ public class View extends JPanel {
 		this.modelViewInteraction = keyboardConfigMenuViewInteraction;
 		this.repaint();
 
+	}
+
+	public void visit(SkillAllocationViewInteraction skillAllocationViewInteraction) {
+		this.modelViewInteraction = skillAllocationViewInteraction;
+		//drawMapBackground = true;
+		this.repaint();
+		
 	}
 
 }

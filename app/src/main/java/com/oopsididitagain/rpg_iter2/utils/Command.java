@@ -13,6 +13,7 @@ public enum Command {
 	ENTER("ENTER"),
 	USE("USE"),
 	INVENTORY("INVENTORY"),
+	SKILLALLOCATION("SKILLALLOCATION"),
 	EQUIP("EQUIP"),
 	DROP("DROP"),
 	SKILLONE("SKILLONE"),
@@ -56,6 +57,7 @@ public enum Command {
 		case"SKILLFIVE": return SKILLFIVE;
 		case"SKILLSIX": return SKILLSIX;
 		case"EXIT": return EXIT;
+		case"SKILLALLOCATION": return SKILLALLOCATION;
 		}
 		return UNKNOWN;
 	}

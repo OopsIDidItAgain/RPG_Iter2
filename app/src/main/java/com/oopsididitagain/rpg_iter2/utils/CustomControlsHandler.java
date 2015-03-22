@@ -42,8 +42,10 @@ public class CustomControlsHandler {
 		controls.put(52, Command.SKILLFOUR);
 		controls.put(53, Command.SKILLFIVE);
 		controls.put(54, Command.SKILLSIX);
-
+		controls.put(77, Command.SKILLALLOCATION);
 		saveOldControls();
+
+
 	}
 
 	public static CustomControlsHandler getInstance() {

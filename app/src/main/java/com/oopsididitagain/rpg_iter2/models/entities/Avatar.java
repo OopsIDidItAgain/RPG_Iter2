@@ -40,7 +40,7 @@ public class Avatar extends Entity implements StatModifiable {
 	public Avatar(String id, Position position,StatBlob statblob) {
 		super(id, position,statblob);
 		this.armory = new Armory();
-		this.stats = new StatCollection(armory);
+		this.stats = new StatCollection(armory,statblob);
 	}
 
 	public void setOccupation(Occupation occupation) {
@@ -95,19 +95,11 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 	
 	public LinkedList<String> getActiveSkillList(){
-		LinkedList<String> skillStrings = new LinkedList<String>();
-		for(Skill s: occupation.getGameSkillList()){
-			skillStrings.add(s.getName());
-		}
-		return skillStrings;
+		return occupation.getGameSkillListString();
 	}
 	
 	public LinkedList<String> getFightSkillList(){
-		LinkedList<String> skillStrings = new LinkedList<String>();
-		for(Skill s: occupation.getFightSkillList()){
-			skillStrings.add(s.getName());
-		}
-		return skillStrings;
+		return occupation.getFightSkillListString();
 	}
 	
 	public void visit(InventoryWeaponItem item) {
@@ -183,6 +175,19 @@ public class Avatar extends Entity implements StatModifiable {
 	public void attemptInhibition(MovementProbe movementProbe) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String StatToString(){
+		return stats.primaryViewport() + stats.derivedViewport();
+	}
+
+	public void minusUnusedSkillPoints() {
+		this.stats.minusUnusedSkillPoints();
+		
+	}
+
+	public int getUnusedPoints() {
+		return stats.getUnusedPoints();
 	}
 
 	

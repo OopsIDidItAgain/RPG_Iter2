@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models.occupations;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
@@ -15,18 +16,87 @@ public class Summoner extends Occupation{
 	public void giveSkills() {
 		// TODO Auto-generated method stub
 		//enchantment active and fight
-		Skill enchantment = new Skill(Skill.ENCHANTMENT);
+		Skill enchantment_sleep = new Skill(Skill.ENCHANTMENT);
 		EntityStatus es = new EntityStatus(EntityStatus.SLEEPING);
 		EntityStatusModifier mod = new EntityStatusModifier(es);
-		enchantment.setEffect(mod);
-		fightSkillList.add(enchantment);
-		gameSkillList.add(enchantment);
+		enchantment_sleep.setEffect(mod);
+		fightSkillList.add(enchantment_sleep);
+		gameSkillList.add(enchantment_sleep);
+		
+		Skill enchantment_sad = new Skill(Skill.ENCHANTMENT);
+		es = new EntityStatus(EntityStatus.SAD);
+		mod = new EntityStatusModifier(es);
+		enchantment_sad.setEffect(mod);
+		fightSkillList.add(enchantment_sad);
+		gameSkillList.add(enchantment_sad);
+		
+		Skill enchantment_badsmell = new Skill(Skill.ENCHANTMENT);
+		es = new EntityStatus(EntityStatus.SMELL);
+		mod = new EntityStatusModifier(es);
+		enchantment_badsmell.setEffect(mod);
+		fightSkillList.add(enchantment_badsmell);
+		gameSkillList.add(enchantment_badsmell);
 		
 		//boon active and fight
 		//bane fight
 		//staff fight
 	}
 	
+	public LinkedList<String> getGameSkillListString() {
+		LinkedList<String> skillStrings = new LinkedList<String>();
+		skillStrings.add(Skill.OBSERVATION);
+		skillStrings.add(Skill.ENCHANTMENT);
+		skillStrings.add(Skill.BANE);
+		skillStrings.add(Skill.BOON);
+		skillStrings.add(Skill.STAFF);
+		return skillStrings;
+	}
+	public LinkedList<String>  getFightSkillListString() {
+		LinkedList<String> skillStrings = new LinkedList<String>();
+		skillStrings.add(Skill.OBSERVATION);
+		skillStrings.add(Skill.ENCHANTMENT);
+		skillStrings.add(Skill.BANE);
+		skillStrings.add(Skill.BOON);
+		skillStrings.add(Skill.STAFF);
+		return skillStrings;
+	}
+	@Override
+	public void increaseMultiplier(int selop){
+		if(selop == 0){
+			Skill skill = gameSkillList.get(selop);
+			skill.increaseMultiplier();
+		}else if(selop == 1){
+			if(gameSkillList.size() >= 4){
+				Skill skill = gameSkillList.get(1);
+				skill.increaseMultiplier();
+				Skill skill1 = gameSkillList.get(2);
+				skill.increaseMultiplier();
+				Skill skill2 = gameSkillList.get(3);
+				skill.increaseMultiplier();
+			}
+		}else if(selop == 2){
+			if(gameSkillList.size() >= 7){
+				Skill skill = gameSkillList.get(4);
+				skill.increaseMultiplier();
+				Skill skill1 = gameSkillList.get(5);
+				skill.increaseMultiplier();
+				Skill skill2 = gameSkillList.get(6);
+				skill.increaseMultiplier();
+			}
+			
+		}else if(selop == 3){
+			if(gameSkillList.size() >= 9){
+				Skill skill = gameSkillList.get(7);
+				skill.increaseMultiplier();
+				Skill skill1 = gameSkillList.get(8);
+				skill.increaseMultiplier();
+				Skill skill2 = gameSkillList.get(9);
+				skill.increaseMultiplier();
+			}
+
+		}
+		
+	}
 	public Skill getFightSkill(Command command) {
 		Skill skill = null;
 		Random random = new Random();
