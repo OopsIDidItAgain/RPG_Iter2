@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
@@ -13,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.OptionsMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.SkillAllocationViewInteraction;
 
 public class View extends JPanel {
 	public static final int WIDTH = 600;
@@ -45,6 +47,11 @@ public class View extends JPanel {
 			modelViewInteraction.drawModel(g);
 		}
 
+	}
+	public void visit(ActionMenuViewInteraction actionMenuViewInteraction) {
+		this.modelViewInteraction = actionMenuViewInteraction;
+		drawMapBackground = true;
+		this.repaint();
 	}
 
 	public void visit(InventoryViewInteraction inventoryViewInteraction) {
@@ -95,6 +102,13 @@ public class View extends JPanel {
 		this.modelViewInteraction = keyboardConfigMenuViewInteraction;
 		this.repaint();
 
+	}
+
+	public void visit(SkillAllocationViewInteraction skillAllocationViewInteraction) {
+		this.modelViewInteraction = skillAllocationViewInteraction;
+		//drawMapBackground = true;
+		this.repaint();
+		
 	}
 
 }

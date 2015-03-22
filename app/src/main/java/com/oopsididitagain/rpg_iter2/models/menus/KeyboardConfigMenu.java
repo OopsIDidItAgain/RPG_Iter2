@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.utils.Command;
 public class KeyboardConfigMenu {
 
 	private Command selected;
+	private boolean configuring;
 
 	public KeyboardConfigMenu() {
 		selected = Command.MOVE_NORTH;
@@ -156,4 +157,16 @@ public class KeyboardConfigMenu {
 	public Command getCurrentOption() {
 		return selected;
 	}
+
+	public boolean isSelected() {
+		return configuring;
+	}
+
+	public void toggleSelect() {
+		if (configuring == true)
+			configuring = false;
+		else
+			configuring = true;
+	}
+
 }

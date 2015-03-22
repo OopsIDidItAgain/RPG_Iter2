@@ -16,9 +16,11 @@ public class StatCollection {
 	private Stat offensiveRating;
 	private Stat defensiveRating;
 	private Stat armorRating;
+	private int unusedSkillPoints = 0;
 	
 	public StatCollection(Armory armory, StatBlob blob) {
 		this.blob = blob;
+		this.armory = armory;
 		deriveStats();
 	}
 	
@@ -30,13 +32,21 @@ public class StatCollection {
 	
 	private void deriveStats() {
 		//derived
+		if(level == null){
+			level = new Stat(this.blob.getExperience() * .1);
+		}
+		double beforeLevel = getLevel();
 		level = new Stat(this.blob.getExperience() * .1);
+		double afterLevel = getLevel();
+		if(afterLevel > beforeLevel){
+			++unusedSkillPoints;
+		}
 		lifeCapacity = new Stat(20 + (0.5 * this.blob.getHardiness()));
 		manaCapacity = new Stat(25.0 + this.blob.getIntellect() * this.level.getValue());
 		offensiveRating = new Stat((blob.getStrength() + armory.getEquippedWeaponRank()) * this.level.getValue()); 
 		defensiveRating = new Stat(blob.getAgility() * this.level.getValue());
 		armorRating = new Stat(blob.getHardiness()  * armory.getEquippedArmorRank()); 
-		System.out.println(blob);
+		//System.out.println(blob);
 	}
 
 	public StatBlob getBlob() {
@@ -145,6 +155,14 @@ public class StatCollection {
 					"\nDefensiveRating: "	+(int)getDefensiveRating()+
 					"\nArmor Rating: "		+(int)getArmorRating());
 		return sb.toString();
+	}
+
+	public void minusUnusedSkillPoints() {
+		unusedSkillPoints--;
+	}
+
+	public int getUnusedPoints() {
+		return unusedSkillPoints;
 	}
 
 }

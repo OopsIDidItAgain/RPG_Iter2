@@ -1,13 +1,17 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
@@ -78,6 +82,8 @@ public class GameController extends Controller{
 		case PAUSE:
 			c = PauseMenuController.getInstance();
 			break;
+		case SKILLALLOCATION:
+			c = SkillPointAllocationController.getInstance();
 		default:
 			break;
 		}
@@ -85,15 +91,18 @@ public class GameController extends Controller{
 			
 			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
 			
-		    entityMapInteraction.move(avatar, toPosition);
+		    boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
 			
-				// TODO Auto-generated catch block
+				
 			
-			/*if (successfulMove) {
-				for (Npc npc: npcList)
-					entityMapInteraction.move(npc, npc.rollDice());
-			}*/
-				// TODO Auto-generated catch block
+			if (!successfulMove) {
+				Entity e = entityMapInteraction.checkForEntity(avatar, toPosition);
+				
+				if(e != null){
+					
+					c =  ActionMenuController.getInstance();
+				}
+			}
 			
 		
 

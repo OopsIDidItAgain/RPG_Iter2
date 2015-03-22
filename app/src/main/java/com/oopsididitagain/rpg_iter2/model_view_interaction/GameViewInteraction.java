@@ -36,6 +36,8 @@ public class GameViewInteraction extends ModelViewInteraction{
 		view.visit(this);		
 	}
 
+	
+	//******* METHODS FOR DRAWING GAME MAP 
 	@Override
 	public void drawModel(Graphics g) {
 		int left = avatar.getX() - 5;
@@ -49,6 +51,7 @@ public class GameViewInteraction extends ModelViewInteraction{
 		drawBottomRight(g, bottom, right);
        
         drawSkills(g);
+        drawStats(g);
         
 	}
 private void drawTopRight(Graphics g, int top, int right){
@@ -115,7 +118,9 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		for(int i = left; i < avatar.getX(); i++){
 			 y = 0;
 			for(int j = top; j < avatar.getY(); j++){
-				System.out.println(x + ", " + y);
+
+				//System.out.println(x + ", " + y);
+
 				if(gameMap.tileInbounds(new Position(j,i))){
 					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
 				}else{
@@ -151,18 +156,33 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		}
 		
 	}
+    private void drawStats(Graphics g) {
+		LinkedList<String> skills = avatar.getActiveSkillList();
+		g.setColor(Color.yellow);
+		g.fillRect(0, 560, View.pWidth, View.pHeight - 560);
+		int startingWidth = 0;
+		String stats = avatar.StatToString();
+		g.setColor(Color.black);
+		g.drawString(stats, 0, 600);
+		
+	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
         Entity entity = t.getEntity();
         	
         Image bf = assets.getImage(tileables.first().getId());
-       // System.out.println(x + "," + y);
         g.drawImage(bf, x *50,y *50,50,50,null);
 
         if(entity!=null){
         	String id = entity.getId();
         	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
         		id+="_sleeping";
+        	}
+        	if(entity.getEntityStatus().getStatus() == EntityStatus.SMELL){
+        		id+="_badSmell";
+        	}
+        	if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
+        		id+="_sad";
         	}
             Image b2 = assets.getImage(id);
             

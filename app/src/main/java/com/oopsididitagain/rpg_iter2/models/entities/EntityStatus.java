@@ -6,6 +6,8 @@ package com.oopsididitagain.rpg_iter2.models.entities;
 public class EntityStatus {
 	public static int PLAYING = 0;
 	public static int SLEEPING = 1;
+	public static int SAD = 2;
+	public static int SMELL = 3;
 	private int status;
 	public EntityStatus(int state){
 		this.status = state;

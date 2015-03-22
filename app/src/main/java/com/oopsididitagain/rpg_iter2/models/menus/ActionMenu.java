@@ -1,14 +1,10 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
 
-
-
-
-public class MainMenu {
-	
+public class ActionMenu {
 	public enum Option {
-		New("New Game"), Load("Load Game"), ExitGame(
-				"Exit Game");
+		Talk("Talk"), Attack("Attack"), UseSkill("Use Skill"), UseOption(
+				"Use Option");
 
 		private String name;
 
@@ -24,19 +20,22 @@ public class MainMenu {
 
 	private Option currentOption;
 
-	public MainMenu() {
-		currentOption = Option.New;
+	public ActionMenu() {
+		currentOption = Option.Talk;
 	}
 
 	public void previousOption() {
 		switch (currentOption) {
-		case New:
+		case Talk:
 			break;
-		case Load:
-			currentOption = Option.New;
+		case Attack:
+			currentOption = Option.Talk;
 			break;
-		case ExitGame:
-			currentOption = Option.Load;
+		case UseSkill:
+			currentOption = Option.Attack;
+			break;
+		case UseOption:
+			currentOption = Option.UseSkill;
 			break;
 		default:
 			break;
@@ -45,13 +44,16 @@ public class MainMenu {
 
 	public void nextOption() {
 		switch (currentOption) {
-		case New:
-			currentOption = Option.Load;
+		case Talk:
+			currentOption = Option.Attack;
 			break;
-		case Load:
-			currentOption = Option.ExitGame;
+		case Attack:
+			currentOption = Option.UseSkill;
 			break;
-		case ExitGame:
+		case UseSkill:
+			currentOption = Option.UseOption;
+			break;
+		case UseOption:
 			break;
 		default:
 			break;
@@ -65,5 +67,4 @@ public class MainMenu {
 	public Option getCurrentOption() {
 		return currentOption;
 	}
-
 }

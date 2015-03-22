@@ -199,4 +199,35 @@ public class StatBlob {
 		return sb.toString();
 	}
 
+	public void set(StatBlob oldblob) {
+		this.livesLeft = oldblob.livesLeft;
+		statMap.put(1, this.livesLeft);
+		statStringMap.put(1,"Lives Left");
+		this.strength = oldblob.strength;
+		statMap.put(2, this.strength);
+		statStringMap.put(2,"Strength");
+		this.agility = oldblob.agility;
+		statMap.put(3, this.agility);
+		statStringMap.put(3,"Agility");
+		this.intellect = oldblob.intellect;
+		statMap.put(4, this.intellect);
+		statStringMap.put(4,"Intellect");
+		this.hardiness = oldblob.hardiness;
+		statMap.put(5, this.hardiness);
+		statStringMap.put(5,"Hardiness");
+		this.experience = oldblob.experience;
+		statMap.put(6, this.experience);
+		statStringMap.put(6,"Experience");
+		this.movement = oldblob.movement;
+		statMap.put(7, this.movement);
+		statStringMap.put(7,"Movement");
+		this.lifeAmount = oldblob.lifeAmount;
+		statMap.put(8, this.lifeAmount);
+		statStringMap.put(8,"Life Amount");
+		this.manaAmount = oldblob.manaAmount;
+		statMap.put(9, this.manaAmount);
+		statStringMap.put(9,"Mana Amount");
+		
+	}
+
 }
