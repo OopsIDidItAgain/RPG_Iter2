@@ -18,4 +18,6 @@ public enum AreaEffectType implements StatBlobHolder {
 	public StatBlob statBlob() {
 		return statBlob;
 	}
+	
+	public String hello() { return "hello"; }
 }

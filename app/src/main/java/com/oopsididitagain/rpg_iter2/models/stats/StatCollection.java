@@ -70,8 +70,8 @@ public class StatCollection {
 		return false;
 	}
 	public void mergeBlob(StatBlob blob) {
+		System.out.println("First breakpoint");
 		this.blob.merge(blob);
-		
 		// has to be handled here because it contains both primary and derived stats
 		/*if(this.blob.getLifeAmount() <= 0) {
 			//if(this.blob.getLivesLeft() > 0) {
@@ -81,6 +81,7 @@ public class StatCollection {
 			
 		} else */
 		// if ((int)this.blob.getLifeAmount() <= 0) dyingLogic();
+		
 		if(this.blob.getLifeAmount() > lifeCapacity.getValue()) {
 			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
 		}
