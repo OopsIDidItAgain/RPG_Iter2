@@ -4,5 +4,5 @@ carrot_item,4,4,TakeableItem,,,,,,,,,,8.05,,
 cape_item,7,9,ArmorTakeableItem,0,0,0,0,15,0,0,0,0,9.05,25,ARMOR
 chainsaw_item,9,4,WeaponTakeableItem,0,15,0,0,5,0,0,0,0,4.05,25,ONE_HANDED_WEAPON
 rock_item,9,6,ObstacleItem,,,,,,,,,,,,
-leafstone_item,0,5,InteractiveItem,5,0,GRASS,cape_item,,,,,,,,
+leafstone_item,0,5,InteractiveItem,2,2,GRASS,cape_item,,,,,,,,
 mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,

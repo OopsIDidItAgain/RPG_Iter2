@@ -222,4 +222,9 @@ public class Avatar extends Entity implements StatModifiable {
 		armory.equip(inventoryWeaponItem);
 	}
 	
+	public boolean kill() {
+		// returns false if no lives left and game's over
+		return stats.die();
+	}
+
 }

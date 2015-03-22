@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
@@ -158,50 +157,54 @@ public class MapDatabase {
 
     private void readObjects(){
     	String line;
+	    Map<String, EffectTakeableItem> usableMap = new HashMap<String, EffectTakeableItem>();
+	    Map<String, TakeableItem> unusableMap = new HashMap<String, TakeableItem>();
+	    Map<String, EquipableTakeableItem> equipableMap = new HashMap<String, EquipableTakeableItem>();
+    		
     	while ((line = readObjectsLine()) != null) {
     		System.out.println(line);
-    		Map<String, EffectTakeableItem> usableMap = new HashMap<String, EffectTakeableItem>();
-    		Map<String, TakeableItem> unusableMap = new HashMap<String, TakeableItem>();
-    		Map<String, EquipableTakeableItem> equipableMap = new HashMap<String, EquipableTakeableItem>();
-    		
     		String[] tokens = line.split(",");
     		String id = tokens[0];
     		int x = Integer.parseInt(tokens[1]);
     		int y = Integer.parseInt(tokens[2]);
     		Position position = new Position(y, x);
     		String type = tokens[3];
-    		PositionedGameObject positionedGameObject = null;
     		switch(type) {
     		case "EffectTakeableItem": 
-    			tiledEntityVisitables.add(new EffectTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens)));
-    			usableMap.put(id, (EffectTakeableItem) positionedGameObject);
+    			EffectTakeableItem eitem = new EffectTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens));
+				tiledEntityVisitables.add(eitem);
+    			usableMap.put(id, eitem);
     			break;
     		case "WeaponTakeableItem":
-    			tiledEntityVisitables.add(new WeaponTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens), parseRank(tokens), parseWeaponType(tokens)));
-    			equipableMap.put(id, (EquipableTakeableItem) positionedGameObject);
+    			WeaponTakeableItem witem = new WeaponTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens), parseRank(tokens), parseWeaponType(tokens));
+				tiledEntityVisitables.add(witem);
+    			equipableMap.put(id, witem);
     			break;
     		case "ArmorTakeableItem":
-    			tiledEntityVisitables.add(new ArmorTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens), parseRank(tokens), parseArmorType(tokens)));
-    			equipableMap.put(id, (EquipableTakeableItem) positionedGameObject);
+    			ArmorTakeableItem aitem = new ArmorTakeableItem(id, position, parsePrice(tokens), parseStatBlob(tokens), parseRank(tokens), parseArmorType(tokens));
+				tiledEntityVisitables.add(aitem);
+    			equipableMap.put(id, aitem);
     			break;
     		case "OneShotItem":
     			tiledEntityVisitables.add(new OneShotItem(id, position, parseStatBlob(tokens)));
     			break;
     		case "TakeableItem":
+    			TakeableItem titem = new TakeableItem(id, position, parsePrice(tokens));
     			tiledEntityVisitables.add(new TakeableItem(id, position, parsePrice(tokens)));
-    			unusableMap.put(id, (TakeableItem) positionedGameObject);
+    			unusableMap.put(id, titem);
     			break;
     		case "ObstacleItem":
     			tiledProbeVisitables.add(new ObstacleItem(id, position));
     			break;
     		case "InteractiveItem":
     			String requirementId = tokens[7];
+    			Position targetPosition = new Position(Integer.parseInt(tokens[5]), Integer.parseInt(tokens[4]));
     			if (usableMap.containsKey(requirementId))
-				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[position.getY()][position.getX()], parseTerrain(tokens), usableMap.get(requirementId).toInventoryItem()));
+				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[targetPosition.getY()][targetPosition.getX()], parseTerrain(tokens), usableMap.get(requirementId).toInventoryItem()));
     			else if (equipableMap.containsKey(requirementId))
-				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[position.getY()][position.getX()], parseTerrain(tokens), equipableMap.get(requirementId).toInventoryItem()));
+				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[targetPosition.getY()][targetPosition.getX()], parseTerrain(tokens), equipableMap.get(requirementId).toInventoryItem()));
     			else if (unusableMap.containsKey(requirementId))
-				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[position.getY()][position.getX()], parseTerrain(tokens), (InventoryUnusableItem) unusableMap.get(requirementId).toInventoryItem()));
+				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[targetPosition.getY()][targetPosition.getX()], parseTerrain(tokens), (InventoryUnusableItem) unusableMap.get(requirementId).toInventoryItem()));
     			break;
     		}
     	}

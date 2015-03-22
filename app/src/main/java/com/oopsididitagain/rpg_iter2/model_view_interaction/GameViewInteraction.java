@@ -177,17 +177,17 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		for (String s : primaries) {
 			if (s.equals("PRIMARY STATS")) g.setFont(fonts.get("inventoryheader"));
 			
-			g.drawString(s, width, height += heightjump);
-			
 			if (height > 650) { // new line
-				width = 150;
+				width += 125;
 				height = 565 + heightjump + 10;
 			}
+			
+			g.drawString(s, width, height += heightjump);
 			
 			if (s.equals("PRIMARY STATS")) {g.setFont(fonts.get("inventorytext")); height+=10;}
 		}
 		
-		width = 340; height = 565;
+		width = 375; height = 565;
 		for (String s : deriveds) {
 			if (s.equals("SECONDARY STATS")) g.setFont(fonts.get("inventoryheader"));
 			g.drawString(s, width, height += heightjump);

@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewIntera
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.BattleViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.DialogueViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.GameOverViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.KeyboardConfigMenuViewInteraction;
@@ -122,6 +123,11 @@ public class View extends JPanel {
 	public void visit(QuestionViewInteraction questionViewInteraction) {
 		this.modelViewInteraction = questionViewInteraction;
 		this.repaint();		
+	}
+
+	public void visit(GameOverViewInteraction gameOverViewInteraction) {
+		this.modelViewInteraction = gameOverViewInteraction;
+		this.repaint();
 	}
 
 	public void accept(BattleViewInteraction battleViewInteraction) {

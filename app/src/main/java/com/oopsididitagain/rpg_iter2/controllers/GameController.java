@@ -3,6 +3,8 @@ package com.oopsididitagain.rpg_iter2.controllers;
 import java.util.ArrayList;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
@@ -55,7 +57,14 @@ public class GameController extends Controller{
 
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
-		Controller c = this;
+		Controller c = takeStatsAndUpdate(); // this includes things like relocating avatar if dead
+		if (c instanceof GameOverController )  { 
+			System.out.println("INSTANCE OF CHECK!");
+			return c; // game over
+		
+		}
+		
+		// c = this;
 		c = performSkillCommand(command);
 		performPassiveSkills();
 		Direction targetDirection = null;
@@ -136,6 +145,7 @@ public class GameController extends Controller{
 				}
 			}
 		}
+	
 		return c;
 	}
 	
@@ -166,6 +176,27 @@ public class GameController extends Controller{
 		default: break;
 		}
 		return targetDirection;
+	}
+	
+	public Controller takeStatsAndUpdate() {
+		Controller c = this;
+		if (avatar.isDead()) {
+			if (avatar.kill()) { // true if avatar has lives left
+				
+				Position 	av = avatar.getPosition(),
+							o = new Position(0,0);
+				
+				avatar.move(gameMap.getTileAt(av), 
+						gameMap.getTileAt(o), o);
+			}
+			else {
+				System.out.println("GAME OVERRRR");
+				c = GameOverController.getInstance();
+				return c;
+			}
+		}
+		
+		return c;
 	}
 
 	private Controller performSkillCommand(Command command) {

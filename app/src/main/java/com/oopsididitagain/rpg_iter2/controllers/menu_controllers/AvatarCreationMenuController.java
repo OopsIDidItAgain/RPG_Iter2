@@ -91,7 +91,7 @@ public class AvatarCreationMenuController extends Controller {
 	}
 	private void createAvatar() {
 		Position position = new Position(0,0,Direction.SOUTH);
-		StatBlob statBlob = new StatBlob(5, 5, 5, 5, 5, 5, 5, 20, 20);
+		StatBlob statBlob = new StatBlob(0, 5, 5, 5, 5, 5, 5, 20, 20);
 		avatar = new Avatar("avatar", position,statBlob );
 		
 	}
