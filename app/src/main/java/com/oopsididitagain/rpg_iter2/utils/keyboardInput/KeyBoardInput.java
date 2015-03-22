@@ -58,6 +58,24 @@ public class KeyBoardInput implements KeyListener, MouseListener {
 		case KeyEvent.VK_ENTER:
 			input = Commands.ENTER;
 			break;
+		case '1':
+			input = Commands.SKILLONE;
+			break;
+		case '2':
+			input = Commands.SKILLTWO; 
+			break;
+		case '3':
+			input = Commands.SKILLTHREE; 
+			break;
+		case '4':
+			input = Commands.SKILLFOUR; 
+			break;
+		case '5':
+			input = Commands.SKILLFIVE; 
+			break;
+		case '6':
+			input = Commands.SKILLSIX; 
+			break;
 		case 'i':
 			input = Commands.INVENTORY;
 			break;
