@@ -17,9 +17,11 @@ public class InventoryController extends Controller {
 	private InventoryMenu inventoryMenu;
 	private Avatar avatar;
 	private Inventory inventory;
+	private InventoryMenuKeyBoardInput keyBoardInput;
 	
 	private InventoryController() {
 		GameController gameController = GameController.getInstance();
+		this.keyBoardInput =  new InventoryMenuKeyBoardInput();
 		this.avatar = gameController.getAvatar();
 		this.inventory = avatar.getInventory();
 		this.inventoryMenu = new InventoryMenu();
@@ -80,8 +82,7 @@ public class InventoryController extends Controller {
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return null;
+		return keyBoardInput;
 	}
 
 }

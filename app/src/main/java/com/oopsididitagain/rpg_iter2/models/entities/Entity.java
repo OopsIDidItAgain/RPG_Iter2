@@ -30,6 +30,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		super(id, position);
 		this.statblob = statblob;
 		this.entityStatus = new EntityStatus(EntityStatus.PLAYING);
+		this.inventory = new Inventory();
 	}
 	
 	@Override

@@ -5,13 +5,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.utils.Commands;
 
-public class GameKeyboardInput extends KeyBoardInput implements KeyListener, MouseListener {
-
+public class InventoryMenuKeyBoardInput extends KeyBoardInput implements KeyListener, MouseListener{
 	int input = -5;
-	public GameKeyboardInput(){
+	public InventoryMenuKeyBoardInput(){
 		input = -5;
 	}
 
@@ -25,38 +23,23 @@ public class GameKeyboardInput extends KeyBoardInput implements KeyListener, Mou
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()){
-		case 'w':
+		case Commands.MOVE_NORTH:
 			input = Commands.MOVE_NORTH;
 			break;
-		case 'x':
-			input = Commands.MOVE_SOUTH;
+		case Commands.MOVE_WEST:
+			input = Commands.MOVE_WEST; 
 			break;
-		case 'a':
-			input = Commands.MOVE_WEST;
+		case Commands.MOVE_SOUTH:
+			input = Commands.MOVE_SOUTH; 
 			break;
-		case 'd':
-			input = Commands.MOVE_EAST;
+		case Commands.MOVE_EAST:
+			input = Commands.MOVE_EAST; 
 			break;
-		case '1':
-			input = Commands.SKILLONE;
-			break;
-		case '2':
-			input = Commands.SKILLTWO; 
-			break;
-		case '3':
-			input = Commands.SKILLTHREE; 
-			break;
-		case '4':
-			input = Commands.SKILLFOUR; 
-			break;
-		case '5':
-			input = Commands.SKILLFIVE; 
-			break;
-		case '6':
-			input = Commands.SKILLSIX; 
+		case Commands.SELECT:
+			input = Commands.SELECT; 
 			break;
 		case Commands.INVENTORY:
-			input = Commands.INVENTORY;
+			input = Commands.INVENTORY; 
 			break;
 		case KeyEvent.VK_ENTER:
 			input = Commands.ENTER;

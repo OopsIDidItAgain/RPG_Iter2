@@ -32,9 +32,10 @@ public class Commands {
 
     public static final int EXIT = '`';
 
-    public static final int INVENTORY = 'I';
+    public static final int INVENTORY = 'i';
     public static final int USE = 'U';
     public static final int EQUIP = 'E';
     public static final int DROP = 'D';
+    public static final int SELECT ='s';
 
 }
