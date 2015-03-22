@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
@@ -44,7 +45,8 @@ public class AvatarCreationMenuController extends Controller {
 		Controller controller = AvatarCreationMenuController.getInstance();
 
 		switch(key){
-		case 4:
+		case Commands.ENTER:
+		case Commands.USE:
 			switch (avatarCreationMenu.getCurrentOption()) {
 			case 0:
 				System.out.println("sneak");

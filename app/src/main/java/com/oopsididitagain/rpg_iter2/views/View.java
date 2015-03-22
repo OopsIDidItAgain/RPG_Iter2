@@ -4,12 +4,13 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInteraction;
 
 public class View extends JPanel{
 	public static final int WIDTH = 600;
@@ -67,6 +68,13 @@ public class View extends JPanel{
 
 	public void visit(ObserverViewInteraction observerViewInteraction) {
 		this.modelViewInteraction = observerViewInteraction;
+		drawMapBackground = true;
+		this.repaint();
+		
+	}
+
+	public void visit(PauseMenuViewInteraction pauseMenuViewInteraction) {
+		this.modelViewInteraction = pauseMenuViewInteraction;
 		drawMapBackground = true;
 		this.repaint();
 		

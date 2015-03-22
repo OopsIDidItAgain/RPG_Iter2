@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;

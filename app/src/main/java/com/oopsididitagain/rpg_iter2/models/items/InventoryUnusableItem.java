@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.items;
 
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 

@@ -67,6 +67,9 @@ public class KeyBoardInput implements KeyListener, MouseListener {
 		case 'k':
 			input = Commands.DROP;
 			break;
+		case '`':
+			input = Commands.EXIT;
+			break;
 		}
 	}
 
