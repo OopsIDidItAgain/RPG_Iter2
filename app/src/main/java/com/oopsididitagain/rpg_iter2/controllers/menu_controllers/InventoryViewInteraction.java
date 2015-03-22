@@ -3,9 +3,9 @@ package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
@@ -98,7 +98,7 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 					}
 
 					g2.fill(r);
-					BufferedImage img = assets.getBufferedImage(item.getId());
+					Image img = assets.getImage(item.getId());
 					g.drawImage(img, w, h, 60, 60, null);
 					++count;
 				} else {

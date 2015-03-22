@@ -2,13 +2,11 @@ package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
-import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
-import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
@@ -20,7 +18,6 @@ import com.oopsididitagain.rpg_iter2.views.View;
 
 public class GameViewInteraction extends ModelViewInteraction{
   
-
     private Game game;
     private Avatar avatar;
     private GameMap gameMap;
@@ -79,11 +76,11 @@ public class GameViewInteraction extends ModelViewInteraction{
         SortedSet<Tileable> tileables =  t.getTilebles();
         
         	
-        BufferedImage bf = assets.getBufferedImage(tileables.first().getId());
+        Image bf = assets.getImage(tileables.first().getId());
         g.drawImage(bf, x*50,y*50,50,50,null);
 
         if(t.getEntity()!=null){
-            BufferedImage b2 = assets.getBufferedImage(t.getEntity().getId());
+            Image b2 = assets.getImage(t.getEntity().getId());
             g.drawImage(b2, x*50,y*50,50,50,null);
 
         	

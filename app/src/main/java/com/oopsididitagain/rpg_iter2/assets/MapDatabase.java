@@ -1,19 +1,19 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 
 public class MapDatabase {
-	BufferedReader gridReader;
-	File gridFile;
+	private BufferedReader gridReader;
+	private InputStream gridFileStream;
 	
-	BufferedReader objectsReader;
-	File objectsFile;
+	private BufferedReader objectsReader;
+	private InputStream objectsFileStream;
 
     String[][] mapGrid;
     int mapX;
@@ -21,21 +21,14 @@ public class MapDatabase {
 	
 	public MapDatabase(int level) {
 
-		gridFile = new File(getClass().getResource("/levels/level"+level+"/grid.csv").getPath());
-		objectsFile = new File(getClass().getResource("/levels/level"+level+"/tileables.csv").getPath());
-		
-		try { 
-			gridReader = new BufferedReader(new FileReader(gridFile));
-			objectsReader = new BufferedReader(new FileReader(objectsFile));
-		} catch (FileNotFoundException e) {
-			System.out.println("Linking files to readers did not work....");
-			e.printStackTrace();
-		}
+		gridFileStream = getClass().getResourceAsStream("/levels/level"+level+"/grid.csv");
+		objectsFileStream = getClass().getResourceAsStream("/levels/level"+level+"/tileables.csv");
+
+		gridReader = new BufferedReader(new InputStreamReader(gridFileStream));
+		objectsReader = new BufferedReader(new InputStreamReader(gridFileStream));
 
         readTerrain();
         readObjects();
-
-
 	}
 
     public int getMapY() {
