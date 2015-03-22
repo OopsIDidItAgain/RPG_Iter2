@@ -36,6 +36,8 @@ public class GameViewInteraction extends ModelViewInteraction{
 		view.visit(this);		
 	}
 
+	
+	//******* METHODS FOR DRAWING GAME MAP 
 	@Override
 	public void drawModel(Graphics g) {
 		int left = avatar.getX() - 5;
@@ -115,7 +117,6 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		for(int i = left; i < avatar.getX(); i++){
 			 y = 0;
 			for(int j = top; j < avatar.getY(); j++){
-				System.out.println(x + ", " + y);
 				if(gameMap.tileInbounds(new Position(j,i))){
 					drawTile(g, gameMap.getTileAt(new Position(j,i)), x, y );
 				}else{
@@ -156,7 +157,6 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
         Entity entity = t.getEntity();
         	
         Image bf = assets.getImage(tileables.first().getId());
-       // System.out.println(x + "," + y);
         g.drawImage(bf, x *50,y *50,50,50,null);
 
         if(entity!=null){

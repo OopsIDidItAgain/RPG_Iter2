@@ -11,6 +11,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 import com.oopsididitagain.rpg_iter2.utils.MovementProbeStatus;
 import com.oopsididitagain.rpg_iter2.utils.PositionOutOfBoundsException;
+import com.oopsididitagain.rpg_iter2.utils.TileContentsProbeStatus;
 
 /*
  * This should hold the interaction between entities and the map,
@@ -29,14 +30,34 @@ public class EntityMapInteraction {
 		this.skillProbe = new SkillProbe();
 		
 	}
+	public Entity checkForEntity(Entity entity, Position toPosition) {
+		Entity e = null;
+		
+		Tile targetTile;
+		if(gameMap.tileInbounds(toPosition)){
+			targetTile = gameMap.getTileAt(toPosition);
 	
-	public void move(Entity entity, Position toPosition)   {
+			MovementProbe movementProbe = new MovementProbe(entity);
+			movementProbe.inspect(targetTile);
+			
+			if(movementProbe.checkStatus(TileContentsProbeStatus.ENTITY_DETECTED)){
+				e = movementProbe.getReturnedEntity();
+				
+			}
+		
+			return e;
+		}else{
+			return e;
+		}
+		
+	}
+	public boolean move(Entity entity, Position toPosition)   {
 		// Step 1: Make Sure Position is on the Map.
 		
 		if(gameMap.tileInbounds(toPosition)){
 			
 			
-		
+		   
 			Tile targetTile, fromTile;
 			fromTile = gameMap.getTileAt(entity.getPosition());
 			targetTile = gameMap.getTileAt(toPosition);
@@ -49,13 +70,17 @@ public class EntityMapInteraction {
 			// Step 3a: If we can, go ahead and Perform movement 
 			if (movementProbe.getStatus() == MovementProbeStatus.MOVEMENT_OK) {
 				entity.move(fromTile, targetTile, toPosition);
+				return true;
 			}
 	
 			// Step 3b: If we cannot, then we need to at least set the Entity's Position in the correct direction.
 			else {
 				entity.setPosition(new Position(entity.getY(), entity.getX(), toPosition.getDirection()));
+				return false;
 			} 
+			
 		}
+		return false;
 	}
 
 	public void applySkill(Avatar avatar, Skill skill) {

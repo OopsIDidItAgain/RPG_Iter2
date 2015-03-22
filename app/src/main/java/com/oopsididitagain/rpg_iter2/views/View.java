@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.AvatarCreationMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
@@ -45,6 +46,11 @@ public class View extends JPanel {
 			modelViewInteraction.drawModel(g);
 		}
 
+	}
+	public void visit(ActionMenuViewInteraction actionMenuViewInteraction) {
+		this.modelViewInteraction = actionMenuViewInteraction;
+		drawMapBackground = true;
+		this.repaint();
 	}
 
 	public void visit(InventoryViewInteraction inventoryViewInteraction) {
