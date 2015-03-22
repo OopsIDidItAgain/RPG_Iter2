@@ -70,7 +70,6 @@ public class StatCollection {
 		return false;
 	}
 	public void mergeBlob(StatBlob blob) {
-		System.out.println("First breakpoint");
 		this.blob.merge(blob);
 		// has to be handled here because it contains both primary and derived stats
 		/*if(this.blob.getLifeAmount() <= 0) {

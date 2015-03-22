@@ -159,9 +159,6 @@ public class StatBlob {
 		
 		this.livesLeft.add(other.livesLeft);
 		
-		if (this.lifeAmount.getValue() + other.lifeAmount.getValue() > 0) // aka you don't die
-			this.lifeAmount.add(other.lifeAmount);
-			// exceptions are handled in StatCollection class's mergeBlob() method
 		this.lifeAmount.add(other.lifeAmount);
 		this.intellect.add(other.intellect);
 		this.strength.add(other.strength);

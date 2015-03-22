@@ -36,7 +36,6 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 
 	@Override
 	public StatBlob statBlob() {
-		System.out.println(type.hello());
 		return type.statBlob();
 	}
 
