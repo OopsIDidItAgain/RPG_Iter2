@@ -1,8 +1,6 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
-import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
-import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.OptionsMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.OptionsMenu;
@@ -47,7 +45,7 @@ public class OptionsMenuController extends Controller {
 				case Graphics:
 					break;
 				case Keyboard:
-					// TODO Keyboards
+					controller = KeyboardConfigMenuController.getInstance();
 					break;
 				default:
 					break;
