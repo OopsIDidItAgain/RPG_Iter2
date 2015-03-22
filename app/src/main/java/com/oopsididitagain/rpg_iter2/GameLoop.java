@@ -43,15 +43,18 @@ public class GameLoop {
 		
 		Controller temp = controller;
 		
-		controller = controller.takeInputAndUpdate(keyboardInput.getInput());
+		controller = controller.takeInputAndUpdate(controller.getKeyBoardInput().getInput());
 		keyboardInput = controller.getKeyBoardInput();
-
+		//System.out.println(controller);
+		//System.out.println(keyboardInput.getInput());
 		if(!controller.equals(temp)){
 			view.addKeyListener(keyboardInput);
 			view.addMouseListener(keyboardInput);
 			view.requestFocusInWindow();
 			modelViewInteraction = controller.populateInteraction();
 		}
+		
+		//keyboardInput = controller.getKeyBoardInput();
 
 		
 	}

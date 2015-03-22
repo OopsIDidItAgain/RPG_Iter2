@@ -55,7 +55,7 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(int command) {
 		Controller c = this;
-
+		System.out.println(command);
 		c = performSkillCommand(command);
 
 		Direction targetDirection = null;
