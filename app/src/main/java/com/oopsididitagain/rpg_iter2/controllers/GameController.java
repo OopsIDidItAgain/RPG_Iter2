@@ -12,6 +12,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
@@ -87,20 +88,30 @@ public class GameController extends Controller{
 		default:
 			break;
 		}
-		if (targetDirection != null) {
+		
+		
+		if (targetDirection != null) { //if we pressed a directional button
 			
+			//check if we can move in the requested direction
 			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
 			
 		    boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
 			
 				
-			
+			//checks if NPC is there, if it is we bring up actionMenu
 			if (!successfulMove) {
-				Entity e = entityMapInteraction.checkForEntity(avatar, toPosition);
+				//See if we run into a Npc, down cast but all entities we run into are Npc's
+				Npc e = (Npc) entityMapInteraction.checkForEntity(avatar, toPosition);
 				
-				if(e != null){
+				if(e != null){// if we did run into an npc, tell the actionMenu and switch to its controller
+					
+					
+					ActionMenuController amc = ActionMenuController.getInstance();
+					amc.setNpc(e);
 					
 					c =  ActionMenuController.getInstance();
+					
+					
 				}
 			}
 			

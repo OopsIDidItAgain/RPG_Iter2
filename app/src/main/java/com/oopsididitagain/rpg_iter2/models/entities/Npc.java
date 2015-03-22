@@ -1,5 +1,7 @@
 
 package com.oopsididitagain.rpg_iter2.models.entities;
+import com.oopsididitagain.rpg_iter2.controllers.Controller;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Storyline;
@@ -23,6 +25,20 @@ public class Npc extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Storyline getStoryline(){
+		
+		return story;
+	}
+	
+	public void setStoryline(Storyline story){
+		
+		this.story = story;
+	}
+	public Controller talk(){
+		
+		return ActionMenuController.getInstance();
+	}	
+	
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.denyMovement();

@@ -23,7 +23,10 @@ public enum Command {
 	SKILLFIVE("SKILLFIVE"),
 	SKILLSIX("SKILLSIX"),
 	EXIT("EXIT"),
+	YES("YES"),
+	NO("NO"),
 	UNKNOWN("UNKNOWN");
+	
 	
 	String identifier; 
 	
@@ -58,6 +61,8 @@ public enum Command {
 		case"SKILLSIX": return SKILLSIX;
 		case"EXIT": return EXIT;
 		case"SKILLALLOCATION": return SKILLALLOCATION;
+		case"YES":return YES;
+		case"NO": return NO;
 		}
 		return UNKNOWN;
 	}
