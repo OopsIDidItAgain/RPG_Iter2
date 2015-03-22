@@ -81,16 +81,16 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 	
 	public Skill getActiveSkill(int command) {//this needs to differentiate between the states
-		if(command < gameSkillList.size() && command > 0){
-			--command;
-			return gameSkillList.get(command);
+		if(command <= gameSkillList.size() && command > 0){
+			int tempcommand = command - 1;
+			return gameSkillList.get(tempcommand);
 		}
 		return null;
 	}
 	public Skill getActiveFightSkill(int command) {//this needs to differentiate between the states
-		if(command < fightSkillList.size() && command > 0){
-			--command;
-			return fightSkillList.get(command);
+		if(command <= fightSkillList.size() && command > 0){
+			int tempcommand = command - 1;
+			return fightSkillList.get(tempcommand);
 		}
 		return null;
 	}

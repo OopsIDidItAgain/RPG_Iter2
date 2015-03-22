@@ -13,14 +13,22 @@ import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
  * Created by parango on 3/11/15.
  */
 public class MainMenuController extends Controller {
-	private static MainMenu mainMenu;
+
 	public static MainMenuController instance;
+
+    private static MainMenu mainMenu;
+    private MainMenuViewInteraction mainMenuView;
+
 	private MainMenuKeyboardInput keyboardInput;
 
+    private Controller controllerToReturn;
+
+
 	private MainMenuController(){
-		this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
+
+        this.keyboardInput = new MainMenuKeyboardInput(mainMenu);
 	}
-	
+
 	public static MainMenuController getInstance() {
 		if ( instance == null ){
 			mainMenu = new MainMenu();
@@ -31,20 +39,52 @@ public class MainMenuController extends Controller {
 
 	@Override
 	public Controller takeInputAndUpdate(int key) {
-		Controller c = this;
-		if(key == 1){
-			c = MainMenuController.getInstance();
-		}if(key == 2){
-			
-			c = AvatarCreationMenuController.getInstance();		
-		}
-		return c;
+		controllerToReturn = this;
+
+        switch(key){
+            case 0:
+                break;
+            case 1:
+                mainMenu.selectedOptionUp();
+                break;
+            case 2:
+                break;
+
+
+            case 3:
+                break;
+            case 4:
+                doSelectedOption();
+                break;
+            case 5:
+                break;
+
+
+            case 6:
+                break;
+            case 7:
+                mainMenu.selectedOptionDown();
+                break;
+            case 8:
+                break;
+        }
+
+		return controllerToReturn;
 	}
+
+    private void doSelectedOption(){
+        String selectedOption = mainMenu.getSelectedOption();
+        switch(selectedOption){
+            case "New Game":
+                controllerToReturn = AvatarCreationMenuController.getInstance();
+                break;
+        }
+    }
 
 	@Override
 	public MainMenuViewInteraction populateInteraction() {
-		MainMenuViewInteraction menuViewInteraction = new MainMenuViewInteraction(this.mainMenu);
-		return menuViewInteraction;
+		mainMenuView = new MainMenuViewInteraction(mainMenu);
+		return mainMenuView;
 	}
 
 
@@ -52,5 +92,5 @@ public class MainMenuController extends Controller {
 	public MainMenuKeyboardInput getKeyBoardInput(){
 		return keyboardInput;
 	}
-	
+
 }

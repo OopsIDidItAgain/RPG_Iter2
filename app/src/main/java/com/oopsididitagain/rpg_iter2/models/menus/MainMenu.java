@@ -5,27 +5,42 @@ package com.oopsididitagain.rpg_iter2.models.menus;
 
 public class MainMenu {
 	private String options[];
-	private int currentOption;
+	private int selectedOption;
 
     public MainMenu(){
-        options = new String[]{"New Game", "Load Game", "Controls", "none"};
-        
-        currentOption = 3;
+        options = new String[]{"New Game", "Load Game", "Controls"};
+
+        selectedOption = 0;
        
     }
     
-    public void setOption(int option){
-    	
-    	currentOption = option;
+    public void selectedOptionUp(){
+    	if(selectedOption > 0 )
+            selectedOption -=1;
+    }
+
+    public void selectedOptionDown(){
+        if(selectedOption < options.length-1 )
+            selectedOption +=1;
     }
     
-    public int getCurrentOption(){
+    public int getSelectedOptionIndex(){
     	
-    	return currentOption;
+    	return selectedOption;
     }
-    public String getOptions(int i){
+
+    public String getSelectedOption(){
+
+        return options[selectedOption];
+    }
+
+    public String getOption(int i){
     	return options[i];
 
+    }
+
+    public int getNumOfOptions(){
+        return  options.length;
     }
 
 

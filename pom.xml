@@ -13,10 +13,9 @@
 
     <build>
         <sourceDirectory>app/src/main/java</sourceDirectory>
-
         <resources>
             <resource>
-                <directory>app/src</directory>
+                <directory>app/src/main/resources</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
@@ -38,13 +37,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.oopsididitagain.RunGame</mainClass>
+                            <mainClass>com.oopsididitagain.rpg_iter2.RunGame</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>OOPsIDidItAgain</finalName>
+                    <finalName>OOPsIDidItAgain_Iteration2</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
 

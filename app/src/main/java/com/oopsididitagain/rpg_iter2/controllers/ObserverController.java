@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.stats.Stat;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.utils.Commands;
 import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 public class ObserverController extends Controller{
@@ -15,9 +16,10 @@ public class ObserverController extends Controller{
 	private EntityMapInteraction entityMapInteraction;
 	private Skill observe;
 	private Avatar avatar;
+	private ObserveKeyboardInput keyboardInput;
 	
 	private ObserverController(){
-
+		this.keyboardInput = new ObserveKeyboardInput();
 
 	}
 
@@ -44,7 +46,7 @@ public class ObserverController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(int key) {
 		Controller c = this;
-		if(key == 3){
+		if(key == Commands.ENTER){
 			c = GameController.getInstance();
 		}
 		return c;
@@ -59,8 +61,7 @@ public class ObserverController extends Controller{
 
 	@Override
 	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return null;
+		return keyboardInput;
 	}
 
 	

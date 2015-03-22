@@ -2,25 +2,24 @@ package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
-import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
-import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 
 public class GameViewInteraction extends ModelViewInteraction{
   
-
     private Game game;
     private Avatar avatar;
     private GameMap gameMap;
@@ -87,13 +86,22 @@ public class GameViewInteraction extends ModelViewInteraction{
 	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
-        
+        Entity entity = t.getEntity();
         	
-        BufferedImage bf = assets.getBufferedImage(tileables.first().getId());
+        Image bf = assets.getImage(tileables.first().getId());
         g.drawImage(bf, x*50,y*50,50,50,null);
 
+        if(entity!=null){
+        	String id = entity.getId();
+        	if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
+        		id+="_sleeping";
+        	}
+            Image b2 = assets.getImage(id);
+            
+            g.drawImage(b2, x*50,y*50,50,50,null);
+
         	
-        
+        }
     }
 
 }
