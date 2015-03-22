@@ -9,6 +9,7 @@ import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
 public class InventoryUsableItem extends InventoryItem implements EntityVisitable, InstantStatModifier {
 	private StatBlob statBlob;
+	private boolean removeable = false;
 	
 	public InventoryUsableItem(String id, double price, StatBlob statBlob) {
 		super(id, price);
@@ -33,6 +34,7 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 	@Override
 	public void accept(Entity entity) {
 		entity.visit(this);
+		removeable = true;
 	}
 	
 	@Override
@@ -44,6 +46,11 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 	@Override
 	public void accept(InventoryViewInteraction inventoryViewInteraction) {
 		inventoryViewInteraction.visit(this);
+	}
+	
+	@Override
+	public boolean removeable() {
+		return removeable;
 	}
 
 }

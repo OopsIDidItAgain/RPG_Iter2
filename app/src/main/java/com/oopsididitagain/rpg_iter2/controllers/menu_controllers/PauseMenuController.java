@@ -43,6 +43,9 @@ public class PauseMenuController extends Controller{
             case USE:
             	Option o = pauseMenu.getCurrentOption();
             	switch(o) {
+            	case Return:
+                	controller = GameController.getInstance();
+            		break;
 				case ExitGame:
 					controller = ExitGameController.getInstance();
 					break;
