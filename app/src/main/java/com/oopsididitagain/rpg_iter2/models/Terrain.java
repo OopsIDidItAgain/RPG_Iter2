@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models;
 
 import com.oopsididitagain.rpg_iter2.utils.Assetable;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
