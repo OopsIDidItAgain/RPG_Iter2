@@ -10,6 +10,7 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInterac
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
+import com.oopsididitagain.rpg_iter2.model_view_interaction.OptionsMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInteraction;
 
 public class View extends JPanel{
@@ -78,6 +79,12 @@ public class View extends JPanel{
 	public void visit(PauseMenuViewInteraction pauseMenuViewInteraction) {
 		this.modelViewInteraction = pauseMenuViewInteraction;
 		drawMapBackground = true;
+		this.repaint();
+		
+	}
+
+	public void visit(OptionsMenuViewInteraction optionsMenuViewInteraction) {
+		this.modelViewInteraction = optionsMenuViewInteraction;
 		this.repaint();
 		
 	}

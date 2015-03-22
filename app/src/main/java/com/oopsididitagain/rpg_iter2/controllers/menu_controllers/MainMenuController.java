@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
+import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
@@ -62,10 +63,12 @@ public class MainMenuController extends Controller {
 			controllerToReturn = AvatarCreationMenuController.getInstance();
 			break;
 		case ExitGame:
+			controllerToReturn = ExitGameController.getInstance();
 			break;
 		case Load:
 			break;
 		case Options:
+			controllerToReturn = OptionsFromStartMenuController.getInstance();
 			break;
 		default:
 			break;

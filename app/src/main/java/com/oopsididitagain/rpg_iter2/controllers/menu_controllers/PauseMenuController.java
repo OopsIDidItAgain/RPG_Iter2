@@ -60,6 +60,7 @@ public class PauseMenuController extends Controller{
             	}
                 break;
             case EXIT:
+            case PAUSE:
             	controller = GameController.getInstance();
             	break;
             default:

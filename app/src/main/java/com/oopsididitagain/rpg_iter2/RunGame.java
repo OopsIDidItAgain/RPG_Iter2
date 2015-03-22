@@ -24,6 +24,7 @@ public class RunGame extends JFrame{
 	    });
 
 		loop.runGame();
+		System.exit(NORMAL);
 	}
 	
 	private void initialize() {

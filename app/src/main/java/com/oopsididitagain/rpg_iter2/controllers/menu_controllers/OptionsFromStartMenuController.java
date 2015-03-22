@@ -9,24 +9,24 @@ import com.oopsididitagain.rpg_iter2.models.menus.OptionsMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.OptionsMenu.Option;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
-public class OptionsMenuController extends Controller {
-	private static OptionsMenuController instance;
+public class OptionsFromStartMenuController extends Controller {
+	private static OptionsFromStartMenuController instance;
 	private OptionsMenu optionsMenu;
 	
-	private OptionsMenuController(OptionsMenu optionsMenu){
+	private OptionsFromStartMenuController(OptionsMenu optionsMenu){
 		this.optionsMenu = optionsMenu;
 	}
 	
-	public static OptionsMenuController getInstance() {
+	public static OptionsFromStartMenuController getInstance() {
 		if ( instance == null ){
-			instance = new OptionsMenuController(new OptionsMenu());
+			instance = new OptionsFromStartMenuController(new OptionsMenu());
 		}
 		return instance;
 	}
 	
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
-		Controller controller = OptionsMenuController.getInstance();
+		Controller controller = OptionsFromStartMenuController.getInstance();
 
         switch(command){
             case MOVE_NORTH:
@@ -42,7 +42,7 @@ public class OptionsMenuController extends Controller {
 				case Audio:
 					break;
 				case Back:
-					controller = PauseMenuController.getInstance();
+					controller = MainMenuController.getInstance();
 					break;
 				case Graphics:
 					break;
@@ -54,7 +54,7 @@ public class OptionsMenuController extends Controller {
             	}
                 break;
             case EXIT:
-            	controller = PauseMenuController.getInstance();
+            	controller = MainMenuController.getInstance();
             	break;
             default:
             	break;
