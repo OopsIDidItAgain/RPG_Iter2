@@ -9,8 +9,8 @@ public class ArmorTakeableItem extends EquipableTakeableItem {
 	private ArmorItemType type;
 
 	public ArmorTakeableItem(String id, Position position,
-			double price, StatBlob statBlob, ArmorItemType type) {
-		super(id, position, price, statBlob);
+			double price, StatBlob statBlob, int rank, ArmorItemType type) {
+		super(id, position, price, statBlob, rank);
 		this.type = type;
 	}
 

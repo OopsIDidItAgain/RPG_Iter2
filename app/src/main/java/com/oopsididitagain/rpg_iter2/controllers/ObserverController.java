@@ -1,25 +1,18 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
-import java.util.LinkedList;
-
-import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ObserverViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.stats.Stat;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class ObserverController extends Controller{
 	private static ObserverController instance;
 	private EntityMapInteraction entityMapInteraction;
 	private Skill observe;
 	private Avatar avatar;
-	private ObserveKeyboardInput keyboardInput;
 	
 	private ObserverController(){
-		this.keyboardInput = new ObserveKeyboardInput();
 
 	}
 
@@ -44,10 +37,14 @@ public class ObserverController extends Controller{
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
-		if(key == Commands.ENTER){
+		switch(command) {
+		case ENTER: 
+		case EXIT: 
 			c = GameController.getInstance();
+			break;
+		default: break;
 		}
 		return c;
 	}
@@ -55,13 +52,8 @@ public class ObserverController extends Controller{
 	@Override
 	public ObserverViewInteraction populateInteraction() {
 		entityMapInteraction.applySkill(avatar, observe);
-		 ObserverViewInteraction observerViewInteraction = new ObserverViewInteraction(observe.getEffect());
-		 return observerViewInteraction;
-	}
-
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		return keyboardInput;
+		ObserverViewInteraction observerViewInteraction = new ObserverViewInteraction(observe.getEffect());
+		return observerViewInteraction;
 	}
 
 	

@@ -9,8 +9,8 @@ public class InventoryWeaponItem extends InventoryEquipableItem {
 	private WeaponItemType type;
 
 	public InventoryWeaponItem(String id, double price,
-			StatBlob statBlob, WeaponItemType type) {
-		super(id, price, statBlob);
+			StatBlob statBlob, WeaponItemType type, int rank) {
+		super(id, price, statBlob, rank);
 		this.type = type;
 	}
 
@@ -30,7 +30,7 @@ public class InventoryWeaponItem extends InventoryEquipableItem {
 
 	@Override
 	public WeaponTakeableItem toTakeableItem(Position position) {
-		WeaponTakeableItem item = new WeaponTakeableItem(getId(), position, price(), statBlob(), type);
+		WeaponTakeableItem item = new WeaponTakeableItem(getId(), position, price(), statBlob(), getRank(), type);
 		return item;
 	}
 

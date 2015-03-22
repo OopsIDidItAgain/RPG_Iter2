@@ -14,9 +14,8 @@ import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
 
 
 public class AvatarCreationMenuController extends Controller {
@@ -24,12 +23,10 @@ public class AvatarCreationMenuController extends Controller {
 	Avatar avatar;
 	GameMap gameMap;
 	private static AvatarCreationMenu avatarCreationMenu;
-	private AvatarCreationMenuKeyboardInput keyboardInput;
 	
 	private AvatarCreationMenuController(){
 		createAvatar();
 		createGameMap();
-		this.keyboardInput = new AvatarCreationMenuKeyboardInput(avatarCreationMenu);
 	}
 	
 	public static AvatarCreationMenuController getInstance() {
@@ -41,23 +38,26 @@ public class AvatarCreationMenuController extends Controller {
 	}
 	
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		Controller controller = AvatarCreationMenuController.getInstance();
 
-		switch(key){
-		case Commands.ENTER:
-		case Commands.USE:
+		switch(command){
+		case MOVE_EAST:
+			avatarCreationMenu.nextOption();
+			break;
+		case MOVE_WEST:
+			avatarCreationMenu.previousOption();
+			break;
+		case ENTER:
+		case USE:
 			switch (avatarCreationMenu.getCurrentOption()) {
-			case 0:
-				System.out.println("");
+			case Summoner:
 				assignSummoner();
 				break;
-			case 1:
-				System.out.println("summoner");
+			case Smasher:
 				assignSmasher();
 				break;
-			case 2:
-				System.out.println("smash");
+			case Sneak:
 				assignSneak();
 				break;
 			}
@@ -65,7 +65,8 @@ public class AvatarCreationMenuController extends Controller {
 			GameController gc = GameController.getInstance();
 			gc.setGame(game);
 			controller = gc;
-			
+			break;
+		default:
 			break;
 		}
 		return controller;	
@@ -105,8 +106,4 @@ public class AvatarCreationMenuController extends Controller {
 		return avatarCreationMenuViewInteraction;
 	}
 
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		return keyboardInput;
-	}
 }

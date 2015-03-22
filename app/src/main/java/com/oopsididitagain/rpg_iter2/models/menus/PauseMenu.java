@@ -23,7 +23,7 @@ public class PauseMenu {
 		currentOption = Option.Save;
 	}
 
-	public void upOption() {
+	public void previousOption() {
 		switch (currentOption) {
 		case Save:
 			break;
@@ -41,7 +41,7 @@ public class PauseMenu {
 		}
 	}
 
-	public void downOption() {
+	public void nextOption() {
 		switch (currentOption) {
 		case Save:
 			currentOption = Option.Load;

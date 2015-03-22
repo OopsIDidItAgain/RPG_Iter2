@@ -1,6 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
-import com.oopsididitagain.rpg_iter2.utils.Commands;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class InventoryMenu {
 
@@ -14,23 +14,23 @@ public class InventoryMenu {
 		this.selectedOption = selectedOption;
 	}
 
-	public void changeMenuOption(int keyCode, int numOfItems) {
-		switch (keyCode) {
-		case Commands.MOVE_NORTH:
+	public void changeMenuOption(Command command, int numOfItems) {
+		switch (command) {
+		case MOVE_NORTH:
 			System.out.println("n");
 			if (selectedOption < 4)
 				;
 			else
 				selectedOption -= 4;
 			break;
-		case Commands.MOVE_SOUTH:
+		case MOVE_SOUTH:
 			System.out.println("s");
 			System.out.println(selectedOption);
 			System.out.println(numOfItems);
 			if (selectedOption + 4 < numOfItems)
 				selectedOption += 4;
 			break;
-		case Commands.MOVE_EAST:
+		case MOVE_EAST:
 			System.out.println("e");
 			System.out.println(selectedOption);
 			System.out.println(numOfItems);
@@ -38,7 +38,7 @@ public class InventoryMenu {
 				selectedOption += 1;
 			}
 			break;
-		case Commands.MOVE_WEST:
+		case MOVE_WEST:
 			System.out.println("w");
 			System.out.println(selectedOption);
 			System.out.println(numOfItems);

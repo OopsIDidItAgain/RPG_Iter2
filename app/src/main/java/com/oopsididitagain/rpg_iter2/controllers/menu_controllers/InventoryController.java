@@ -9,8 +9,7 @@ import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.menus.InventoryMenu;
-import com.oopsididitagain.rpg_iter2.utils.Commands;
-import com.oopsididitagain.rpg_iter2.utils.keyboardInput.*;
+import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class InventoryController extends Controller {
 	private static InventoryController instance;
@@ -33,18 +32,18 @@ public class InventoryController extends Controller {
 	}
 
 	@Override
-	public Controller takeInputAndUpdate(int key) {
+	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
-		switch(key) {
-		case Commands.MOVE_EAST: 
-		case Commands.MOVE_SOUTH: 
-		case Commands.MOVE_NORTH: 
-		case Commands.MOVE_WEST: {
-			inventoryMenu.changeMenuOption(key, inventory.size());
+		switch(command) {
+		case MOVE_EAST: 
+		case MOVE_SOUTH: 
+		case MOVE_NORTH: 
+		case MOVE_WEST: {
+			inventoryMenu.changeMenuOption(command, inventory.size());
 			break;
 		}
-		case Commands.USE:
-		case Commands.EQUIP: {
+		case USE:
+		case EQUIP: {
 			try {
 				int selectedOption = inventoryMenu.getSelectedOption();
 				InventoryItem selectedItem = inventory.getItemAtIndex(selectedOption);
@@ -55,11 +54,11 @@ public class InventoryController extends Controller {
 			}
 			break;
 		}
-		case Commands.INVENTORY: {
+		case INVENTORY: {
 			c = GameController.getInstance();
 			break;
 		}
-		case Commands.DROP: {
+		case DROP: {
 			c = GameController.getInstance();
 			int selectedOption = inventoryMenu.getSelectedOption();
 			InventoryItem selectedItem = inventory.getItemAtIndex(selectedOption);
@@ -67,7 +66,7 @@ public class InventoryController extends Controller {
 			avatar.drop(selectedItem);
 			break;
 		}
-			
+		default: break;
 		}
 		return c;
 	}
@@ -76,12 +75,6 @@ public class InventoryController extends Controller {
 	public ModelViewInteraction populateInteraction() {
 		InventoryViewInteraction inventoryViewInteraction = new InventoryViewInteraction(inventoryMenu, inventory);
 		return inventoryViewInteraction;
-	}
-
-	@Override
-	public KeyBoardInput getKeyBoardInput() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

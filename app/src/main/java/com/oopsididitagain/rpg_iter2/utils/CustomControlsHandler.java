@@ -11,10 +11,31 @@ import java.util.Iterator;
 
 public class CustomControlsHandler {
 	
-	private static HashMap<Integer, Integer> controls;
+	private static HashMap<Integer, Command> controls;
 	
 	static {
-		controls = new HashMap<Integer, Integer>();
+		controls = new HashMap<Integer, Command>();
+		// Initialize with defaults
+		controls.put(87, Command.MOVE_NORTH); // w
+		controls.put(88, Command.MOVE_SOUTH); // x
+		controls.put(68, Command.MOVE_EAST); // d
+		controls.put(65, Command.MOVE_WEST); // a
+		controls.put(69, Command.MOVE_NORTHEAST); // e
+		controls.put(81, Command.MOVE_NORTHWEST); // q
+		controls.put(67, Command.MOVE_SOUTHEAST); // c
+		controls.put(90, Command.MOVE_SOUTHWEST);
+		controls.put(80, Command.PAUSE);
+		controls.put(10, Command.ENTER);
+		controls.put(73, Command.INVENTORY);
+		controls.put(83, Command.USE);
+		controls.put(75, Command.DROP);
+		controls.put(27, Command.EXIT);
+		controls.put(49, Command.SKILLONE);
+		controls.put(50, Command.SKILLTWO);
+		controls.put(51, Command.SKILLTHREE);
+		controls.put(52, Command.SKILLFOUR);
+		controls.put(53, Command.SKILLFIVE);
+		controls.put(54, Command.SKILLSIX);
 	}
 	
 	public static void bind(Integer key, Integer command) {
@@ -28,14 +49,16 @@ public class CustomControlsHandler {
 			controls.remove(prevKey);
 		}
 		controls.remove(newKey);
-		controls.put(newKey, command);
 	}
 	
-	public static Integer getKeyboardKeyCommand(Integer key) {
-		return controls.get(key);
+	public static Command getKeyboardKeyCommand(Integer key) {
+		if (controls.get(key) == null)
+			return Command.UNKNOWN;
+		else
+			return controls.get(key);
 	}
 	
-	public static void saveControls(HashMap<Integer, Integer> controls, File file) {
+	public static void saveControls(HashMap<Integer, Command> controls, File file) {
 		BufferedWriter writer = null;
 		try {
 			if(file.createNewFile()) {
@@ -47,8 +70,8 @@ public class CustomControlsHandler {
 			Iterator<Integer> iterator = controls.keySet().iterator();
 			while(iterator.hasNext()) {
 				Integer key = iterator.next();
-				Integer command = controls.get(key);
-				writer.write(key + "," + command + "\n");
+				Command command = controls.get(key);
+				writer.write(key + "," + command.toString() + "\n");
 				iterator.remove();
 			}
 			writer.flush();
@@ -65,8 +88,8 @@ public class CustomControlsHandler {
 		}
 	}
 	
-	public static HashMap<Integer, Integer> loadControls(File file) {
-		HashMap<Integer, Integer> controls = new HashMap<Integer, Integer>();
+	public static HashMap<Integer, Command> loadControls(File file) {
+		HashMap<Integer, Command> controls = new HashMap<Integer, Command>();
 		
 		BufferedReader reader = null;
 		if(file.exists()) {
@@ -77,7 +100,8 @@ public class CustomControlsHandler {
 				String line;
 				while((line = reader.readLine()) != null) {
 					String[] split = line.split(",");
-					controls.put(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+					String enumerationId = split[1];
+					controls.put(Integer.parseInt(split[0]), Command.fromString(enumerationId));
 				}
 			} catch(IOException ioe) {
 				System.err.println("Error loading custom controls");
@@ -97,7 +121,7 @@ public class CustomControlsHandler {
 		return controls;
 	}
 	
-	public static void setControls(HashMap<Integer, Integer> newControls) {
+	public static void setControls(HashMap<Integer, Command> newControls) {
 		controls = newControls;
 	}
 	

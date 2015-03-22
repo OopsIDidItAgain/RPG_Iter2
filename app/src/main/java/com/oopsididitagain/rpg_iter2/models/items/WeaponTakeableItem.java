@@ -8,8 +8,8 @@ public class WeaponTakeableItem extends EquipableTakeableItem {
 	private WeaponItemType type;
 
 	public WeaponTakeableItem(String id, Position position,
-			double price, StatBlob statBlob, WeaponItemType type) {
-		super(id, position, price, statBlob);
+			double price, StatBlob statBlob, int rank, WeaponItemType type) {
+		super(id, position, price, statBlob, rank);
 		this.type = type;
 	}
 	

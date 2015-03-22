@@ -128,7 +128,7 @@ public class GameMap {
 		for(int i =lowerBoundHeight; i != upperBoundHeight; ++i){
 			for(int j = lowerBoundWidth; j != upperBoundWidth; ++j){
 				if(i == y && j == x){
-					Position center = new Position(startingY,startingY);
+					Position center = new Position(startingY,startingX);
 					minimap.setCenter(center);
 				}
 				returningTiles[startingY][startingX] = tiles[i][j];

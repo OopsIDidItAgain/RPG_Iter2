@@ -12,7 +12,7 @@ import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 public class PickPocket implements Effect{
 	int numberOfItemsStolen;
 	int baseNumberOfItemsStolen = 1;
-	int baseRadius = 1;
+	int baseRadius = 2;
 	int radius;
 	
 	@Override
