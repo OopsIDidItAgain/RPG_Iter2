@@ -116,6 +116,7 @@ public class View extends JPanel {
 	}
 
 	public void visit(DialogueViewInteraction dialogueViewInteraction) {
+		drawMapBackground = true;
 		this.modelViewInteraction = dialogueViewInteraction;
 		this.repaint();
 	}

@@ -60,10 +60,18 @@ public abstract class Occupation {
 	public abstract Skill getFightSkill(Command command);
 	public abstract Skill getActiveSkill(Command command);
 	public void increaseMultiplier(int selop) {
-		if(selop < gameSkillList.size() && selop >= 0){
+		ArrayList<Skill> totalSkills = getTotalSkills();
+		if(selop < totalSkills.size() && selop >= 0){
 			Skill skill = gameSkillList.get(selop);
 			skill.increaseMultiplier();
-		}	
+			System.out.println(skill.getName() + " "  + skill.getMultiplier());
+		}
+	}
+	public ArrayList<Skill> getTotalSkills(){
+		ArrayList<Skill> totalSkills = new ArrayList<Skill>();
+		totalSkills.addAll(gameSkillList);
+		totalSkills.addAll(passiveSkillArray);
+		return totalSkills;
 	}
 	
 	

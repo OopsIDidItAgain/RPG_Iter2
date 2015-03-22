@@ -7,7 +7,7 @@ import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
-public class StatModifier implements Effect, InstantStatModifier{
+public abstract class StatModifier implements Effect, InstantStatModifier{
 	StatBlob baseStatblob;
 	StatBlob statblob;
 	int radius;
@@ -20,8 +20,8 @@ public class StatModifier implements Effect, InstantStatModifier{
 	
 	@Override
 	public void applyMultiplier(int m) {
-		statblob = baseStatblob;
-		
+		statblob = baseStatblob.multiply(m);
+		radius = baseRadius * m;
 	}
 	@Override
 	public StatBlob statBlob() {
@@ -40,7 +40,7 @@ public class StatModifier implements Effect, InstantStatModifier{
 	}
 	
 	public void changeStats(Entity entity, Avatar avatar) {
-		// TODO Auto-generated method stub
+		System.out.println("oops nothing happened");
 		
 	}
 

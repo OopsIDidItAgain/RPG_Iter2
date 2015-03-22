@@ -167,6 +167,14 @@ public class StatCollection {
 		return unusedSkillPoints;
 	}
 
+	public int getMovementSpeed() {
+		if(blob.getMovement() < 2){
+			return 1;
+		}else{
+			return (int) Math.floor(blob.getMovement());
+		}
+	}
+
 }
 
 

@@ -10,12 +10,12 @@ public class SkillAllocationMenu{
 	}
 	public void changeMenuOption(Command command) {
 		switch (command) {
-		case MOVE_NORTH:
+		case MOVE_SOUTH:
 			if (selectedOption < length-1) {
 				selectedOption += 1;
 			}
 			break;
-		case MOVE_SOUTH:
+		case MOVE_NORTH:
 			if (selectedOption > 0) {
 				selectedOption -= 1;
 			}

@@ -63,7 +63,7 @@ public class Avatar extends Entity implements StatModifiable {
 		Skill bargain = new Skill(Skill.BARGAIN);
 		Discount discount = new Discount(.05);
 		bargain.setEffect(discount);
-		passiveSkillList.put(Skill.BARGAIN, bargain);
+		gameSkillList.add(bargain);
 		//observe active
 		
 		Skill observe = new Skill(Skill.OBSERVATION);
@@ -220,6 +220,14 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public void setWeapon(InventoryWeaponItem inventoryWeaponItem) {
 		armory.equip(inventoryWeaponItem);
+	}
+
+	public int getMovementSpeed() {
+		return stats.getMovementSpeed();
+	}
+
+	public void setStatBlob(StatBlob avstatBlob) {
+		stats.mergeBlob(avstatBlob);
 	}
 	
 	public boolean kill() {
