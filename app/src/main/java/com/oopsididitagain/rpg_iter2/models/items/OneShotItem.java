@@ -24,11 +24,6 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	}
 
 	@Override
-	public void affect(StatBlob target) {
-		target.merge(statBlob());
-	}
-
-	@Override
 	public int compareTo(Tileable o) {
 		return getTileablePriority().compareTo(o.getTileablePriority());
 	}

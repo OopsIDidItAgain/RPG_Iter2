@@ -34,11 +34,6 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	}
 
 	@Override
-	public void affect(StatBlob target) {
-		target.merge(statBlob());
-	}
-
-	@Override
 	public boolean removeable() {
 		return false;
 	}

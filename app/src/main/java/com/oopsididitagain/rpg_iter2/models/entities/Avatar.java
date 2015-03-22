@@ -133,7 +133,7 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	@Override
 	public void visit(InstantStatModifier modifier) {
-		modifier.affect(statBlob());
+		stats.mergeBlob(modifier.statBlob());
 	}
 
 	@Override
