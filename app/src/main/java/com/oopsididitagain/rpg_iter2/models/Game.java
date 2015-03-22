@@ -30,6 +30,7 @@ public class Game {
 		Position position3 = new Position(6, 2);
 		Position position4 = new Position(6, 5);
 		Position position7 = new Position(9, 9);
+		Position position9 = new Position(1,0);
 
 		StatBlob statBlob1 = new StatBlob(0, 30, 0, 0, 0, 0, 0, 20, 20);
 		StatBlob statBlob2 = new StatBlob(0, 0, 30, 0, 0, 0, 0, 20, 20);
@@ -70,6 +71,9 @@ public class Game {
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
+		
+		//Trap trap = new Trap("bearTrap", position9);
+		//gameMap.getTileAt(position9).add(trap);
 		
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);

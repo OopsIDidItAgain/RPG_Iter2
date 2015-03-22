@@ -197,7 +197,9 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
         Entity entity = t.getEntity();
-        	
+        //if(tileables.first().getId().equals("bearTrap")){
+        //	System.out.println("trapppp");
+        //}
         Image bf = assets.getImage(tileables.first().getId());
         g.drawImage(bf, x *50,y *50,50,50,null);
 
@@ -214,6 +216,9 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
         	}
         	if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
         		id+="_sad";
+        	}
+        	if(entity.getEntityStatus().getStatus() == EntityStatus.TRAPPED){
+        		id+="_flying";
         	}
             Image b2 = assets.getImage(id);
             
