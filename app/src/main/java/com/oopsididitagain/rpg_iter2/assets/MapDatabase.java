@@ -204,10 +204,6 @@ public class MapDatabase {
 				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[position.getY()][position.getX()], parseTerrain(tokens), (InventoryUnusableItem) unusableMap.get(requirementId).toInventoryItem()));
     			break;
     		}
-    		if (positionedGameObject == null) {
-    			System.out.println("NULL TILEABLE WHILE BUILDING MAP DATABASE");
-    			continue;
-    		}
     	}
     }
     
