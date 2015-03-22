@@ -1,5 +1,9 @@
 package com.oopsididitagain.rpg_iter2.models.entities;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
@@ -75,8 +79,9 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		return isCurrentlyFlying;
 	}
 	
-	public void toggleFlight() {
-		isCurrentlyFlying = !isCurrentlyFlying;
+	public void setFlying(boolean flying) {
+		isCurrentlyFlying = !flying;
+		
 	}
 
 	@Override
