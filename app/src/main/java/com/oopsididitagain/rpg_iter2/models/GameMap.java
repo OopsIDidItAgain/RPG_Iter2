@@ -102,21 +102,21 @@ public class GameMap {
 	
 	public MiniMap getTiles(int y, int x, int radius) {
 	
-		int upperBoundHeight = y + radius;
+		int upperBoundHeight = y + radius+1;
 		if(upperBoundHeight > tiles.length){
 			upperBoundHeight = tiles.length;
 		}
-		int lowerBoundHeight = y - radius;
+		int lowerBoundHeight = y - radius - 1;
 		if(lowerBoundHeight < 0){
 			lowerBoundHeight = 0;
 		}
 		int newHeight = upperBoundHeight - lowerBoundHeight;
 		
-		int upperBoundWidth = x + radius;
+		int upperBoundWidth = x + radius + 1;
 		if(upperBoundWidth > tiles[0].length){
 			upperBoundWidth = tiles[0].length;
 		}
-		int lowerBoundWidth = x - radius;
+		int lowerBoundWidth = x - radius - 1;
 		if(lowerBoundWidth < 0){
 			lowerBoundWidth = 0;
 		}

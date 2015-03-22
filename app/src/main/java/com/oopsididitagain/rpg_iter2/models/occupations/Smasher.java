@@ -5,16 +5,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.effects.WeaponBasedStatModifier;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Command;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Smasher extends Occupation{
 
 
 	@Override
-	public void giveSkills() {
+	public void giveSkills(Avatar avatar) {
 		//One handed passive
+		StatBlob statblob = new StatBlob(0, 0, 10, 0, 0, 0, 0, 0, 0);
+		WeaponBasedStatModifier wp = new WeaponBasedStatModifier(statblob, 0, WeaponItemType.ONE_HANDED_WEAPON);
+		Skill oneHandedWeapon = new Skill(Skill.ONEHAND);
+		oneHandedWeapon.setEffect(wp);
+		passiveSkillArray.add(oneHandedWeapon);
+		passiveSkillList.put(oneHandedWeapon.getName(),oneHandedWeapon);
 		//TwoHanded passive
+		
+		wp = new WeaponBasedStatModifier(statblob, 0, WeaponItemType.TWO_HANDED_WEAPON);
+		Skill twoHandedWeapon = new Skill(Skill.TWOHAND);
+		twoHandedWeapon.setEffect(wp);
+		passiveSkillArray.add(twoHandedWeapon);
+		passiveSkillList.put(twoHandedWeapon.getName(),twoHandedWeapon);
 		//Brawl passive
+		wp = new WeaponBasedStatModifier(statblob, 0, WeaponItemType.FISTS);
+		Skill brawl = new Skill(Skill.BRAWL);
+		brawl.setEffect(wp);
+		passiveSkillArray.add(brawl);
+		passiveSkillList.put(brawl.getName(),brawl);
 		//TODO
 	
 	}

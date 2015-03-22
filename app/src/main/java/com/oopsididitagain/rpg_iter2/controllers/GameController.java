@@ -33,6 +33,7 @@ public class GameController extends Controller{
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
+	private boolean isFlying = false;
 
 	private GameController(){
 
@@ -56,7 +57,7 @@ public class GameController extends Controller{
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
 		c = performSkillCommand(command);
-
+		performPassiveSkills();
 		Direction targetDirection = null;
 		switch(command){
 		case MOVE_SOUTH: 
@@ -87,6 +88,10 @@ public class GameController extends Controller{
 			break;
 		case SKILLALLOCATION:
 			c = SkillPointAllocationController.getInstance();
+		case FLIGHT:
+			avatar.setFlying(isFlying);
+			isFlying = !isFlying;
+			break;
 		default:
 			break;
 		}
@@ -129,9 +134,6 @@ public class GameController extends Controller{
 			    boolean isSuccessful = entityMapInteraction.move(npc, p);
 				}
 			}
-			
-		
-
 		}
 		return c;
 	}
@@ -180,6 +182,13 @@ public class GameController extends Controller{
 		}
 		return c;
 	}
+	public void performPassiveSkills(){
+		ArrayList<Skill> passiveSkill = avatar.getPassiveSkillList();
+		for(Skill skill: passiveSkill)
+		{
+			entityMapInteraction.applySkill(avatar,skill);
+		}
+	}
 
 	private void createEntityMapInteraction() {
 		entityMapInteraction = new EntityMapInteraction(gameMap);
@@ -198,6 +207,12 @@ public class GameController extends Controller{
 		this.gameMap = gameMap;
 	}
 
+	//public void toggleFlight(){
+		//if(!gameMap.getTileAt(avatar.getPosition()).getTerrain().isWater()) {
+		//	avatar.setFlying(!avatar.isFlying());
+		//}
+	//}
+	
 	@Override
 	public GameViewInteraction populateInteraction() {
 

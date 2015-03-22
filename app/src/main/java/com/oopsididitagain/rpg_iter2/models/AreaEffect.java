@@ -16,8 +16,14 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	public AreaEffect(String id, Position position, AreaEffectType type) {
 		super(id, position);
 		this.type = type;
+	} // ^^ we should deprecate this if no one's using it
+	
+	public AreaEffect( Decal decal, Position position, AreaEffectType type) {
+		super(decal.getId(), position );
+		// the image id is inside of decal
+		this.type = type;
 	}
-
+	
 	@Override
 	public void accept(Entity entity) throws InvalidMovementException {
 		entity.visit(this);

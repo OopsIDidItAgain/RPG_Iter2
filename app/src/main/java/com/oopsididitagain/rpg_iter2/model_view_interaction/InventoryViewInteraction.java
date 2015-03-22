@@ -6,9 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.RoundRectangle2D;
+import java.util.LinkedList;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
+import com.oopsididitagain.rpg_iter2.models.entities.Bank;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryEquipableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
@@ -20,10 +22,16 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 	private InventoryMenu inventoryMenu;
 	private Inventory inventory;
 	private Graphics2D gr;
+	private Bank bank = null;
 
 	public InventoryViewInteraction(InventoryMenu inventoryMenu, Inventory inventory) {
 		this.inventoryMenu = inventoryMenu;
 		this.inventory = inventory;
+	}
+	public InventoryViewInteraction(InventoryMenu inventoryMenu, Inventory inventory, Bank bank) {
+		this.inventoryMenu = inventoryMenu;
+		this.inventory = inventory;
+		this.bank = bank;
 	}
 
 	@Override
@@ -73,11 +81,20 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 		g2.setPaint(Color.green);
 
 		int x = 130, y = 90;
-		String[] s = { "OPTION: " + option,
-				"Press USE or your 'use' key to select/unselect item",
-				"Press INVENTORY to close inventory", "Press INVENTORY to close inventory" };
-		for (int i = 0; i < 3; i++)
-			g2.drawString(s[i], x, y += g2.getFontMetrics().getHeight());
+		LinkedList<String> displayString = new LinkedList<String>();
+		displayString.add("OPTION: "+ option);
+		displayString.add("Press USE or your 'use' key to select/unselect item");
+		displayString.add("Press INVENTORY to close inventory");
+	
+		if(bank!=null){
+			displayString.add("$" + bank.getAvailableFunds());
+			for (int i = 0; i < 4; i++)
+				g2.drawString(displayString.get(i), x, y += g2.getFontMetrics().getHeight());
+		}else{
+			for (int i = 0; i < 3; i++)
+				g2.drawString(displayString.get(i), x, y += g2.getFontMetrics().getHeight());
+		}
+		
 		
 		int size = inventory.size();
 		int count = bottom;

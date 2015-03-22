@@ -6,13 +6,14 @@ import java.util.Map;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class Sneak extends Occupation{
 
 	@Override
-	public void giveSkills() {
+	public void giveSkills(Avatar avatar) {
 		// TODO Auto-generated method stub
 		
 		//pickpocket active

@@ -28,8 +28,10 @@ import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
+import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Avatar extends Entity implements StatModifiable {
 
@@ -47,7 +49,7 @@ public class Avatar extends Entity implements StatModifiable {
 	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;
 		giveBaseSkills();
-		occupation.giveSkills();
+		occupation.giveSkills(this);
 	}
 
 	private void giveBaseSkills() {
@@ -173,8 +175,12 @@ public class Avatar extends Entity implements StatModifiable {
 		Position position = this.position.createPositionAtDirection(getDirection());
 	}
 	
-	public String StatToString(){
-		return stats.primaryViewport() + stats.derivedViewport();
+	public String[] primaryStats() {
+		return stats.primaryStatArray();
+	}
+	
+	public String[] derivedStats() {
+		return stats.derivedStatArray();
 	}
 
 	public void minusUnusedSkillPoints() {
@@ -197,6 +203,20 @@ public class Avatar extends Entity implements StatModifiable {
 	public void attemptInhibition(MovementProbe movementProbe) {
 		movementProbe.denyMovement();
 	}
+
+	public WeaponItemType getWeaponType() {
+		return armory.getWeaponItemType();
+	}
+
+	public ArrayList<Skill> getPassiveSkillList() {
+		return occupation.getPassiveSkillArray();
+	}
+
+	public void setWeapon(InventoryWeaponItem inventoryWeaponItem) {
+		armory.equip(inventoryWeaponItem);
+	}
+
+	
 
 	
 }

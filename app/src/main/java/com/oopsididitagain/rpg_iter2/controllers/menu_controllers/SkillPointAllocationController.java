@@ -52,10 +52,14 @@ public class SkillPointAllocationController extends Controller{
             case ENTER:
             case USE:
             	int selop = skillMenu.getMenuOption();
+            	//add check for 0
             	occupation.increaseMultiplier(selop);
             	avatar.minusUnusedSkillPoints();
+
             	break;
             case EXIT:
+            	//LinkedList<String> skills = 
+            	//GameController gc = gc.performPassiveSkill(skill);
             default:
             	break;
         }

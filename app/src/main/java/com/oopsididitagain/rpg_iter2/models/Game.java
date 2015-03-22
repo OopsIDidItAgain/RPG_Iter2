@@ -12,6 +12,7 @@ import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.ArmorItemType;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
@@ -47,6 +48,17 @@ public class Game {
 		buddy.setStoryline(new Storyline(" >> I'm Luigi."));
 		buddy.getInventory().add(pgo);
 		
+		// heal damage
+		Position heartposition = new Position(8,0);
+		Decal heal = new Decal("heart_decal");
+		AreaEffect heal_decal = new AreaEffect(heal, heartposition, AreaEffectType.HEAL_DAMAGE);
+		gameMap.getTileAt(heartposition).add(heal_decal);
+		
+		// take damage
+		Position skullposition = new Position(8,1);
+		Decal damage = new Decal("take_damage_decal");
+		AreaEffect damage_decal = new AreaEffect(damage, skullposition, AreaEffectType.TAKE_DAMAGE);
+		gameMap.getTileAt(skullposition).add(damage_decal);
 		
 		NonTradingNPC sheep = new NonTradingNPC("sheep", position5, statBlob1);
 		

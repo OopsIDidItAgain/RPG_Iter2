@@ -7,13 +7,14 @@ import java.util.Random;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class Summoner extends Occupation{
 
 	@Override
-	public void giveSkills() {
+	public void giveSkills(Avatar avatar) {
 		// TODO Auto-generated method stub
 		//enchantment active and fight
 		Skill enchantment_sleep = new Skill(Skill.ENCHANTMENT);

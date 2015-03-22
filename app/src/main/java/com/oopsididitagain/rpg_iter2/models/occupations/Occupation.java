@@ -6,13 +6,15 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public abstract class Occupation {
-	public abstract void giveSkills();
+	public abstract void giveSkills(Avatar avatar);
 	
 	protected ArrayList<Skill> gameSkillList = new ArrayList<Skill>();
 	protected ArrayList<Skill> fightSkillList = new ArrayList<Skill>();
+	protected ArrayList<Skill> passiveSkillArray = new ArrayList<Skill>();
 	protected Map<String,Skill> passiveSkillList = new HashMap<String,Skill>();
 	
 	public LinkedList<String> getGameSkillListString() {
@@ -29,6 +31,13 @@ public abstract class Occupation {
 		}
 		return skillStrings;
 	}
+	public LinkedList<String> getPassiveSkillListString() {
+		LinkedList<String> skillStrings = new LinkedList<String>();
+		for(Skill s: passiveSkillArray){
+			skillStrings.add(s.getName());
+		}
+		return skillStrings;
+	}
 	
 	public ArrayList<Skill> getGameSkillList() {
 		return gameSkillList;
@@ -36,8 +45,14 @@ public abstract class Occupation {
 	public ArrayList<Skill> getFightSkillList() {
 		return fightSkillList;
 	}
+	public ArrayList<Skill> getFightSkillArray() {
+		return passiveSkillArray;
+	}
 	public Map<String, Skill> getPassiveSkillList() {
 		return passiveSkillList;
+	}
+	public ArrayList<Skill> getPassiveSkillArray() {
+		return passiveSkillArray;
 	}
 	public Skill getPassiveSkill(String skill) {
 		return passiveSkillList.get(skill);

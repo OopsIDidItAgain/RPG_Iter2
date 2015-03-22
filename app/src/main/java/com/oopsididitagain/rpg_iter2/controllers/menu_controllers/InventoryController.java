@@ -1,11 +1,14 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
 
+import java.util.ArrayList;
+
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.InventoryViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
+import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.menus.InventoryMenu;
@@ -48,6 +51,8 @@ public class InventoryController extends Controller {
 				int selectedOption = inventoryMenu.getSelectedOption();
 				InventoryItem selectedItem = inventory.getItemAtIndex(selectedOption);
 				selectedItem.accept(avatar);
+				GameController gc = GameController.getInstance();
+				gc.performPassiveSkills();
 				if (selectedItem.removeable()) // Mixed Instance Cohesion :'(
 					inventory.remove(selectedItem);
 			} catch (IndexOutOfBoundsException ex) {
@@ -78,5 +83,6 @@ public class InventoryController extends Controller {
 		InventoryViewInteraction inventoryViewInteraction = new InventoryViewInteraction(inventoryMenu, inventory);
 		return inventoryViewInteraction;
 	}
+
 
 }
