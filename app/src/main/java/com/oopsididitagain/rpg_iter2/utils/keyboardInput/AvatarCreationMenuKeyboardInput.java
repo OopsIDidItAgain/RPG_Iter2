@@ -66,14 +66,14 @@ public class AvatarCreationMenuKeyboardInput extends KeyBoardInput implements Ke
 		this.loadGameButton = new Rectangle(width/2 - 100, height/2 + 50 + padding, 200, 50);
 		this.controlsButton = nexw Rectangle(width/2 - 100, height/2 + 110 + padding, 200, 50);
        */
-		int mouseX = e.getX();
-
-		if ((mouseX > 0) && (mouseX < View.WIDTH / 3))
-			avatarCreationMenu.setOption(0);
-		else if ((mouseX >= View.WIDTH / 3) && (mouseX < (2 * View.WIDTH) / 3))
-			avatarCreationMenu.setOption(1);
-		else
-			avatarCreationMenu.setOption(2);
+//		int mouseX = e.getX();
+//
+//		if ((mouseX > 0) && (mouseX < View.WIDTH / 3))
+//			avatarCreationMenu.setOption(0);
+//		else if ((mouseX >= View.WIDTH / 3) && (mouseX < (2 * View.WIDTH) / 3))
+//			avatarCreationMenu.setOption(1);
+//		else
+//			avatarCreationMenu.setOption(2);
 	}
 
 	@Override
