@@ -1,6 +1,7 @@
 package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
@@ -157,14 +158,36 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		
 	}
     private void drawStats(Graphics g) {
+    	// fonts
+		Font header = new Font("TimesRoman", Font.BOLD, 20);
+		Font text = new Font("TimesRoman", Font.PLAIN, 20);
+    	
 		LinkedList<String> skills = avatar.getActiveSkillList();
 		g.setColor(Color.yellow);
 		g.fillRect(0, 560, View.pWidth, View.pHeight - 560);
-		int startingWidth = 0;
-		String stats = avatar.StatToString();
+		int height = 565, heightjump = 18, width = 10;
+		String[] primaries = avatar.primaryStats();
+		String[] deriveds = avatar.derivedStats();
 		g.setColor(Color.black);
-		g.drawString(stats, 0, 600);
+		for (String s : primaries) {
+			if (s.equals("PRIMARY STATS")) g.setFont(header);
+			
+			g.drawString(s, width, height += heightjump);
+			
+			if (height > 650) { // new line
+				width = 150;
+				height = 565 + heightjump + 10;
+			}
+			
+			if (s.equals("PRIMARY STATS")) {g.setFont(text); height+=10;}
+		}
 		
+		width = 340; height = 565;
+		for (String s : deriveds) {
+			if (s.equals("SECONDARY STATS")) g.setFont(header);
+			g.drawString(s, width, height += heightjump);
+			if (s.equals("SECONDARY STATS")) {g.setFont(text); height+=10;}
+		}
 	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
