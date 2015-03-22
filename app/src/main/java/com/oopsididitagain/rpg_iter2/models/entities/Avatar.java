@@ -37,6 +37,7 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public Avatar(String id, Position position,StatBlob statblob) {
 		super(id, position,statblob);
+		
 	}
 
 	public void setOccupation(Occupation occupation) {

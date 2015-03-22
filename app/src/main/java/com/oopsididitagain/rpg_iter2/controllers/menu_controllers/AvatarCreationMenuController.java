@@ -88,7 +88,7 @@ public class AvatarCreationMenuController extends Controller {
 	private void createAvatar() {
 		Position position = new Position(0,0);
 		StatBlob statBlob = new StatBlob(0, 0, 0, 0, 0, 0, 0, 20, 20);
-		avatar = new Avatar("Avatar", position,statBlob);
+		avatar = new Avatar("avatar", position,statBlob );
 		
 	}
 	private void switchControllers(GameController controller){

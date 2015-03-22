@@ -60,6 +60,7 @@ public class GameController extends Controller{
 	public void setGame(Game g){
 		
 		game = g;
+		this.avatar = g.getAvatar();
 	}
 	public static GameController getInstance() {
 		if ( instance == null ){
@@ -71,7 +72,7 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(int command) {
 		Controller c = this;
-		performSkillCommand(command);
+		//performSkillCommand(command);
 		Direction targetDirection = null;
 		switch(command){
 		case Commands.MOVE_EAST: targetDirection = Direction.EAST; 
@@ -94,8 +95,9 @@ public class GameController extends Controller{
 			c = InventoryController.getInstance();
 			break;
 		}
-		Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
+		
 		if (targetDirection != null) {
+			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
 			boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
 			/*if (successfulMove) {
 				for (Npc npc: npcList)

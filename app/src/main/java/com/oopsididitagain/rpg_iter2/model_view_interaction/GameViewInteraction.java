@@ -33,7 +33,6 @@ public class GameViewInteraction extends ModelViewInteraction{
 
 	@Override
 	public void drawModel(Graphics g) {
-
         int Xi = 0;
         int Yi = 0;
 
@@ -43,6 +42,7 @@ public class GameViewInteraction extends ModelViewInteraction{
         for(int y = Yi; y <= Yf; y++ ){
             for(int x = Xi; x<= Xf; x++){
                 try{
+                	
                     drawTile(g, game.getGameMap().getTileAt(new Position(y, x)), x, y);
                 }catch (Exception e){
                     e.printStackTrace();
@@ -55,10 +55,17 @@ public class GameViewInteraction extends ModelViewInteraction{
 
     private void drawTile(Graphics g, Tile t, int x, int y){
         SortedSet<Tileable> tileables =  t.getTilebles();
-
-
+        
+        	
         BufferedImage bf = assets.getBufferedImage(tileables.first().getId());
         g.drawImage(bf, x*50,y*50,50,50,null);
+
+        if(t.getEntity()!=null){
+            BufferedImage b2 = assets.getBufferedImage(t.getEntity().getId());
+            g.drawImage(b2, x*50,y*50,50,50,null);
+
+        	
+        }
     }
 
 }
