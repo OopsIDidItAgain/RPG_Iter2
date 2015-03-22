@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Queue;
 
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 
@@ -44,6 +45,16 @@ public class MapDatabase {
 
     public int getMapX() {
         return mapX;
+    }
+
+    public String getTerrainAtYX(int y, int x){
+
+        return mapGrid[y][x];
+    }
+
+    public String getObjectsAtYX(int y, int x){
+
+        return mapGrid[y][x];
     }
 
     private void readTerrain(){
@@ -96,11 +107,6 @@ public class MapDatabase {
 
     private String readTerrainLine() {
         return readNextLine(gridReader);
-    }
-
-    public String getTerrainAtYX(int y, int x){
-
-        return mapGrid[y][x];
     }
 
     private void readObjects(){
