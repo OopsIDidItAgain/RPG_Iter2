@@ -2,8 +2,8 @@ package com.oopsididitagain.rpg_iter2.models.menus;
 
 public class PauseMenu {
 	public enum Option {
-		Save("Save Game"), Load("Load Game"), Options("Options"), ExitGame(
-				"Exit Game");
+		Return("Return"), Save("Save Game"), Load("Load Game"), Options(
+				"Options"), ExitGame("Exit Game");
 
 		private String name;
 
@@ -20,12 +20,15 @@ public class PauseMenu {
 	private Option currentOption;
 
 	public PauseMenu() {
-		currentOption = Option.Save;
+		currentOption = Option.Return;
 	}
 
 	public void previousOption() {
 		switch (currentOption) {
+		case Return:
+			break;
 		case Save:
+			currentOption = Option.Return;
 			break;
 		case Load:
 			currentOption = Option.Save;
@@ -43,6 +46,9 @@ public class PauseMenu {
 
 	public void nextOption() {
 		switch (currentOption) {
+		case Return:
+			currentOption = Option.Save;
+			break;
 		case Save:
 			currentOption = Option.Load;
 			break;
@@ -62,7 +68,7 @@ public class PauseMenu {
 	public Option[] getOptions() {
 		return currentOption.getDeclaringClass().getEnumConstants();
 	}
-	
+
 	public Option getCurrentOption() {
 		return currentOption;
 	}

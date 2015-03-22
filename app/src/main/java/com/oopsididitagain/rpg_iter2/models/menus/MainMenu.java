@@ -7,7 +7,7 @@ package com.oopsididitagain.rpg_iter2.models.menus;
 public class MainMenu {
 	
 	public enum Option {
-		New("New Game"), Load("Load Game"), Options("Options"), ExitGame(
+		New("New Game"), Load("Load Game"), ExitGame(
 				"Exit Game");
 
 		private String name;
@@ -35,11 +35,8 @@ public class MainMenu {
 		case Load:
 			currentOption = Option.New;
 			break;
-		case Options:
-			currentOption = Option.Load;
-			break;
 		case ExitGame:
-			currentOption = Option.Options;
+			currentOption = Option.Load;
 			break;
 		default:
 			break;
@@ -52,9 +49,6 @@ public class MainMenu {
 			currentOption = Option.Load;
 			break;
 		case Load:
-			currentOption = Option.Options;
-			break;
-		case Options:
 			currentOption = Option.ExitGame;
 			break;
 		case ExitGame:

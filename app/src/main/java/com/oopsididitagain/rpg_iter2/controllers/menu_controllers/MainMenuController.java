@@ -67,9 +67,6 @@ public class MainMenuController extends Controller {
 			break;
 		case Load:
 			break;
-		case Options:
-			controllerToReturn = OptionsFromStartMenuController.getInstance();
-			break;
 		default:
 			break;
 		}
