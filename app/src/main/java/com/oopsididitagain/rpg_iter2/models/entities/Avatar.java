@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import com.oopsididitagain.rpg_iter2.models.Armory;
+import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
@@ -24,6 +25,7 @@ import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
+import com.oopsididitagain.rpg_iter2.utils.Battleable;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
@@ -33,7 +35,7 @@ import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
-public class Avatar extends Entity implements StatModifiable {
+public class Avatar extends Entity implements StatModifiable, Battleable {
 
 	
 	private Occupation occupation;
@@ -192,6 +194,10 @@ public class Avatar extends Entity implements StatModifiable {
 		return stats.getUnusedPoints();
 	}
 
+	public void accept(Battle battle) {
+		battle.visit(this);
+	}
+
 	@Override
 	public void visit(InteractiveItem item) {
 		item.checkRequirement(inventory);
@@ -215,8 +221,5 @@ public class Avatar extends Entity implements StatModifiable {
 	public void setWeapon(InventoryWeaponItem inventoryWeaponItem) {
 		armory.equip(inventoryWeaponItem);
 	}
-
-	
-
 	
 }
