@@ -58,13 +58,9 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = takeStatsAndUpdate(); // this includes things like relocating avatar if dead
-		if (c instanceof GameOverController )  { 
-			System.out.println("INSTANCE OF CHECK!");
+		if (c instanceof GameOverController )
 			return c; // game over
 		
-		}
-		
-		// c = this;
 		c = performSkillCommand(command);
 		performPassiveSkills();
 		Direction targetDirection = null;
@@ -190,7 +186,6 @@ public class GameController extends Controller{
 						gameMap.getTileAt(o), o);
 			}
 			else {
-				System.out.println("GAME OVERRRR");
 				c = GameOverController.getInstance();
 				return c;
 			}
