@@ -91,7 +91,10 @@ public class GameController extends Controller {
 			targetDirection = Direction.NORTHEAST;
 			break;
 		case INVENTORY:
-			c = InventoryController.getInstance();
+            InventoryController ic = InventoryController.getInstance();
+            ic.setCurrentTile(gameMap.getTileAt(avatar.getPosition()));
+			c = ic;
+
 			break;
 		case PAUSE:
 			c = PauseMenuController.getInstance();

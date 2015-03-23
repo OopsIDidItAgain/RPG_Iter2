@@ -9,12 +9,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import com.oopsididitagain.rpg_iter2.models.Armory;
-import com.oopsididitagain.rpg_iter2.models.Battle;
-import com.oopsididitagain.rpg_iter2.models.Inventory;
-import com.oopsididitagain.rpg_iter2.models.MovementProbe;
-import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.*;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
@@ -174,8 +169,9 @@ public class Avatar extends Entity implements StatModifiable {
 		return false;
 	}
 
-	public void drop(InventoryItem selectedItem) {
-		Position position = this.position.createPositionAtDirection(getDirection());
+	public void drop(InventoryItem selectedItem, Tile currentTile) {
+        inventory.remove(selectedItem);
+        currentTile.add(selectedItem.toTakeableItem(currentTile.getPosition()));
 	}
 	
 	public String[] primaryStats() {
@@ -225,10 +221,6 @@ public class Avatar extends Entity implements StatModifiable {
 
 	public int getMovementSpeed() {
 		return stats.getMovementSpeed();
-	}
-
-	public void setStatBlob(StatBlob avstatBlob) {
-		stats.mergeBlob(avstatBlob);
 	}
 	
 	public boolean kill() {
