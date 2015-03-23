@@ -65,6 +65,9 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
             	Color textColor = Color.BLACK;
             	
             	switch(option) {
+            		case Tutorial:
+            			bgColor = Color.YELLOW;
+            			break;
             		case New:
             			bgColor = Color.RED;
             			break;
@@ -85,6 +88,9 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
             	Color color = Color.WHITE;
             	
             	switch(option) {
+            		case Tutorial:
+            			color = Color.YELLOW;
+            			break;
             		case New:
             			color = Color.RED;
             			break;

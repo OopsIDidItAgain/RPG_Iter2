@@ -24,6 +24,8 @@ public abstract class Npc extends Entity {
 
 	Storyline story;
 
+	private int turnsCannotMove;
+
 	public Npc(String id, Position position, StatBlob statblob) {
 		super(id, position, statblob);
 		// TODO Auto-generated constructor stub
@@ -32,6 +34,21 @@ public abstract class Npc extends Entity {
 	public Storyline getStoryline() {
 
 		return story;
+	}
+
+	public void setCantMove(int turns) {
+		this.turnsCannotMove = turns;
+	}
+	
+	public void decrementTurnsCannotMove(int additional) {
+		this.turnsCannotMove = turnsCannotMove - 1 - additional;
+		if(turnsCannotMove < 0) {
+			turnsCannotMove = 0;
+		}
+	}
+
+	public int getTurnsCannotMove() {
+		return turnsCannotMove;
 	}
 
 	public void setStoryline(Storyline story) {
@@ -58,8 +75,7 @@ public abstract class Npc extends Entity {
 
 	@Override
 	public void visit(InstantStatModifier modifier) {
-		// TODO Auto-generated method stub
-
+		statBlob().merge(modifier.statBlob());
 	}
 
 	@Override
@@ -115,4 +131,5 @@ public abstract class Npc extends Entity {
 
 		return a;
 	}
+
 }

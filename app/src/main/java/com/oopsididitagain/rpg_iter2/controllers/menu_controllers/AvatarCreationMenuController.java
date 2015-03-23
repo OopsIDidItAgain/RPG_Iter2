@@ -23,6 +23,7 @@ public class AvatarCreationMenuController extends Controller {
 	public static AvatarCreationMenuController instance;
 	Avatar avatar;
 	GameMap gameMap;
+	boolean tutorial = false;
 	private static AvatarCreationMenu avatarCreationMenu;
 	
 	private AvatarCreationMenuController(){
@@ -63,7 +64,8 @@ public class AvatarCreationMenuController extends Controller {
 				break;
 			}
 			
-			Game game = new Game(this.avatar);
+			Game game = new Game(this.avatar, 1, tutorial);
+			game.setTutorial(tutorial);
 			GameController gc = GameController.getInstance();
 			gc.setGame(game);
 			controller = gc;
@@ -111,4 +113,8 @@ public class AvatarCreationMenuController extends Controller {
 		return avatarCreationMenuViewInteraction;
 	}
 
+	public void setTutorial(boolean t) {
+		System.out.println("Tutorial is set to...."+Boolean.toString(t));
+		tutorial = t;
+	}
 }

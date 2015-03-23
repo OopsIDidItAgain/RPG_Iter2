@@ -63,7 +63,19 @@ public class GameViewInteraction extends ModelViewInteraction{
        
         drawSkills(g);
         drawStats(g);
+        drawTrapped(g);
         
+	}
+private void drawTrapped(Graphics g) {
+	  if(avatar.getEntityStatus().getStatus() == EntityStatus.TRAPPED ){
+      	g.setColor(Color.red);
+      	int trapheight = View.pHeight / 3;
+      	int trapwidth = (int) (View.pWidth / 2);
+      	//g.fillRoundRect(100, 10, 80, 30, 15, 15);
+      	g.setColor(Color.black);
+      	g.drawString("YOU'RE TRAPPED!", trapwidth, trapheight +30);
+     }
+		
 	}
 private void drawTopRight(Graphics g, int top, int right){
 		
@@ -260,10 +272,8 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
             	 Image b2 = assets.getImage(id);
             	 g.drawImage(b2, x *50, y *50,50,50,null);
             }
-           
-
-           
-
+          
+         
             if(effect != null){
                 g.drawImage(effect, x *50, y *50,50,50,null);
             }

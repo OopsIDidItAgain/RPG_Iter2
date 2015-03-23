@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
 import com.oopsididitagain.rpg_iter2.controllers.TradeController;
+import com.oopsididitagain.rpg_iter2.controllers.UseController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ActionMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Battle;
@@ -86,6 +87,12 @@ public class ActionMenuController extends Controller {
 				break;
 			case UseOption:
 				// TODO save logic
+				System.out.println("use item");
+				UseController useController = UseController.getInstance();
+				GameController GameC = GameController.getInstance();
+				Avatar avatar = GameC.getAvatar();
+				useController.setNpc(npc, avatar);
+				controller = useController;
 				break;
 			case Exit:
 				actionMenu.reset(); // go back to first option

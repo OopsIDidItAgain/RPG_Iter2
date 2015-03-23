@@ -74,6 +74,7 @@ public class SkillProbe {
 		MovementProbe probe = new MovementProbe(avatar);
 		while(minimap.inBounds(position)){
 			currentTile = minimap.getTile(position);
+			if(currentTile == null) break;
 			currentTile.checkTileContents(probe);
 			if(probe.checkStatus(TileContentsProbeStatus.ENTITY_DETECTED)){
 				break;
@@ -129,6 +130,7 @@ public class SkillProbe {
 		int i = 0;
 		while(i < removeRadius){
 			currentTile = tiles.getTile(position);
+			if(currentTile == null)break;
 			currentTile.checkTileContents(probe);
 			if(probe.checkStatus(TileContentsProbeStatus.TRAP_DETECTED)){
 				break;

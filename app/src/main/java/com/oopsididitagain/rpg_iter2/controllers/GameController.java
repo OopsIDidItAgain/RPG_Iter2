@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
@@ -18,6 +19,8 @@ import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
 /**
  * In charge of handling input while playing game
@@ -122,12 +125,22 @@ public class GameController extends Controller {
 																					// pressed
 																					// a
 																					// directional
+																				// button
             avatar.setDirection(targetDirection);																		// button
 			// check if we can move in the requested direction
 			Position toPosition = avatar.getPosition()
 					.createPositionAtDirection(targetDirection);
 			boolean successfulMove = entityMapInteraction.move(avatar,
 					toPosition);
+			
+			// check if teleporter is there
+				// teleporter is always at the bottom right corner
+			if (avatar.getX() == gameMap.getWidth()-1 &&
+					avatar.getY() == gameMap.getHeight()-1) {
+				Position o = new Position(0,0);
+				avatar.move(gameMap.getTileAt(avatar.getPosition()), gameMap.getTileAt(o), o);
+				return incrementLevel();
+			}
 
 			if (!successfulMove) {
 				// See if we run into a Npc, down cast but all entities we run
@@ -154,6 +167,26 @@ public class GameController extends Controller {
 		}
 
 		return c;
+	}
+	
+	private GameController incrementLevel() {
+		
+		Position o = new Position(0,0,Direction.SOUTH);
+		
+		
+		int currentLevel = game.getLevel();
+
+		Game newgame = new Game(this.avatar, ++currentLevel);
+		this.setGame(newgame);
+		avatar.move(gameMap.getTileAt(avatar.getPosition()), 
+				gameMap.getTileAt(o), o);
+		
+		// gameMap = newgame.getGameMap();
+		// isFlying = false;
+		// entityMapInteraction = new EntityMapInteraction(gameMap);
+		// takeInputAndUpdate(Command.MOVE_NORTH);
+		populateInteraction();
+		return this;
 	}
 
 	private void moveNpcs() {

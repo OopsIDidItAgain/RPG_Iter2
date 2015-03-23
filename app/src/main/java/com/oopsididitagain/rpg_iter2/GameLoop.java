@@ -43,9 +43,9 @@ public class GameLoop {
 		Controller temp = controller;
 		Command command = CustomControlsHandler.getInstance().getKeyboardKeyCommand(keyboardInput.getInput()); 
 		controller = controller.takeInputAndUpdate(command);
-		if(!controller.equals(temp)) {
+		//if(!controller.equals(temp)) {
 			modelViewInteraction = controller.populateInteraction();
-		}
+		//}
 		
 	}
 

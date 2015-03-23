@@ -1,0 +1,3 @@
+potion_item,2,5,EffectTakeableItem,1,0,0,0,0,0,0,10,0,4.05,,
+sword_item,3,0,WeaponTakeableItem,0,10,0,0,0,0,0,0,0,4.05,10,ONE_HANDED_WEAPON
+carrot_item,4,4,TakeableItem,,,,,,,,,,8.05,,

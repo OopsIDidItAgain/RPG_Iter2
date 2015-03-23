@@ -61,6 +61,7 @@ public class InventoryController extends Controller {
                     gc.performPassiveSkills();
                     if (selectedItem.removeable()) // Mixed Instance Cohesion :'(
                         inventory.remove(selectedItem);
+                    System.out.println(avatar.statBlob().getLifeAmountStat());
                 }
 			} catch (IndexOutOfBoundsException ex) {
 				ex.printStackTrace();
