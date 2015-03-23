@@ -37,7 +37,7 @@ public class InventoryArmorItem extends InventoryEquipableItem {
 
 	@Override
 	public String toSaveableFormat() {
-		String[] arr = { getId(), Double.toString(price()), type.toString(), Boolean.toString(isEquipped()),
+		String[] arr = { "Armor", getId(), Double.toString(price()), type.toString(), Boolean.toString(isEquipped()),
 				Integer.toString(getRank()), statBlob().toSaveFormat() };
 		return IOUtil.commaSeperate(arr);
 	}

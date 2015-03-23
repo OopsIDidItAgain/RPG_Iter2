@@ -51,7 +51,7 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 
 	@Override
 	public String toSaveableFormat() {
-		String[] arr = { getId(), Double.toString(price()), statBlob().toSaveFormat() };
+		String[] arr = { "Usable", getId(), Double.toString(price()), statBlob().toSaveFormat() };
 		return IOUtil.commaSeperate(arr);
 	}
 

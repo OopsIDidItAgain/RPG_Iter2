@@ -33,7 +33,7 @@ public class InventoryUnusableItem extends InventoryItem {
 
 	@Override
 	public String toSaveableFormat() {
-		String[] arr = {getId(), Double.toString(price()) };
+		String[] arr = { "Unusable", getId(), Double.toString(price()) };
 		return IOUtil.commaSeperate(arr);
 	}
 }
