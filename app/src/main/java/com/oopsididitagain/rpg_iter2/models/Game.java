@@ -11,6 +11,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.TradingNPC;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
+import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
@@ -22,11 +23,50 @@ public class Game {
 	private Avatar avatar;
 	private GameMap gameMap;
 	private ArrayList<Npc> listOfNpcs = new ArrayList<Npc>();
+	int level;
+	boolean tutorial;
 	
-	public Game(Avatar avatar){
+	public Game(Avatar avatar, int level, boolean tutorial) {
 		this.avatar = avatar;
-		gameMap = new GameMap(new MapDatabase(1));
-		Position position2 = new Position(3,0);
+		this.level = level;
+		this.tutorial = tutorial;
+		
+		System.out.println("\n\nTUTORIAL IS "+Boolean.toString(tutorial)+"\n");
+		initialize();
+	}
+	
+	public Game(Avatar avatar, int level) {
+		this.avatar = avatar;
+		this.level = level;
+		
+		initialize();
+	}
+	
+	public Game( Avatar avatar, GameMap gameMap){
+	
+		this.avatar = avatar;
+		this.gameMap = gameMap;
+	}
+	
+	public void initialize() {
+		if (tutorial && this.level < 100) this.level += 100;
+		// level = 4;
+		System.out.println("\nCreating game from level "+Integer.toString(level));
+		gameMap = new GameMap(new MapDatabase(level));
+		gameMap.getTileAt((new Position(0,0))).add(avatar);
+
+		if (level == 104)	{	// add a sheep
+			Position p = new Position(1,5);
+			StatBlob sb = new StatBlob(0, 3, 0, 0, 0, 0, 0, 20, 20);
+			NonTradingNPC sheep = new NonTradingNPC("sheep", p, sb);
+			sheep.setStoryline(new Storyline(" >> I'm a sheep."));
+			WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", null, 4.05, sb, 5, WeaponItemType.ONE_HANDED_WEAPON);
+			sheep.getInventory().add(pgo);
+			listOfNpcs.add( sheep );
+			gameMap.getTileAt(p).add(sheep);
+		}
+		
+		/*Position position2 = new Position(3,0);
 		Position position3 = new Position(6, 2);
 		Position position4 = new Position(6, 5);
 		Position position6 = new Position(7, 5);
@@ -80,13 +120,13 @@ public class Game {
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);
 		listOfNpcs.add(shopkeeper);
+		*/
+		// TELEPORTER!
+		
+		Position p = new Position(gameMap.getHeight()-1,gameMap.getWidth()-1);
+		Teleporter door = new Teleporter("teleporter", p);
+		gameMap.getTileAt(p).add(door);
 	}
-	public Game( Avatar avatar, GameMap gameMap){
-	
-		this.avatar = avatar;
-		this.gameMap = gameMap;
-	}
-	
 	public Avatar getAvatar(){
 		
 		return avatar;
@@ -98,4 +138,13 @@ public class Game {
 	public ArrayList<Npc> getListOfNpcs(){
 		return listOfNpcs;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setTutorial(boolean tutorial) {
+		this.tutorial = tutorial;
+	}
+
 }
