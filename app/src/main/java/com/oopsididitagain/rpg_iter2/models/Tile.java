@@ -20,8 +20,8 @@ public class Tile implements Assetable, Positionable {
 	private Terrain terrain;
 
 	public Tile(Position position, Terrain terrain) {
-		this.entityVisitables = new TreeSet<TiledEntityVisitable>();
-		this.probeVisitables = new TreeSet<TiledProbeVisitable>();
+		this.entityVisitables = new TreeSet<>();
+		this.probeVisitables = new TreeSet<>();
 		this.position = position;
 		this.terrain = terrain;
 	}

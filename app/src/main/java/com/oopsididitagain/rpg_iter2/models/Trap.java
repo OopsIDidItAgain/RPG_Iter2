@@ -68,6 +68,8 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
+
+		movementProbe.add(this);
 		
 	}
 	
