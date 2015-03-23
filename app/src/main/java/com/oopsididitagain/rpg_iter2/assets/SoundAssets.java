@@ -1,40 +1,34 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-
 public class SoundAssets {
 
-	private static InputStream soundIdToPathReader;
-	private static HashMap<String, String> paths; //sound id -> path
-	private static HashMap<String, byte[]> sounds; //sound id -> byte data
-	private static HashMap<String, AudioFormat> formats; //sound id -> sound format
-	private static Clip currentBgClip = null;
+
+	private static HashMap<String, String> paths; //sound id ->
+    private static HashMap<String, Clip> sounds; //sound id -> sound
+    private static Clip clip;
 	
 	static {
-		paths = new HashMap<String, String>();
-		sounds = new HashMap<String, byte[]>();
-		formats = new HashMap<String, AudioFormat>();
+		paths = new HashMap<>();
+		sounds = new HashMap<>();
+
 		loadPaths();
 		loadSounds();
 	}
 	
 	private static void loadPaths() {
-		soundIdToPathReader = SoundAssets.class.getClass().getResourceAsStream("/assets/SoundIDsAndPaths.csv");
+		InputStream soundIdToPathReader = SoundAssets.class.getClass().getResourceAsStream("/assets/SoundIDsAndPaths.csv");
 		
 		try {
-			BufferedReader 	pathReader = new BufferedReader(new InputStreamReader(soundIdToPathReader));
+			BufferedReader pathReader = new BufferedReader(new InputStreamReader(soundIdToPathReader));
 
             pathReader.readLine(); // skip first line
 			
@@ -58,15 +52,14 @@ public class SoundAssets {
 			String soundID = iterator.next();
 			System.out.println(SoundAssets.class.getResource(getPath(soundID)));
 			try {
-				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream( SoundAssets.class.getResource(getPath(soundID)) );
-				byte[] buffer = new byte[32 * 1024];
-				int read = 0;
-				ByteArrayOutputStream baos = new ByteArrayOutputStream(buffer.length);
-				while((read = audioInputStream.read(buffer, 0, buffer.length)) != -1) {
-					baos.write(buffer, 0, read);
-				}
-				sounds.put(soundID, baos.toByteArray());
-				formats.put(soundID, audioInputStream.getFormat());
+				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                            new BufferedInputStream(SoundAssets.class.getResourceAsStream(getPath(soundID))
+                        ));
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                sounds.put(soundID,clip);
+
+				
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -74,86 +67,43 @@ public class SoundAssets {
 			iterator.remove();
 		}
 	}
-	
-	public void playClip(String soundID) {
-		byte[] data = sounds.get(soundID);
-		AudioFormat format = formats.get(soundID);
-		
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = new AudioInputStream(new ByteArrayInputStream(data), format, AudioSystem.NOT_SPECIFIED);
-			audioInputStream.reset();
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.start();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void playBgClip(String soundID) {
-		byte[] data = sounds.get(soundID);
-		AudioFormat format = formats.get(soundID);
-		
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = new AudioInputStream(new ByteArrayInputStream(data), format, AudioSystem.NOT_SPECIFIED);
-			audioInputStream.reset();
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			currentBgClip = clip;
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void stopClip(String soundID) {
-		byte[] data = sounds.get(soundID);
-		AudioFormat format = formats.get(soundID);
-		
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = new AudioInputStream(new ByteArrayInputStream(data), format, AudioSystem.NOT_SPECIFIED);
-			audioInputStream.reset();
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.stop();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void stopBgClip() {
-		if(currentBgClip != null) {
-			currentBgClip.stop();
-			currentBgClip = null;
-		}
-	}
-	
-	public void loopClip(String soundID, int cycles) {
-		//sounds.get(soundID).loop(cycles);
-	}
-	
-	public void loopClipContinuously(String soundID) {
-		byte[] data = sounds.get(soundID);
-		AudioFormat format = formats.get(soundID);
-		
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = new AudioInputStream(new ByteArrayInputStream(data), format, AudioSystem.NOT_SPECIFIED);
-			audioInputStream.reset();
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public boolean isBgSoundPlaying() {
-		return (currentBgClip != null);
-	}
+
+    public static void playSound(String soundID){
+        Clip clip = sounds.get(soundID);
+        stopSound(soundID);
+
+        try {
+            System.out.println("Play " + soundID);
+            clip.setFramePosition(0);
+            clip.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void playLooped(String soundID){
+        Clip clip = sounds.get(soundID);
+        stopSound(soundID);
+
+        try {
+            System.out.println("Play " + soundID);
+            clip.setFramePosition(0);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void stopSound(String soundID){
+        Clip clip = sounds.get(soundID);
+        if(clip.isRunning()) {
+            clip.stop();
+
+        }
+    }
 	
 	public static String getPath(String soundID) {
 		return paths.get(soundID);

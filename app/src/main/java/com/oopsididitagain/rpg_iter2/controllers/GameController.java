@@ -45,16 +45,14 @@ public class GameController extends Controller {
 		this.avatar = g.getAvatar();
 		this.gameMap = g.getGameMap();
 		createEntityMapInteraction();
+        SoundAssets.playLooped("main");
 	}
 
 	public static GameController getInstance() {
 		if (instance == null) {
 			instance = new GameController();
 		}
-		
-		if(sa.isBgSoundPlaying()) {
-			sa.playBgClip("main");
-		}
+
 		
 		return instance;
 	}

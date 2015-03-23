@@ -1,5 +1,4 @@
 OBJECT-ID,URL
-battle,/sounds/battle/battle-vs-trainer.wav
-main,/sounds/ambient/palette-town-theme.wav
-beep,/sounds/effects/beep.wav
-inventory,/sounds/effects/inventory_open.wav
+battle,/sounds/battle/pokemonbattle.wav
+main,/sounds/ambient/zeldabg.wav
+enemy_die,/sounds/effects/enemy_die.wav
