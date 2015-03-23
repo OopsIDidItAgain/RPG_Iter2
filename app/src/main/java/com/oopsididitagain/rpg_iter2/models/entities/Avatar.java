@@ -170,6 +170,10 @@ public class Avatar extends Entity implements StatModifiable {
 		return stats.getBlob();
 	}
 
+	public StatCollection statCollection() {
+		return stats;
+	}
+	
 	@Override
 	public void visit(TakeableItem item) {
 		try {

@@ -182,6 +182,12 @@ public class StatCollection {
 		blob.raiseMovementSpeedBy(speedDifference);
 	}
 
+	public void removeLife() {
+		this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
+		this.blob.getLivesLeftStat().subtract(1);
+		
+	}
+
 }
 
 

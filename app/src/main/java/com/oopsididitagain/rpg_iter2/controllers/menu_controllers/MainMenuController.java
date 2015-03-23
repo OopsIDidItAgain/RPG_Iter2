@@ -73,6 +73,7 @@ public class MainMenuController extends Controller {
 			break;
 		case New:
 			controllerToReturn = AvatarCreationMenuController.getInstance();
+			((AvatarCreationMenuController)controllerToReturn).setTutorial(false);
 			break;
 		case ExitGame:
 			controllerToReturn = ExitGameController.getInstance();
