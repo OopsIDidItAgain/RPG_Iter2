@@ -106,9 +106,10 @@ public class GameController extends Controller {
 			break;
 		}
 
+
 		if (targetDirection != null
 				&& canMove
-				&& avatar.getEntityStatus().getStatus() != EntityStatus.SLEEPING) { // if
+				&& avatar.getEntityStatus().getStatus() != EntityStatus.TRAPPED) { // if
 																					// we
 																					// pressed
 																					// a
@@ -119,7 +120,7 @@ public class GameController extends Controller {
 					.createPositionAtDirection(targetDirection);
 			boolean successfulMove = entityMapInteraction.move(avatar,
 					toPosition);
-			// checks if NPC is there, if it is we bring up actionMenu
+
 			if (!successfulMove) {
 				// See if we run into a Npc, down cast but all entities we run
 				// into are Npc's

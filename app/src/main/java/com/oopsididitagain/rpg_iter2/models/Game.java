@@ -69,9 +69,12 @@ public class Game {
 		
 		shopkeeper.setStoryline(new Storyline(" >> Hey, I haven't seen you around before... "));
 		shopkeeper.getInventory().add(pgo);
+		Position position10 = new Position(10, 0);
+		Trap trap1 = new Trap("trap",position10);
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
+		gameMap.getTileAt(position10).add(trap1);
 		
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);

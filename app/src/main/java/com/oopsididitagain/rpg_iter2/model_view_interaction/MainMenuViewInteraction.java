@@ -4,14 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
+import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 public class MainMenuViewInteraction extends ModelViewInteraction{
 	private MainMenu mainMenu;
-	
+	Assets assets;
 	//private MenuButton newGameButton;
 	//private MenuButton loadGameButton;
 	//private MenuButton controlsButton;
@@ -21,6 +23,7 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
 		int height = 700;
 		int padding = 10;
 		this.mainMenu = mainMenu;
+		assets = new Assets();
         //numOfButtons = mainMenu.getNumOfOptions();
 
 		//this.newGameButton = new MenuButton(mainMenu.getOptions(0), width/2 - 100 , height/2, 200, 50);
@@ -51,6 +54,10 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
         int buttonX = width/2 - 100;
         int buttonY = height/2 ;
         Option[] options = mainMenu.getOptions();
+        Image pageJones = assets.getImage("mainmain");
+        Image dave = assets.getImage("dave");
+		g.drawImage(pageJones, View.pWidth/3, 20, 200, 300, null);
+		g.drawImage(dave, View.pWidth/3, -30, View.pWidth+40, 300, null);
         for(int i =0; i<options.length; i++){
         	Option option = options[i];
             if (option.equals(mainMenu.getCurrentOption())){
