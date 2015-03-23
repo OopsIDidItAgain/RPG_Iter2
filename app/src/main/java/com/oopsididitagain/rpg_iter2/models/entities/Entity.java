@@ -77,6 +77,10 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		return inventory;
 	}
 
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+	
 	public abstract void visit(TakeableItem item);
 	public abstract void visit(InstantStatModifier modifier);
 	public abstract void visit(InventoryUnusableItem item);
@@ -125,6 +129,8 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		inventory.add(pricedItem);
 		
 	}
+
+
 
 
 

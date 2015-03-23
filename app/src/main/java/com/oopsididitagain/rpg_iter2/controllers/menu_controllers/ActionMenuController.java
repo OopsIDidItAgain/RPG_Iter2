@@ -20,89 +20,93 @@ public class ActionMenuController extends Controller {
 	private static Npc npc;
 	private Battle battle;
 	private Avatar avatar;
-	
-	private ActionMenuController(ActionMenu actionMenu){
+
+	private ActionMenuController(ActionMenu actionMenu) {
 		this.actionMenu = actionMenu;
 		battle = new Battle();
 	}
-	
+
 	public static ActionMenuController getInstance() {
-		if ( instance == null ){
+		if (instance == null) {
 			instance = new ActionMenuController(new ActionMenu(false));
 		}
 		return instance;
 	}
-	public void setNpc(Npc npc){
+
+	public void setNpc(Npc npc) {
 		this.npc = npc;
 		actionMenu.setCanAttack(npc.accept(battle));
-		battle.addMonster(npc);
 	}
-	public void setAvatar(Avatar avatar){
+
+	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
-		battle.addPartyMember(avatar);
 	}
-	
+
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller controller = ActionMenuController.getInstance();
 
-        switch(command){
-            case MOVE_NORTH:
-            	actionMenu.previousOption();
-                break;
-            case MOVE_SOUTH:
-            	actionMenu.nextOption();
-                break;
-            case ENTER:
-            case USE:
-            	Option o = actionMenu.getCurrentOption();
-            	switch(o) {
-				case Talk:
-					//Dialogue part
-					DialogueController dc = DialogueController.getInstance();
-					dc.setNpc(npc);
-					controller = dc;
-					break;
-				case Attack:
-					// logic for canAttack in setNpc
-					BattleController bc = BattleController.getInstance();
-					bc.set(battle);
-					
-					controller = bc;
-					break;
-				case Trade:
-					System.out.println("trade");
-					TradeController tradeController = TradeController.getInstance();
-					GameController gc = GameController.getInstance();
-					Avatar av = gc.getAvatar();
-					tradeController.setNpc(npc,av);
-					controller = tradeController;
-					break;
-				case UseOption:
-					// TODO save logic
-					break;
-				case Exit:
-					actionMenu.reset(); // go back to first option
-					controller = GameController.getInstance();
-					break;
-				default:
-					break;
-            	}
-                break;
-            case EXIT:
-            case PAUSE:
-            	controller = GameController.getInstance();
-            	break;
-            default:
-            	break;
-        }
+		switch (command) {
+		case MOVE_NORTH:
+			actionMenu.previousOption();
+			break;
+		case MOVE_SOUTH:
+			actionMenu.nextOption();
+			break;
+		case ENTER:
+		case USE:
+			Option o = actionMenu.getCurrentOption();
+			switch (o) {
+			case Talk:
+				// Dialogue part
+				DialogueController dc = DialogueController.getInstance();
+				dc.setNpc(npc);
+				controller = dc;
+				break;
+			case Attack:
+				// logic for canAttack in setNpc
+				BattleController bc = BattleController.getInstance();
+				Battle battle = new Battle();
+				bc.set(battle);
+				battle.addMonster(npc);
+				battle.addPartyMember(avatar);
+
+				controller = bc;
+				break;
+			case Trade:
+				System.out.println("trade");
+				TradeController tradeController = TradeController.getInstance();
+				GameController gc = GameController.getInstance();
+				Avatar av = gc.getAvatar();
+				tradeController.setNpc(npc, av);
+				controller = tradeController;
+				break;
+			case UseOption:
+				// TODO save logic
+				break;
+			case Exit:
+				actionMenu.reset(); // go back to first option
+				controller = GameController.getInstance();
+				break;
+			default:
+				break;
+			}
+			break;
+		case EXIT:
+		case PAUSE:
+			controller = GameController.getInstance();
+			break;
+		default:
+			break;
+		}
 
 		return controller;
 	}
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		ActionMenuViewInteraction actionMenuViewInteraction = new ActionMenuViewInteraction(this.actionMenu);
+		ActionMenuViewInteraction actionMenuViewInteraction = new ActionMenuViewInteraction(
+				this.actionMenu);
 		return actionMenuViewInteraction;
 	}
 }

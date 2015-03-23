@@ -24,15 +24,12 @@ import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInterac
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 
-
-
-
 /**
  * In charge of handling input while playing game
  *
  * Created by parango on 3/11/15.
  */
-public class GameController extends Controller{
+public class GameController extends Controller {
 	private static GameController instance;
 	private Game game;
 	private Avatar avatar;
@@ -41,19 +38,20 @@ public class GameController extends Controller{
 	private boolean isFlying = false;
 	private boolean canMove = true;
 
-	private GameController(){
+	private GameController() {
 
 	}
 
-	public void setGame(Game g){
+	public void setGame(Game g) {
 		game = g;
 		this.avatar = g.getAvatar();
 		this.gameMap = g.getGameMap();
 		createEntityMapInteraction();
 
 	}
+
 	public static GameController getInstance() {
-		if ( instance == null ){
+		if (instance == null) {
 			instance = new GameController();
 		}
 		return instance;
@@ -61,35 +59,40 @@ public class GameController extends Controller{
 
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
-		Controller c = takeStatsAndUpdate(); // this includes things like relocating avatar if dead
-		if (c instanceof GameOverController )
+		Controller c = takeStatsAndUpdate(); // this includes things like
+												// relocating avatar if dead
+		if (c instanceof GameOverController)
 			return c; // game over
-		
+
 		c = performSkillCommand(command);
 		performPassiveSkills();
 		Direction targetDirection = null;
-		switch(command){
-		case MOVE_SOUTH: 
+		switch (command) {
+		case MOVE_SOUTH:
 			targetDirection = Direction.SOUTH;
 			break;
-		case MOVE_NORTH: 
+		case MOVE_NORTH:
 			targetDirection = Direction.NORTH;
 			break;
-		case MOVE_WEST: 
+		case MOVE_WEST:
 			targetDirection = Direction.WEST;
 			break;
-		case MOVE_EAST: 
+		case MOVE_EAST:
 			targetDirection = Direction.EAST;
 			break;
-		case MOVE_SOUTHWEST: targetDirection = Direction.SOUTHWEST; 
+		case MOVE_SOUTHWEST:
+			targetDirection = Direction.SOUTHWEST;
 			break;
-		case MOVE_SOUTHEAST: targetDirection = Direction.SOUTHEAST; 
+		case MOVE_SOUTHEAST:
+			targetDirection = Direction.SOUTHEAST;
 			break;
-		case MOVE_NORTHWEST: targetDirection = Direction.NORTHWEST; 
+		case MOVE_NORTHWEST:
+			targetDirection = Direction.NORTHWEST;
 			break;
-		case MOVE_NORTHEAST: targetDirection = Direction.NORTHEAST; 
+		case MOVE_NORTHEAST:
+			targetDirection = Direction.NORTHEAST;
 			break;
-		case INVENTORY: 
+		case INVENTORY:
 			c = InventoryController.getInstance();
 			break;
 		case PAUSE:
@@ -104,127 +107,149 @@ public class GameController extends Controller{
 		default:
 			break;
 		}
-		
-		
-		if (targetDirection != null && canMove && avatar.getEntityStatus().getStatus() != EntityStatus.SLEEPING) { //if we pressed a directional button
-			//check if we can move in the requested direction
-			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
-		    boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
-			//checks if NPC is there, if it is we bring up actionMenu
+
+		if (targetDirection != null
+				&& canMove
+				&& avatar.getEntityStatus().getStatus() != EntityStatus.SLEEPING) { // if
+																					// we
+																					// pressed
+																					// a
+																					// directional
+																					// button
+			// check if we can move in the requested direction
+			Position toPosition = avatar.getPosition()
+					.createPositionAtDirection(targetDirection);
+			boolean successfulMove = entityMapInteraction.move(avatar,
+					toPosition);
+			// checks if NPC is there, if it is we bring up actionMenu
 			if (!successfulMove) {
-				//See if we run into a Npc, down cast but all entities we run into are Npc's
-				Npc e = (Npc) entityMapInteraction.checkForEntity(avatar, toPosition);
-				
-				if(e != null){// if we did run into an npc, tell the actionMenu and switch to its controller
-					
-					
-					ActionMenuController amc = ActionMenuController.getInstance();
+				// See if we run into a Npc, down cast but all entities we run
+				// into are Npc's
+				Npc e = (Npc) entityMapInteraction.checkForEntity(avatar,
+						toPosition);
+
+				if (e != null) {// if we did run into an npc, tell the
+								// actionMenu and switch to its controller
+
+					ActionMenuController amc = ActionMenuController
+							.getInstance();
 					amc.setNpc(e);
 					amc.setAvatar(avatar);
-					
-					c =  ActionMenuController.getInstance();
+
+					c = ActionMenuController.getInstance();
+				} else {
+					moveNpcs();
 				}
+			} else {
+				moveNpcs();
 			}
-			//randomly move npcs
-			ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
-			for(int i = 0; i < listOfNpcs.size(); i++){
-				Direction d = getRandomDirection();
-				if(d != null){
-				Npc npc = listOfNpcs.get(i);
-				Position p = npc.getPosition().createPositionAtDirection(d);
-				
-			    boolean isSuccessful = entityMapInteraction.move(npc, p);
-				}
-			}
-			canMove = false;
-			TimerTask timertask = new TimerTask(){
-				@Override
-				public void run() {
-					canMove = true;
-				}
-			};
-			Timer timer = new Timer();
-			timer.schedule(timertask,1000/avatar.getMovementSpeed());
+
 		}
-	
+
 		return c;
 	}
-	
-	private Direction getRandomDirection(){
+
+	private void moveNpcs() {
+		// randomly move npcs
+		ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
+		for (int i = 0; i < listOfNpcs.size(); i++) {
+			Direction d = getRandomDirection();
+			if (d != null) {
+				Npc npc = listOfNpcs.get(i);
+				Position p = npc.getPosition().createPositionAtDirection(d);
+
+				boolean isSuccessful = entityMapInteraction.move(npc, p);
+			}
+		}
+		canMove = false;
+		TimerTask timertask = new TimerTask() {
+			@Override
+			public void run() {
+				canMove = true;
+			}
+		};
+		Timer timer = new Timer();
+		timer.schedule(timertask, 1000 / avatar.getMovementSpeed());
+	}
+
+	private Direction getRandomDirection() {
 		int randDir = (int) (Math.random() * 16);
 		Direction targetDirection = null;
-		switch(randDir){
-		case 0: 
+		switch (randDir) {
+		case 0:
 			targetDirection = Direction.SOUTH;
 			break;
-		case 1: 
+		case 1:
 			targetDirection = Direction.NORTH;
 			break;
-		case 2: 
+		case 2:
 			targetDirection = Direction.WEST;
 			break;
-		case 3: 
+		case 3:
 			targetDirection = Direction.EAST;
 			break;
-		case 4: targetDirection = Direction.SOUTHWEST; 
+		case 4:
+			targetDirection = Direction.SOUTHWEST;
 			break;
-		case 5: targetDirection = Direction.SOUTHEAST; 
+		case 5:
+			targetDirection = Direction.SOUTHEAST;
 			break;
-		case 6: targetDirection = Direction.NORTHWEST; 
+		case 6:
+			targetDirection = Direction.NORTHWEST;
 			break;
-		case 7: targetDirection = Direction.NORTHEAST; 
+		case 7:
+			targetDirection = Direction.NORTHEAST;
 			break;
-		default: break;
+		default:
+			break;
 		}
 		return targetDirection;
 	}
-	
+
 	public Controller takeStatsAndUpdate() {
 		Controller c = this;
 		if (avatar.isDead()) {
 			if (avatar.kill()) { // true if avatar has lives left
-				
-				Position 	av = avatar.getPosition(),
-							o = new Position(0,0);
-				
-				avatar.move(gameMap.getTileAt(av), 
-						gameMap.getTileAt(o), o);
-			}
-			else {
+
+				Position av = avatar.getPosition(), o = new Position(0, 0);
+
+				avatar.move(gameMap.getTileAt(av), gameMap.getTileAt(o), o);
+			} else {
 				c = GameOverController.getInstance();
 				return c;
 			}
 		}
-		
+
 		return c;
 	}
 
 	private Controller performSkillCommand(Command command) {
 		Controller c = this;
 		Skill skill = avatar.getActiveSkill(command);
-		if(skill != null){
-			entityMapInteraction.applySkill(avatar,skill);
+		if (skill != null) {
+			entityMapInteraction.applySkill(avatar, skill);
 			// Command.SKILLTWO will always point to observe
-			if(command == Command.SKILLTWO){
+			if (command == Command.SKILLTWO) {
 				c = ObserverController.getInstance();
-				((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
+				((ObserverController) c)
+						.setEntityMapInteraction(entityMapInteraction);
 				((ObserverController) c).setAvatar(avatar);
 				((ObserverController) c).setSkill(skill);
 			}
 		}
 		return c;
 	}
-	public void performPassiveSkills(){
+
+	public void performPassiveSkills() {
 		ArrayList<Skill> passiveSkill = avatar.getPassiveSkillList();
-		for(Skill skill: passiveSkill)
-		{
-			entityMapInteraction.applySkill(avatar,skill);
+		for (Skill skill : passiveSkill) {
+			entityMapInteraction.applySkill(avatar, skill);
 		}
 	}
 
 	private void createEntityMapInteraction() {
 		entityMapInteraction = new EntityMapInteraction(gameMap);
-		
+
 	}
 
 	public Avatar getAvatar() {
@@ -239,12 +264,12 @@ public class GameController extends Controller{
 		this.gameMap = gameMap;
 	}
 
-	//public void toggleFlight(){
-		//if(!gameMap.getTileAt(avatar.getPosition()).getTerrain().isWater()) {
-		//	avatar.setFlying(!avatar.isFlying());
-		//}
-	//}
-	
+	// public void toggleFlight(){
+	// if(!gameMap.getTileAt(avatar.getPosition()).getTerrain().isWater()) {
+	// avatar.setFlying(!avatar.isFlying());
+	// }
+	// }
+
 	@Override
 	public GameViewInteraction populateInteraction() {
 
