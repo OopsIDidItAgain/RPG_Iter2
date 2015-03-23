@@ -437,7 +437,6 @@ public class Battle {
 	public Controller useShotgun() {
 
 		Position pos = newAvatar.getPosition();
-<<<<<<< HEAD
 		
 		Shotgun s = new Shotgun(pos, newAvatar.getDirection());
 		
@@ -521,67 +520,9 @@ public class Battle {
 							
 						}
 					}
-=======
-
-		Shotgun s = new Shotgun(pos);
-		shotguns.add(s);
-
-		Position position = position = new Position(s.getPosition().getY(), s
-				.getPosition().getX());
-		;
-		for (int i = 3; i >= 0; i--) {
-			for (int j = 3; j >= 0; j--) {
-				switch (newAvatar.getDirection()) {
-
-				case NORTH:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				case SOUTH:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				case NORTHWEST:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				case SOUTHWEST:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				case NORTHEAST:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				case SOUTHEAST:
-					position = new Position(s.getPosition().getY() + j, s
-							.getPosition().getX() + i);
-					break;
-				default:
-					break;
-
-				}
-
-				if (battleground.tileInbounds(position)) {
-					Tile t = battleground.getTileAt(position);
-					Entity e = t.getEntity();
-					if (e != null) {
-
-						if (!e.getId().equals("avatar")) {
-							e.statBlob().merge(s.getStatBlob());
-							break;
-						}
-					}
-
-				} else {
-					break;
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
 				}
 
 			}
-<<<<<<< HEAD
-				
-				
 		}else if(s.getDirection() == Direction.NORTHWEST) {
 			for(int i = -4; i <=  -1; i++){
 				for(int j = -4; j <= -1; j++){
@@ -667,15 +608,6 @@ public class Battle {
 				
 				
 		}
-			
-	
-			
-		
-=======
-
-		}
-
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
 		return BattleController.getInstance();
 
 	}
@@ -693,12 +625,6 @@ public class Battle {
 				Position position = new Position(b.getPosition().getY() + j, b
 						.getPosition().getX() + i);
 				if (battleground.tileInbounds(position)) {
-<<<<<<< HEAD
-=======
-					System.out
-							.println(position.getX() + " ," + position.getY());
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
-
 					Tile t = battleground.getTileAt(position);
 					Entity e = t.getEntity();
 					if (e != null) {
