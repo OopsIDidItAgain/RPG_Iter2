@@ -32,9 +32,10 @@ public class Game {
 		Position position6 = new Position(7, 5);
 		Position position7 = new Position(9, 9);
 
+		
 		StatBlob statBlob1 = new StatBlob(0, 3, 0, 0, 0, 0, 0, 20, 20);
 		StatBlob statBlob2 = new StatBlob(0, 0, 30, 0, 0, 0, 0, 20, 20);
-		StatBlob statBlob3 = new StatBlob(0, 0, 0, 0, 0, 0, 0, 30, 0);
+		StatBlob statBlob3 = new StatBlob(0, 0, 0, 0, 0, 0, 0, 20, 0);
 		WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", position2, 4.05,statBlob1, 5, WeaponItemType.ONE_HANDED_WEAPON);
 		ArmorTakeableItem pgo2 = new ArmorTakeableItem("cape_item", position3, 4.05,statBlob2, 5, ArmorItemType.ARMOR);
 		EffectTakeableItem pgo3 = new EffectTakeableItem("potion_item", position4, 4.05, statBlob3);
