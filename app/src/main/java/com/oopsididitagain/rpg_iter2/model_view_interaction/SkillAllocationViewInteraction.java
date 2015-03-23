@@ -2,8 +2,10 @@ package com.oopsididitagain.rpg_iter2.model_view_interaction;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
+import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.menus.SkillAllocationMenu;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
@@ -28,27 +30,28 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 										// RIGHT NOW. DELETE?
 										//
 										// - DANNY
-		
-		// I'M LOCATED IN GAMEVIEW INTERACTION!!!
-
-		
-		/*g.setColor(Color.black);
-		LinkedList<String> skills = occupation.getGameSkillListString();
+										//It is, its when you press "m" -Tess
+		g.setColor(Color.black);
+		LinkedList<String> skillString = new LinkedList<String>();
+		ArrayList<Skill> skills = occupation.getTotalSkills();
+		for(Skill s: skills) {
+			skillString.add(s.getName());
+		}
 		int unusedPoint = avatar.getUnusedPoints();
 		String s = "" + unusedPoint;
 		g.drawString(s, 2, View.pWidth/2);
-		int widthOffset = 60;
+		int widthOffset = 20;
 		int i = 0;
-		for(String st: skills){
+		for(String st: skillString){
 			if(i == menu.getMenuOption()){
 				g.setColor(Color.red);
 			}
 			g.drawString(st, 40, widthOffset);
-			widthOffset += widthOffset;
+			widthOffset += 20;
 			g.setColor(Color.black);
 			++i;
-		}*/
-			
+		}
+		
 	}
 	
 }

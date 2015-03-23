@@ -31,7 +31,7 @@ public abstract class InventoryItem extends GameObject implements Priceable {
 	}
 	
 	public void applyDiscount(Discount discount) {
-		discount.applyDiscount(price);
+		price = discount.applyDiscount(price);
 	}
 
 	public void displayItem() {

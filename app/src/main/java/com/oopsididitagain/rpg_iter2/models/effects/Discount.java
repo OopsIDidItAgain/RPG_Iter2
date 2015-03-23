@@ -13,7 +13,7 @@ import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 public class Discount implements Effect{
 	double baseDiscount;
 	double discount;
-	int radius = 1;
+	int radius = 3;
 	
 	public Discount(double baseDiscount){
 		this.baseDiscount = baseDiscount;

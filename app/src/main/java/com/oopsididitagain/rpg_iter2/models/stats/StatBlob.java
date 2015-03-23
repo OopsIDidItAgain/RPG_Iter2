@@ -69,6 +69,19 @@ public class StatBlob {
 		this.manaAmount = new Stat(other.manaAmount.getValue());
 	}
 	
+	public StatBlob multiply(int m){
+		this.livesLeft = new Stat(getLivesLeft() * m);
+		this.strength = new Stat(getStrength() * m);
+		this.agility = new Stat(getAgility() * m);
+		this.intellect = new Stat(getIntellect() * m);
+		this.hardiness = new Stat(getHardiness() * m);
+		this.experience = new Stat(getExperience() * m);
+		this.movement = new Stat(getMovement() * m);
+		this.lifeAmount = new Stat(getLifeAmount() * m);
+		this.manaAmount = new Stat(getManaAmount() * m);
+		StatBlob stat = new StatBlob(this);
+		return stat;
+	}
 	public int getLivesLeft(){
 		return (int)livesLeft.getValue();
 	}

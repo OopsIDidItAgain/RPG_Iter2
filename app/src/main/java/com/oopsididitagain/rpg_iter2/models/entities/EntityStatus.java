@@ -8,6 +8,7 @@ public class EntityStatus {
 	public static int SLEEPING = 1;
 	public static int SAD = 2;
 	public static int SMELL = 3;
+	public static int TRAPPED = 4;
 	private int status;
 	public EntityStatus(int state){
 		this.status = state;

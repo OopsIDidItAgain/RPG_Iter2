@@ -24,7 +24,7 @@ public class SkillPointAllocationController extends Controller{
 		GameController gameController = GameController.getInstance();
 		this.avatar = gameController.getAvatar();
 		this.occupation = avatar.getOccupation();
-		int length = occupation.getGameSkillListString().size();
+		int length = occupation.getTotalSkills().size();
 		this.skillMenu = new SkillAllocationMenu(length);
 	}
 	

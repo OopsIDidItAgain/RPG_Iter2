@@ -9,25 +9,20 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.probes.SkillProbe;
 
-public class TimedStatModifier extends StatModifier{
+public class Bane extends StatModifier{
+
 	boolean canPerform = true;
 	StatBlob manaHurt = new StatBlob(0, 0, 0, 0, 0, 0, 0, 0, -1);
 	
-	public TimedStatModifier(StatBlob statblob, int radius){
+	public Bane(StatBlob statblob, int radius){
 		super(statblob,radius);
 	}
 	
 	public void changeStats(Entity entity, final Avatar avatar) {
-		final StatBlob oldBlob = avatar.statBlob();
-		oldBlob.merge(statblob);
-		TimerTask timertask = new TimerTask(){
-			@Override
-			public void run() {
-				oldBlob.detach(statblob);
-			}
-		};
-		Timer timer = new Timer();
-		timer.schedule(timertask, 10000);
+		if(entity!=null){
+			System.out.println("bane!");
+			entity.visit(this);
+		}
 	}
 	
 	@Override
@@ -51,10 +46,8 @@ public class TimedStatModifier extends StatModifier{
 			}		
 		};
 		Timer timer = new Timer();
-		timer.schedule(timertask, 10000);
-		
+		timer.schedule(timertask, 10000);		
 	}
 	
 
-	
 }

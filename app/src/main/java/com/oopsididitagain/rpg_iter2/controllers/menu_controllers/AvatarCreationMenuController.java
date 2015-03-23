@@ -25,7 +25,6 @@ public class AvatarCreationMenuController extends Controller {
 	private static AvatarCreationMenu avatarCreationMenu;
 	
 	private AvatarCreationMenuController(){
-		createAvatar();
 		createGameMap();
 	}
 	
@@ -40,6 +39,7 @@ public class AvatarCreationMenuController extends Controller {
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller controller = AvatarCreationMenuController.getInstance();
+		createAvatar();
 
 		switch(command){
 		case MOVE_EAST:
@@ -61,6 +61,7 @@ public class AvatarCreationMenuController extends Controller {
 				assignSneak();
 				break;
 			}
+			
 			Game game = new Game(this.avatar);
 			GameController gc = GameController.getInstance();
 			gc.setGame(game);

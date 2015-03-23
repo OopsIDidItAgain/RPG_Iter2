@@ -1,6 +1,8 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
@@ -16,6 +18,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
@@ -36,6 +39,7 @@ public class GameController extends Controller{
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
 	private boolean isFlying = false;
+	private boolean canMove = true;
 
 	private GameController(){
 
@@ -58,13 +62,9 @@ public class GameController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = takeStatsAndUpdate(); // this includes things like relocating avatar if dead
-		if (c instanceof GameOverController )  { 
-			System.out.println("INSTANCE OF CHECK!");
+		if (c instanceof GameOverController )
 			return c; // game over
 		
-		}
-		
-		// c = this;
 		c = performSkillCommand(command);
 		performPassiveSkills();
 		Direction targetDirection = null;
@@ -106,14 +106,10 @@ public class GameController extends Controller{
 		}
 		
 		
-		if (targetDirection != null) { //if we pressed a directional button
-			
+		if (targetDirection != null && canMove && avatar.getEntityStatus().getStatus() != EntityStatus.SLEEPING) { //if we pressed a directional button
 			//check if we can move in the requested direction
 			Position toPosition = avatar.getPosition().createPositionAtDirection(targetDirection);
-			
 		    boolean successfulMove = entityMapInteraction.move(avatar, toPosition);
-			
-				
 			//checks if NPC is there, if it is we bring up actionMenu
 			if (!successfulMove) {
 				//See if we run into a Npc, down cast but all entities we run into are Npc's
@@ -127,12 +123,8 @@ public class GameController extends Controller{
 					amc.setAvatar(avatar);
 					
 					c =  ActionMenuController.getInstance();
-					
-					
 				}
-				
 			}
-			
 			//randomly move npcs
 			ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
 			for(int i = 0; i < listOfNpcs.size(); i++){
@@ -144,6 +136,15 @@ public class GameController extends Controller{
 			    boolean isSuccessful = entityMapInteraction.move(npc, p);
 				}
 			}
+			canMove = false;
+			TimerTask timertask = new TimerTask(){
+				@Override
+				public void run() {
+					canMove = true;
+				}
+			};
+			Timer timer = new Timer();
+			timer.schedule(timertask,1000/avatar.getMovementSpeed());
 		}
 	
 		return c;
@@ -190,7 +191,6 @@ public class GameController extends Controller{
 						gameMap.getTileAt(o), o);
 			}
 			else {
-				System.out.println("GAME OVERRRR");
 				c = GameOverController.getInstance();
 				return c;
 			}
@@ -204,8 +204,8 @@ public class GameController extends Controller{
 		Skill skill = avatar.getActiveSkill(command);
 		if(skill != null){
 			entityMapInteraction.applySkill(avatar,skill);
-			// I think Command.SKILLONE will always point to observe
-			if(command == Command.SKILLONE){
+			// Command.SKILLTWO will always point to observe
+			if(command == Command.SKILLTWO){
 				c = ObserverController.getInstance();
 				((ObserverController) c).setEntityMapInteraction(entityMapInteraction);
 				((ObserverController) c).setAvatar(avatar);

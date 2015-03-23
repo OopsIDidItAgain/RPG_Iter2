@@ -17,7 +17,7 @@ public class Skill {
 
 	public static String BARGAIN = "bargin";
 	public static String ONEHAND = "oneHand";
-	public static String TWOHAND = "oneHand";
+	public static String TWOHAND = "twoHand";
 	public static String BRAWL = "brawl";
 	public static String RANGED = "ranged";
 	public static String BINDWOUNDS = "bindwounds";
@@ -53,6 +53,9 @@ public class Skill {
 	public void increaseMultiplier(){
 		this.multiplier++;
 		applyMultiplier();
+	}
+	public int getMultiplier(){
+		return multiplier;
 	}
 	public Effect getEffect() {
 		return effect;
