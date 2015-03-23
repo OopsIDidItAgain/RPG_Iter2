@@ -437,7 +437,6 @@ public class Battle {
 	public Controller useShotgun() {
 
 		Position pos = newAvatar.getPosition();
-
 		
 		Shotgun s = new Shotgun(pos, newAvatar.getDirection());
 		
@@ -561,8 +560,10 @@ public class Battle {
 						}
 					}
 
+
 				}
 			}
+
 			
 		}else if(s.getDirection() == Direction.NORTHWEST) {
 			for(int i = -4; i <=  -1; i++){
@@ -649,11 +650,6 @@ public class Battle {
 				
 				
 		}
-			
-	
-			
-		
-
 		return BattleController.getInstance();
 
 	}
@@ -671,7 +667,6 @@ public class Battle {
 				Position position = new Position(b.getPosition().getY() + j, b
 						.getPosition().getX() + i);
 				if (battleground.tileInbounds(position)) {
-
 
 					Tile t = battleground.getTileAt(position);
 					Entity e = t.getEntity();
