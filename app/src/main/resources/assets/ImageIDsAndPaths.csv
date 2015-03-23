@@ -35,8 +35,6 @@ buddy_west,/images/entities/buddy/w.png
 buddy_southeast,/images/entities/buddy/se.png
 buddy_south,/images/entities/buddy/s.png
 buddy_southwest,/images/entities/buddy/sw.png
-buddy_sad,/images/entities/buddy/buddy_sad.jpg
-buddy_badSmell,/images/entities/buddy/buddy_badSmell.jpg
 sheep,/images/entities/sheep/sheep.jpg
 sheep_northeast,/images/entities/sheep/sheep.jpg
 sheep_north,/images/entities/sheep/sheep.jpg
@@ -55,7 +53,9 @@ shopkeeper_west,/images/entities/shopkeeper/shopkeeper.png
 shopkeeper_southeast,/images/entities/shopkeeper/shopkeeper.png
 shopkeeper_south,/images/entities/shopkeeper/shopkeeper.png
 shopkeeper_southwest,/images/entities/shopkeeper/shopkeeper.png
-sleeping,/images/entities/emotions/sleeping.png
+sleeping,/images/entities/effects/sleeping.png
+smells_bad,/images/entities/effects/smells_bad.png
+sad,/images/entities/effects/sad.png
 leafstone_item,/images/items/leafstone.jpg
 axe,/images/occupations/axe.png
 bow,/images/occupations/bow.png

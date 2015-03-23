@@ -213,19 +213,12 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
         bf = assets.getImage(tileableToDrawId);
         g.drawImage(bf, x *50,y *50,50,50,null);
 
+        Image effect = null;
+
         if(entity!=null){
         	String id = entity.getId();
         	if(entity.isCurrentlyFlying()){
         		id+="_flying";
-        	}
-        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
-        		id+="_sleeping";
-        	}
-        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SMELL){
-        		 id+="_badSmell";
-        	}
-        	else if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
-        		id+="_sad";
         	}
             else if (entity.getDirection() == Direction.NORTHWEST) {
                 id += "_northwest";
@@ -252,10 +245,24 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
                 id += "_southwest";
             }
 
+            if(entity.getEntityStatus().getStatus() == EntityStatus.SLEEPING){
+                effect = assets.getImage("sleeping");
+            }
+            else if(entity.getEntityStatus().getStatus() == EntityStatus.SMELL){
+                effect = assets.getImage("smells_bad");
+            }
+            else if(entity.getEntityStatus().getStatus() == EntityStatus.SAD){
+                effect = assets.getImage("sad");
+            }
+
 
             Image b2 = assets.getImage(id);
 
             g.drawImage(b2, x *50, y *50,50,50,null);
+
+            if(effect != null){
+                g.drawImage(effect, x *50, y *50,50,50,null);
+            }
 
         	
         }
