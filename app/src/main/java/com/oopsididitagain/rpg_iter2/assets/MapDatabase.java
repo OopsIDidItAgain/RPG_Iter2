@@ -28,6 +28,7 @@ import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EquipableTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.ObstacleItem;
 import com.oopsididitagain.rpg_iter2.models.items.OneShotItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
@@ -204,22 +205,22 @@ public class MapDatabase {
 					switch (type) {
 					case "EffectTakeableItem":
 						EffectTakeableItem eitem = new EffectTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
+								position, parsePrice(tokens[13]), parseStatBlob(4,
 										tokens));
 						tiledEntityVisitables.add(eitem);
 						usableMap.put(id, eitem);
 						break;
 					case "WeaponTakeableItem":
 						WeaponTakeableItem witem = new WeaponTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
+								position, parsePrice(tokens[13]), parseStatBlob(4,
 										tokens), parseRank(tokens),
-								parseWeaponType(tokens));
+								parseWeaponType(tokens[15]));
 						tiledEntityVisitables.add(witem);
 						equipableMap.put(id, witem);
 						break;
 					case "ArmorTakeableItem":
 						ArmorTakeableItem aitem = new ArmorTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
+								position, parsePrice(tokens[13]), parseStatBlob(4,
 										tokens), parseRank(tokens),
 								parseArmorType(tokens));
 						tiledEntityVisitables.add(aitem);
@@ -231,9 +232,9 @@ public class MapDatabase {
 						break;
 					case "TakeableItem":
 						TakeableItem titem = new TakeableItem(id, position,
-								parsePrice(tokens));
+								parsePrice(tokens[13]));
 						tiledEntityVisitables.add(new TakeableItem(id,
-								position, parsePrice(tokens)));
+								position, parsePrice(tokens[13])));
 						unusableMap.put(id, titem);
 						break;
 					case "ObstacleItem":
@@ -292,7 +293,7 @@ public class MapDatabase {
 				Direction direction = parseDirection(tokens[3]);
 				Position position = new Position(y, x, direction);
 				EntityStatus entityStatus = parseEntityStatus(tokens[4]);
-				boolean isFlying = parseIsFlying(tokens[5]);
+				boolean isFlying = parseBoolean(tokens[5]);
 				Bank bank = parseBank(tokens[6]);
 				// STAT BLOB
 				StatBlob statBlob = parseStatBlob(7, tokens);
@@ -326,6 +327,16 @@ public class MapDatabase {
 					case "Usable":
 					case "Unusable":
 					case "Weapon":
+						id = tokens[1];
+						double price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						int rank = Integer.parseInt(tokens[5]);
+						StatBlob sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(id,price,sb,weaponType,rank);
+						inventory.add(weaponItem);
+						break;
 					case "Armor":
 						break;
 					}
@@ -352,7 +363,7 @@ public class MapDatabase {
 				direction = parseDirection(tokens[3]);
 				position = new Position(y, x, direction);
 				entityStatus = parseEntityStatus(tokens[4]);
-				isFlying = parseIsFlying(tokens[5]);
+				isFlying = parseBoolean(tokens[5]);
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
@@ -399,7 +410,7 @@ public class MapDatabase {
 				direction = parseDirection(tokens[3]);
 				position = new Position(y, x, direction);
 				entityStatus = parseEntityStatus(tokens[4]);
-				isFlying = parseIsFlying(tokens[5]);
+				isFlying = parseBoolean(tokens[5]);
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
@@ -446,7 +457,7 @@ public class MapDatabase {
 				direction = parseDirection(tokens[3]);
 				position = new Position(y, x, direction);
 				entityStatus = parseEntityStatus(tokens[4]);
-				isFlying = parseIsFlying(tokens[5]);
+				isFlying = parseBoolean(tokens[5]);
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
@@ -515,7 +526,7 @@ public class MapDatabase {
 		return new EntityStatus(Integer.parseInt(token));
 	}
 
-	private boolean parseIsFlying(String token) {
+	private boolean parseBoolean(String token) {
 		if (token.equals("TRUE"))
 			return true;
 		return false;
@@ -606,9 +617,8 @@ public class MapDatabase {
 		return Integer.parseInt(tokens[14]);
 	}
 
-	private WeaponItemType parseWeaponType(String[] tokens) {
-		String type = tokens[15];
-		switch (type) {
+	private WeaponItemType parseWeaponType(String token) {
+		switch (token) {
 		case "ONE_HANDED_WEAPON":
 			return WeaponItemType.ONE_HANDED_WEAPON;
 		case "TWO_HANDED_WEAPON":
@@ -623,8 +633,8 @@ public class MapDatabase {
 		return WeaponItemType.FISTS;
 	}
 
-	private double parsePrice(String[] tokens) {
-		return Double.parseDouble(tokens[13]);
+	private double parsePrice(String token) {
+		return Double.parseDouble(token);
 	}
 
 	private StatBlob parseStatBlob(int start, String[] tokens) {

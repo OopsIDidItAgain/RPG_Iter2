@@ -15,6 +15,7 @@ avatar,0,0,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
 Sneak,,,,,,,,,,,,,,,
 2,3,4,1,1,,,,,,,,,,,
 Inventory,,,,,,,,,,,,,,,
+Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,
 ,,,,,,,,,,,,,,,
 AttackingNpc,,,,,,,,,,,,,,,
 buddy,0,2,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
