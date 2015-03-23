@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Game;
@@ -210,7 +209,7 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		g.setFont(fonts.get("default"));
 	}
 	private void drawTile(Graphics g, Tile t, int x, int y){
-        SortedSet<Tileable> tileables =  t.getTilebles();
+        LinkedList<Tileable> tileables =  t.getTilebles();
         Entity entity = t.getEntity();
 
         Image bf = assets.getImage(t.getTerrain().getId());

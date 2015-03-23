@@ -18,4 +18,19 @@ public enum AreaEffectType implements StatBlobHolder {
 	public StatBlob statBlob() {
 		return statBlob;
 	}
+	
+	public String toString() {
+		switch(this) {
+		case HEAL_DAMAGE:
+			return "HEAL_DAMAGE";
+		case INSTANT_DEATH:
+			return "INSTANT_DEATH";
+		case LEVEL_UP:
+			return "LEVEL_UP";
+		case TAKE_DAMAGE:
+			return "TAKE_DAMAGE";
+		default:
+			return "HEAL_DAMAGE";
+		}
+	}
 }

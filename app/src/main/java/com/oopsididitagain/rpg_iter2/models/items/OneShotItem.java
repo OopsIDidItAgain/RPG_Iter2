@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -46,6 +47,13 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.addPositionedGameObject(this);
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()),
+				"OneShotItem", statBlob().toSaveFormat() };
+		return IOUtil.commaSeperate(arr);
 	}
 
 

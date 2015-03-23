@@ -42,4 +42,10 @@ public class Teleporter extends PositionedGameObject implements Tileable, TiledE
 		
 	}
 
+	@Override
+	public String toSaveableFormat() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
 }

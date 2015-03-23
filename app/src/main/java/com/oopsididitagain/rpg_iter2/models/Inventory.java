@@ -84,4 +84,12 @@ public class Inventory {
 		contents.add((InventoryItem) pricedItem);//TODO FIX
 		
 	}
+
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		for(int i = 0; i < contents.size(); ++i) {
+			sb.append(contents.get(i).toSaveableFormat() + "\n");
+		}
+		return sb.toString();
+	}
 }

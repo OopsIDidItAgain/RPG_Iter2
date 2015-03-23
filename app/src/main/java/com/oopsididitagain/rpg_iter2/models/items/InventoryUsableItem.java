@@ -5,6 +5,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 
 public class InventoryUsableItem extends InventoryItem implements EntityVisitable, InstantStatModifier {
@@ -46,6 +47,12 @@ public class InventoryUsableItem extends InventoryItem implements EntityVisitabl
 	@Override
 	public boolean removeable() {
 		return removeable;
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		String[] arr = { "Usable", getId(), Double.toString(price()), statBlob().toSaveFormat() };
+		return IOUtil.commaSeperate(arr);
 	}
 
 }
