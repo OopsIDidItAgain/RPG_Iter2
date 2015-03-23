@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.EntityVisitable;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -78,6 +79,14 @@ public class InteractiveItem extends PositionedGameObject implements TiledEntity
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.addPositionedGameObject(this);
+	}
+
+	@Override
+	public String toSaveFormat() {
+		String[] arr =  { getId(), Integer.toString(getX()), Integer.toString(getY()),
+			Integer.toString(target.getPosition().getX()), Integer.toString(target.getPosition().getY()), 
+			"InteractiveItem", resultant.toString(), requirement.getId() };
+		return IOUtil.commaSeperate(arr);
 	}
 
 

@@ -34,5 +34,7 @@ public abstract class PositionedGameObject extends GameObject
 	public Direction getDirection() {
 		return position.getDirection();
 	}
+	
+	public abstract String toSaveFormat();
 
 }

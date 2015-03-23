@@ -4,6 +4,7 @@ import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
@@ -59,6 +60,13 @@ public class TakeableItem extends PositionedGameObject implements TiledEntityVis
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.addPositionedGameObject(this);
+	}
+
+	@Override
+	public String toSaveFormat() {
+		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), "TakeableItem", "", "", "", "",
+			"", "", "", "", "", Double.toString(price) };
+		return IOUtil.commaSeperate(arr);
 	}
 
 }

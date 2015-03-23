@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
+
 
 public class StatBlob {
 
@@ -249,6 +251,13 @@ public class StatBlob {
 	
 	public void raiseMovementSpeedBy(int speedDifference) {
 		this.movement.add(speedDifference);
+	}
+	
+	public String toSaveFormat() {
+		String[] arr = { livesLeft.toString(), strength.toString(), agility.toString(), 
+				intellect.toString(), hardiness.toString(), experience.toString(), movement.toString(), 
+				lifeAmount.toString(), manaAmount.toString() };
+		return IOUtil.commaSeperate(arr);
 	}
 	
 }
