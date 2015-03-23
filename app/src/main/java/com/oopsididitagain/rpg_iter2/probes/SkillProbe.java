@@ -4,6 +4,8 @@ import com.oopsididitagain.rpg_iter2.models.MiniMap;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.Trap;
+import com.oopsididitagain.rpg_iter2.models.effects.DetectTrap;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
@@ -91,6 +93,58 @@ public class SkillProbe {
 	public void performSkill(StatModifier statModifier, Avatar avatar,MiniMap tiles) {
 		Entity entity = getEntity(avatar,tiles);
 		statModifier.changeStats(entity,avatar);
+	}
+
+	public void setUpSkill(DetectTrap detectTrap, Avatar avatar, MiniMap tiles) {
+		Trap t = getTrap(tiles,avatar);
+		if(t!=null){
+			detectTrap.detectTrap(t);
+		}
+	}
+
+	private Trap getTrap(MiniMap tiles, Avatar avatar) {
+		Position center;
+		Tile currentTile;
+		MovementProbe mp = new MovementProbe();
+		for(int i =  0; i!= tiles.length();++i){
+			for(int j = 0; j!=tiles.width(); ++j){
+				center = new Position(i,j);
+				currentTile = tiles.getTile(center);
+				currentTile.checkTileContents(mp);
+				if(mp.checkStatus(TileContentsProbeStatus.TRAP_DETECTED)){
+					return mp.getTrap();
+				}
+			}
+		}
+		return null;
+	}
+
+	public void setUpSkill(DetectTrap detectTrap, Avatar avatar, MiniMap tiles,
+			int removeRadius) {
+		Position center = tiles.getCenter();
+		Direction direction = avatar.getDirection();
+		Position position = center.createPositionAtDirection(direction);
+		Tile currentTile = null;
+		MovementProbe probe = new MovementProbe(avatar);
+		int i = 0;
+		while(i < removeRadius){
+			currentTile = tiles.getTile(position);
+			currentTile.checkTileContents(probe);
+			if(probe.checkStatus(TileContentsProbeStatus.TRAP_DETECTED)){
+				break;
+			}
+			currentTile.checkMovable(probe);
+			if(probe.getStatus() == MovementProbeStatus.MOVEMENT_DENIED){
+				break;
+			}
+			position = position.createPositionAtDirection(direction);
+			++i;
+		}
+			
+		Trap trap = probe.getTrap();
+		if(currentTile != null && trap != null){
+			detectTrap.removeTrap(trap,currentTile);
+		}
 	}
 
 

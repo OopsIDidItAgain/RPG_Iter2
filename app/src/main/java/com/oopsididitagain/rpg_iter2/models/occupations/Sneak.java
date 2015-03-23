@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.effects.Creep;
+import com.oopsididitagain.rpg_iter2.models.effects.DetectTrap;
 import com.oopsididitagain.rpg_iter2.models.effects.EntityStatusModifier;
 import com.oopsididitagain.rpg_iter2.models.effects.PickPocket;
+import com.oopsididitagain.rpg_iter2.models.effects.WeaponBasedStatModifier;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Command;
+import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Sneak extends Occupation{
 
@@ -25,9 +30,24 @@ public class Sneak extends Occupation{
 		
 		//detectAndRemoveTrap active
 		
+		Skill detectTrap = new Skill(Skill.REMOVETRAP);
+		DetectTrap trap = new DetectTrap();
+		detectTrap.setEffect(trap);
+		gameSkillList.add(detectTrap);
+		
 		//creep active 
+		Skill creep = new Skill(Skill.CREEP);
+		Creep creeping = new Creep();
+		creep.setEffect(creeping);
+		gameSkillList.add(creep);
 		
 		//ranged weapon passive
+		StatBlob statblob = new StatBlob(0, 0, 10, 0, 0, 0, 0, 0, 0);
+		WeaponBasedStatModifier wp = new WeaponBasedStatModifier(statblob, 0, WeaponItemType.RANGED_WEAPON);
+		Skill rangedWeapon = new Skill(Skill.RANGED);
+		rangedWeapon.setEffect(wp);
+		passiveSkillArray.add(rangedWeapon);
+		passiveSkillList.put(rangedWeapon.getName(),rangedWeapon);
 		
 	}
 

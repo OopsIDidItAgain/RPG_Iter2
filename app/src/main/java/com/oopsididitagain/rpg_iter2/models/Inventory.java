@@ -15,7 +15,11 @@ public class Inventory {
 	private List<InventoryItem> contents = new ArrayList<InventoryItem>();
 	
 	public InventoryItem getItemAtIndex(int index) throws IndexOutOfBoundsException {
-		return contents.get(index);
+        if(contents.size()>0){
+            return contents.get(index);
+        }
+        return null;
+
 	}
 	
 	public void add(TakeableItem item){
@@ -23,7 +27,9 @@ public class Inventory {
 	}
 	
 	public void remove(InventoryItem item) {
-		contents.remove(item);
+		if(item == null)
+            return;
+        contents.remove(item);
 	}
 	
 	public void applyDiscount(Discount discount) {

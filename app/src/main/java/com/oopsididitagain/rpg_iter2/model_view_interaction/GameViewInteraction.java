@@ -19,6 +19,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 import com.oopsididitagain.rpg_iter2.views.View;
 
 
@@ -255,10 +256,13 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
                 effect = assets.getImage("sad");
             }
 
+            if(entity.getTileablePriority() != TileablePriority.HIDDEN){
+            	 Image b2 = assets.getImage(id);
+            	 g.drawImage(b2, x *50, y *50,50,50,null);
+            }
+           
 
-            Image b2 = assets.getImage(id);
-
-            g.drawImage(b2, x *50, y *50,50,50,null);
+           
 
             if(effect != null){
                 g.drawImage(effect, x *50, y *50,50,50,null);

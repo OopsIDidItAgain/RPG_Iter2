@@ -9,6 +9,7 @@ import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Projectile;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
@@ -21,15 +22,17 @@ public class BattleViewInteraction extends ModelViewInteraction {
 	private Assets assets;
 	private GameMap battleground;
 
-	private final int height = View.pHeight / 3;
-	private final int width = (int) (View.pWidth / 2);
+	private final int height = View.pHeight;
+	private final int width = (int) (View.pWidth);
 	private final int x = View.pWidth / 5;
 	private final int y = View.pHeight / 4;
+	private Projectile p;
 
 	public BattleViewInteraction(Battle battle) {
 		this.battle = battle;
 		this.assets = new Assets();
 		battleground = battle.getGameMap();
+
 	}
 
 	@Override
@@ -46,6 +49,18 @@ public class BattleViewInteraction extends ModelViewInteraction {
 				Tile t = battleground.getTileAt(new Position(j, i));
 				drawTile(g, t, i, j);
 			}
+		}
+		drawHearts(g);
+
+		drawProjectile(g);
+	}
+
+	private void drawProjectile(Graphics g) {
+		if ((battle.getP() != null)
+				&& (battle.getP().inBounds(battleground.getWidth() * 50,
+						battleground.getHeight() * 50))) {
+			battle.getP().update();
+			battle.getP().render(g);
 		}
 	}
 
@@ -96,6 +111,24 @@ public class BattleViewInteraction extends ModelViewInteraction {
 
 			g.drawImage(b2, x * 50, y * 50, 50, 50, null);
 
+		}
+	}
+	
+	private void drawHearts(Graphics g) {
+		int[] hearts = battle.getHearts();
+
+		int height = 420, width = 20, next = 0;
+		// avatar
+		Image heart = assets.getImage("heart_decal");
+		for (int i = 0; i < hearts[0]; i++) {
+			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
+			if (i % 7 == 6) { height += 20; next = 0;}
+		}
+		
+		height = 420; width = 330; next = 0;
+		for (int i = 0; i < hearts[1]; i++) {
+			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
+			if (i % 7 == 6) { height += 20; next = 0;}
 		}
 	}
 

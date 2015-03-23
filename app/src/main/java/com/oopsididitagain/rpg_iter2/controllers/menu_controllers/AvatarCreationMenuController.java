@@ -10,6 +10,7 @@ import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.menus.AvatarCreationMenu;
+import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.occupations.Smasher;
 import com.oopsididitagain.rpg_iter2.models.occupations.Sneak;
 import com.oopsididitagain.rpg_iter2.models.occupations.Summoner;
@@ -75,12 +76,15 @@ public class AvatarCreationMenuController extends Controller {
 	
 	private void assignSmasher(){
 		this.avatar.setOccupation(new Smasher());
+        this.avatar.setStatblob(StatBlob.SMASHER_DEFAULT);
 	}
 	private void assignSummoner(){
 		this.avatar.setOccupation(new Summoner());
+        this.avatar.setStatblob(StatBlob.SUMMONER_DEFAULT);
 	}
 	private void assignSneak(){
 		this.avatar.setOccupation(new Sneak());
+        this.avatar.setStatblob(StatBlob.SNEAK_DEFAULT);
 	}
 	private void createEntityMapInteraction() {
 		// TODO Auto-generated method stub
