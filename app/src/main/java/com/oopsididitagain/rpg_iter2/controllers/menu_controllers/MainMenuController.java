@@ -84,8 +84,10 @@ public class MainMenuController extends Controller {
 	}
 
 	private Controller loadGame() {
+		File rootDir = new File(System.getProperty("user.home") + "/OOP_SAVEGAMES");
+		rootDir.mkdirs();
 		File loadGameDir = null;
-		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser = new JFileChooser(rootDir);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) 
