@@ -101,7 +101,7 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	}
 	
 	public void setFlying(boolean flying) {
-		isCurrentlyFlying = !flying;
+		isCurrentlyFlying = flying;
 		
 	}
 

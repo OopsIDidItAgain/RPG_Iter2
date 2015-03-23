@@ -108,9 +108,9 @@ public class GameController extends Controller {
 		case FLIGHT:
             if(avatar.isCurrentlyFlying()){
                 if(gameMap.getTileAt(avatar.getPosition()).getTerrain() != Terrain.WATER)
-			        avatar.setFlying(true);
+			        avatar.setFlying(false);
             }else{
-                avatar.setFlying(false);
+                avatar.setFlying(true);
             }
 			break;
 		default:

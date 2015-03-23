@@ -17,10 +17,12 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.Trap;
+import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Bank;
-import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.models.entities.NonTradingNPC;
+import com.oopsididitagain.rpg_iter2.models.entities.TradingNPC;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EquipableTakeableItem;
@@ -339,10 +341,146 @@ public class MapDatabase {
 				// end of Avatar load
 				break;
 			case "AttackingNpc":
+				/* Do Entity stuff - line right after tag */
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseIsFlying(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+					case "Unusable":
+					case "Weapon":
+					case "Armor":
+						break;
+					}
+				}
+				AttackingNPC attackingNpc = new AttackingNPC(id, position, statBlob);
+				attackingNpc.setEntityStatus(entityStatus);
+				attackingNpc.setFlying(isFlying);
+				attackingNpc.setBank(bank);
+				attackingNpc.setInventory(inventory);
+				tiledProbeVisitables.add(attackingNpc);
+				// line is at empty row after last item in inventory
+				// end of AttackingNpc load
 				break;
-			case "NonTradingNpc":
+			case "NonTradingNpc":/* Do Entity stuff - line right after tag */
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseIsFlying(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+					case "Unusable":
+					case "Weapon":
+					case "Armor":
+						break;
+					}
+				}
+				NonTradingNPC nonTradingNPC = new NonTradingNPC(id, position, statBlob);
+				nonTradingNPC.setEntityStatus(entityStatus);
+				nonTradingNPC.setFlying(isFlying);
+				nonTradingNPC.setBank(bank);
+				nonTradingNPC.setInventory(inventory);
+				tiledProbeVisitables.add(nonTradingNPC);
+				// line is at empty row after last item in inventory
+				// end of nonTradingNPC load
 				break;
 			case "TradingNpc":
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseIsFlying(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+					case "Unusable":
+					case "Weapon":
+					case "Armor":
+						break;
+					}
+				}
+				TradingNPC tradingNPC = new TradingNPC(id, position, statBlob);
+				tradingNPC.setEntityStatus(entityStatus);
+				tradingNPC.setFlying(isFlying);
+				tradingNPC.setBank(bank);
+				tradingNPC.setInventory(inventory);
+				tiledProbeVisitables.add(tradingNPC);
+				// line is at empty row after last item in inventory
+				// end of nonTradingNPC load
 				break;
 			default:
 				break;
@@ -378,7 +516,10 @@ public class MapDatabase {
 	}
 
 	private boolean parseIsFlying(String token) {
-		return Boolean.parseBoolean(token);
+		if (token.equals("TRUE"))
+			return true;
+		return false;
+			
 	}
 
 	private Bank parseBank(String token) {
