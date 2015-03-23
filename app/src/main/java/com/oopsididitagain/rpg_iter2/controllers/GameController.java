@@ -48,7 +48,11 @@ public class GameController extends Controller {
 		if (instance == null) {
 			instance = new GameController();
 		}
-		sa.playBgClip("main");
+		
+		if(sa.isBgSoundPlaying()) {
+			sa.playBgClip("main");
+		}
+		
 		return instance;
 	}
 

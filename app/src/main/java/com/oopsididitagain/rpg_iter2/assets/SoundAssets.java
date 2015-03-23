@@ -101,10 +101,8 @@ public class SoundAssets {
 			audioInputStream.reset();
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			if(!clip.equals(currentBgClip)) {
-				currentBgClip = clip;
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
+			currentBgClip = clip;
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -151,6 +149,10 @@ public class SoundAssets {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isBgSoundPlaying() {
+		return (currentBgClip != null);
 	}
 	
 	public static String getPath(String soundID) {
