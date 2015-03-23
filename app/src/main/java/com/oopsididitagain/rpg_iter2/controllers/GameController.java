@@ -21,6 +21,8 @@ import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
 /**
  * In charge of handling input while playing game
@@ -114,12 +116,21 @@ public class GameController extends Controller {
 																					// pressed
 																					// a
 																					// directional
-																					// button
+																				// button
 			// check if we can move in the requested direction
 			Position toPosition = avatar.getPosition()
 					.createPositionAtDirection(targetDirection);
 			boolean successfulMove = entityMapInteraction.move(avatar,
 					toPosition);
+			
+			// check if teleporter is there
+			for (Tileable tev: gameMap.getTileAt(toPosition).getTilebles()) {
+				if (tev.getId().equals("teleporter")) {
+					Position o = new Position(0,0);
+					avatar.move(gameMap.getTileAt(avatar.getPosition()), gameMap.getTileAt(o), o);
+					incrementLevel();
+				}
+			}
 
 			if (!successfulMove) {
 				// See if we run into a Npc, down cast but all entities we run
@@ -146,6 +157,17 @@ public class GameController extends Controller {
 		}
 
 		return c;
+	}
+	
+	private GameController incrementLevel() {
+		GameController temp = this;
+		int currentLevel = game.getLevel();
+		Game newGame = new Game(avatar, currentLevel + 1);
+		game = newGame;
+		gameMap = newGame.getGameMap();
+		isFlying = false;
+		entityMapInteraction = new EntityMapInteraction(gameMap);
+		return this;
 	}
 
 	private void moveNpcs() {

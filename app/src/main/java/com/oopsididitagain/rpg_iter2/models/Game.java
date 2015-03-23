@@ -11,6 +11,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.TradingNPC;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
+import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
@@ -22,10 +23,12 @@ public class Game {
 	private Avatar avatar;
 	private GameMap gameMap;
 	private ArrayList<Npc> listOfNpcs = new ArrayList<Npc>();
+	int level;
 	
-	public Game(Avatar avatar){
+	public Game(Avatar avatar, int level){
 		this.avatar = avatar;
-		gameMap = new GameMap(new MapDatabase(1));
+		this.level = level;
+		gameMap = new GameMap(new MapDatabase(level));
 		Position position2 = new Position(3,0);
 		Position position3 = new Position(6, 2);
 		Position position4 = new Position(6, 5);
@@ -79,6 +82,11 @@ public class Game {
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);
 		listOfNpcs.add(shopkeeper);
+		
+		// TELEPORTER!
+		Position p = new Position(1,1);
+		Teleporter door = new Teleporter("teleporter", p);
+		gameMap.getTileAt(p).add(door);
 	}
 	public Game( Avatar avatar, GameMap gameMap){
 	
@@ -97,4 +105,9 @@ public class Game {
 	public ArrayList<Npc> getListOfNpcs(){
 		return listOfNpcs;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
+
 }

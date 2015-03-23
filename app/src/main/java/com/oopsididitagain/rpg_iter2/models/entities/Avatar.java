@@ -23,6 +23,7 @@ import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
+import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
@@ -258,5 +259,13 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	public double defensiveRating() {
 		return stats.getDefensiveRating();
+	}
+
+	@Override
+	public void visit(Teleporter item) {
+		// maybe figure out a way to get game state instance?
+		
+		// go back to origin
+		// this.setPosition(new Position(0,0));
 	}
 }

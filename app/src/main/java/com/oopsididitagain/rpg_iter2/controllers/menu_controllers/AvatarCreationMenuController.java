@@ -62,7 +62,7 @@ public class AvatarCreationMenuController extends Controller {
 				break;
 			}
 			
-			Game game = new Game(this.avatar);
+			Game game = new Game(this.avatar, 1);
 			GameController gc = GameController.getInstance();
 			gc.setGame(game);
 			controller = gc;

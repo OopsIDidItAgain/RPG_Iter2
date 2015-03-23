@@ -6,6 +6,7 @@ import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuCont
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.QuestionMenuController;
 import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 
 public class NonAttackingNPC extends Npc {
@@ -23,5 +24,11 @@ public class NonAttackingNPC extends Npc {
 	@Override
 	public boolean accept(Battle battle) {
 		return battle.visit(this);
+	}
+
+	@Override
+	public void visit(Teleporter item) {
+		// TODO Auto-generated method stub
+		
 	}
 }
