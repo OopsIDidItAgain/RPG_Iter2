@@ -252,4 +252,11 @@ public class Avatar extends Entity implements StatModifiable {
 		return a;
 	}
 
+	public double offensiveRating() {
+		return stats.getOffensiveRating();
+	}
+	
+	public double defensiveRating() {
+		return stats.getDefensiveRating();
+	}
 }

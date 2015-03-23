@@ -6,7 +6,10 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oopsididitagain.rpg_iter2.controllers.BattleController;
+import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
@@ -16,6 +19,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.entities.NonAttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
+import com.oopsididitagain.rpg_iter2.models.interaction_classes.AvatarEntityInteraction;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
@@ -253,7 +257,9 @@ public class Battle {
 		return oldPosition;
 	}
 
-	public void move(Command command) {
+	public Controller move(Command command) {
+		Controller controller = BattleController.getInstance();
+
 		Direction targetDirection = null;
 		switch (command) {
 		case MOVE_SOUTH:
@@ -301,7 +307,12 @@ public class Battle {
 						toPosition);
 
 				if (e != null) {// if we did run into an npc...
-					monsters.remove(e);
+					AvatarEntityInteraction.avatarAttack(newAvatar, e);
+					AvatarEntityInteraction.entityAttack(newAvatar, e);
+					if (e.statBlob().getLifeAmount() <= 0)
+						monsters.remove(e);
+					if (newAvatar.isDead())
+						controller = GameOverController.getInstance();
 				}
 			}
 			// randomly move npcs
@@ -325,6 +336,7 @@ public class Battle {
 			timer.schedule(timertask, 1000 / newAvatar.getMovementSpeed());
 		}
 
+		return controller;
 	}
 
 	private Direction getRandomDirection() {
@@ -365,5 +377,10 @@ public class Battle {
 		if (monsters.isEmpty())
 			return true;
 		return false;
+	}
+
+	public Controller use() {
+		// TODO
+		return BattleController.getInstance();
 	}
 }

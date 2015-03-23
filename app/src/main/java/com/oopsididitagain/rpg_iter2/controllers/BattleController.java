@@ -35,6 +35,7 @@ public class BattleController extends Controller {
 			switch (command) {
 			case ENTER:
 			case USE:
+				controller = battle.use();
 				break;
 			case EXIT:
 				controller = ActionMenuController.getInstance();
@@ -47,7 +48,7 @@ public class BattleController extends Controller {
 			case MOVE_SOUTHEAST:
 			case MOVE_SOUTHWEST:
 			case MOVE_WEST:
-				battle.move(command);
+				controller = battle.move(command);
 				break;
 			case SKILLFIVE:
 				break;

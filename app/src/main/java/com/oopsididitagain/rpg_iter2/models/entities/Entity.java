@@ -130,9 +130,13 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		
 	}
 
+	public double offensiveRating() {
+		return this.statblob.getStrength();
+	}
 
-
-
+	public double defensiveRating() {
+		return this.statblob.getHardiness();
+	}
 
 	
 }
