@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.oopsididitagain.rpg_iter2.models.Armory;
 import com.oopsididitagain.rpg_iter2.models.Battle;
+import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
@@ -233,6 +234,22 @@ public class Avatar extends Entity implements StatModifiable {
 	public boolean kill() {
 		// returns false if no lives left and game's over
 		return stats.die();
+	}
+
+	public Avatar cloneAvatar() {
+		Position p = this.getPosition();
+		Position newP = new Position(p.getY(), p.getX(), Direction.EAST);
+		
+		Avatar a = new Avatar(this.getId(),newP,this.statblob);
+		a.entityStatus = this.entityStatus;
+		a.inventory = this.inventory;
+		a.isCurrentlyFlying = this.isCurrentlyFlying;
+		a.bank = this.bank;
+		a.occupation = this.occupation;
+		a.stats = this.stats;
+		a.armory = this.armory;
+		
+		return a;
 	}
 
 }
