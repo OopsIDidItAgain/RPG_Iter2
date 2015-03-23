@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.models;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.Assetable;
@@ -38,15 +39,17 @@ public class Tile implements Assetable, Positionable {
 		
 	}
 	public void interact(Entity entity) {
+		List<TiledEntityVisitable> toRemove = new LinkedList<TiledEntityVisitable>();
 		for (TiledEntityVisitable entityVisitable: entityVisitables) {
 			try {
 				entityVisitable.accept(entity);
 				if (entityVisitable.removeable())
-					entityVisitables.remove(entityVisitable);
+					toRemove.add(entityVisitable);
 			} catch(InvalidMovementException ex) {
 				ex.printStackTrace();
 			}
 		}
+		entityVisitables.removeAll(toRemove);
 	}
 
 	public void checkMovable(MovementProbe movementProbe) {
