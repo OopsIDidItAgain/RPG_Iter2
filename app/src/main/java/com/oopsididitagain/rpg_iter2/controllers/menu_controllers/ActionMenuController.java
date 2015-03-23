@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.GameController;
@@ -36,6 +37,7 @@ public class ActionMenuController extends Controller {
 	public void setNpc(Npc npc) {
 		this.npc = npc;
 		actionMenu.setCanAttack(npc.accept(battle));
+		actionMenu.reset();
 	}
 
 	public void setAvatar(Avatar avatar) {

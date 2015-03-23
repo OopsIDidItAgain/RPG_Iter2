@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.controllers;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.BattleViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
@@ -12,6 +13,7 @@ public class BattleController extends Controller {
 	private static BattleController instance;
 	private Battle battle;
 	private Npc npc;
+	private SoundAssets sa = new SoundAssets();
 
 	private BattleController() {
 	}
@@ -25,6 +27,8 @@ public class BattleController extends Controller {
 
 	public void set(Battle battle) {
 		this.battle = battle;
+		sa.stopBgClip();
+		sa.playBgClip("battle");
 		// battle.sortEntities();
 	}
 
@@ -67,6 +71,8 @@ public class BattleController extends Controller {
 
 			}
 		} else {
+			sa.stopBgClip();
+			
 			GameController gc = GameController.getInstance();
 			gc.remove(npc);
 			controller = gc;

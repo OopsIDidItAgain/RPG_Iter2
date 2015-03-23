@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
@@ -30,6 +31,7 @@ public class GameController extends Controller {
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
 	private boolean canMove = true;
+	private static SoundAssets sa = new SoundAssets();
 
 	private GameController() {
 
@@ -40,13 +42,13 @@ public class GameController extends Controller {
 		this.avatar = g.getAvatar();
 		this.gameMap = g.getGameMap();
 		createEntityMapInteraction();
-
 	}
 
 	public static GameController getInstance() {
 		if (instance == null) {
 			instance = new GameController();
 		}
+		sa.playBgClip("main");
 		return instance;
 	}
 
@@ -63,33 +65,42 @@ public class GameController extends Controller {
 		switch (command) {
 		case MOVE_SOUTH:
 			targetDirection = Direction.SOUTH;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTH:
 			targetDirection = Direction.NORTH;
+			sa.playClip("beep");
 			break;
 		case MOVE_WEST:
 			targetDirection = Direction.WEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_EAST:
 			targetDirection = Direction.EAST;
+			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHWEST:
 			targetDirection = Direction.SOUTHWEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHEAST:
 			targetDirection = Direction.SOUTHEAST;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTHWEST:
 			targetDirection = Direction.NORTHWEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTHEAST:
 			targetDirection = Direction.NORTHEAST;
+			sa.playClip("beep");
 			break;
 		case INVENTORY:
+			sa.playClip("inventory");
             InventoryController ic = InventoryController.getInstance();
             ic.setCurrentTile(gameMap.getTileAt(avatar.getPosition()));
+			ic.setAvatar(avatar);
 			c = ic;
-
 			break;
 		case PAUSE:
 			c = PauseMenuController.getInstance();

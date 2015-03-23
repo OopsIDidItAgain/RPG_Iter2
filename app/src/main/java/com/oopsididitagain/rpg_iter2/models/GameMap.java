@@ -21,7 +21,6 @@ public class GameMap {
 		try {
 			position.checkBounds(0, 0, getWidth(), getHeight());
 		} catch (PositionOutOfBoundsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

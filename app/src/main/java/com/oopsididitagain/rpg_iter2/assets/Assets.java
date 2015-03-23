@@ -19,7 +19,7 @@ import java.util.HashMap;
 // - animations (maybe)
 
 
-public  class Assets {
+public class Assets {
 
 	private static InputStream imgIDToPathFilenameReader;
 	private static HashMap<String, String> paths; // image id -> path

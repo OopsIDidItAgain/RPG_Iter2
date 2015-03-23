@@ -16,11 +16,9 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
 	public Trap(String id, Position position) {
 		super(id, position);
-		// TODO Auto-generated constructor stub
 	}
 
 	private boolean detected = false;
-	private Position position;
 		
 	public boolean isDetected() {
 		return detected;
@@ -30,10 +28,10 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 		tp = TileablePriority.MIDDLE;
 	}
 	
-	public Position getPosition(){
-		return position;
+	public void remove() {
+		//sprung = true;
 	}
-
+	
 	@Override
 	public void accept(final Entity entity) throws InvalidMovementException {
 		// TODO Auto-generated method stub
@@ -55,13 +53,11 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
 	@Override
 	public boolean removeable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public TileablePriority getTileablePriority() {
-		// TODO Auto-generated method stub
 		return tp;
 	}
 
@@ -72,6 +68,7 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
+
 		movementProbe.add(this);
 		
 	}
