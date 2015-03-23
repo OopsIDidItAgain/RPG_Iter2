@@ -28,8 +28,9 @@ public class Bomb {
 		return avatarPosition;
 	}
 	
-	public StatBlob getStatBlob() {
-		return new StatBlob(0, 0, 0, 0, 0, 0, 0, -2, 0);
+	public StatBlob getStatBlob(int i, int j) {
+		
+		return new StatBlob(0, 0, 0, 0, 0, 0, 0, -1 *( 5 - Math.max(Math.abs(i), Math.abs(j))), 0);
 	}
 	
 	public void render(Graphics g, int r){
@@ -45,8 +46,10 @@ public class Bomb {
 		for(int i = 0; i <= r ; i++){
 			for(int j = 0; j <= r; j++){
 
-				
-				if(r == 3){
+				if(r == 4){
+					g.setColor(Color.YELLOW);
+
+				}else if(r == 3){
 					g.setColor(Color.RED);
 				}else if(r == 2){
 					g.setColor(Color.GREEN);	

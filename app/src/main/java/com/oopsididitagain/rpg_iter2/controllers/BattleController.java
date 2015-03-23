@@ -63,9 +63,9 @@ public class BattleController extends Controller {
 			case SKILLSIX:
 				break;
 			case SKILLTHREE:
+				controller = battle.useShotgun();
 				break;
 			case SKILLTWO:
-				//System.out.println("hi");
 				controller = battle.useBomb();
 				break;
 			default:
