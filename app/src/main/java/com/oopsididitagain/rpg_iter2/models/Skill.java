@@ -75,5 +75,10 @@ public class Skill {
 		return name;
 	}
 
+	public void setMultiplier(Integer integer) {
+		this.multiplier = integer;
+		applyMultiplier();
+	}
+
 
 }

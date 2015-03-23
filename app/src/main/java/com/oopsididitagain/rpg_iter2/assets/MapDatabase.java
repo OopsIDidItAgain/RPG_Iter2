@@ -17,6 +17,7 @@ import com.oopsididitagain.rpg_iter2.models.Armory;
 import com.oopsididitagain.rpg_iter2.models.Decal;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Skill;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.Trap;
@@ -413,6 +414,12 @@ public class MapDatabase {
 				avatar.setFlying(isFlying);
 				avatar.setBank(bank);
 				avatar.setOccupation(occupation);
+				ArrayList<Skill> skillz = occupation.getTotalSkills();
+				int i = 0;
+				for(Skill skill1: skillz){
+					skill1.setMultiplier(multipliers.get(i));
+					++i;
+				}
 				avatar.setInventory(inventory);
 				// tiledProbeVisitables.add(avatar);
 				// line is at empty row after last item in inventory
