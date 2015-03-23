@@ -141,6 +141,7 @@ public abstract class Npc extends Entity {
 			Integer.toString(entityStatus.getStatus()), Boolean.toString(isCurrentlyFlying), Double.toString(bank.amountOfMoney),
 			statBlob().toSaveFormat() };
 		sb.append(IOUtil.commaSeperate(arr) + "\n");
+		sb.append(story.printStory().replace("\n", "") + "\n");
 		sb.append("INVENTORY\n");
 		sb.append(inventory.toSaveableFormat());
 		sb.append("\n");
