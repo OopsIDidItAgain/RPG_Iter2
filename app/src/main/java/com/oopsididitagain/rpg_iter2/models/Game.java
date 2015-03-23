@@ -33,8 +33,6 @@ public class Game {
 		this.tutorial = tutorial;
 
 		initialize();
-		IOUtil.saveMap(gameMap, level);
-		IOUtil.saveOnMapItems(gameMap);
 	}
 	
 	public Game(Avatar avatar, int level) {

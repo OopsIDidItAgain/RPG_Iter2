@@ -19,8 +19,9 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
  * Created by parango on 3/11/15.
  */
 public class IOUtil {
+	private static File outputDirectory = new File(System.getProperty("user.home"), "OOP_SAVEGAMES");
 	
-	public static File saveMap(GameMap gameMap, int level) {
+	public static void saveMap(GameMap gameMap, int level) {
 		StringBuilder sb = new StringBuilder("");
 		sb.append(gameMap.getHeight() + "," + gameMap.getWidth() + "\n\n");
 		for (int i = 0; i < gameMap.getHeight(); ++i) {
@@ -42,12 +43,15 @@ public class IOUtil {
 			sb.append(level);
 			sb.append("\n");
 		}
-		File savedMap = new File(System.getProperty("user.home") + "/" + "SavedMap.csv");
+		outputDirectory.mkdirs();
+		int saveNumber = outputDirectory.listFiles().length + 1;
+		File saveGameDirectory = new File(outputDirectory, "Save" + saveNumber);
+		File savedMap = new File(saveGameDirectory, "grid.csv");
 		writeFile(sb.toString(), savedMap);
-		return savedMap;
+		saveOnMapItems(gameMap, saveNumber);
 	}
 	
-	public static File saveOnMapItems(GameMap gameMap) {
+	private static void saveOnMapItems(GameMap gameMap, int saveNumber) {
 		StringBuilder sb = new StringBuilder("");
 
 		Queue<Entity> entities = new LinkedList<Entity>();
@@ -72,9 +76,8 @@ public class IOUtil {
 		for (Entity e: entities)
 			sb.append(e.toSaveableFormat());
 		
-		File savedOnMapItems = new File(System.getProperty("user.home") + "/" + "SavedMapItems.csv");
+		File savedOnMapItems = new File(outputDirectory, "Save" + saveNumber + "/" + "tileables.csv");
 		writeFile(sb.toString(), savedOnMapItems);
-		return savedOnMapItems; 
 	}
 	
 	private static void writeFile(String contents, File toFile) {
