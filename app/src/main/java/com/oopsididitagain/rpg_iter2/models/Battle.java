@@ -36,6 +36,8 @@ public class Battle {
 	// private SoundAssets sa = new SoundAssets();
 
 	private LinkedList<Projectile> projectiles;
+	private LinkedList<Bomb> bombs;
+
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -51,6 +53,8 @@ public class Battle {
 
 		entityMapInteraction = new EntityMapInteraction(battleground);
 		projectiles = new LinkedList<Projectile>();
+		bombs = new LinkedList<Bomb>();
+
 		// sa.playClip("battle");
 
 	} // use this constructor if you want to set monsters and party using
@@ -407,7 +411,42 @@ public class Battle {
 	public LinkedList<Projectile> getProjectiles() {
 		return projectiles;
 	}
-
+	
+public Controller useBomb(){
+		
+		Position pos = newAvatar.getPosition();
+		
+		Bomb b = new Bomb(pos);
+		bombs.add(b);
+		
+		
+		for(int i = 3; i >= 0 ; i--){
+			for(int j = 3; j >= 0 ; j--){
+				Position position = new Position(b.getPosition().getY() + j,b.getPosition().getX() + i);
+				if (battleground.tileInbounds(position)) {
+					Tile t = battleground.getTileAt(position);
+					Entity e = t.getEntity();
+					if (e != null  ) {
+						
+						if(!e.getId().equals("avatar")){
+							e.statBlob().merge(b.getStatBlob());
+							break;
+						}
+					}
+					
+				} else {
+					break;
+				}
+				
+				
+			}
+			
+		}
+			
+		
+		return BattleController.getInstance();
+		
+	}
 	public Controller use() {
 		// FOR DEBUG of PROJECTILE
 		Position pos = newAvatar.getPosition();
@@ -447,12 +486,7 @@ public class Battle {
 		}
 		return BattleController.getInstance();
 	}
-	public Controller useBomb(){
-		Position pos = newAvatar.getPosition();
-		Bomb b = new Bomb(pos);
-		
-		return BattleController.getInstance();
-	}
+	
 	
 
 	public int[] getHearts() {
@@ -476,5 +510,13 @@ public class Battle {
 
 	public void removeProjectile(Projectile p) {
 		projectiles.remove(p);
+	}
+
+	public void removeBomb(Bomb b) {
+		bombs.remove(b);
+	}
+
+	public LinkedList<Bomb> getBombs() {
+		return bombs;
 	}
 }

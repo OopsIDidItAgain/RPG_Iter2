@@ -1,3 +1,4 @@
+Items,,,,,,,,,,,,,,,
 potion_item,2,5,EffectTakeableItem,1,0,0,0,0,0,0,10,0,4.05,,
 sword_item,3,0,WeaponTakeableItem,0,10,0,0,0,0,0,0,0,4.05,10,ONE_HANDED_WEAPON
 carrot_item,4,4,TakeableItem,,,,,,,,,,8.05,,
@@ -8,3 +9,9 @@ leafstone_item,0,5,InteractiveItem,2,2,GRASS,cape_item,,,,,,,,
 mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,
 trap,0,8,Trap,,,,,,,,,,,,
 take_damage_decal,5,5,AreaEffect,TAKE_DAMAGE,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Avatar,,,,,,,,,,,,,,,
+avatar,0,0,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Sneak,,,,,,,,,,,,,,,
+2,3,4,1,1,,,,,,,,,,,
+Inventory,,,,,,,,,,,,,,,

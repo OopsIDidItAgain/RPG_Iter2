@@ -47,6 +47,11 @@ public class Avatar extends Entity implements StatModifiable {
 		this.armory = new Armory();
 		this.stats = new StatCollection(armory,statblob);
 	}
+	
+	public Avatar(String id, Position position,StatBlob statblob, Armory armory) {
+		super(id, position,statblob);
+		this.stats = new StatCollection(armory,statblob);
+	}
 
 	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;

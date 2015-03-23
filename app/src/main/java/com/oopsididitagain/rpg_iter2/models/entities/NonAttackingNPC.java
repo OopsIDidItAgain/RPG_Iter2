@@ -9,7 +9,7 @@ import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 
-public class NonAttackingNPC extends Npc {
+public abstract class NonAttackingNPC extends Npc {
 	public NonAttackingNPC(String id, Position position, StatBlob statblob) {
 		super(id, position, statblob);
 	}

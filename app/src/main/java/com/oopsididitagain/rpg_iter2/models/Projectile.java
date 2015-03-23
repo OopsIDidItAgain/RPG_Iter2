@@ -70,9 +70,11 @@ public class Projectile {
 		end = new Position(position.getY(), position.getX(),
 				position.getDirection());
 		position = position.createPositionAtDirection(d);
+		/*
 		System.out.println(position.getX() + " " + position.getY() + " start:"
 				+ start.getX() + " " + start.getY() + " end:" + end.getX()
 				+ " " + +end.getY());
+				*/
 	}
 
 	public void update() {
@@ -105,8 +107,10 @@ public class Projectile {
 		endx = end.getX() * 50 + 25;
 		starty = start.getY() * 50 + 25;
 		endy = end.getY() * 50 + 25;
+		/*
 		System.out.println(this.x+" "+this.y+" "+x + " " + y + " " + startx + " " + endx + " " + starty
 				+ " " + endy);
+				*/
 		if (start.getX() > end.getX()) {
 			if (start.getY() > end.getY()) {
 				if ((this.x <= startx && this.x >= endx)

@@ -13,7 +13,6 @@ public class BattleController extends Controller {
 	private static BattleController instance;
 	private Battle battle;
 	private Npc npc;
-	private SoundAssets sa = new SoundAssets();
 
 	private BattleController() {
 	}
@@ -27,9 +26,7 @@ public class BattleController extends Controller {
 
 	public void set(Battle battle) {
 		this.battle = battle;
-		sa.stopBgClip();
-		sa.playBgClip("battle");
-		// battle.sortEntities();
+
 	}
 
 	@Override
@@ -65,6 +62,7 @@ public class BattleController extends Controller {
 			case SKILLTHREE:
 				break;
 			case SKILLTWO:
+				//System.out.println("hi");
 				controller = battle.useBomb();
 				break;
 			default:
@@ -72,11 +70,16 @@ public class BattleController extends Controller {
 
 			}
 		} else {
-			sa.stopBgClip();
-			
+
+
+            SoundAssets.stopSound("battle");
 			GameController gc = GameController.getInstance();
 			gc.remove(npc);
+
 			controller = gc;
+            SoundAssets.playSound("enemy_die");
+            SoundAssets.playLooped("main");
+
 		}
 
 		return controller;
