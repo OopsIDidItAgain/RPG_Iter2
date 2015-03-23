@@ -1,4 +1,31 @@
 Items,,,,,,,,,,,,,,,
-chainsaw_item,19,19,WeaponTakeableItem,0,15,0,0,5,0,0,0,0,4.05,25,ONE_HANDED_WEAPON
-rock_item,15,15,ObstacleItem,,,,,,,,,,,,
-mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,
+potion_item,1,5,EffectTakeableItem,1,0,0,0,0,0,0,10,0,4.05,,
+sword_item,0,13,WeaponTakeableItem,0,10,0,0,0,0,0,0,0,4.05,10,ONE_HANDED_WEAPON
+carrot_item,5,16,TakeableItem,,,,,,,,,,8.05,,
+cape_item,7,9,ArmorTakeableItem,0,0,0,0,15,0,0,0,0,9.05,25,ARMOR
+chainsaw_item,9,4,WeaponTakeableItem,0,15,0,0,5,0,0,0,0,4.05,25,ONE_HANDED_WEAPON
+rock_item,9,6,ObstacleItem,,,,,,,,,,,,
+leafstone_item,15,8,InteractiveItem,2,2,GRASS,cape_item,,,,,,,,
+mushroom_item,15,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,
+trap,18,19,Trap,,,,,,,,,,,,
+take_damage_decal,2,15,AreaEffect,TAKE_DAMAGE,,,,,,,,,,,
+level_up_decal,15,7,AreaEffect,LEVEL_UP,,,,,,,,,,,
+heal_damage_decal,11,15,AreaEffect,HEAL_DAMAGE,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+AttackingNpc,,,,,,,,,,,,,,,
+buddy,11,18,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm luigi!,,,,,,,,,,,,,,
+Inventory,,,,,,,,,,,,,,,
+Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,
+,,,,,,,,,,,,,,,
+NonTradingNpc,,,,,,,,,,,,,,,
+sheep,0,9,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm a sheep,,,,,,,,,,,,,,
+Inventory,,,,,,,,,,,,,,,
+Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,
+,,,,,,,,,,,,,,,
+TradingNpc,,,,,,,,,,,,,,,
+shopkeeper,9,9,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm a shopkeeper,,,,,,,,,,,,,,
+Inventory,,,,,,,,,,,,,,,
+Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,

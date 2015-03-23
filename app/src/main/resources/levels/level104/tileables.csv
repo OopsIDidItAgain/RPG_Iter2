@@ -1,0 +1,5 @@
+NonTradingNpc,,,,,,,,,,,,,,,
+sheep,5,1,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm a sheep,,,,,,,,,,,,,,
+Inventory,,,,,,,,,,,,,,,
+Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,

@@ -99,22 +99,6 @@ public class Game {
 		// ----------
 		// tutorial levels
 		// ----------
-		if (level == 104)	{	// add a sheep
-			NonTradingNPC sheep = new NonTradingNPC("sheep", p, sb);
-			sheep.setStoryline(new Storyline(" >> I'm a sheep."));
-			sheep.getInventory().add(pgo);
-			listOfNpcs.add( sheep );
-			gameMap.getTileAt(p).add(sheep);
-		}
-		
-		if (level == 105) {
-			Npc buddy = new AttackingNPC("buddy", p,  sb);
-			buddy.setStoryline(new Storyline(" >> I'm Luigi."));
-			buddy.getInventory().add(pgo);
-			listOfNpcs.add(buddy);
-			gameMap.getTileAt(p).add(buddy);
-		}
-		
 		
 		
 		/* -------------
