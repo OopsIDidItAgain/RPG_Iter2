@@ -15,7 +15,7 @@ public class Inventory {
 	private List<InventoryItem> contents = new ArrayList<InventoryItem>();
 	
 	public InventoryItem getItemAtIndex(int index) throws IndexOutOfBoundsException {
-        if(contents.size()>0){
+        if(index<contents.size() && index>=0){
             return contents.get(index);
         }
         return null;

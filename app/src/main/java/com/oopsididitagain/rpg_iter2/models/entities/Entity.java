@@ -133,9 +133,11 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		return this.statblob;
 	}
 	public void purchaseItem(Priceable pricedItem) {
-		double price = pricedItem.price();
-		bank.purchaseTransaction(price);
-		inventory.add(pricedItem);
+        if(pricedItem!=null) {
+            double price = pricedItem.price();
+            bank.purchaseTransaction(price);
+            inventory.add(pricedItem);
+        }
 		
 	}
 
