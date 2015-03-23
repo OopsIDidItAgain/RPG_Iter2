@@ -6,3 +6,5 @@ chainsaw_item,9,4,WeaponTakeableItem,0,15,0,0,5,0,0,0,0,4.05,25,ONE_HANDED_WEAPO
 rock_item,9,6,ObstacleItem,,,,,,,,,,,,
 leafstone_item,0,5,InteractiveItem,2,2,GRASS,cape_item,,,,,,,,
 mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,
+trap,1,1,Trap,,,,,,,,,,,,
+take_damage_decal,1,2,AreaEffect,TAKE_DAMAGE,,,,,,,,,,,

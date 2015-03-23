@@ -214,6 +214,7 @@ public class MapDatabase {
     			tiledEntityVisitables.add(new AreaEffect(decal, position, aetype));
     			break;
     		case "Trap":
+    			System.out.println(position);
     			Trap trap = new Trap(id, position);
     			tiledEntityVisitables.add(trap);
     			break;
