@@ -166,7 +166,15 @@ public class GameController extends Controller {
 			}
 
 		}
-
+		ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
+		for (int i = 0; i < listOfNpcs.size(); i++) {
+				Npc npc = listOfNpcs.get(i);
+				Position p = npc.getPosition();
+				if(npc.isCurrentlyDead()){
+					Tile t = gameMap.getTileAt(p);
+					t.remove(npc);
+				}
+		}
 		return c;
 	}
 	
