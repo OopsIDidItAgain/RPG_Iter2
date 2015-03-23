@@ -74,6 +74,9 @@ public abstract class Npc extends Entity {
 
 	}
 
+	public boolean isCurrentlyDead() {
+		return (statblob.getLivesLeft() < 1);
+	}
 	@Override
 	public void visit(InstantStatModifier modifier) {
 		statBlob().merge(modifier.statBlob());

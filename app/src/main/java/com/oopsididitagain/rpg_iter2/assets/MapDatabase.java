@@ -417,7 +417,7 @@ public class MapDatabase {
 				avatar.setOccupation(occupation);
 				ArrayList<Skill> skillz = occupation.getTotalSkills();
 				int i = 0;
-				for(Skill skill1: skillz){
+				for (Skill skill1 : skillz) {
 					skill1.setMultiplier(multipliers.get(i));
 					++i;
 				}
@@ -442,14 +442,15 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
-				//NEW LINE is storyline
+				// NEW LINE is storyline
 				line = readObjectsLine();
 				tokens = line.split(",");
 				String story = "";
 				for (String s : tokens) {
-					story = story + s +", ";
+					story = story + s + ", ";
 				}
-				Storyline storyline = new Storyline(story.substring(0, story.length()-2));
+				Storyline storyline = new Storyline(story.substring(0,
+						story.length() - 2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -536,14 +537,15 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
-				//NEW LINE is storyline
+				// NEW LINE is storyline
 				line = readObjectsLine();
 				tokens = line.split(",");
 				story = "";
 				for (String s : tokens) {
-					story = story + s +", ";
+					story = story + s + ", ";
 				}
-				storyline = new Storyline(story.substring(0, story.length()-2));
+				storyline = new Storyline(
+						story.substring(0, story.length() - 2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -630,14 +632,15 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
-				//NEW LINE is storyline
+				// NEW LINE is storyline
 				line = readObjectsLine();
 				tokens = line.split(",");
 				story = "";
 				for (String s : tokens) {
-					story = story + s +", ";
+					story = story + s + ", ";
 				}
-				storyline = new Storyline(story.substring(0, story.length()-2));
+				storyline = new Storyline(
+						story.substring(0, story.length() - 2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories

@@ -12,6 +12,7 @@ import com.oopsididitagain.rpg_iter2.models.Bomb;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Projectile;
+import com.oopsididitagain.rpg_iter2.models.Shotgun;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
@@ -57,6 +58,23 @@ public class BattleViewInteraction extends ModelViewInteraction {
 
 		drawProjectile(g);
 		drawBomb(g);
+		drawShotgun(g);
+	}
+	private void drawShotgun(Graphics g){
+		LinkedList<Shotgun> toRemove = new LinkedList<Shotgun>();
+		for (Shotgun s : battle.getShotguns()) {
+			
+			if (s.isAlive()) {
+				s.update();
+				s.render(g, s.getRadius());
+			} else {
+				toRemove.add(s);
+			}
+		}
+		for (Shotgun s : toRemove) {
+			battle.removeShotgun(s);
+		}
+		
 	}
 private void drawBomb(Graphics g){
 	

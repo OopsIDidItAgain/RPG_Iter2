@@ -100,7 +100,15 @@ public class Avatar extends Entity implements StatModifiable {
 		//SKILLTWO
 		//SKILLFIGHTONE
 		
+		
+		
+		
 	}
+	
+	public boolean isCurrentlyDead() {
+		return (stats.getLivesLeft() < 1);
+	}
+
 	
 
 	public Direction getDirection(){
