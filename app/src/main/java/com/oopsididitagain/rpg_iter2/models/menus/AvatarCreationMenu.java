@@ -29,6 +29,7 @@ public class AvatarCreationMenu {
 	public void previousOption() {
 		switch (currentOption) {
 		case Sneak:
+			currentOption = Option.Smasher;
 			break;
 		case Summoner:
 			currentOption = Option.Sneak;
@@ -50,6 +51,7 @@ public class AvatarCreationMenu {
 			currentOption = Option.Smasher;
 			break;
 		case Smasher:
+			currentOption = Option.Sneak;
 			break;
 		default:
 			break;

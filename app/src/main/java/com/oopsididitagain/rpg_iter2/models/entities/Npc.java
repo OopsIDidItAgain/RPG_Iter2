@@ -1,5 +1,5 @@
-
 package com.oopsididitagain.rpg_iter2.models.entities;
+
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.models.Battle;
@@ -13,6 +13,7 @@ import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
@@ -20,27 +21,29 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
  * Created by parango on 3/11/15.
  */
 public abstract class Npc extends Entity {
-	
+
 	Storyline story;
+
 	public Npc(String id, Position position, StatBlob statblob) {
-		super(id, position,statblob);
+		super(id, position, statblob);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Storyline getStoryline(){
-		
+	public Storyline getStoryline() {
+
 		return story;
 	}
-	
-	public void setStoryline(Storyline story){
-		
+
+	public void setStoryline(Storyline story) {
+
 		this.story = story;
 	}
-	public Controller talk(){
-		
+
+	public Controller talk() {
+
 		return ActionMenuController.getInstance();
-	}	
-	
+	}
+
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.denyMovement();
@@ -50,13 +53,13 @@ public abstract class Npc extends Entity {
 	@Override
 	public void visit(TakeableItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void visit(InstantStatModifier modifier) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -72,7 +75,7 @@ public abstract class Npc extends Entity {
 	@Override
 	public void visit(InventoryUnusableItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -83,22 +86,33 @@ public abstract class Npc extends Entity {
 	@Override
 	public void visit(InventoryArmorItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void visit(InventoryWeaponItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void visit(InteractiveItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public abstract boolean accept(Battle battle);
 
-	
+	public AttackingNPC cloneNpc() {
+		Position p = this.getPosition();
+		Position newP = new Position(p.getY(), p.getX(), Direction.WEST);
+
+		AttackingNPC a = new AttackingNPC(this.getId(), newP, this.statblob);
+		a.entityStatus = this.entityStatus;
+		a.inventory = this.inventory;
+		a.isCurrentlyFlying = this.isCurrentlyFlying;
+		a.bank = this.bank;
+
+		return a;
+	}
 }

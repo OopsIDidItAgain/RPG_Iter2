@@ -26,6 +26,7 @@ public class GameOverMenu {
 	public void previousOption() {
 		switch (currentOption) {
 		case StartOver:
+			currentOption = Option.ExitGame;
 			break;
 		case ExitGame:
 			currentOption = Option.StartOver;
@@ -41,6 +42,7 @@ public class GameOverMenu {
 			currentOption = Option.ExitGame;
 			break;
 		case ExitGame:
+			currentOption = Option.StartOver;
 		default:
 			break;
 		}

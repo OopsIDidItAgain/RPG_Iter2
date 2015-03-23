@@ -51,7 +51,7 @@ public class Game {
 		
 		// heal damage
 		Position heartposition = new Position(8,0);
-		Decal heal = new Decal("heart_decal");
+		Decal heal = new Decal("heal_damage_decal");
 		AreaEffect heal_decal = new AreaEffect(heal, heartposition, AreaEffectType.HEAL_DAMAGE);
 		gameMap.getTileAt(heartposition).add(heal_decal);
 		
