@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.Decal;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.Trap;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EquipableTakeableItem;
@@ -211,6 +212,10 @@ public class MapDatabase {
     			AreaEffectType aetype = parseAreaEffectType(tokens);
     			Decal decal = parseDecal(aetype);
     			tiledEntityVisitables.add(new AreaEffect(decal, position, aetype));
+    			break;
+    		case "Trap":
+    			Trap trap = new Trap(id, position);
+    			tiledEntityVisitables.add(trap);
     			break;
     		}
     	}
