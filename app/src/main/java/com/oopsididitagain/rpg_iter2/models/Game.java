@@ -30,8 +30,7 @@ public class Game {
 		this.avatar = avatar;
 		this.level = level;
 		this.tutorial = tutorial;
-		
-		System.out.println("\n\nTUTORIAL IS "+Boolean.toString(tutorial)+"\n");
+
 		initialize();
 	}
 	
@@ -51,21 +50,60 @@ public class Game {
 	public void initialize() {
 		if (tutorial && this.level < 100) this.level += 100;
 		// level = 4;
-		System.out.println("\nCreating game from level "+Integer.toString(level));
 		gameMap = new GameMap(new MapDatabase(level));
 		gameMap.getTileAt((new Position(0,0))).add(avatar);
 
+		levelSpecificChecks();
+
+		// TELEPORTER!		
+		Position p = new Position(gameMap.getHeight()-1,gameMap.getWidth()-1);
+		Teleporter door = new Teleporter("teleporter", p);
+		gameMap.getTileAt(p).add(door);
+	}
+	public Avatar getAvatar(){
+		
+		return avatar;
+	}
+	public GameMap getGameMap(){
+		
+		return gameMap;
+	}
+	public ArrayList<Npc> getListOfNpcs(){
+		return listOfNpcs;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setTutorial(boolean tutorial) {
+		this.tutorial = tutorial;
+	}
+	
+	public void levelSpecificChecks() {
+		Position p = new Position(1,5);
+		StatBlob sb = new StatBlob(0, 3, 0, 0, 0, 0, 0, 20, 20);
+		WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", null, 4.05, sb, 5, WeaponItemType.ONE_HANDED_WEAPON);
+		
 		if (level == 104)	{	// add a sheep
-			Position p = new Position(1,5);
-			StatBlob sb = new StatBlob(0, 3, 0, 0, 0, 0, 0, 20, 20);
 			NonTradingNPC sheep = new NonTradingNPC("sheep", p, sb);
 			sheep.setStoryline(new Storyline(" >> I'm a sheep."));
-			WeaponTakeableItem pgo = new WeaponTakeableItem("chainsaw_item", null, 4.05, sb, 5, WeaponItemType.ONE_HANDED_WEAPON);
 			sheep.getInventory().add(pgo);
 			listOfNpcs.add( sheep );
 			gameMap.getTileAt(p).add(sheep);
 		}
 		
+		if (level == 105) {
+			Npc buddy = new AttackingNPC("buddy", p,  sb);
+			buddy.setStoryline(new Storyline(" >> I'm Luigi."));
+			buddy.getInventory().add(pgo);
+			listOfNpcs.add(buddy);
+			gameMap.getTileAt(p).add(buddy);
+		}
+		
+		
+		
+		/* BIG DUMP AT THE END */
 		/*Position position2 = new Position(3,0);
 		Position position3 = new Position(6, 2);
 		Position position4 = new Position(6, 5);
@@ -120,30 +158,6 @@ public class Game {
 		listOfNpcs.add(sheep);
 		listOfNpcs.add(shopkeeper);
 		*/
-		// TELEPORTER!
-		
-		Position p = new Position(gameMap.getHeight()-1,gameMap.getWidth()-1);
-		Teleporter door = new Teleporter("teleporter", p);
-		gameMap.getTileAt(p).add(door);
-	}
-	public Avatar getAvatar(){
-		
-		return avatar;
-	}
-	public GameMap getGameMap(){
-		
-		return gameMap;
-	}
-	public ArrayList<Npc> getListOfNpcs(){
-		return listOfNpcs;
-	}
-	
-	public int getLevel() {
-		return level;
-	}
-	
-	public void setTutorial(boolean tutorial) {
-		this.tutorial = tutorial;
 	}
 
 }
