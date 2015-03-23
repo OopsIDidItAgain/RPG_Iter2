@@ -11,6 +11,7 @@ public class ObserverController extends Controller{
 	private EntityMapInteraction entityMapInteraction;
 	private Skill observe;
 	private Avatar avatar;
+	private boolean fillInteraction = true;
 	
 	private ObserverController(){
 
@@ -39,19 +40,19 @@ public class ObserverController extends Controller{
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
 		Controller c = this;
-		switch(command) {
-		case ENTER: 
-		case EXIT: 
+		if(command == Command.ENTER){
 			c = GameController.getInstance();
-			break;
-		default: break;
+			fillInteraction = true;
 		}
 		return c;
 	}
 
 	@Override
 	public ObserverViewInteraction populateInteraction() {
-		entityMapInteraction.applySkill(avatar, observe);
+		if(fillInteraction){
+			entityMapInteraction.applySkill(avatar, observe);
+			fillInteraction = false;
+		}
 		ObserverViewInteraction observerViewInteraction = new ObserverViewInteraction(observe.getEffect());
 		return observerViewInteraction;
 	}

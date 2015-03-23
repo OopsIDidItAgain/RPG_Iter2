@@ -47,6 +47,9 @@ public class SkillAllocationViewInteraction extends ModelViewInteraction{
 				g.setColor(Color.red);
 			}
 			g.drawString(st, 40, widthOffset);
+			int skillPoints = skills.get(i).getMultiplier();
+			String drawthis = "" + skillPoints;
+			g.drawString(drawthis, 200, widthOffset);
 			widthOffset += 20;
 			g.setColor(Color.black);
 			++i;
