@@ -28,6 +28,7 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	
 	@Override
 	public void accept(Entity entity) throws InvalidMovementException {
+		System.out.println(getId());
 		entity.visit(this);
 	}
 

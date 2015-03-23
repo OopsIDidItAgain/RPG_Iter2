@@ -9,6 +9,8 @@ leafstone_item,0,5,InteractiveItem,2,2,GRASS,cape_item,,,,,,,,
 mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,
 trap,0,8,Trap,,,,,,,,,,,,
 take_damage_decal,5,5,AreaEffect,TAKE_DAMAGE,,,,,,,,,,,
+level_up_decal,6,5,AreaEffect,LEVEL_UP,,,,,,,,,,,
+heal_damage_decal,4,5,AreaEffect,HEAL_DAMAGE,,,,,,,,,,,
 ,,,,,,,,,,,,,,,
 AttackingNpc,,,,,,,,,,,,,,,
 buddy,0,2,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
