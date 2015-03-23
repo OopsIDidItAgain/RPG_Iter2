@@ -10,11 +10,7 @@ import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryContr
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
-import com.oopsididitagain.rpg_iter2.models.Game;
-import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.*;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
@@ -33,7 +29,6 @@ public class GameController extends Controller {
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
-	private boolean isFlying = false;
 	private boolean canMove = true;
 
 	private GameController() {
@@ -103,8 +98,12 @@ public class GameController extends Controller {
 			c = SkillPointAllocationController.getInstance();
 			break;
 		case FLIGHT:
-			avatar.setFlying(isFlying);
-			isFlying = !isFlying;
+            if(avatar.isCurrentlyFlying()){
+                if(gameMap.getTileAt(avatar.getPosition()).getTerrain() != Terrain.WATER)
+			        avatar.setFlying(true);
+            }else{
+                avatar.setFlying(false);
+            }
 			break;
 		default:
 			break;
