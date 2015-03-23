@@ -12,7 +12,7 @@ import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
 public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
-	TileablePriority tp = TileablePriority.MIDDLE;
+	TileablePriority tp = TileablePriority.HIDDEN;
 
 	public Trap(String id, Position position) {
 		super(id, position);
