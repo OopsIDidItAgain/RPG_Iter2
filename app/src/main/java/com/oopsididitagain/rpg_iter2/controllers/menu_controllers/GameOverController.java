@@ -76,7 +76,7 @@ public class GameOverController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		return new GameOverViewInteraction(gameOverMenu);
+		return new GameOverViewInteraction(gameOverMenu, false);
 	}
 
 	public static Controller getInstance() {
