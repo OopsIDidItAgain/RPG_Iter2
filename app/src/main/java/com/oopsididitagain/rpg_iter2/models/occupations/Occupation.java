@@ -62,7 +62,7 @@ public abstract class Occupation {
 	public void increaseMultiplier(int selop) {
 		ArrayList<Skill> totalSkills = getTotalSkills();
 		if(selop < totalSkills.size() && selop >= 0){
-			Skill skill = gameSkillList.get(selop);
+			Skill skill = totalSkills.get(selop);
 			skill.increaseMultiplier();
 			System.out.println(skill.getName() + " "  + skill.getMultiplier());
 		}
