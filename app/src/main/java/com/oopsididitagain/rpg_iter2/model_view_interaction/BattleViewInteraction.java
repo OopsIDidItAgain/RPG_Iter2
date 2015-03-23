@@ -9,6 +9,7 @@ import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Battle;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Projectile;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
@@ -21,15 +22,17 @@ public class BattleViewInteraction extends ModelViewInteraction {
 	private Assets assets;
 	private GameMap battleground;
 
-	private final int height = View.pHeight / 3;
-	private final int width = (int) (View.pWidth / 2);
+	private final int height = View.pHeight;
+	private final int width = (int) (View.pWidth);
 	private final int x = View.pWidth / 5;
 	private final int y = View.pHeight / 4;
+	private Projectile p;
 
 	public BattleViewInteraction(Battle battle) {
 		this.battle = battle;
 		this.assets = new Assets();
 		battleground = battle.getGameMap();
+
 	}
 
 	@Override
@@ -47,8 +50,18 @@ public class BattleViewInteraction extends ModelViewInteraction {
 				drawTile(g, t, i, j);
 			}
 		}
-		
 		drawHearts(g);
+
+		drawProjectile(g);
+	}
+
+	private void drawProjectile(Graphics g) {
+		if ((battle.getP() != null)
+				&& (battle.getP().inBounds(battleground.getWidth() * 50,
+						battleground.getHeight() * 50))) {
+			battle.getP().update();
+			battle.getP().render(g);
+		}
 	}
 
 	private void drawTile(Graphics g, Tile t, int x, int y) {

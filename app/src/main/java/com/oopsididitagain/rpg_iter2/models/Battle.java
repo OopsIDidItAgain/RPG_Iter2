@@ -8,11 +8,7 @@ import java.util.TimerTask;
 
 import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
 import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
@@ -35,6 +31,8 @@ public class Battle {
 	private Position oldPosition;
 	private boolean canMove = true;
 	private EntityMapInteraction entityMapInteraction;
+
+	private Projectile p;
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -379,8 +377,26 @@ public class Battle {
 		return false;
 	}
 
+	public Projectile getP() {
+		return p;
+	}
+
 	public Controller use() {
-		// TODO
+		Position pos = newAvatar.getPosition();
+		p = new Projectile(pos);
+		do {
+			if (battleground.tileInbounds(p.getPosition())) {
+				Tile t = battleground.getTileAt(p.getPosition());
+				Entity e = t.getEntity();
+				if (e != null) {
+					e.statBlob().merge(p.getStatBlob());
+					break;
+				}
+				p.doLogic();
+			} else {
+				break;
+			}
+		} while (battleground.tileInbounds(p.getPosition()));
 		return BattleController.getInstance();
 	}
 	

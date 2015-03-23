@@ -88,8 +88,8 @@ public class GameController extends Controller {
 		case INVENTORY:
             InventoryController ic = InventoryController.getInstance();
             ic.setCurrentTile(gameMap.getTileAt(avatar.getPosition()));
+			ic.setAvatar(avatar);
 			c = ic;
-
 			break;
 		case PAUSE:
 			c = PauseMenuController.getInstance();

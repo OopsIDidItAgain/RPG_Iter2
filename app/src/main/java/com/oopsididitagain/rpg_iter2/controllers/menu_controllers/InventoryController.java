@@ -25,12 +25,13 @@ public class InventoryController extends Controller {
     private Tile currentTile;
 	
 	private InventoryController() {
-		GameController gameController = GameController.getInstance();
-		this.avatar = gameController.getAvatar();
-		this.inventory = avatar.getInventory();
 		this.inventoryMenu = new InventoryMenu();
 	}
 	
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
+		this.inventory = avatar.getInventory();
+	}
 	public static InventoryController getInstance() {
 		if ( instance == null ){
 			instance = new InventoryController();

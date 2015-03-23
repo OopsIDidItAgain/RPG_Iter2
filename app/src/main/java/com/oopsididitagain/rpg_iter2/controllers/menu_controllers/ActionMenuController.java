@@ -36,6 +36,7 @@ public class ActionMenuController extends Controller {
 	public void setNpc(Npc npc) {
 		this.npc = npc;
 		actionMenu.setCanAttack(npc.accept(battle));
+		actionMenu.reset();
 	}
 
 	public void setAvatar(Avatar avatar) {
