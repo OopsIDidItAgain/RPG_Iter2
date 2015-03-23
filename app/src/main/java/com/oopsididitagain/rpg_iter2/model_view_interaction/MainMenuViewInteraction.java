@@ -14,23 +14,12 @@ import com.oopsididitagain.rpg_iter2.views.View;
 public class MainMenuViewInteraction extends ModelViewInteraction{
 	private MainMenu mainMenu;
 	Assets assets;
-	//private MenuButton newGameButton;
-	//private MenuButton loadGameButton;
-	//private MenuButton controlsButton;
 	
 	public  MainMenuViewInteraction(MainMenu mainMenu) { //constructor
-		int width = 600;
-		int height = 700;
-		int padding = 10;
 		this.mainMenu = mainMenu;
 		assets = new Assets();
-        //numOfButtons = mainMenu.getNumOfOptions();
-
-		//this.newGameButton = new MenuButton(mainMenu.getOptions(0), width/2 - 100 , height/2, 200, 50);
-		//this.loadGameButton = new MenuButton(mainMenu.getOptions(1),width/2 - 100, height/2 + 50 + padding, 200, 50);
-		//this.controlsButton = new MenuButton(mainMenu.getOptions(2), width/2 - 100, height/2 + 110 + padding, 200, 50);
-
 	}
+
 	@Override
 	public void accept(View view) {
 		view.visit(this);
@@ -41,7 +30,6 @@ public class MainMenuViewInteraction extends ModelViewInteraction{
 
         int width = 600;
         int height = 700;
-        int padding = 10;
 
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.BLACK);

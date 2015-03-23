@@ -1,6 +1,8 @@
 package com.oopsididitagain.rpg_iter2.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -18,7 +20,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Entity;
  */
 public class IOUtil {
 	
-	public static File saveMap(GameMap gameMap) {
+	public static File saveMap(GameMap gameMap, int level) {
 		StringBuilder sb = new StringBuilder("");
 		sb.append(gameMap.getHeight() + "," + gameMap.getWidth() + "\n\n");
 		for (int i = 0; i < gameMap.getHeight(); ++i) {
@@ -36,6 +38,8 @@ public class IOUtil {
 				if (j != gameMap.getWidth() - 1)
 					sb.append(",");
 			}
+			sb.append("\n");
+			sb.append(level);
 			sb.append("\n");
 		}
 		File savedMap = new File(System.getProperty("user.home") + "/" + "SavedMap.csv");
@@ -92,5 +96,23 @@ public class IOUtil {
 				sb.append(",");
 		}
 		return sb.toString();
+	}
+
+	public static int parseLevel(File grid) {
+		int level = 0; 
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(grid));
+			String[] sizes = reader.readLine().split(",");
+			int height = Integer.parseInt(sizes[0]);
+			reader.readLine(); // Skip Empty Line after Sizes
+			for (int i = 0; i < height; ++i)
+				reader.readLine();
+			level = Integer.parseInt(reader.readLine().split(",")[0]);
+			reader.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return level;
+		
 	}
 }

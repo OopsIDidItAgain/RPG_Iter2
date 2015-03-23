@@ -67,7 +67,12 @@ public class Assets {
 	public Image getImage(String gameObjID) {
         if(!images.containsKey(gameObjID)){
             System.out.println("loading"+gameObjID);
-            Image image = Toolkit.getDefaultToolkit().getImage(Assets.class.getResource(getPath(gameObjID)));
+            Image image = null;
+            try {
+			    image = Toolkit.getDefaultToolkit().getImage(Assets.class.getResource(getPath(gameObjID)));
+            } catch (Exception ex) {
+            	System.out.println("ERROR HERE: " + gameObjID);
+            }
             images.put(gameObjID, image);
         }
         return images.get(gameObjID);
