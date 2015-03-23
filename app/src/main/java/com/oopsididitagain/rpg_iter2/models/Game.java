@@ -49,6 +49,14 @@ public class Game {
 		this.gameMap = gameMap;
 	}
 	
+	// constructor for load
+	public Game(MapDatabase mapDatabase) {
+		this.gameMap = new GameMap(mapDatabase);
+		this.avatar = mapDatabase.getAvatar();
+		this.gameMap.getTileAt(avatar.getPosition()).add(avatar);
+		this.listOfNpcs = gameMap.getListOfNpcs();
+	}
+	
 	public void initialize() {
 		if (tutorial && this.level < 100) this.level += 100;
 		// level = 4;
