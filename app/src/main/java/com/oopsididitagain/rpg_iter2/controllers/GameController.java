@@ -109,7 +109,6 @@ public class GameController extends Controller {
 			break;
 		}
 
-
 		if (targetDirection != null
 				&& canMove
 				&& avatar.getEntityStatus().getStatus() != EntityStatus.TRAPPED) { // if
@@ -117,7 +116,7 @@ public class GameController extends Controller {
 																					// pressed
 																					// a
 																					// directional
-																					// button
+            avatar.setDirection(targetDirection);																		// button
 			// check if we can move in the requested direction
 			Position toPosition = avatar.getPosition()
 					.createPositionAtDirection(targetDirection);

@@ -45,7 +45,7 @@ public class Position {
 		return facing;
 	}
 
-	public void setFacing(Direction facing) {
+	public void setDirection(Direction facing) {
 		this.facing = facing;
 	}
 
