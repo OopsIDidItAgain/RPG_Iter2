@@ -57,6 +57,6 @@ shopkeeper_south,/images/entities/shopkeeper/shopkeeper.png
 shopkeeper_southwest,/images/entities/shopkeeper/shopkeeper.png
 sleeping,/images/entities/emotions/sleeping.png
 leafstone_item,/images/items/leafstone.jpg
-axe,/images/occupation/axe.png
-bow,/images/occupation/bow.png
-staff,/images/occupation/staff.png
+axe,/images/occupations/axe.png
+bow,/images/occupations/bow.png
+staff,/images/occupations/staff.png
