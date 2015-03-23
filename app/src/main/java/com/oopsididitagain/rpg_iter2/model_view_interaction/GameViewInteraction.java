@@ -170,10 +170,14 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
 		g.fillRect(0, 500, View.pWidth, 60);
 		int startingWidth = 0;
 		int i = 1;
+		int thingy = 100;
 		for(String s: skills){
+			if(i > 5){
+				thingy = 50;
+			}
 			g.setColor(Color.white);
 			g.drawString(i + ": " + s, startingWidth, 530);
-			startingWidth += 100;
+			startingWidth += thingy;
 			++i;
 		}
 		
