@@ -22,11 +22,12 @@ public enum Command {
 	SKILLFOUR("SKILLFOUR"),
 	SKILLFIVE("SKILLFIVE"),
 	SKILLSIX("SKILLSIX"),
+	SKILLSEVEN("SKILLSEVEN"),
 	EXIT("EXIT"),
 	YES("YES"),
 	NO("NO"),
 	UNKNOWN("UNKNOWN"),
-	FLIGHT("FLIGHT");
+	FLIGHT("FLIGHT"), ;
 	
 	
 	String identifier; 
