@@ -236,7 +236,8 @@ private void drawBottomLeft(Graphics g, int bottom, int left){
         	if(entity.isCurrentlyFlying()){
         		id+="_flying";
         	}
-            else if (entity.getDirection() == Direction.NORTHWEST) {
+
+            if (entity.getDirection() == Direction.NORTHWEST) {
                 id += "_northwest";
             }
             else if (entity.getDirection() == Direction.NORTH) {

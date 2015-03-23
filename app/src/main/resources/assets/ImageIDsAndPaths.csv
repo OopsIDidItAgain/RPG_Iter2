@@ -1,6 +1,14 @@
 OBJECT-ID,URL
 avatar,/images/entities/avatar/avatar.png
 avatar_flying,/images/entities/avatar/avatar_flying.png
+avatar_flying_west,/images/entities/avatar/flying/w.png
+avatar_flying_east,/images/entities/avatar/flying/e.png
+avatar_flying_north,/images/entities/avatar/flying/n.png
+avatar_flying_northeast,/images/entities/avatar/flying/ne.png
+avatar_flying_northwest,/images/entities/avatar/flying/nw.png
+avatar_flying_south,/images/entities/avatar/flying/s.png
+avatar_flying_southeast,/images/entities/avatar/flying/se.png
+avatar_flying_southwest,/images/entities/avatar/flying/sw.png
 avatar_east,/images/entities/avatar/e.png
 avatar_north,/images/entities/avatar/n.png
 avatar_northeast,/images/entities/avatar/ne.png

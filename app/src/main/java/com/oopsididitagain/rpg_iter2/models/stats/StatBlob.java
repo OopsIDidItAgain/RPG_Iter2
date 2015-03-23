@@ -117,7 +117,7 @@ public class StatBlob {
 	}
 
 	public double getLifeAmount() {
-		System.out.print(lifeAmount.getValue());
+		//System.out.print(lifeAmount.getValue());
 		return lifeAmount.getValue();
 	}
 	
