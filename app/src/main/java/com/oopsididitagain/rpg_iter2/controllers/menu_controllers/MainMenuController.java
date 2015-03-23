@@ -59,6 +59,10 @@ public class MainMenuController extends Controller {
 	private void doSelectedOption() {
 		Option selectedOption = mainMenu.getCurrentOption();
 		switch (selectedOption) {
+		case Tutorial:
+			controllerToReturn = AvatarCreationMenuController.getInstance();
+			((AvatarCreationMenuController)controllerToReturn).setTutorial(true);
+			break;
 		case New:
 			controllerToReturn = AvatarCreationMenuController.getInstance();
 			break;
