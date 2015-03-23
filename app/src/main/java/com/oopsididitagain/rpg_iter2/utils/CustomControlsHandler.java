@@ -29,7 +29,7 @@ public class CustomControlsHandler {
 		controls.put(81, Command.MOVE_NORTHWEST); // q
 		controls.put(67, Command.MOVE_SOUTHEAST); // c
 		controls.put(90, Command.MOVE_SOUTHWEST);
-		controls.put(70, Command.FLIGHT); //f
+		controls.put(70, Command.FLIGHT); // f
 		controls.put(80, Command.PAUSE);
 		controls.put(10, Command.ENTER);
 		controls.put(73, Command.INVENTORY);
@@ -47,7 +47,6 @@ public class CustomControlsHandler {
 		controls.put(89, Command.YES);
 		controls.put(78, Command.NO);
 		saveOldControls();
-
 
 	}
 
@@ -82,12 +81,15 @@ public class CustomControlsHandler {
 			// key has a command, collision issue
 			// remove the old key-command pair
 			modifiedControls.remove(key);
+			int prevKey = getModifiedKeyboardKey(command);
+			if (prevKey != -1)
+				modifiedControls.remove(prevKey);
 			// add new key-command pair
 			modifiedControls.put(key, command);
 		} else {
 			// key is free bind command to key
 			// find command, remove key from command
-			int prevKey = getKeyboardKey(command);
+			int prevKey = getModifiedKeyboardKey(command);
 			if (prevKey != -1)
 				modifiedControls.remove(prevKey);
 			// put new key with command
@@ -130,6 +132,15 @@ public class CustomControlsHandler {
 
 	public int getKeyboardKey(Command c) {
 		for (Map.Entry<Integer, Command> entry : controls.entrySet()) {
+			if (entry.getValue().equals(c)) {
+				return entry.getKey();
+			}
+		}
+		return -1;
+	}
+
+	public int getModifiedKeyboardKey(Command c) {
+		for (Map.Entry<Integer, Command> entry : modifiedControls.entrySet()) {
 			if (entry.getValue().equals(c)) {
 				return entry.getKey();
 			}
