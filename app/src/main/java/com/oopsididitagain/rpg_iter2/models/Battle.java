@@ -382,7 +382,7 @@ public class Battle {
 		for (Npc npc : toRemove) {
 			monsters.remove(npc);
 		}
-		if (monsters.isEmpty())
+		if (monsters.isEmpty()) {
 			return true;
 		}
 		return false;
