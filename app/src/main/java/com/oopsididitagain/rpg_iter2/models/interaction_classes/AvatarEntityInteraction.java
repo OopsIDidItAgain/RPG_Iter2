@@ -10,7 +10,10 @@ public class AvatarEntityInteraction {
 		double off = avatar.offensiveRating();
 		double def = npc.defensiveRating();
 
-		npc.statBlob().merge(new StatBlob(0, 0, 0, 0, 0, 0, 0, def - off, 0));
+		if (def - off < 0)
+			npc.statBlob().merge(
+					new StatBlob(0, 0, 0, 0, 0, 0, 0, def - off, 0));
+
 		System.out.println("Off: " + off + " Def: " + def + " avatar hp: "
 				+ avatar.statBlob().getLifeAmount() + " entity: "
 				+ npc.statBlob().getLifeAmount());
@@ -19,9 +22,9 @@ public class AvatarEntityInteraction {
 	public static void entityAttack(Avatar avatar, Npc npc) {
 		double off = npc.offensiveRating();
 		double def = avatar.defensiveRating();
-
-		avatar.statBlob()
-				.merge(new StatBlob(0, 0, 0, 0, 0, 0, 0, def - off, 0));
+		if (def - off < 0)
+			avatar.statBlob().merge(
+					new StatBlob(0, 0, 0, 0, 0, 0, 0, def - off, 0));
 		System.out.println("Off: " + off + " Def: " + def + " avatar hp: "
 				+ avatar.statBlob().getLifeAmount() + " entity: "
 				+ npc.statBlob().getLifeAmount());
