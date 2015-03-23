@@ -92,7 +92,7 @@ public class Avatar extends Entity implements StatModifiable {
 		
 		//bind wounds regular active fight
 		Skill bindWounds = new Skill(Skill.BINDWOUNDS);
-		StatBlob statblob = new StatBlob(0, 0, 10, 0, 0, 0, 0, 0, 0);
+		StatBlob statblob = new StatBlob(0, 0, 0, 0, 0, 0, 0, 10, 0);
 		SelfInflictedModifier self = new SelfInflictedModifier(statblob,0);
 		bindWounds.setEffect(self);
 		gameSkillList.add(bindWounds);
