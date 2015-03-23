@@ -9,7 +9,11 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import com.oopsididitagain.rpg_iter2.models.*;
+import com.oopsididitagain.rpg_iter2.models.Armory;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
+import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.effects.SelfInflictedModifier;
@@ -23,12 +27,11 @@ import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
-import com.oopsididitagain.rpg_iter2.utils.Battleable;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
-import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -50,6 +53,7 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	public Avatar(String id, Position position,StatBlob statblob, Armory armory) {
 		super(id, position,statblob);
+		this.armory = new Armory();		
 		this.stats = new StatCollection(armory,statblob);
 	}
 
@@ -88,7 +92,7 @@ public class Avatar extends Entity implements StatModifiable {
 		
 		//bind wounds regular active fight
 		Skill bindWounds = new Skill(Skill.BINDWOUNDS);
-		StatBlob statblob = new StatBlob(0, 0, 10, 0, 0, 0, 0, 0, 0);
+		StatBlob statblob = new StatBlob(0, 0, 0, 0, 0, 0, 0, 10, 0);
 		SelfInflictedModifier self = new SelfInflictedModifier(statblob,0);
 		bindWounds.setEffect(self);
 		gameSkillList.add(bindWounds);
@@ -166,6 +170,10 @@ public class Avatar extends Entity implements StatModifiable {
 		return stats.getBlob();
 	}
 
+	public StatCollection statCollection() {
+		return stats;
+	}
+	
 	@Override
 	public void visit(TakeableItem item) {
 		try {
@@ -288,5 +296,20 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 	public void raiseMovementSpeedBy(int speedDifference) {
 		stats.raiseMovementSpeedBy(speedDifference)	;	
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Avatar\n");
+		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), getDirection().toString(),
+			Integer.toString(entityStatus.getStatus()), Boolean.toString(isCurrentlyFlying), Double.toString(bank.amountOfMoney),
+			statBlob().toSaveFormat() };
+		sb.append(IOUtil.commaSeperate(arr) + "\n");
+		sb.append(occupation.toSaveableFormat() + "\n");
+		sb.append("INVENTORY\n");
+		sb.append(inventory.toSaveableFormat());
+		sb.append("\n");
+		return sb.toString();
 	}
 }

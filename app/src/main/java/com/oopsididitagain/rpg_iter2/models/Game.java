@@ -16,6 +16,7 @@ import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.ArmorItemType;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Game {
@@ -39,6 +40,7 @@ public class Game {
 		this.level = level;
 		
 		initialize();
+		
 	}
 	
 	public Game( Avatar avatar, GameMap gameMap){
@@ -47,12 +49,21 @@ public class Game {
 		this.gameMap = gameMap;
 	}
 	
+	// constructor for load
+	public Game(MapDatabase mapDatabase) {
+		this.gameMap = new GameMap(mapDatabase);
+		this.avatar = mapDatabase.getAvatar();
+		this.gameMap.getTileAt(avatar.getPosition()).add(avatar);
+		this.listOfNpcs = gameMap.getListOfNpcs();
+	}
+	
 	public void initialize() {
 		if (tutorial && this.level < 100) this.level += 100;
 		// level = 4;
 		gameMap = new GameMap(new MapDatabase(level));
 		gameMap.getTileAt((new Position(0,0))).add(avatar);
-
+		listOfNpcs = gameMap.getListOfNpcs();
+		
 		levelSpecificChecks();
 		
 		// TELEPORTER!		
@@ -109,7 +120,7 @@ public class Game {
 		/* -------------
 		 * BIG DUMP AT THE END
 		 * ------------------ */
-		if (level == 1) {
+		/*if (level == 1) {
 			Position position2 = new Position(3,0);
 			
 			Position position3 = new Position(6, 2);
@@ -165,7 +176,7 @@ public class Game {
 			listOfNpcs.add(buddy);
 			listOfNpcs.add(sheep);
 			listOfNpcs.add(shopkeeper);
-		}
+		}*/
 	}
 
 }

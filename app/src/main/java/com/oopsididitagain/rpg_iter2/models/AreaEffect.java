@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.models;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.InvalidMovementException;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
@@ -27,6 +28,7 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	
 	@Override
 	public void accept(Entity entity) throws InvalidMovementException {
+		System.out.println(getId());
 		entity.visit(this);
 	}
 
@@ -53,6 +55,13 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	@Override
 	public void accept(MovementProbe movementProbe) {
 		movementProbe.addPositionedGameObject(this);
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		String[] arr  = { getId(), Integer.toString(getX()), Integer.toString(getY()),
+			"AreaEffect", type.toString() };
+		return IOUtil.commaSeperate(arr);
 	}
 
 }

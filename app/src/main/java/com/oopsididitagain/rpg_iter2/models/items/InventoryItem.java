@@ -48,4 +48,6 @@ public abstract class InventoryItem extends GameObject implements Priceable {
 		return false;
 	}
 
+	public abstract String toSaveableFormat();
+
 }

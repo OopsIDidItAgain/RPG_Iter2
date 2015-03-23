@@ -53,9 +53,10 @@ public class SkillPointAllocationController extends Controller{
             case USE:
             	int selop = skillMenu.getMenuOption();
             	//add check for 0
-            	occupation.increaseMultiplier(selop);
-            	avatar.minusUnusedSkillPoints();
-
+            	if(avatar.getUnusedPoints() > 0){
+            		occupation.increaseMultiplier(selop);
+                	avatar.minusUnusedSkillPoints();
+            	}
             	break;
             case EXIT:
             	//LinkedList<String> skills = 

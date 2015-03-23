@@ -18,4 +18,9 @@ public class NonTradingNPC extends NonAttackingNPC{
 		return ActionMenuController.getInstance();
 		
 	}
+	
+	@Override
+	public String toSaveableFormat() {
+		return "NonTradingNpc\n" + super.toSaveableFormat();
+	}
 }

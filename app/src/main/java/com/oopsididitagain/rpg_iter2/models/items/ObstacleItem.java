@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.models.items;
 import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.MovementInhibitor;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -37,6 +38,13 @@ public class ObstacleItem extends PositionedGameObject implements TiledProbeVisi
 	@Override
 	public boolean removeable() {
 		return false;
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		String[] arr = { getId(), Integer.toString(position.getX()), Integer.toString(position.getY()),
+				"ObstacleItem" };
+		return IOUtil.commaSeperate(arr);
 	}
 	
 }

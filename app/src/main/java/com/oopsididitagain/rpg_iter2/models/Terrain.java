@@ -53,4 +53,14 @@ public class Terrain implements Assetable, TiledProbeVisitable, MovementInhibito
 		return getTileablePriority().compareTo(o.getTileablePriority());
 	}
 
+	@Override
+	public String toString() {
+		switch(id) {
+		case "G": return "GRASS";
+		case "W": return "WATER";
+		case "M": return "MOUNTAIN";
+		}
+		System.out.println("ERROR TO STRING ON TERRAIN!");
+		return "GRASS";
+	}
 }

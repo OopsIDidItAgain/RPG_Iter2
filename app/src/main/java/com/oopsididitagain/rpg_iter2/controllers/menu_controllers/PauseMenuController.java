@@ -8,6 +8,7 @@ import com.oopsididitagain.rpg_iter2.model_view_interaction.PauseMenuViewInterac
 import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.PauseMenu.Option;
 import com.oopsididitagain.rpg_iter2.utils.Command;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 
 /**
  * Handles input while in pause menu_controllers
@@ -56,7 +57,8 @@ public class PauseMenuController extends Controller{
 					controller = OptionsMenuController.getInstance();
 					break;
 				case Save:
-					// TODO save logic
+					GameController.getInstance().saveGame();
+					controller = GameController.getInstance();
 					break;
 				default:
 					break;

@@ -55,11 +55,12 @@ public class TradeController extends Controller{
 				
 				int selectedOption = menu.getSelectedOption();
 				Priceable pricedItem = NPCInventory.getItemAtIndex(selectedOption);
-				avatar.purchaseItem(pricedItem);
-				GameController gc = GameController.getInstance();
-				gc.performPassiveSkills();
-					NPCInventory.remove(pricedItem);
-					
+				if(pricedItem != null){
+					avatar.purchaseItem(pricedItem);
+					GameController gc = GameController.getInstance();
+					gc.performPassiveSkills();
+						NPCInventory.remove(pricedItem);
+				}	
 			} catch (IndexOutOfBoundsException ex) {
 				ex.printStackTrace();
 				break;

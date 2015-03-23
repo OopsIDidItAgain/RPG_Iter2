@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.models.occupations;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -275,6 +276,19 @@ public class Summoner extends Occupation{
 			return null;
 		}
 		return skill;
+	}
+	
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Summoner\n");
+		List<Skill> skills = getTotalSkills();
+		for(int i = 0; i < skills.size(); ++i) {
+			Skill skill = skills.get(i);
+			sb.append(skill.getMultiplier());
+			if (i != skills.size() - 1) 
+				sb.append(",");
+		}
+		return sb.toString();
 	}
 
 }

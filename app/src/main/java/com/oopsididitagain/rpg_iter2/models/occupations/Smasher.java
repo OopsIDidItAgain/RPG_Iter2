@@ -2,6 +2,7 @@ package com.oopsididitagain.rpg_iter2.models.occupations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.Skill;
@@ -96,7 +97,17 @@ public class Smasher extends Occupation{
 		return skill;
 	}
 
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Smasher\n");
+		List<Skill> skills = getTotalSkills();
+		for(int i = 0; i < skills.size(); ++i) {
+			Skill skill = skills.get(i);
+			sb.append(skill.getMultiplier());
+			if (i != skills.size() - 1) 
+				sb.append(",");
+		}
+		return sb.toString();
+	}
 	
-
-
 }

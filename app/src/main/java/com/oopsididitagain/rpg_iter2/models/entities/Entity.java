@@ -95,13 +95,14 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	public abstract void visit(InventoryWeaponItem item);
 	public abstract void visit(InteractiveItem item);
 	public abstract void visit(Teleporter item);
+	public abstract String toSaveableFormat();
 
 	public boolean isCurrentlyFlying() {
 		return isCurrentlyFlying;
 	}
 	
 	public void setFlying(boolean flying) {
-		isCurrentlyFlying = !flying;
+		isCurrentlyFlying = flying;
 		
 	}
 

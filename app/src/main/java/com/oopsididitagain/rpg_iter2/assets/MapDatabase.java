@@ -1,6 +1,9 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,18 +17,25 @@ import com.oopsididitagain.rpg_iter2.models.Armory;
 import com.oopsididitagain.rpg_iter2.models.Decal;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.Trap;
+import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Bank;
-import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
+import com.oopsididitagain.rpg_iter2.models.entities.NonTradingNPC;
+import com.oopsididitagain.rpg_iter2.models.entities.TradingNPC;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EquipableTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryUsableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.ObstacleItem;
 import com.oopsididitagain.rpg_iter2.models.items.OneShotItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
@@ -54,6 +64,7 @@ public class MapDatabase {
 	String[][] mapGrid;
 	int mapX;
 	int mapY;
+	private Avatar avatar;
 
 	public MapDatabase(int level) {
 		tiledEntityVisitables = new ArrayList<TiledEntityVisitable>();
@@ -62,6 +73,26 @@ public class MapDatabase {
 				"/levels/level" + level + "/grid.csv");
 		objectsFileStream = getClass().getResourceAsStream(
 				"/levels/level" + level + "/tileables.csv");
+
+		gridReader = new BufferedReader(new InputStreamReader(gridFileStream));
+		objectsReader = new BufferedReader(new InputStreamReader(
+				objectsFileStream));
+
+		readTerrain();
+		setTiles();
+		readObjects();
+	}
+
+	public MapDatabase(int level, File grid, File tileables) {
+		tiledEntityVisitables = new ArrayList<TiledEntityVisitable>();
+		tiledProbeVisitables = new ArrayList<TiledProbeVisitable>();
+		try {
+			gridFileStream = new FileInputStream(grid);
+			objectsFileStream = new FileInputStream(tileables);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		gridReader = new BufferedReader(new InputStreamReader(gridFileStream));
 		objectsReader = new BufferedReader(new InputStreamReader(
@@ -180,8 +211,11 @@ public class MapDatabase {
 
 		while ((line = readObjectsLine()) != null) {
 			System.out.println(line);
-			String[] tokens = line.split(",");
+			String[] tokens = line.trim().split(",");
 			String SAVED_TYPE = tokens[0];
+			// empty row, but newline char
+			if (SAVED_TYPE.length() == 0)
+				break;
 			boolean isDone = false;
 			/* Do switch on typestuff */
 			switch (SAVED_TYPE) {
@@ -195,6 +229,9 @@ public class MapDatabase {
 					if (tokens.length == 0)
 						break;
 					String id = tokens[0];
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					int x = Integer.parseInt(tokens[1]);
 					int y = Integer.parseInt(tokens[2]);
 					Position position = new Position(y, x);
@@ -202,24 +239,24 @@ public class MapDatabase {
 					switch (type) {
 					case "EffectTakeableItem":
 						EffectTakeableItem eitem = new EffectTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
-										tokens));
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens));
 						tiledEntityVisitables.add(eitem);
 						usableMap.put(id, eitem);
 						break;
 					case "WeaponTakeableItem":
 						WeaponTakeableItem witem = new WeaponTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
-										tokens), parseRank(tokens),
-								parseWeaponType(tokens));
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens), parseRank(tokens),
+								parseWeaponType(tokens[15]));
 						tiledEntityVisitables.add(witem);
 						equipableMap.put(id, witem);
 						break;
 					case "ArmorTakeableItem":
 						ArmorTakeableItem aitem = new ArmorTakeableItem(id,
-								position, parsePrice(tokens), parseStatBlob(4,
-										tokens), parseRank(tokens),
-								parseArmorType(tokens));
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens), parseRank(tokens),
+								parseArmorType(tokens[15]));
 						tiledEntityVisitables.add(aitem);
 						equipableMap.put(id, aitem);
 						break;
@@ -229,9 +266,9 @@ public class MapDatabase {
 						break;
 					case "TakeableItem":
 						TakeableItem titem = new TakeableItem(id, position,
-								parsePrice(tokens));
+								parsePrice(tokens[13]));
 						tiledEntityVisitables.add(new TakeableItem(id,
-								position, parsePrice(tokens)));
+								position, parsePrice(tokens[13])));
 						unusableMap.put(id, titem);
 						break;
 					case "ObstacleItem":
@@ -290,7 +327,7 @@ public class MapDatabase {
 				Direction direction = parseDirection(tokens[3]);
 				Position position = new Position(y, x, direction);
 				EntityStatus entityStatus = parseEntityStatus(tokens[4]);
-				boolean isFlying = parseIsFlying(tokens[5]);
+				boolean isFlying = parseBoolean(tokens[5]);
 				Bank bank = parseBank(tokens[6]);
 				// STAT BLOB
 				StatBlob statBlob = parseStatBlob(7, tokens);
@@ -303,7 +340,7 @@ public class MapDatabase {
 				line = readObjectsLine();
 				System.out.println(line);
 				tokens = line.split(",");
-				parseSkills(occupation, tokens);
+				List<Integer> multipliers = parseSkills(occupation, tokens);
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -319,30 +356,357 @@ public class MapDatabase {
 					 */
 					if (tokens.length == 0)
 						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
 					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
 					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						// do logic for Armory
+						if (isEquipped) {
+							armory.equip(weaponItem);
+						}
+						break;
 					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
+						// do logic for Armory
+						if (isEquipped) {
+							armory.equip(armorItem);
+						}
 						break;
 					}
 				}
-				Avatar avatar = new Avatar(id, position, statBlob, armory);
+				avatar = new Avatar(id, position, statBlob, armory);
 				avatar.setEntityStatus(entityStatus);
 				avatar.setFlying(isFlying);
 				avatar.setBank(bank);
 				avatar.setOccupation(occupation);
+				ArrayList<Skill> skillz = occupation.getTotalSkills();
+				int i = 0;
+				for(Skill skill1: skillz){
+					skill1.setMultiplier(multipliers.get(i));
+					++i;
+				}
 				avatar.setInventory(inventory);
-				tiledProbeVisitables.add(avatar);
+				// tiledProbeVisitables.add(avatar);
 				// line is at empty row after last item in inventory
 				// end of Avatar load
 				break;
 			case "AttackingNpc":
+				/* Do Entity stuff - line right after tag */
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseBoolean(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				String story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				Storyline storyline = new Storyline(story.substring(0, story.length()-2));
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
+					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
+					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
+					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
+						break;
+					}
+				}
+				AttackingNPC attackingNpc = new AttackingNPC(id, position,
+						statBlob);
+				attackingNpc.setEntityStatus(entityStatus);
+				attackingNpc.setFlying(isFlying);
+				attackingNpc.setBank(bank);
+				attackingNpc.setInventory(inventory);
+				attackingNpc.setStoryline(storyline);
+				tiledProbeVisitables.add(attackingNpc);
+				// line is at empty row after last item in inventory
+				// end of AttackingNpc load
 				break;
-			case "NonTradingNpc":
+			case "NonTradingNpc":/* Do Entity stuff - line right after tag */
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseBoolean(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				storyline = new Storyline(story.substring(0, story.length()-2));
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
+					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
+					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
+					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
+						break;
+					}
+				}
+				NonTradingNPC nonTradingNPC = new NonTradingNPC(id, position,
+						statBlob);
+				nonTradingNPC.setEntityStatus(entityStatus);
+				nonTradingNPC.setFlying(isFlying);
+				nonTradingNPC.setBank(bank);
+				nonTradingNPC.setInventory(inventory);
+				nonTradingNPC.setStoryline(storyline);
+				tiledProbeVisitables.add(nonTradingNPC);
+				// line is at empty row after last item in inventory
+				// end of nonTradingNPC load
 				break;
 			case "TradingNpc":
+				line = readObjectsLine();
+				System.out.println(line);
+				tokens = line.split(",");
+				// START BUILDING
+				id = tokens[0];
+				x = Integer.parseInt(tokens[1]);
+				y = Integer.parseInt(tokens[2]);
+				direction = parseDirection(tokens[3]);
+				position = new Position(y, x, direction);
+				entityStatus = parseEntityStatus(tokens[4]);
+				isFlying = parseBoolean(tokens[5]);
+				bank = parseBank(tokens[6]);
+				// STAT BLOB
+				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				storyline = new Storyline(story.substring(0, story.length()-2));
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				inventory = new Inventory();
+				isDone = false;
+				while (!isDone && (line = readObjectsLine()) != null) {
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
+					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
+					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
+					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
+						break;
+					}
+				}
+				TradingNPC tradingNPC = new TradingNPC(id, position, statBlob);
+				tradingNPC.setEntityStatus(entityStatus);
+				tradingNPC.setFlying(isFlying);
+				tradingNPC.setBank(bank);
+				tradingNPC.setInventory(inventory);
+				tradingNPC.setStoryline(storyline);
+				tiledProbeVisitables.add(tradingNPC);
+				// line is at empty row after last item in inventory
+				// end of nonTradingNPC load
 				break;
 			default:
 				break;
@@ -377,8 +741,11 @@ public class MapDatabase {
 		return new EntityStatus(Integer.parseInt(token));
 	}
 
-	private boolean parseIsFlying(String token) {
-		return Boolean.parseBoolean(token);
+	private boolean parseBoolean(String token) {
+		if (token.equals("TRUE"))
+			return true;
+		return false;
+
 	}
 
 	private Bank parseBank(String token) {
@@ -398,13 +765,13 @@ public class MapDatabase {
 		}
 	}
 
-	private void parseSkills(Occupation o, String tokens[]) {
+	private List<Integer> parseSkills(Occupation o, String tokens[]) {
+		List<Integer> list = new ArrayList<Integer>();
 		for (int i = 0; i < tokens.length; i++) {
 			int multiplier = Integer.parseInt(tokens[i]);
-			for (int j = 0; j < multiplier; j++) {
-				o.increaseMultiplier(i);
-			}
+			list.add(multiplier);
 		}
+		return list;
 	}
 
 	private Decal parseDecal(AreaEffectType type) {
@@ -448,9 +815,8 @@ public class MapDatabase {
 		return Terrain.GRASS;
 	}
 
-	private ArmorItemType parseArmorType(String[] tokens) {
-		String type = tokens[15];
-		switch (type) {
+	private ArmorItemType parseArmorType(String token) {
+		switch (token) {
 		case "ARMOR":
 			return ArmorItemType.ARMOR;
 		case "BOOTS":
@@ -465,9 +831,8 @@ public class MapDatabase {
 		return Integer.parseInt(tokens[14]);
 	}
 
-	private WeaponItemType parseWeaponType(String[] tokens) {
-		String type = tokens[15];
-		switch (type) {
+	private WeaponItemType parseWeaponType(String token) {
+		switch (token) {
 		case "ONE_HANDED_WEAPON":
 			return WeaponItemType.ONE_HANDED_WEAPON;
 		case "TWO_HANDED_WEAPON":
@@ -482,20 +847,20 @@ public class MapDatabase {
 		return WeaponItemType.FISTS;
 	}
 
-	private double parsePrice(String[] tokens) {
-		return Double.parseDouble(tokens[13]);
+	private double parsePrice(String token) {
+		return Double.parseDouble(token);
 	}
 
 	private StatBlob parseStatBlob(int start, String[] tokens) {
-		StatBlob statBlob = new StatBlob(Integer.parseInt(tokens[start]),
-				Integer.parseInt(tokens[start + 1]),
-				Integer.parseInt(tokens[start + 2]),
-				Integer.parseInt(tokens[start + 3]),
-				Integer.parseInt(tokens[start + 4]),
-				Integer.parseInt(tokens[start + 5]),
-				Integer.parseInt(tokens[start + 6]),
-				Integer.parseInt(tokens[start + 7]),
-				Integer.parseInt(tokens[start + 8]));
+		StatBlob statBlob = new StatBlob(Double.parseDouble(tokens[start]),
+				Double.parseDouble(tokens[start + 1]),
+				Double.parseDouble(tokens[start + 2]),
+				Double.parseDouble(tokens[start + 3]),
+				Double.parseDouble(tokens[start + 4]),
+				Double.parseDouble(tokens[start + 5]),
+				Double.parseDouble(tokens[start + 6]),
+				Double.parseDouble(tokens[start + 7]),
+				Double.parseDouble(tokens[start + 8]));
 		return statBlob;
 	}
 
@@ -515,5 +880,9 @@ public class MapDatabase {
 
 	public Tile[][] getTiles() {
 		return tiles;
+	}
+
+	public Avatar getAvatar() {
+		return avatar;
 	}
 }

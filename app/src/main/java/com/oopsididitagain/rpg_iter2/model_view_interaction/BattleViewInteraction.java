@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.SortedSet;
+import java.util.LinkedList;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Battle;
@@ -109,7 +109,7 @@ private void drawBomb(Graphics g){
 	}
 
 	private void drawTile(Graphics g, Tile t, int x, int y) {
-		SortedSet<Tileable> tileables = t.getTilebles();
+		LinkedList<Tileable> tileables = t.getTilebles();
 		Entity entity = t.getEntity();
 
 		Image bf = assets.getImage(t.getTerrain().getId());

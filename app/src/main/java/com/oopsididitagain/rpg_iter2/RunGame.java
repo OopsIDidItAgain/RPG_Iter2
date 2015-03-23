@@ -32,7 +32,7 @@ public class RunGame extends JFrame{
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize(600, 700);
 		this.setLocationRelativeTo(null); // places frame into center of screen
-		this.setTitle("Demeter Lays Down the Law 2: Tell, Don't Ask");
+		this.setTitle("Dungeons and Dave 2: The Revenge of Page Jones");
 		this.setVisible(true);
 		this.setResizable(false);
 		this.add(loop.getView());

@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.models.items;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class InventoryWeaponItem extends InventoryEquipableItem {
@@ -32,6 +33,13 @@ public class InventoryWeaponItem extends InventoryEquipableItem {
 	public WeaponTakeableItem toTakeableItem(Position position) {
 		WeaponTakeableItem item = new WeaponTakeableItem(getId(), position, price(), statBlob(), getRank(), type);
 		return item;
+	}
+	
+	@Override
+	public String toSaveableFormat() {
+		String[] arr = { "Weapon", getId(), Double.toString(price()), type.toString(), Boolean.toString(isEquipped()),
+				Integer.toString(getRank()), statBlob().toSaveFormat() };
+		return IOUtil.commaSeperate(arr);
 	}
 
 }
