@@ -1,11 +1,17 @@
 package com.oopsididitagain.rpg_iter2.controllers.menu_controllers;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.ExitGameController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.MainMenuViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu;
 import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
 import com.oopsididitagain.rpg_iter2.utils.Command;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 
 /**
  * In charge of handling input in main menu_controllers
@@ -70,10 +76,30 @@ public class MainMenuController extends Controller {
 			controllerToReturn = ExitGameController.getInstance();
 			break;
 		case Load:
+			controllerToReturn = loadGame();
 			break;
 		default:
 			break;
 		}
+	}
+
+	private Controller loadGame() {
+		File loadGameDir = null;
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int returnVal = chooser.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) 
+			loadGameDir = chooser.getSelectedFile();
+
+		if (loadGameDir == null) return this;
+		
+		File grid = new File(loadGameDir, "grid.csv");
+		File tileables = new File(loadGameDir, "tileables.csv");
+		int level = IOUtil.parseLevel(grid);
+		return this;
+		
+		// TODO:
+		// Pass this to map database.
 	}
 
 	@Override
