@@ -12,7 +12,7 @@ import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
 public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
-	TileablePriority tp = TileablePriority.MIDDLE;
+	TileablePriority tp = TileablePriority.HIDDEN;
 
 	public Trap(String id, Position position) {
 		super(id, position);
@@ -28,11 +28,6 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 	
 	public void detect() {
 		tp = TileablePriority.MIDDLE;
-	}
-	
-	public void remove() {
-		//TODO: Add probability of successful removal
-		//sprung = true;
 	}
 	
 	public Position getPosition(){
@@ -77,7 +72,7 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 
 	@Override
 	public void accept(MovementProbe movementProbe) {
-		// TODO Auto-generated method stub
+		movementProbe.add(this);
 		
 	}
 	
