@@ -184,7 +184,7 @@ public class GameController extends Controller {
 		
 		
 		int currentLevel = game.getLevel();
-		if (currentLevel == 106) { // end of tutorial
+		if (currentLevel == 107 || currentLevel == 2) { // end of tutorial
 			Controller c = CompletedTutorialController.getInstance();
 			return c;
 		}
