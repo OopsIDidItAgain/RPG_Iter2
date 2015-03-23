@@ -83,8 +83,12 @@ public class StatCollection {
 			
 		} else */
 		// if ((int)this.blob.getLifeAmount() <= 0) dyingLogic();
-		
+		System.out.println("hdF" + blob.getLifeAmount());
 		if(this.blob.getLifeAmount() > lifeCapacity.getValue()) {
+			blob.setLivesLeft(blob.getLivesLeft() + 1);
+			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
+		}else if(this.blob.getLifeAmount() <= 0) {
+			blob.setLivesLeft(blob.getLivesLeft() - 1);
 			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
 		}
 				
@@ -92,6 +96,13 @@ public class StatCollection {
 	}
 	public void detachBlob(StatBlob blob) {
 		this.blob.detach(blob);
+		if(this.blob.getLifeAmount() > lifeCapacity.getValue()) {
+			blob.setLivesLeft(blob.getLivesLeft() + 1);
+			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
+		}else if(this.blob.getLifeAmount() <= 0) {
+			blob.setLivesLeft(blob.getLivesLeft() - 1);
+			this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
+		}
 		deriveStats();
 	}
 
@@ -182,10 +193,20 @@ public class StatCollection {
 		blob.raiseMovementSpeedBy(speedDifference);
 	}
 
+
 	public void removeLife() {
 		this.blob.getLifeAmountStat().setValue(lifeCapacity.getValue());
 		this.blob.getLivesLeftStat().subtract(1);
+	}
 		
+
+	public int getLifeAmount() {
+		return (int) blob.getLifeAmount();
+	}
+
+	public int getLivesLeft() {
+		return blob.getLivesLeft();
+
 	}
 
 }

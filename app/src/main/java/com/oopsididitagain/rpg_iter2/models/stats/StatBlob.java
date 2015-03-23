@@ -117,6 +117,7 @@ public class StatBlob {
 	}
 
 	public double getLifeAmount() {
+		System.out.print(lifeAmount.getValue());
 		return lifeAmount.getValue();
 	}
 	
@@ -182,9 +183,11 @@ public class StatBlob {
 		this.experience.add(other.experience);
 		this.movement.add(other.movement);
 		this.manaAmount.add(other.manaAmount);
+		
 	}
 	
 	public void detach(StatBlob other) {
+		System.out.println("\nhdF" + lifeAmount );
 		this.livesLeft.subtract(other.livesLeft);
 		this.intellect.subtract(other.intellect);
 		this.strength.subtract(other.strength);
@@ -258,6 +261,11 @@ public class StatBlob {
 				intellect.toString(), hardiness.toString(), experience.toString(), movement.toString(), 
 				lifeAmount.toString(), manaAmount.toString() };
 		return IOUtil.commaSeperate(arr);
+	}
+
+	public void setLivesLeft(int livesLeft2) {
+		this.livesLeft.setValue(livesLeft2);
+		
 	}
 	
 }

@@ -61,8 +61,8 @@ public class GameController extends Controller {
 
 	@Override
 	public Controller takeInputAndUpdate(Command command) {
-		Controller c = takeStatsAndUpdate(); // this includes things like
-												// relocating avatar if dead
+		Controller c = this;
+		 c = takeStatsAndUpdate(); // this includes things like
 		if (c instanceof GameOverController)
 			return c; // game over
 
@@ -117,7 +117,8 @@ public class GameController extends Controller {
 		default:
 			break;
 		}
-
+		
+		// relocating avatar if dead
 		if (targetDirection != null
 				&& canMove
 				&& avatar.getEntityStatus().getStatus() != EntityStatus.TRAPPED) { // if
@@ -200,8 +201,12 @@ public class GameController extends Controller {
 			Direction d = getRandomDirection();
 			if (d != null) {
 				Npc npc = listOfNpcs.get(i);
+				
 				Position p = npc.getPosition().createPositionAtDirection(d);
-
+				if(npc.isCurrentlyDead()){
+					Tile t = gameMap.getTileAt(p);
+					t.remove(npc);
+				}
 				boolean isSuccessful = entityMapInteraction.move(npc, p);
 			}
 		}
@@ -252,16 +257,10 @@ public class GameController extends Controller {
 
 	public Controller takeStatsAndUpdate() {
 		Controller c = this;
-		if (avatar.isDead()) {
-			if (avatar.kill()) { // true if avatar has lives left
-
-				Position av = avatar.getPosition(), o = new Position(0, 0);
-
-				avatar.move(gameMap.getTileAt(av), gameMap.getTileAt(o), o);
-			} else {
-				c = GameOverController.getInstance();
-				return c;
-			}
+		if (avatar.isCurrentlyDead()) {
+			c = GameOverController.getInstance();
+			Position av = avatar.getPosition(), o = new Position(0, 0);
+			avatar.move(gameMap.getTileAt(av), gameMap.getTileAt(o), o);
 		}
 
 		return c;
