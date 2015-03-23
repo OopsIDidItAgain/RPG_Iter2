@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 
@@ -114,5 +115,18 @@ public abstract class Npc extends Entity {
 		a.bank = this.bank;
 
 		return a;
+	}
+	
+	@Override
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), getDirection().toString(),
+			Integer.toString(entityStatus.getStatus()), Boolean.toString(isCurrentlyFlying), Double.toString(bank.amountOfMoney),
+			statBlob().toSaveFormat() };
+		sb.append(IOUtil.commaSeperate(arr) + "\n");
+		sb.append("INVENTORY\n");
+		sb.append(inventory.toSaveableFormat());
+		sb.append("\n");
+		return sb.toString();		
 	}
 }

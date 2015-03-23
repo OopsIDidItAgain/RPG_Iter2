@@ -41,7 +41,7 @@ public class ObstacleItem extends PositionedGameObject implements TiledProbeVisi
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr = { getId(), Integer.toString(position.getX()), Integer.toString(position.getY()),
 				"ObstacleItem" };
 		return IOUtil.commaSeperate(arr);

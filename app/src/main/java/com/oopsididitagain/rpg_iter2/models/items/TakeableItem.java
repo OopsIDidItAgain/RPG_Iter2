@@ -63,7 +63,7 @@ public class TakeableItem extends PositionedGameObject implements TiledEntityVis
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), "TakeableItem", "", "", "", "",
 			"", "", "", "", "", Double.toString(price) };
 		return IOUtil.commaSeperate(arr);

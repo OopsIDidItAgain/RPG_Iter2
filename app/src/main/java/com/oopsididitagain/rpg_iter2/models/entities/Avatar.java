@@ -24,6 +24,7 @@ import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
 import com.oopsididitagain.rpg_iter2.utils.Battleable;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
@@ -268,5 +269,20 @@ public class Avatar extends Entity implements StatModifiable {
 	}
 	public void raiseMovementSpeedBy(int speedDifference) {
 		stats.raiseMovementSpeedBy(speedDifference)	;	
+	}
+
+	@Override
+	public String toSaveableFormat() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Avatar\n");
+		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), getDirection().toString(),
+			Integer.toString(entityStatus.getStatus()), Boolean.toString(isCurrentlyFlying), Double.toString(bank.amountOfMoney),
+			statBlob().toSaveFormat() };
+		sb.append(IOUtil.commaSeperate(arr) + "\n");
+		sb.append(occupation.toSaveableFormat() + "\n");
+		sb.append("INVENTORY\n");
+		sb.append(inventory.toSaveableFormat());
+		sb.append("\n");
+		return sb.toString();
 	}
 }

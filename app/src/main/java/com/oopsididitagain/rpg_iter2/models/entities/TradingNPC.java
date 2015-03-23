@@ -22,4 +22,9 @@ public class TradingNPC extends NonAttackingNPC{
 		
 	}
 
+	
+	@Override
+	public String toSaveableFormat() {
+		return "TradingNpc\n" + super.toSaveableFormat();
+	}
 }

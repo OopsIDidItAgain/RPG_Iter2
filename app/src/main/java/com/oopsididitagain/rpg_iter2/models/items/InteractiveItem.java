@@ -82,7 +82,7 @@ public class InteractiveItem extends PositionedGameObject implements TiledEntity
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr =  { getId(), Integer.toString(getX()), Integer.toString(getY()),
 			Integer.toString(target.getPosition().getX()), Integer.toString(target.getPosition().getY()), 
 			"InteractiveItem", resultant.toString(), requirement.getId() };

@@ -59,6 +59,7 @@ public abstract class Occupation {
 	}
 	public abstract Skill getFightSkill(Command command);
 	public abstract Skill getActiveSkill(Command command);
+	public abstract String toSaveableFormat();
 	public void increaseMultiplier(int selop) {
 		ArrayList<Skill> totalSkills = getTotalSkills();
 		if(selop < totalSkills.size() && selop >= 0){

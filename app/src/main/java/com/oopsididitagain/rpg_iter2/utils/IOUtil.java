@@ -54,7 +54,7 @@ public class IOUtil {
 				SortedSet<Tileable> tileables = tile.getTilebles();
 				for (Tileable tileable: tileables) {
 					PositionedGameObject positionedGameObject = (PositionedGameObject) tileable;
-					sb.append(positionedGameObject.toSaveFormat() + "\n");
+					sb.append(positionedGameObject.toSaveableFormat() + "\n");
 				}
 			}
 		}

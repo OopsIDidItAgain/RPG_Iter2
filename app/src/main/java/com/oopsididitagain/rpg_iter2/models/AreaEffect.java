@@ -57,7 +57,7 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr  = { getId(), Integer.toString(getX()), Integer.toString(getY()),
 			"AreaEffect", type.toString() };
 		return IOUtil.commaSeperate(arr);

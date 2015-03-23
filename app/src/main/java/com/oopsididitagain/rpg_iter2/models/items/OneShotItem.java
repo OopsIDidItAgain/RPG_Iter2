@@ -50,7 +50,7 @@ public class OneShotItem extends PositionedGameObject implements InstantStatModi
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()),
 				"OneShotItem", statBlob().toSaveFormat() };
 		return IOUtil.commaSeperate(arr);

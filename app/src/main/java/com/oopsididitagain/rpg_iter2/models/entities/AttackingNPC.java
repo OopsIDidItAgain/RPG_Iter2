@@ -24,5 +24,10 @@ public class AttackingNPC extends Npc implements Battleable{
 	public boolean accept(Battle battle) {
 		return battle.visit(this);
 	}
-
+	
+	@Override
+	public String toSaveableFormat() {
+		return "AttackingNpc\n" + super.toSaveableFormat();
+	}
+	
 }

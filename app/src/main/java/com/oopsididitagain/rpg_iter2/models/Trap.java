@@ -75,7 +75,7 @@ public class Trap extends PositionedGameObject implements TiledEntityVisitable{
 	}
 
 	@Override
-	public String toSaveFormat() {
+	public String toSaveableFormat() {
 		String[] arr = { getId(), Integer.toString(getX()), Integer.toString(getY()), "Trap" };
 		return IOUtil.commaSeperate(arr);
 	}
