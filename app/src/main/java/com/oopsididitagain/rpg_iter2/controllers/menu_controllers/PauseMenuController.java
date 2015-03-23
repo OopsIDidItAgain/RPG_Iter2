@@ -57,6 +57,8 @@ public class PauseMenuController extends Controller{
 					controller = OptionsMenuController.getInstance();
 					break;
 				case Save:
+					GameController.getInstance().saveGame();
+					controller = GameController.getInstance();
 					break;
 				default:
 					break;

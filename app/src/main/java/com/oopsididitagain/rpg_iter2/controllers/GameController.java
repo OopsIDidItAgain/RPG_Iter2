@@ -20,6 +20,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
@@ -327,6 +328,10 @@ public class GameController extends Controller {
 		// remove from list and map tile
 		listOfNpcs.remove(npc);
 		t.remove(npc);
+	}
+
+	public void saveGame() {
+		IOUtil.saveMap(gameMap, game.getLevel());
 	}
 
 }
