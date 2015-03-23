@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import com.oopsididitagain.rpg_iter2.models.*;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
+import com.oopsididitagain.rpg_iter2.models.effects.SelfInflictedModifier;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryItem;
@@ -80,6 +81,12 @@ public class Avatar extends Entity implements StatModifiable {
 	
 		
 		//bind wounds regular active fight
+		Skill bindWounds = new Skill(Skill.BINDWOUNDS);
+		StatBlob statblob = new StatBlob(0, 0, 10, 0, 0, 0, 0, 0, 0);
+		SelfInflictedModifier self = new SelfInflictedModifier(statblob,0);
+		bindWounds.setEffect(self);
+		gameSkillList.add(bindWounds);
+	
 		//SKILLTWO
 		//SKILLFIGHTONE
 		
