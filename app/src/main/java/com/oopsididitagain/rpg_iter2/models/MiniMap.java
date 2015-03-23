@@ -36,4 +36,10 @@ public class MiniMap {
 	public Tile getTile(Position position) {
 		return tiles[position.getY()][position.getX()];
 	}
+	public int length() {
+		return tiles.length;
+	}
+	public int width() {
+		return tiles[0].length;
+	}
 }

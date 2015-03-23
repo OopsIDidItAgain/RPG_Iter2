@@ -239,5 +239,16 @@ public class StatBlob {
 		statStringMap.put(9,"Mana Amount");
 		
 	}
+
+	public void lowerMovementSpeedBy(int speedDifference) {
+		if(movement.getValue() - speedDifference < 0 ){
+			this.movement.setValue(1);
+		}
+		this.movement.subtract(speedDifference);
+	}
+	
+	public void raiseMovementSpeedBy(int speedDifference) {
+		this.movement.add(speedDifference);
+	}
 	
 }

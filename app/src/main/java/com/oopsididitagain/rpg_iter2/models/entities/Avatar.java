@@ -34,6 +34,7 @@ import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
 import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
+import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Avatar extends Entity implements StatModifiable {
@@ -42,6 +43,7 @@ public class Avatar extends Entity implements StatModifiable {
 	private Occupation occupation;
 	private StatCollection stats;
 	private Armory armory;
+	TileablePriority tileablePriority = TileablePriority.HIGH;
 
 	public Avatar(String id, Position position,StatBlob statblob) {
 		super(id, position,statblob);
@@ -53,6 +55,15 @@ public class Avatar extends Entity implements StatModifiable {
 		this.occupation = occupation;
 		giveBaseSkills();
 		occupation.giveSkills(this);
+	}
+
+	public void setTileablePriority(TileablePriority tileablePriority) {
+		this.tileablePriority = tileablePriority;
+	}
+	
+	@Override
+	public TileablePriority getTileablePriority() {
+		return this.tileablePriority;
 	}
 
 	private void giveBaseSkills() {
@@ -258,5 +269,12 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	public double defensiveRating() {
 		return stats.getDefensiveRating();
+	}
+
+	public void lowerMovementSpeedBy(int speedDifference) {
+		stats.lowerMovementSpeedBy(speedDifference);		
+	}
+	public void raiseMovementSpeedBy(int speedDifference) {
+		stats.raiseMovementSpeedBy(speedDifference)	;	
 	}
 }

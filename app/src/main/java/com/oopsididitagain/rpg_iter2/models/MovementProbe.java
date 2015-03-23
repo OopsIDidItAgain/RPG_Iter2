@@ -16,6 +16,7 @@ public class MovementProbe {
 	private MovementProbeStatus movementProbeStatus = MovementProbeStatus.MOVEMENT_OK;
 	private Set<TileContentsProbeStatus> tileFlags = new HashSet<TileContentsProbeStatus>();
 	private List<PositionedGameObject> positionedGameObjects = new ArrayList<PositionedGameObject>();
+	private Trap trap;
 	
 	public MovementProbe(Entity entity) {
 		this.entity = entity;
@@ -68,6 +69,15 @@ public class MovementProbe {
 	public void setEntityFlag() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void add(Trap trap) {
+		this.trap = trap;
+		tileFlags.add(TileContentsProbeStatus.TRAP_DETECTED);
+	}
+
+	public Trap getTrap() {
+		return trap;
 	}
 	
 }

@@ -98,6 +98,7 @@ public class GameController extends Controller {
 			break;
 		case SKILLALLOCATION:
 			c = SkillPointAllocationController.getInstance();
+			break;
 		case FLIGHT:
 			avatar.setFlying(isFlying);
 			isFlying = !isFlying;

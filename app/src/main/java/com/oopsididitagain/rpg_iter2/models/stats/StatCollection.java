@@ -175,6 +175,13 @@ public class StatCollection {
 		}
 	}
 
+	public void lowerMovementSpeedBy(int speedDifference) {
+		blob.lowerMovementSpeedBy(speedDifference);
+	}
+	public void raiseMovementSpeedBy(int speedDifference) {
+		blob.raiseMovementSpeedBy(speedDifference);
+	}
+
 }
 
 
