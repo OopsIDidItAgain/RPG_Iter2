@@ -18,6 +18,7 @@ import com.oopsididitagain.rpg_iter2.models.entities.NonAttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.AvatarEntityInteraction;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
+import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 
@@ -32,9 +33,9 @@ public class Battle {
 	private Position oldPosition;
 	private boolean canMove = true;
 	private EntityMapInteraction entityMapInteraction;
-	//private SoundAssets sa = new SoundAssets();
+	// private SoundAssets sa = new SoundAssets();
 
-	private Projectile p;
+	private LinkedList<Projectile> projectiles;
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -49,8 +50,8 @@ public class Battle {
 		battleground = new GameMap(tiles);
 
 		entityMapInteraction = new EntityMapInteraction(battleground);
-		
-		//sa.playClip("battle");
+		projectiles = new LinkedList<Projectile>();
+		// sa.playClip("battle");
 
 	} // use this constructor if you want to set monsters and party using
 		// setMonsters() and setParty()
@@ -317,12 +318,20 @@ public class Battle {
 			}
 			// randomly move npcs
 			for (int i = 0; i < monsters.size(); i++) {
-				Direction d = getRandomDirection();
-				if (d != null) {
-					Npc npc = monsters.get(i);
-					Position p = npc.getPosition().createPositionAtDirection(d);
+				Npc npc = monsters.get(i);
+				Direction d = getDirectionToAvatar(npc);
+				Position p = npc.getPosition().createPositionAtDirection(d);
+				boolean isSuccessful = entityMapInteraction.move(npc, p);
+				if (!isSuccessful) {
+					// See if we run into the avatar
+					Avatar a = (Avatar) entityMapInteraction.checkForEntity(
+							npc, p);
 
-					boolean isSuccessful = entityMapInteraction.move(npc, p);
+					if (a != null) {// if we did run into the avatar...
+						AvatarEntityInteraction.entityAttack(newAvatar, npc);
+						if (newAvatar.isDead())
+							controller = GameOverController.getInstance();
+					}
 				}
 			}
 			canMove = false;
@@ -339,38 +348,40 @@ public class Battle {
 		return controller;
 	}
 
-	private Direction getRandomDirection() {
-		int randDir = (int) (Math.random() * 16);
-		Direction targetDirection = null;
-		switch (randDir) {
-		case 0:
-			targetDirection = Direction.SOUTH;
-			break;
-		case 1:
-			targetDirection = Direction.NORTH;
-			break;
-		case 2:
-			targetDirection = Direction.WEST;
-			break;
-		case 3:
-			targetDirection = Direction.EAST;
-			break;
-		case 4:
-			targetDirection = Direction.SOUTHWEST;
-			break;
-		case 5:
-			targetDirection = Direction.SOUTHEAST;
-			break;
-		case 6:
-			targetDirection = Direction.NORTHWEST;
-			break;
-		case 7:
-			targetDirection = Direction.NORTHEAST;
-			break;
-		default:
-			break;
+	private Direction getDirectionToAvatar(Npc npc) {
+		Position a = newAvatar.getPosition();
+		Position n = npc.getPosition();
+		if (n.getX() == a.getX()) {
+			// north or south
+			if (n.getY() > a.getY()) {
+				return Direction.NORTH;
+			} else {
+				return Direction.SOUTH;
+			}
 		}
-		return targetDirection;
+		if (n.getY() == a.getY()) {
+			// east or west
+			if (n.getX() > a.getX()) {
+				return Direction.WEST;
+			} else {
+				return Direction.EAST;
+			}
+		}
+		if (n.getX() > a.getX()) {
+			// west
+			if (n.getY() > a.getY()) {
+				return Direction.NORTHWEST;
+			} else {
+				return Direction.SOUTHWEST;
+			}
+		} else {
+			// east
+			if (n.getY() > a.getY()) {
+				return Direction.NORTHEAST;
+			} else {
+				return Direction.SOUTHEAST;
+			}
+		}
 	}
 
 	public boolean isDone() {
@@ -388,13 +399,15 @@ public class Battle {
 		return false;
 	}
 
-	public Projectile getP() {
-		return p;
+	public LinkedList<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 	public Controller use() {
+		// FOR DEBUG of PROJECTILE
 		Position pos = newAvatar.getPosition();
-		p = new Projectile(pos);
+		Projectile p = new Projectile(pos);
+		projectiles.add(p);
 		do {
 			if (battleground.tileInbounds(p.getPosition())) {
 				Tile t = battleground.getTileAt(p.getPosition());
@@ -408,6 +421,24 @@ public class Battle {
 				break;
 			}
 		} while (battleground.tileInbounds(p.getPosition()));
+		//FOR DEBUG OF PROJECTILE
+		if (newAvatar.getWeaponType() != null) {
+
+			switch (newAvatar.getWeaponType()) {
+			case FISTS:
+				break;
+			case ONE_HANDED_WEAPON:
+				break;
+			case RANGED_WEAPON:
+				break;
+			case STAFF:
+				break;
+			case TWO_HANDED_WEAPON:
+				break;
+			default:
+				break;
+			}
+		}
 		return BattleController.getInstance();
 	}
 	public Controller useBomb(){
@@ -435,5 +466,9 @@ public class Battle {
 		}
 
 		return hearts;
+	}
+
+	public void removeProjectile(Projectile p) {
+		projectiles.remove(p);
 	}
 }

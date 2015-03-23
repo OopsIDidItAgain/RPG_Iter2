@@ -69,38 +69,29 @@ public class GameController extends Controller {
 		switch (command) {
 		case MOVE_SOUTH:
 			targetDirection = Direction.SOUTH;
-			sa.playClip("beep");
 			break;
 		case MOVE_NORTH:
 			targetDirection = Direction.NORTH;
-			sa.playClip("beep");
 			break;
 		case MOVE_WEST:
 			targetDirection = Direction.WEST;
-			sa.playClip("beep");
 			break;
 		case MOVE_EAST:
 			targetDirection = Direction.EAST;
-			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHWEST:
 			targetDirection = Direction.SOUTHWEST;
-			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHEAST:
 			targetDirection = Direction.SOUTHEAST;
-			sa.playClip("beep");
 			break;
 		case MOVE_NORTHWEST:
 			targetDirection = Direction.NORTHWEST;
-			sa.playClip("beep");
 			break;
 		case MOVE_NORTHEAST:
 			targetDirection = Direction.NORTHEAST;
-			sa.playClip("beep");
 			break;
 		case INVENTORY:
-			sa.playClip("inventory");
             InventoryController ic = InventoryController.getInstance();
             ic.setCurrentTile(gameMap.getTileAt(avatar.getPosition()));
 			ic.setAvatar(avatar);
