@@ -8,6 +8,7 @@ import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
 import com.oopsididitagain.rpg_iter2.models.Battle;
+import com.oopsididitagain.rpg_iter2.models.Bomb;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Projectile;
@@ -28,6 +29,7 @@ public class BattleViewInteraction extends ModelViewInteraction {
 	private final int x = View.pWidth / 5;
 	private final int y = View.pHeight / 4;
 	private Projectile p;
+	private Bomb b;
 
 	public BattleViewInteraction(Battle battle) {
 		this.battle = battle;
@@ -54,8 +56,24 @@ public class BattleViewInteraction extends ModelViewInteraction {
 		drawHearts(g);
 
 		drawProjectile(g);
+		drawBomb(g);
 	}
-
+private void drawBomb(Graphics g){
+	
+	LinkedList<Bomb> toRemove = new LinkedList<Bomb>();
+	for (Bomb b : battle.getBombs()) {
+		
+		if (b.isAlive()) {
+			b.update();
+			b.render(g, b.getRadius());
+		} else {
+			toRemove.add(b);
+		}
+	}
+	for (Bomb b : toRemove) {
+		battle.removeBomb(b);
+	}
+}
 	private void drawProjectile(Graphics g) {
 		LinkedList<Projectile> toRemove = new LinkedList<Projectile>();
 		for (Projectile p : battle.getProjectiles()) {
