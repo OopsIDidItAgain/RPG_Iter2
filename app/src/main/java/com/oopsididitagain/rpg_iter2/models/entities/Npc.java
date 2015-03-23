@@ -75,8 +75,7 @@ public abstract class Npc extends Entity {
 
 	@Override
 	public void visit(InstantStatModifier modifier) {
-		// TODO Auto-generated method stub
-
+		statBlob().merge(modifier.statBlob());
 	}
 
 	@Override
