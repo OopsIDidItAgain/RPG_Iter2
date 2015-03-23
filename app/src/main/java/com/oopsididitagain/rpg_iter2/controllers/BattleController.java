@@ -4,12 +4,14 @@ import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuCont
 import com.oopsididitagain.rpg_iter2.model_view_interaction.BattleViewInteraction;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.ModelViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Battle;
+import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 
 public class BattleController extends Controller {
 
 	private static BattleController instance;
 	private Battle battle;
+	private Npc npc;
 
 	private BattleController() {
 	}
@@ -64,7 +66,9 @@ public class BattleController extends Controller {
 
 			}
 		} else {
-			controller = GameController.getInstance();
+			GameController gc = GameController.getInstance();
+			gc.remove(npc);
+			controller = gc;
 		}
 
 		return controller;
@@ -75,6 +79,10 @@ public class BattleController extends Controller {
 		BattleViewInteraction battleViewInteraction = new BattleViewInteraction(
 				battle);
 		return battleViewInteraction;
+	}
+
+	public void setNpc(Npc npc) {
+		this.npc = npc;
 	}
 
 }

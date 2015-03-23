@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
@@ -13,11 +12,10 @@ import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllo
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
 import com.oopsididitagain.rpg_iter2.models.Game;
 import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.MovementProbe;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
-import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
 import com.oopsididitagain.rpg_iter2.models.interaction_classes.EntityMapInteraction;
@@ -275,6 +273,15 @@ public class GameController extends Controller {
 
 		GameViewInteraction gameInteraction = new GameViewInteraction(game);
 		return gameInteraction;
+	}
+
+	public void remove(Npc npc) {
+		Position p = npc.getPosition();
+		Tile t = gameMap.getTileAt(p);
+		ArrayList<Npc> listOfNpcs = game.getListOfNpcs();
+		// remove from list and map tile
+		listOfNpcs.remove(npc);
+		t.remove(npc);
 	}
 
 }

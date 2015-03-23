@@ -299,7 +299,7 @@ public class Battle {
 				// into are Npc's
 				Npc e = (Npc) entityMapInteraction.checkForEntity(newAvatar,
 						toPosition);
-					
+
 				if (e != null) {// if we did run into an npc...
 					monsters.remove(e);
 				}
@@ -359,5 +359,11 @@ public class Battle {
 			break;
 		}
 		return targetDirection;
+	}
+
+	public boolean isDone() {
+		if (monsters.isEmpty())
+			return true;
+		return false;
 	}
 }

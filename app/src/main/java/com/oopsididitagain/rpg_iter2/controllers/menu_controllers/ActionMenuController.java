@@ -68,6 +68,7 @@ public class ActionMenuController extends Controller {
 				BattleController bc = BattleController.getInstance();
 				Battle battle = new Battle();
 				bc.set(battle);
+				bc.setNpc(npc);
 				battle.addMonster(npc);
 				battle.addPartyMember(avatar);
 
