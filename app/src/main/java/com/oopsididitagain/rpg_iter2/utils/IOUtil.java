@@ -14,14 +14,18 @@ import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
+import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
+import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 
 /**
  * Created by parango on 3/11/15.
  */
 public class IOUtil {
-	private static File outputDirectory = new File(System.getProperty("user.home"), "OOP_SAVEGAMES");
-	
+	private static File outputDirectory = new File(
+			System.getProperty("user.home"), "OOP_SAVEGAMES");
+
 	public static void saveMap(GameMap gameMap, int level) {
 		outputDirectory.mkdirs();
 		StringBuilder sb = new StringBuilder("");
@@ -30,13 +34,16 @@ public class IOUtil {
 			for (int j = 0; j < gameMap.getWidth(); ++j) {
 				Tile tile = gameMap.getTileAt(new Position(i, j));
 				Terrain terrain = tile.getTerrain();
-				switch(terrain.getId()) {
-				case "M": sb.append("^");
-				break;
-				case "G": sb.append("-");
-				break;
-				case "W": sb.append("~");
-				break;
+				switch (terrain.getId()) {
+				case "M":
+					sb.append("^");
+					break;
+				case "G":
+					sb.append("-");
+					break;
+				case "W":
+					sb.append("~");
+					break;
 				}
 				if (j != gameMap.getWidth() - 1)
 					sb.append(",");
@@ -51,7 +58,7 @@ public class IOUtil {
 		writeFile(sb.toString(), savedMap);
 		saveOnMapItems(gameMap, saveNumber);
 	}
-	
+
 	private static void saveOnMapItems(GameMap gameMap, int saveNumber) {
 		StringBuilder sb = new StringBuilder("Items\n");
 
@@ -61,33 +68,42 @@ public class IOUtil {
 			for (int j = 0; j < gameMap.getWidth(); ++j) {
 				Tile tile = gameMap.getTileAt(new Position(i, j));
 				LinkedList<Tileable> tileables = tile.getTilebles();
-				for (Tileable tileable: tileables) {
+				for (Tileable tileable : tileables) {
 					try {
 						PositionedGameObject positionedGameObject = (PositionedGameObject) tileable;
-						if (positionedGameObject instanceof Entity) 
-							entities.offer((Entity)positionedGameObject);
+						if (positionedGameObject instanceof Entity)
+							entities.offer((Entity) positionedGameObject);
 						else if (positionedGameObject instanceof InteractiveItem)
-							interactiveItems.offer((InteractiveItem) positionedGameObject);
-						else
-							sb.append(positionedGameObject.toSaveableFormat() + "\n");
+							interactiveItems
+									.offer((InteractiveItem) positionedGameObject);
+						else if (positionedGameObject instanceof EffectTakeableItem)
+							sb.append(((EffectTakeableItem) positionedGameObject)
+									.toSaveableFormat() + "\n");
+						else if (positionedGameObject instanceof WeaponTakeableItem)
+							sb.append(((WeaponTakeableItem) positionedGameObject)
+									.toSaveableFormat() + "\n");
+						else if (positionedGameObject instanceof ArmorTakeableItem)
+							sb.append(((ArmorTakeableItem) positionedGameObject)
+									.toSaveableFormat() + "\n");
 					} catch (Exception ex) {
-						//ex.printStackTrace();
+						// ex.printStackTrace();
 					}
 				}
 			}
 		}
 		// Delete last newline
-		sb.deleteCharAt(sb.length() - 1);
-		for (InteractiveItem item: interactiveItems)
+		// sb.deleteCharAt(sb.length() - 1);
+		for (InteractiveItem item : interactiveItems)
 			sb.append(item.toSaveableFormat() + "\n");
 		sb.append("\n");
-		for (Entity e: entities)
+		for (Entity e : entities)
 			sb.append(e.toSaveableFormat());
-		
-		File savedOnMapItems = new File(outputDirectory, "Save" + saveNumber + "/" + "tileables.csv");
+
+		File savedOnMapItems = new File(outputDirectory, "Save" + saveNumber
+				+ "/" + "tileables.csv");
 		writeFile(sb.toString(), savedOnMapItems);
 	}
-	
+
 	private static void writeFile(String contents, File toFile) {
 		try {
 			FileWriter writer = new FileWriter(toFile);
@@ -98,10 +114,10 @@ public class IOUtil {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public static String commaSeperate(String[] arr) {
 		StringBuilder sb = new StringBuilder("");
-		for(int i = 0; i < arr.length; ++i) {
+		for (int i = 0; i < arr.length; ++i) {
 			sb.append(arr[i]);
 			if (i != arr.length - 1)
 				sb.append(",");
@@ -110,7 +126,7 @@ public class IOUtil {
 	}
 
 	public static int parseLevel(File grid) {
-		int level = 0; 
+		int level = 0;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(grid));
 			String[] sizes = reader.readLine().split(",");
@@ -124,6 +140,6 @@ public class IOUtil {
 			ex.printStackTrace();
 		}
 		return level;
-		
+
 	}
 }
