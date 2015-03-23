@@ -1,11 +1,3 @@
-20,30
-
-AVATAR,0,0
-POTION_ITEM,2,5
-SWORD_ITEM,3,0
-CARROT_ITEM,4,4
-CAPE_ITEM,7,9
-CHAINSAW_ITEM,10,4
-ROCK_ITEM,9,6
-HEART_DECAL,13,10
-MUSHROOM_ITEM,14,6
+chainsaw_item,19,19,WeaponTakeableItem,0,15,0,0,5,0,0,0,0,4.05,25,ONE_HANDED_WEAPON
+rock_item,15,15,ObstacleItem,,,,,,,,,,,,
+mushroom_item,0,6,OneShotItem,2,0,0,0,0,0,0,0,0,,,

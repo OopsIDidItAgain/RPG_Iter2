@@ -93,10 +93,16 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		
 	}
 
+
 	public boolean isDead() {
 		return (statblob.getLifeAmount() < 1);
 	}
-	
+
+	public void setStatblob(StatBlob statblob) {
+		this.statblob = statblob;
+	}
+
+
 	@Override
 	public TileablePriority getTileablePriority() {
 		return TileablePriority.HIGH;

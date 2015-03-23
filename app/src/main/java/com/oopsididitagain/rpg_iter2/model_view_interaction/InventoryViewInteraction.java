@@ -116,6 +116,8 @@ public class InventoryViewInteraction extends ModelViewInteraction {
 					g2.fill(r);
 					Image img = assets.getImage(item.getId());
 					g.drawImage(img, w, h, 60, 60, null);
+					g.setColor(Color.black);
+					g.drawString("" + item.price(), w, h);
 					++count;
 				} else {
 					Rectangle r = new Rectangle(w, h, 60, 60);

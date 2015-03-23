@@ -66,12 +66,11 @@ public class EntityStatusModifier implements Effect{
 	}
 	
 	private void takeTimedMana(final StatBlob statBlob) {
-		final StatBlob oldblob = statBlob;
 		statBlob.merge(manaHurt);
 		TimerTask timertask = new TimerTask(){
 			@Override
 			public void run() {
-				statBlob.merge(manaRegain);		
+				statBlob.detach(manaHurt);		
 			}		
 		};
 		Timer timer = new Timer();
