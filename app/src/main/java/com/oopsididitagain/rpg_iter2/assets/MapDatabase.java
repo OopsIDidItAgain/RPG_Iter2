@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.oopsididitagain.rpg_iter2.models.AreaEffect;
+import com.oopsididitagain.rpg_iter2.models.Decal;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
@@ -22,6 +24,7 @@ import com.oopsididitagain.rpg_iter2.models.items.OneShotItem;
 import com.oopsididitagain.rpg_iter2.models.items.TakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
+import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.ArmorItemType;
 import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
@@ -32,7 +35,6 @@ public class MapDatabase {
 	private InputStream gridFileStream;
 	private BufferedReader objectsReader;
 	private InputStream objectsFileStream;
-	//private List<PositionedGameObject> positionedGameObjects;
 	private List<TiledEntityVisitable> tiledEntityVisitables;
 	private List<TiledProbeVisitable> tiledProbeVisitables;
 	private Tile[][] tiles;
@@ -42,7 +44,6 @@ public class MapDatabase {
     int mapY;
 	
 	public MapDatabase(int level) {
-
 		tiledEntityVisitables = new ArrayList<TiledEntityVisitable>();
 		tiledProbeVisitables = new ArrayList<TiledProbeVisitable>();
 		gridFileStream = getClass().getResourceAsStream("/levels/level"+level+"/grid.csv");
@@ -206,8 +207,37 @@ public class MapDatabase {
     			else if (unusableMap.containsKey(requirementId))
 				    tiledEntityVisitables.add(new InteractiveItem(id, position, tiles[targetPosition.getY()][targetPosition.getX()], parseTerrain(tokens), (InventoryUnusableItem) unusableMap.get(requirementId).toInventoryItem()));
     			break;
+    		case "AreaEffect":
+    			AreaEffectType aetype = parseAreaEffectType(tokens);
+    			Decal decal = parseDecal(aetype);
+    			tiledEntityVisitables.add(new AreaEffect(decal, position, aetype));
+    			break;
     		}
     	}
+    }
+    
+    private Decal parseDecal(AreaEffectType type) {
+    	switch (type) {
+		case HEAL_DAMAGE:
+			return new Decal("heal_damage_decal");
+		case INSTANT_DEATH:
+			return new Decal("instant_death_decal");
+		case LEVEL_UP:
+			return new Decal("level_up_decal");
+		case TAKE_DAMAGE:
+			return new Decal("take_damage_decal");
+    	}
+		return new Decal("heart_decal");
+    }
+    
+    private AreaEffectType parseAreaEffectType(String[] tokens) {
+    	switch(tokens[4]) {
+    	case "LEVEL_UP": return AreaEffectType.LEVEL_UP;
+    	case "HEAL_DAMAGE": return AreaEffectType.HEAL_DAMAGE;
+    	case "TAKE_DAMAGE": return AreaEffectType.TAKE_DAMAGE;
+    	case "INSTANT_DEATH": return AreaEffectType.INSTANT_DEATH;
+    	}
+    	return AreaEffectType.LEVEL_UP;
     }
     
     private Terrain parseTerrain(String[] tokens) {

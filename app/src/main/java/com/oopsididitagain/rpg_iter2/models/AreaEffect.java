@@ -13,6 +13,7 @@ public class AreaEffect extends PositionedGameObject implements TiledEntityVisit
 
 	private AreaEffectType type;
 	
+	@Deprecated
 	public AreaEffect(String id, Position position, AreaEffectType type) {
 		super(id, position);
 		this.type = type;
