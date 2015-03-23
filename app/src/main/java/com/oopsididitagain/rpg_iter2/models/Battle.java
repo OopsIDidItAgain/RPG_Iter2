@@ -410,6 +410,13 @@ public class Battle {
 		} while (battleground.tileInbounds(p.getPosition()));
 		return BattleController.getInstance();
 	}
+	public Controller useBomb(){
+		Position pos = newAvatar.getPosition();
+		Bomb b = new Bomb(pos);
+		
+		return BattleController.getInstance();
+	}
+	
 
 	public int[] getHearts() {
 		// String heartcount = "";
