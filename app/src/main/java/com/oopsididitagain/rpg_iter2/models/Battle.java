@@ -35,7 +35,7 @@ public class Battle {
 	private EntityMapInteraction entityMapInteraction;
 	// private SoundAssets sa = new SoundAssets();
 
-	private Projectile p;
+	private LinkedList<Projectile> projectiles;
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -50,7 +50,7 @@ public class Battle {
 		battleground = new GameMap(tiles);
 
 		entityMapInteraction = new EntityMapInteraction(battleground);
-
+		projectiles = new LinkedList<Projectile>();
 		// sa.playClip("battle");
 
 	} // use this constructor if you want to set monsters and party using
@@ -324,8 +324,8 @@ public class Battle {
 				boolean isSuccessful = entityMapInteraction.move(npc, p);
 				if (!isSuccessful) {
 					// See if we run into the avatar
-					Avatar a = (Avatar) entityMapInteraction.checkForEntity(npc,
-							p);
+					Avatar a = (Avatar) entityMapInteraction.checkForEntity(
+							npc, p);
 
 					if (a != null) {// if we did run into the avatar...
 						AvatarEntityInteraction.entityAttack(newAvatar, npc);
@@ -399,11 +399,29 @@ public class Battle {
 		return false;
 	}
 
-	public Projectile getP() {
-		return p;
+	public LinkedList<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 	public Controller use() {
+		// FOR DEBUG of PROJECTILE
+		Position pos = newAvatar.getPosition();
+		Projectile p = new Projectile(pos);
+		projectiles.add(p);
+		do {
+			if (battleground.tileInbounds(p.getPosition())) {
+				Tile t = battleground.getTileAt(p.getPosition());
+				Entity e = t.getEntity();
+				if (e != null) {
+					e.statBlob().merge(p.getStatBlob());
+					break;
+				}
+				p.doLogic();
+			} else {
+				break;
+			}
+		} while (battleground.tileInbounds(p.getPosition()));
+		//FOR DEBUG OF PROJECTILE
 		if (newAvatar.getWeaponType() != null) {
 
 			switch (newAvatar.getWeaponType()) {
@@ -412,21 +430,6 @@ public class Battle {
 			case ONE_HANDED_WEAPON:
 				break;
 			case RANGED_WEAPON:
-				Position pos = newAvatar.getPosition();
-				p = new Projectile(pos);
-				do {
-					if (battleground.tileInbounds(p.getPosition())) {
-						Tile t = battleground.getTileAt(p.getPosition());
-						Entity e = t.getEntity();
-						if (e != null) {
-							e.statBlob().merge(p.getStatBlob());
-							break;
-						}
-						p.doLogic();
-					} else {
-						break;
-					}
-				} while (battleground.tileInbounds(p.getPosition()));
 				break;
 			case STAFF:
 				break;
@@ -456,5 +459,9 @@ public class Battle {
 		}
 
 		return hearts;
+	}
+
+	public void removeProjectile(Projectile p) {
+		projectiles.remove(p);
 	}
 }
