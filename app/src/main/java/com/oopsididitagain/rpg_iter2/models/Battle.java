@@ -383,4 +383,23 @@ public class Battle {
 		// TODO
 		return BattleController.getInstance();
 	}
+	
+	public int[] getHearts() {
+		// String heartcount = "";
+		int[] hearts = new int[2];
+		
+		Iterator<Entity> entityIterator = party.iterator();
+		while(entityIterator.hasNext()) {
+			Entity entity = entityIterator.next();
+			hearts[0] = (int)entity.statBlob().getLifeAmount();
+		}
+		
+		Iterator<Npc> monsterIterator = monsters.iterator();
+		while (monsterIterator.hasNext()) {
+			Npc monster = monsterIterator.next();
+			hearts[1] = (int)monster.statBlob().getLifeAmount();
+		}
+
+		return hearts;
+	}
 }

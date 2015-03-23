@@ -47,6 +47,8 @@ public class BattleViewInteraction extends ModelViewInteraction {
 				drawTile(g, t, i, j);
 			}
 		}
+		
+		drawHearts(g);
 	}
 
 	private void drawTile(Graphics g, Tile t, int x, int y) {
@@ -96,6 +98,24 @@ public class BattleViewInteraction extends ModelViewInteraction {
 
 			g.drawImage(b2, x * 50, y * 50, 50, 50, null);
 
+		}
+	}
+	
+	private void drawHearts(Graphics g) {
+		int[] hearts = battle.getHearts();
+
+		int height = 420, width = 20, next = 0;
+		// avatar
+		Image heart = assets.getImage("heart_decal");
+		for (int i = 0; i < hearts[0]; i++) {
+			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
+			if (i % 7 == 6) { height += 20; next = 0;}
+		}
+		
+		height = 420; width = 330; next = 0;
+		for (int i = 0; i < hearts[1]; i++) {
+			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
+			if (i % 7 == 6) { height += 20; next = 0;}
 		}
 	}
 
