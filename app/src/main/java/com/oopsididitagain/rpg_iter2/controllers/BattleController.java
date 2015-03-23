@@ -20,6 +20,7 @@ public class BattleController extends Controller {
 	public static BattleController getInstance() {
 		if (instance == null) {
 			instance = new BattleController();
+			
 		}
 		return instance;
 	}

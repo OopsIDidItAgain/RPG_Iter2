@@ -68,7 +68,7 @@ public class ActionMenuController extends Controller {
 				break;
 			case Attack:
 				// logic for canAttack in setNpc
-
+				avatar.setFlying(false);
                 SoundAssets.stopSound("main");
                 SoundAssets.playSound("battle");
 
