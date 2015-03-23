@@ -15,24 +15,24 @@ import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 
-public class GameOverController extends Controller {
+public class CompletedTutorialController extends Controller {
 	// members
-	public static GameOverController instance;
+	public static CompletedTutorialController instance;
     private static GameOverMenu gameOverMenu;
     private GameOverViewInteraction gameOverMenuView;
 	private Avatar avatar;
 
     private Controller controllerToReturn;
 
-    private GameOverController() {
+    private CompletedTutorialController() {
 		GameController gameController = GameController.getInstance();
 		this.avatar = gameController.getAvatar();
 	}
     
-    private GameOverController(GameOverMenu gameOverMenu) {
+    private CompletedTutorialController(GameOverMenu gameOverMenu) {
 		GameController gameController = GameController.getInstance();
 		this.avatar = gameController.getAvatar();
-		GameOverController.gameOverMenu = gameOverMenu;
+		CompletedTutorialController.gameOverMenu = gameOverMenu;
     }
     
     
@@ -52,12 +52,6 @@ public class GameOverController extends Controller {
         	Option o = gameOverMenu.getCurrentOption();
         	switch(o) {
 			case StartOver:
-				// Position position = new Position(0,0,Direction.SOUTH);
-				// StatBlob statBlob = new StatBlob(0, 5, 5, 5, 5, 5, 5, 20, 20);
-				// avatar = new Avatar("avatar", position,statBlob );
-				
-				// AvatarCreationMenuController();
-				
 				controllerToReturn = MainMenuController.getInstance();
 				break;
 			case ExitGame:
@@ -76,12 +70,12 @@ public class GameOverController extends Controller {
 
 	@Override
 	public ModelViewInteraction populateInteraction() {
-		return new GameOverViewInteraction(gameOverMenu, false);
+		return new GameOverViewInteraction(gameOverMenu, true);
 	}
 
 	public static Controller getInstance() {
 		if ( instance == null ){
-			instance = new GameOverController(new GameOverMenu());
+			instance = new CompletedTutorialController(new GameOverMenu());
 		}
 		return instance;
 	}

@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.CompletedTutorialController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
@@ -169,13 +170,17 @@ public class GameController extends Controller {
 		return c;
 	}
 	
-	private GameController incrementLevel() {
+	private Controller incrementLevel() {
 		
 		Position o = new Position(0,0,Direction.SOUTH);
 		
 		
 		int currentLevel = game.getLevel();
-
+		if (currentLevel == 106) { // end of tutorial
+			Controller c = CompletedTutorialController.getInstance();
+			return c;
+		}
+		
 		Game newgame = new Game(this.avatar, ++currentLevel);
 		this.setGame(newgame);
 		avatar.move(gameMap.getTileAt(avatar.getPosition()), 

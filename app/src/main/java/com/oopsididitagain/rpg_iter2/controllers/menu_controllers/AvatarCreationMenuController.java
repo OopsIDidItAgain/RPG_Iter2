@@ -114,7 +114,6 @@ public class AvatarCreationMenuController extends Controller {
 	}
 
 	public void setTutorial(boolean t) {
-		System.out.println("Tutorial is set to...."+Boolean.toString(t));
 		tutorial = t;
 	}
 }
