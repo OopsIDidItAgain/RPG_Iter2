@@ -55,6 +55,7 @@ public class Game {
 		// level = 4;
 		gameMap = new GameMap(new MapDatabase(level));
 		gameMap.getTileAt((new Position(0,0))).add(avatar);
+		listOfNpcs = gameMap.getListOfNpcs();
 		
 		levelSpecificChecks();
 		

@@ -27,7 +27,9 @@ import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EquipableTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryArmorItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryUnusableItem;
+import com.oopsididitagain.rpg_iter2.models.items.InventoryUsableItem;
 import com.oopsididitagain.rpg_iter2.models.items.InventoryWeaponItem;
 import com.oopsididitagain.rpg_iter2.models.items.ObstacleItem;
 import com.oopsididitagain.rpg_iter2.models.items.OneShotItem;
@@ -205,24 +207,24 @@ public class MapDatabase {
 					switch (type) {
 					case "EffectTakeableItem":
 						EffectTakeableItem eitem = new EffectTakeableItem(id,
-								position, parsePrice(tokens[13]), parseStatBlob(4,
-										tokens));
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens));
 						tiledEntityVisitables.add(eitem);
 						usableMap.put(id, eitem);
 						break;
 					case "WeaponTakeableItem":
 						WeaponTakeableItem witem = new WeaponTakeableItem(id,
-								position, parsePrice(tokens[13]), parseStatBlob(4,
-										tokens), parseRank(tokens),
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens), parseRank(tokens),
 								parseWeaponType(tokens[15]));
 						tiledEntityVisitables.add(witem);
 						equipableMap.put(id, witem);
 						break;
 					case "ArmorTakeableItem":
 						ArmorTakeableItem aitem = new ArmorTakeableItem(id,
-								position, parsePrice(tokens[13]), parseStatBlob(4,
-										tokens), parseRank(tokens),
-								parseArmorType(tokens));
+								position, parsePrice(tokens[13]),
+								parseStatBlob(4, tokens), parseRank(tokens),
+								parseArmorType(tokens[15]));
 						tiledEntityVisitables.add(aitem);
 						equipableMap.put(id, aitem);
 						break;
@@ -325,19 +327,51 @@ public class MapDatabase {
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
-					case "Unusable":
-					case "Weapon":
-						id = tokens[1];
+						String iid = tokens[1];
 						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
+					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
+					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
 						WeaponItemType weaponType = parseWeaponType(tokens[3]);
 						boolean isEquipped = parseBoolean(tokens[4]);
-						// do logic for Armory
+						
 						int rank = Integer.parseInt(tokens[5]);
-						StatBlob sb = parseStatBlob(6, tokens);
-						InventoryWeaponItem weaponItem = new InventoryWeaponItem(id,price,sb,weaponType,rank);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
 						inventory.add(weaponItem);
+						// do logic for Armory
+						if(isEquipped){
+							armory.equip(weaponItem);
+						}
 						break;
 					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
+						// do logic for Armory
+						if(isEquipped){
+							armory.equip(armorItem);
+						}
 						break;
 					}
 				}
@@ -384,13 +418,48 @@ public class MapDatabase {
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
 					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
 					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+						
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
 					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
 						break;
 					}
 				}
-				AttackingNPC attackingNpc = new AttackingNPC(id, position, statBlob);
+				AttackingNPC attackingNpc = new AttackingNPC(id, position,
+						statBlob);
 				attackingNpc.setEntityStatus(entityStatus);
 				attackingNpc.setFlying(isFlying);
 				attackingNpc.setBank(bank);
@@ -431,13 +500,48 @@ public class MapDatabase {
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
 					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
 					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+						
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
 					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
 						break;
 					}
 				}
-				NonTradingNPC nonTradingNPC = new NonTradingNPC(id, position, statBlob);
+				NonTradingNPC nonTradingNPC = new NonTradingNPC(id, position,
+						statBlob);
 				nonTradingNPC.setEntityStatus(entityStatus);
 				nonTradingNPC.setFlying(isFlying);
 				nonTradingNPC.setBank(bank);
@@ -478,9 +582,43 @@ public class MapDatabase {
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
+						String iid = tokens[1];
+						double price = parsePrice(tokens[2]);
+						StatBlob sb = parseStatBlob(3, tokens);
+						InventoryUsableItem usableItem = new InventoryUsableItem(
+								iid, price, sb);
+						inventory.add(usableItem);
+						break;
 					case "Unusable":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						InventoryUnusableItem unusableItem = new InventoryUnusableItem(
+								iid, price);
+						inventory.add(unusableItem);
+						break;
 					case "Weapon":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						WeaponItemType weaponType = parseWeaponType(tokens[3]);
+						boolean isEquipped = parseBoolean(tokens[4]);
+						
+						int rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
+								iid, price, sb, weaponType, rank);
+						inventory.add(weaponItem);
+						break;
 					case "Armor":
+						iid = tokens[1];
+						price = parsePrice(tokens[2]);
+						ArmorItemType armorType = parseArmorType(tokens[3]);
+						isEquipped = parseBoolean(tokens[4]);
+						// do logic for Armory
+						rank = Integer.parseInt(tokens[5]);
+						sb = parseStatBlob(6, tokens);
+						InventoryArmorItem armorItem = new InventoryArmorItem(
+								iid, price, sb, rank, armorType);
+						inventory.add(armorItem);
 						break;
 					}
 				}
@@ -530,7 +668,7 @@ public class MapDatabase {
 		if (token.equals("TRUE"))
 			return true;
 		return false;
-			
+
 	}
 
 	private Bank parseBank(String token) {
@@ -600,9 +738,8 @@ public class MapDatabase {
 		return Terrain.GRASS;
 	}
 
-	private ArmorItemType parseArmorType(String[] tokens) {
-		String type = tokens[15];
-		switch (type) {
+	private ArmorItemType parseArmorType(String token) {
+		switch (token) {
 		case "ARMOR":
 			return ArmorItemType.ARMOR;
 		case "BOOTS":

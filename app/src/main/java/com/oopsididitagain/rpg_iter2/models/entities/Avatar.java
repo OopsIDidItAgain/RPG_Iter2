@@ -9,7 +9,11 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import com.oopsididitagain.rpg_iter2.models.*;
+import com.oopsididitagain.rpg_iter2.models.Armory;
+import com.oopsididitagain.rpg_iter2.models.MovementProbe;
+import com.oopsididitagain.rpg_iter2.models.Position;
+import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.effects.Discount;
 import com.oopsididitagain.rpg_iter2.models.effects.Observe;
 import com.oopsididitagain.rpg_iter2.models.effects.SelfInflictedModifier;
@@ -23,13 +27,11 @@ import com.oopsididitagain.rpg_iter2.models.items.Teleporter;
 import com.oopsididitagain.rpg_iter2.models.occupations.Occupation;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.models.stats.StatCollection;
-import com.oopsididitagain.rpg_iter2.utils.Battleable;
 import com.oopsididitagain.rpg_iter2.utils.Command;
 import com.oopsididitagain.rpg_iter2.utils.Direction;
 import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.InstantStatModifier;
 import com.oopsididitagain.rpg_iter2.utils.ItemAlreadyTakenException;
-import com.oopsididitagain.rpg_iter2.utils.Priceable;
 import com.oopsididitagain.rpg_iter2.utils.StatModifiable;
 import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
@@ -51,6 +53,7 @@ public class Avatar extends Entity implements StatModifiable {
 	
 	public Avatar(String id, Position position,StatBlob statblob, Armory armory) {
 		super(id, position,statblob);
+		this.armory = new Armory();		
 		this.stats = new StatCollection(armory,statblob);
 	}
 
