@@ -50,6 +50,7 @@ public class SkillPointAllocationController extends Controller{
             case SKILLALLOCATION:
             	controller = GameController.getInstance();
             case ENTER:
+            	break;
             case USE:
             	int selop = skillMenu.getMenuOption();
             	//add check for 0

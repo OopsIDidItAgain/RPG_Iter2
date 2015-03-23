@@ -171,7 +171,7 @@ public class Summoner extends Occupation{
 				System.out.println(skill2.getName() + " "  + skill2.getMultiplier());
 			}
 		}else if(selop == 6){
-			Skill skill = gameSkillList.get(selop);
+			Skill skill = gameSkillList.get(12);
 			skill.increaseMultiplier();
 		}
 	
