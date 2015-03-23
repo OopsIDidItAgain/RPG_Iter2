@@ -28,6 +28,7 @@ public class ActionMenu {
 	public void previousOption() {
 		switch (currentOption) {
 		case Talk:
+            currentOption = Option.Exit;
 			break;
 		case Attack:
 			currentOption = Option.Talk;
@@ -65,7 +66,9 @@ public class ActionMenu {
 		case UseOption:
 			currentOption = Option.Exit;
 			break;
-		default: // includes "Exit"
+        case Exit:
+            currentOption = Option.Talk;
+		default:
 			break;
 		}
 	}
