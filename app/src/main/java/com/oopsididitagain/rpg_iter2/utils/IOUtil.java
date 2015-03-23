@@ -40,12 +40,11 @@ public class IOUtil {
 					sb.append(",");
 			}
 			sb.append("\n");
-			sb.append(level);
-			sb.append("\n");
 		}
-		outputDirectory.mkdirs();
+		sb.append(level);
 		int saveNumber = outputDirectory.listFiles().length + 1;
 		File saveGameDirectory = new File(outputDirectory, "Save" + saveNumber);
+		saveGameDirectory.mkdirs();
 		File savedMap = new File(saveGameDirectory, "grid.csv");
 		writeFile(sb.toString(), savedMap);
 		saveOnMapItems(gameMap, saveNumber);
