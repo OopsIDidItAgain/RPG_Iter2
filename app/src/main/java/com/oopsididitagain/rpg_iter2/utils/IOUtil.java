@@ -22,6 +22,7 @@ public class IOUtil {
 	private static File outputDirectory = new File(System.getProperty("user.home"), "OOP_SAVEGAMES");
 	
 	public static void saveMap(GameMap gameMap, int level) {
+		outputDirectory.mkdirs();
 		StringBuilder sb = new StringBuilder("");
 		sb.append(gameMap.getHeight() + "," + gameMap.getWidth() + "\n\n");
 		for (int i = 0; i < gameMap.getHeight(); ++i) {
