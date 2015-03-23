@@ -23,7 +23,7 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
  */
 public abstract class Npc extends Entity {
 
-	Storyline story;
+	Storyline story = new Storyline();
 
 	private int turnsCannotMove;
 

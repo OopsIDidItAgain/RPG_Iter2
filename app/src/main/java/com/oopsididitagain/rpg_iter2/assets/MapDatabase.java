@@ -338,7 +338,7 @@ public class MapDatabase {
 				line = readObjectsLine();
 				System.out.println(line);
 				tokens = line.split(",");
-				parseSkills(occupation, tokens);
+				List<Integer> multipliers = parseSkills(occupation, tokens);
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -730,13 +730,13 @@ public class MapDatabase {
 		}
 	}
 
-	private void parseSkills(Occupation o, String tokens[]) {
+	private List<Integer> parseSkills(Occupation o, String tokens[]) {
+		List<Integer> list = new ArrayList<Integer>();
 		for (int i = 0; i < tokens.length; i++) {
 			int multiplier = Integer.parseInt(tokens[i]);
-			for (int j = 0; j < multiplier; j++) {
-				o.increaseMultiplier(i);
-			}
+			list.add(multiplier);
 		}
+		return list;
 	}
 
 	private Decal parseDecal(AreaEffectType type) {
