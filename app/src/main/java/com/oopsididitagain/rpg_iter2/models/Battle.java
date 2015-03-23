@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
@@ -35,6 +36,7 @@ public class Battle {
 	private Position oldPosition;
 	private boolean canMove = true;
 	private EntityMapInteraction entityMapInteraction;
+	//private SoundAssets sa = new SoundAssets();
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -49,6 +51,8 @@ public class Battle {
 		battleground = new GameMap(tiles);
 
 		entityMapInteraction = new EntityMapInteraction(battleground);
+		
+		//sa.playClip("battle");
 
 	} // use this constructor if you want to set monsters and party using
 		// setMonsters() and setParty()
@@ -374,8 +378,10 @@ public class Battle {
 	}
 
 	public boolean isDone() {
-		if (monsters.isEmpty())
+		if (monsters.isEmpty()) {
+			//sa.stopClip("battle");
 			return true;
+		}
 		return false;
 	}
 
