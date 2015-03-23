@@ -319,18 +319,23 @@ public class Battle {
 			// randomly move npcs
 			for (int i = 0; i < monsters.size(); i++) {
 				Npc npc = monsters.get(i);
-				Direction d = getDirectionToAvatar(npc);
-				Position p = npc.getPosition().createPositionAtDirection(d);
-				boolean isSuccessful = entityMapInteraction.move(npc, p);
-				if (!isSuccessful) {
-					// See if we run into the avatar
-					Avatar a = (Avatar) entityMapInteraction.checkForEntity(
-							npc, p);
+				if (npc.getTurnsCannotMove() > 0) {
+					npc.decrementTurnsCannotMove(0);
+				} else {
+					Direction d = getDirectionToAvatar(npc);
+					Position p = npc.getPosition().createPositionAtDirection(d);
+					boolean isSuccessful = entityMapInteraction.move(npc, p);
+					if (!isSuccessful) {
+						// See if we run into the avatar
+						Avatar a = (Avatar) entityMapInteraction
+								.checkForEntity(npc, p);
 
-					if (a != null) {// if we did run into the avatar...
-						AvatarEntityInteraction.entityAttack(newAvatar, npc);
-						if (newAvatar.isDead())
-							controller = GameOverController.getInstance();
+						if (a != null) {// if we did run into the avatar...
+							AvatarEntityInteraction
+									.entityAttack(newAvatar, npc);
+							if (newAvatar.isDead())
+								controller = GameOverController.getInstance();
+						}
 					}
 				}
 			}
@@ -411,9 +416,10 @@ public class Battle {
 		do {
 			if (battleground.tileInbounds(p.getPosition())) {
 				Tile t = battleground.getTileAt(p.getPosition());
-				Entity e = t.getEntity();
+				Npc e = (Npc) t.getEntity();
 				if (e != null) {
 					e.statBlob().merge(p.getStatBlob());
+					//e.setCantMove(1);
 					break;
 				}
 				p.doLogic();
@@ -421,7 +427,7 @@ public class Battle {
 				break;
 			}
 		} while (battleground.tileInbounds(p.getPosition()));
-		//FOR DEBUG OF PROJECTILE
+		// FOR DEBUG OF PROJECTILE
 		if (newAvatar.getWeaponType() != null) {
 
 			switch (newAvatar.getWeaponType()) {
