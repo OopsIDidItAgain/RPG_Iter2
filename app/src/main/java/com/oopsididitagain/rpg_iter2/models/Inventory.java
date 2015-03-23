@@ -27,7 +27,9 @@ public class Inventory {
 	}
 	
 	public void remove(InventoryItem item) {
-		contents.remove(item);
+		if(item == null)
+            return;
+        contents.remove(item);
 	}
 	
 	public void applyDiscount(Discount discount) {

@@ -54,11 +54,13 @@ public class InventoryController extends Controller {
 			try {
 				int selectedOption = inventoryMenu.getSelectedOption();
 				InventoryItem selectedItem = inventory.getItemAtIndex(selectedOption);
-				selectedItem.accept(avatar);
-				GameController gc = GameController.getInstance();
-				gc.performPassiveSkills();
-				if (selectedItem.removeable()) // Mixed Instance Cohesion :'(
-					inventory.remove(selectedItem);
+				if(selectedItem != null) {
+                    selectedItem.accept(avatar);
+                    GameController gc = GameController.getInstance();
+                    gc.performPassiveSkills();
+                    if (selectedItem.removeable()) // Mixed Instance Cohesion :'(
+                        inventory.remove(selectedItem);
+                }
 			} catch (IndexOutOfBoundsException ex) {
 				ex.printStackTrace();
 				break;
@@ -77,7 +79,7 @@ public class InventoryController extends Controller {
                 inventory.remove(selectedItem);
                 avatar.drop(selectedItem, currentTile);
                 System.out.println(selectedItem);
-                for(Tileable tileable : currentTile.getTilebles())
+                for (Tileable tileable : currentTile.getTilebles())
                     System.out.println(tileable);
             }
 			break;
