@@ -75,6 +75,10 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 	public void setEntityStatus(EntityStatus entityStatus) {
 		this.entityStatus = entityStatus;
 	}
+	
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
 
 	public Inventory getInventory() {
 		return inventory;

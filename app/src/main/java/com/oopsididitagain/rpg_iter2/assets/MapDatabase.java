@@ -10,12 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.oopsididitagain.rpg_iter2.models.AreaEffect;
+import com.oopsididitagain.rpg_iter2.models.Armory;
 import com.oopsididitagain.rpg_iter2.models.Decal;
+import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.Trap;
+import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Bank;
+import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.items.ArmorTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.items.EffectTakeableItem;
@@ -300,11 +304,39 @@ public class MapDatabase {
 				System.out.println(line);
 				tokens = line.split(",");
 				parseSkills(occupation, tokens);
-				
+				// NEW LINE inventory tag
+				line = readObjectsLine();
+				// NEW LINE start of inventories
+				Inventory inventory = new Inventory();
+				Armory armory = new Armory();
 				isDone = false;
 				while (!isDone && (line = readObjectsLine()) != null) {
-
+					System.out.println(line);
+					tokens = line.split(",");
+					/*
+					 * check if empty row, break out of this while loop end of
+					 * inventory
+					 */
+					if (tokens.length == 0)
+						break;
+					String type = tokens[0];
+					switch (type) {
+					case "Usable":
+					case "Unusable":
+					case "Weapon":
+					case "Armor":
+						break;
+					}
 				}
+				Avatar avatar = new Avatar(id, position, statBlob, armory);
+				avatar.setEntityStatus(entityStatus);
+				avatar.setFlying(isFlying);
+				avatar.setBank(bank);
+				avatar.setOccupation(occupation);
+				avatar.setInventory(inventory);
+				tiledProbeVisitables.add(avatar);
+				// line is at empty row after last item in inventory
+				// end of Avatar load
 				break;
 			case "AttackingNpc":
 				break;
@@ -367,9 +399,9 @@ public class MapDatabase {
 	}
 
 	private void parseSkills(Occupation o, String tokens[]) {
-		int i = 0;
-		while (!tokens[i].isEmpty()) {
-			for (int j = 0; j < Integer.parseInt(tokens[i]); i++) {
+		for (int i = 0; i < tokens.length; i++) {
+			int multiplier = Integer.parseInt(tokens[i]);
+			for (int j = 0; j < multiplier; j++) {
 				o.increaseMultiplier(i);
 			}
 		}
