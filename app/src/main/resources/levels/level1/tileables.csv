@@ -14,15 +14,18 @@ heal_damage_decal,4,5,AreaEffect,HEAL_DAMAGE,,,,,,,,,,,
 ,,,,,,,,,,,,,,,
 AttackingNpc,,,,,,,,,,,,,,,
 buddy,0,2,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm luigi!,,,,,,,,,,,,,,
 Inventory,,,,,,,,,,,,,,,
 Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,
 ,,,,,,,,,,,,,,,
 NonTradingNpc,,,,,,,,,,,,,,,
 sheep,4,4,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm a sheep,,,,,,,,,,,,,,
 Inventory,,,,,,,,,,,,,,,
 Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,
 ,,,,,,,,,,,,,,,
 TradingNpc,,,,,,,,,,,,,,,
 shopkeeper,9,9,SOUTH,0,FALSE,10.12,1,10,10,10,10,0,5,20,20
+Hi,I'm a shopkeeper,,,,,,,,,,,,,,
 Inventory,,,,,,,,,,,,,,,
 Weapon,chainsaw_item,4.05,ONE_HANDED_WEAPON,FALSE,5,0,3,0,0,0,0,0,20,20,

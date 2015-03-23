@@ -18,6 +18,7 @@ import com.oopsididitagain.rpg_iter2.models.Decal;
 import com.oopsididitagain.rpg_iter2.models.Inventory;
 import com.oopsididitagain.rpg_iter2.models.Position;
 import com.oopsididitagain.rpg_iter2.models.Skill;
+import com.oopsididitagain.rpg_iter2.models.Storyline;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.Trap;
@@ -441,6 +442,14 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				String story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				Storyline storyline = new Storyline(story.substring(0, story.length()-2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -507,6 +516,7 @@ public class MapDatabase {
 				attackingNpc.setFlying(isFlying);
 				attackingNpc.setBank(bank);
 				attackingNpc.setInventory(inventory);
+				attackingNpc.setStoryline(storyline);
 				tiledProbeVisitables.add(attackingNpc);
 				// line is at empty row after last item in inventory
 				// end of AttackingNpc load
@@ -526,6 +536,14 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				storyline = new Storyline(story.substring(0, story.length()-2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -592,6 +610,7 @@ public class MapDatabase {
 				nonTradingNPC.setFlying(isFlying);
 				nonTradingNPC.setBank(bank);
 				nonTradingNPC.setInventory(inventory);
+				nonTradingNPC.setStoryline(storyline);
 				tiledProbeVisitables.add(nonTradingNPC);
 				// line is at empty row after last item in inventory
 				// end of nonTradingNPC load
@@ -611,6 +630,14 @@ public class MapDatabase {
 				bank = parseBank(tokens[6]);
 				// STAT BLOB
 				statBlob = parseStatBlob(7, tokens);
+				//NEW LINE is storyline
+				line = readObjectsLine();
+				tokens = line.split(",");
+				story = "";
+				for (String s : tokens) {
+					story = story + s +", ";
+				}
+				storyline = new Storyline(story.substring(0, story.length()-2));
 				// NEW LINE inventory tag
 				line = readObjectsLine();
 				// NEW LINE start of inventories
@@ -676,6 +703,7 @@ public class MapDatabase {
 				tradingNPC.setFlying(isFlying);
 				tradingNPC.setBank(bank);
 				tradingNPC.setInventory(inventory);
+				tradingNPC.setStoryline(storyline);
 				tiledProbeVisitables.add(tradingNPC);
 				// line is at empty row after last item in inventory
 				// end of nonTradingNPC load
