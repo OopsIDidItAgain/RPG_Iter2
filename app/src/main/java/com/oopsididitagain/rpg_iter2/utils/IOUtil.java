@@ -52,7 +52,7 @@ public class IOUtil {
 	}
 	
 	private static void saveOnMapItems(GameMap gameMap, int saveNumber) {
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder("Items\n");
 
 		Queue<Entity> entities = new LinkedList<Entity>();
 		for (int i = 0; i < gameMap.getHeight(); ++i) {
@@ -72,7 +72,6 @@ public class IOUtil {
 				}
 			}
 		}
-		sb.append("\n");
 		for (Entity e: entities)
 			sb.append(e.toSaveableFormat());
 		

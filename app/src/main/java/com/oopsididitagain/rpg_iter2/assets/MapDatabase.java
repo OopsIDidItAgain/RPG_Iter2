@@ -1,6 +1,9 @@
 package com.oopsididitagain.rpg_iter2.assets;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,6 +71,26 @@ public class MapDatabase {
 				"/levels/level" + level + "/grid.csv");
 		objectsFileStream = getClass().getResourceAsStream(
 				"/levels/level" + level + "/tileables.csv");
+
+		gridReader = new BufferedReader(new InputStreamReader(gridFileStream));
+		objectsReader = new BufferedReader(new InputStreamReader(
+				objectsFileStream));
+
+		readTerrain();
+		setTiles();
+		readObjects();
+	}
+
+	public MapDatabase(int level, File grid, File tileables) {
+		tiledEntityVisitables = new ArrayList<TiledEntityVisitable>();
+		tiledProbeVisitables = new ArrayList<TiledProbeVisitable>();
+		try {
+			gridFileStream = new FileInputStream(grid);
+			objectsFileStream = new FileInputStream(tileables);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		gridReader = new BufferedReader(new InputStreamReader(gridFileStream));
 		objectsReader = new BufferedReader(new InputStreamReader(
@@ -186,8 +209,11 @@ public class MapDatabase {
 
 		while ((line = readObjectsLine()) != null) {
 			System.out.println(line);
-			String[] tokens = line.split(",");
+			String[] tokens = line.trim().split(",");
 			String SAVED_TYPE = tokens[0];
+			// empty row, but newline char
+			if (SAVED_TYPE.length() == 0)
+				break;
 			boolean isDone = false;
 			/* Do switch on typestuff */
 			switch (SAVED_TYPE) {
@@ -201,6 +227,9 @@ public class MapDatabase {
 					if (tokens.length == 0)
 						break;
 					String id = tokens[0];
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					int x = Integer.parseInt(tokens[1]);
 					int y = Integer.parseInt(tokens[2]);
 					Position position = new Position(y, x);
@@ -325,6 +354,9 @@ public class MapDatabase {
 					 */
 					if (tokens.length == 0)
 						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
@@ -347,14 +379,14 @@ public class MapDatabase {
 						price = parsePrice(tokens[2]);
 						WeaponItemType weaponType = parseWeaponType(tokens[3]);
 						boolean isEquipped = parseBoolean(tokens[4]);
-						
+
 						int rank = Integer.parseInt(tokens[5]);
 						sb = parseStatBlob(6, tokens);
 						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
 								iid, price, sb, weaponType, rank);
 						inventory.add(weaponItem);
 						// do logic for Armory
-						if(isEquipped){
+						if (isEquipped) {
 							armory.equip(weaponItem);
 						}
 						break;
@@ -370,7 +402,7 @@ public class MapDatabase {
 								iid, price, sb, rank, armorType);
 						inventory.add(armorItem);
 						// do logic for Armory
-						if(isEquipped){
+						if (isEquipped) {
 							armory.equip(armorItem);
 						}
 						break;
@@ -416,6 +448,9 @@ public class MapDatabase {
 					 */
 					if (tokens.length == 0)
 						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
@@ -438,7 +473,7 @@ public class MapDatabase {
 						price = parsePrice(tokens[2]);
 						WeaponItemType weaponType = parseWeaponType(tokens[3]);
 						boolean isEquipped = parseBoolean(tokens[4]);
-						
+
 						int rank = Integer.parseInt(tokens[5]);
 						sb = parseStatBlob(6, tokens);
 						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
@@ -498,6 +533,9 @@ public class MapDatabase {
 					 */
 					if (tokens.length == 0)
 						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
@@ -520,7 +558,7 @@ public class MapDatabase {
 						price = parsePrice(tokens[2]);
 						WeaponItemType weaponType = parseWeaponType(tokens[3]);
 						boolean isEquipped = parseBoolean(tokens[4]);
-						
+
 						int rank = Integer.parseInt(tokens[5]);
 						sb = parseStatBlob(6, tokens);
 						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
@@ -580,6 +618,9 @@ public class MapDatabase {
 					 */
 					if (tokens.length == 0)
 						break;
+					// empty row, but newline char
+					if (tokens.length == 1 && tokens[0].length() == 0)
+						break;
 					String type = tokens[0];
 					switch (type) {
 					case "Usable":
@@ -602,7 +643,7 @@ public class MapDatabase {
 						price = parsePrice(tokens[2]);
 						WeaponItemType weaponType = parseWeaponType(tokens[3]);
 						boolean isEquipped = parseBoolean(tokens[4]);
-						
+
 						int rank = Integer.parseInt(tokens[5]);
 						sb = parseStatBlob(6, tokens);
 						InventoryWeaponItem weaponItem = new InventoryWeaponItem(
@@ -776,15 +817,15 @@ public class MapDatabase {
 	}
 
 	private StatBlob parseStatBlob(int start, String[] tokens) {
-		StatBlob statBlob = new StatBlob(Integer.parseInt(tokens[start]),
-				Integer.parseInt(tokens[start + 1]),
-				Integer.parseInt(tokens[start + 2]),
-				Integer.parseInt(tokens[start + 3]),
-				Integer.parseInt(tokens[start + 4]),
-				Integer.parseInt(tokens[start + 5]),
-				Integer.parseInt(tokens[start + 6]),
-				Integer.parseInt(tokens[start + 7]),
-				Integer.parseInt(tokens[start + 8]));
+		StatBlob statBlob = new StatBlob(Double.parseDouble(tokens[start]),
+				Double.parseDouble(tokens[start + 1]),
+				Double.parseDouble(tokens[start + 2]),
+				Double.parseDouble(tokens[start + 3]),
+				Double.parseDouble(tokens[start + 4]),
+				Double.parseDouble(tokens[start + 5]),
+				Double.parseDouble(tokens[start + 6]),
+				Double.parseDouble(tokens[start + 7]),
+				Double.parseDouble(tokens[start + 8]));
 		return statBlob;
 	}
 

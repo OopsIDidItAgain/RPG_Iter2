@@ -14,29 +14,34 @@ import com.oopsididitagain.rpg_iter2.utils.Tileable;
 import com.oopsididitagain.rpg_iter2.utils.TileablePriority;
 import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 
-public class InteractiveItem extends PositionedGameObject implements TiledEntityVisitable, EntityVisitable {
-	private InventoryItem requirement; 
+public class InteractiveItem extends PositionedGameObject implements
+		TiledEntityVisitable, EntityVisitable {
+	private InventoryItem requirement;
 	private Tile target;
 	private boolean fulfilled = false;
 	private Terrain resultant;
 
-	private InteractiveItem(String id, Position position, Tile target, Terrain resultant) {
+	private InteractiveItem(String id, Position position, Tile target,
+			Terrain resultant) {
 		super(id, position);
 		this.target = target;
 		this.resultant = resultant;
 	}
-	
-	public InteractiveItem(String id, Position position, Tile target, Terrain resultant, InventoryEquipableItem requirement) {
+
+	public InteractiveItem(String id, Position position, Tile target,
+			Terrain resultant, InventoryEquipableItem requirement) {
 		this(id, position, target, resultant);
 		this.requirement = requirement;
 	}
 
-	public InteractiveItem(String id, Position position, Tile target, Terrain resultant, InventoryUsableItem requirement) {
+	public InteractiveItem(String id, Position position, Tile target,
+			Terrain resultant, InventoryUsableItem requirement) {
 		this(id, position, target, resultant);
 		this.requirement = requirement;
 	}
 
-	public InteractiveItem(String id, Position position, Tile target, Terrain resultant, InventoryUnusableItem requirement) {
+	public InteractiveItem(String id, Position position, Tile target,
+			Terrain resultant, InventoryUnusableItem requirement) {
 		this(id, position, target, resultant);
 		this.requirement = requirement;
 	}
@@ -60,7 +65,7 @@ public class InteractiveItem extends PositionedGameObject implements TiledEntity
 	public void accept(Entity entity) throws InvalidMovementException {
 		entity.visit(this);
 	}
-	
+
 	public boolean isFufilled() {
 		return fulfilled;
 	}
@@ -83,11 +88,12 @@ public class InteractiveItem extends PositionedGameObject implements TiledEntity
 
 	@Override
 	public String toSaveableFormat() {
-		String[] arr =  { getId(), Integer.toString(getX()), Integer.toString(getY()),
-			Integer.toString(target.getPosition().getX()), Integer.toString(target.getPosition().getY()), 
-			"InteractiveItem", resultant.toString(), requirement.getId() };
+		String[] arr = { getId(), Integer.toString(getX()),
+				Integer.toString(getY()), "InteractiveItem",
+				Integer.toString(target.getPosition().getX()),
+				Integer.toString(target.getPosition().getY()),
+				resultant.toString(), requirement.getId() };
 		return IOUtil.commaSeperate(arr);
 	}
-
 
 }
