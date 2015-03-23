@@ -33,6 +33,7 @@ public class Game {
 		this.tutorial = tutorial;
 
 		initialize();
+		IOUtil.saveOnMapItems(gameMap);
 	}
 	
 	public Game(Avatar avatar, int level) {
@@ -41,7 +42,6 @@ public class Game {
 		
 		initialize();
 		
-		IOUtil.saveOnMapItems(gameMap);
 	}
 	
 	public Game( Avatar avatar, GameMap gameMap){
@@ -112,7 +112,7 @@ public class Game {
 		/* -------------
 		 * BIG DUMP AT THE END
 		 * ------------------ */
-		if (level == 1) {
+		/*if (level == 1) {
 			Position position2 = new Position(3,0);
 			
 			Position position3 = new Position(6, 2);
@@ -168,7 +168,7 @@ public class Game {
 			listOfNpcs.add(buddy);
 			listOfNpcs.add(sheep);
 			listOfNpcs.add(shopkeeper);
-		}
+		}*/
 	}
 
 }

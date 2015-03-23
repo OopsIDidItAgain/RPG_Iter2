@@ -51,14 +51,11 @@ public class IOUtil {
 			for (int j = 0; j < gameMap.getWidth(); ++j) {
 				Tile tile = gameMap.getTileAt(new Position(i, j));
 				LinkedList<Tileable> tileables = tile.getTilebles();
-				System.out.println(tileables.size());
 				for (Tileable tileable: tileables) {
 					try {
 						PositionedGameObject positionedGameObject = (PositionedGameObject) tileable;
-						if (positionedGameObject instanceof Entity) {
-							System.out.println("HEY");
+						if (positionedGameObject instanceof Entity) 
 							entities.offer((Entity)positionedGameObject);
-						}
 						else
 							sb.append(positionedGameObject.toSaveableFormat() + "\n");
 					} catch (Exception ex) {
