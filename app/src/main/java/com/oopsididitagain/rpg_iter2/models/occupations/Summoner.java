@@ -100,6 +100,7 @@ public class Summoner extends Occupation{
 		LinkedList<String> skillStrings = new LinkedList<String>();
 		skillStrings.add(Skill.BARGAIN);
 		skillStrings.add(Skill.OBSERVATION);
+		skillStrings.add(Skill.BINDWOUNDS);
 		skillStrings.add(Skill.ENCHANTMENT);
 		skillStrings.add(Skill.BOON);
 		skillStrings.add(Skill.BANE);
@@ -127,43 +128,48 @@ public class Summoner extends Occupation{
 			System.out.println(skill.getName() + " "  + skill.getMultiplier());
 		}
 		else if(selop == 2){
-			if(gameSkillList.size() >= 5){
-				Skill skill = gameSkillList.get(2);
+			Skill skill = gameSkillList.get(selop);
+			skill.increaseMultiplier();
+			System.out.println(skill.getName() + " "  + skill.getMultiplier());
+		}
+		else if(selop == 3){
+			if(gameSkillList.size() >= 6){
+				Skill skill = gameSkillList.get(3);
 				skill.increaseMultiplier();
 				System.out.println(skill.getName() + " "  + skill.getMultiplier());
-				Skill skill1 = gameSkillList.get(3);
+				Skill skill1 = gameSkillList.get(4);
 				skill1.increaseMultiplier();
 				System.out.println(skill1.getName() + " "  + skill1.getMultiplier());
-				Skill skill2 = gameSkillList.get(4);
+				Skill skill2 = gameSkillList.get(5);
 				skill2.increaseMultiplier();
 				System.out.println(skill2.getName() + " "  + skill2.getMultiplier());
 			}
-		}else if(selop == 3){
-			if(gameSkillList.size() >= 8){
-				Skill skill = gameSkillList.get(5);
+		}else if(selop == 4){
+			if(gameSkillList.size() >= 9){
+				Skill skill = gameSkillList.get(6);
 				skill.increaseMultiplier();
 				System.out.println(skill.getName() + " "  + skill.getMultiplier());
-				Skill skill1 = gameSkillList.get(6);
+				Skill skill1 = gameSkillList.get(7);
 				skill1.increaseMultiplier();
 				System.out.println(skill1.getName() + " "  + skill1.getMultiplier());
-				Skill skill2 = gameSkillList.get(7);
+				Skill skill2 = gameSkillList.get(8);
 				skill2.increaseMultiplier();
 				System.out.println(skill2.getName() + " "  + skill2.getMultiplier());
 			}
 			
-		}else if(selop == 4){
-			if(gameSkillList.size() >= 10){
-				Skill skill = gameSkillList.get(8);
+		}else if(selop == 5){
+			if(gameSkillList.size() >= 11){
+				Skill skill = gameSkillList.get(9);
 				skill.increaseMultiplier();
 				System.out.println(skill.getName() + " "  + skill.getMultiplier());
-				Skill skill1 = gameSkillList.get(9);
+				Skill skill1 = gameSkillList.get(10);
 				skill1.increaseMultiplier();
 				System.out.println(skill1.getName() + " "  + skill1.getMultiplier());
-				Skill skill2 = gameSkillList.get(10);
+				Skill skill2 = gameSkillList.get(11);
 				skill2.increaseMultiplier();
 				System.out.println(skill2.getName() + " "  + skill2.getMultiplier());
 			}
-		}else if(selop == 5){
+		}else if(selop == 6){
 			Skill skill = gameSkillList.get(selop);
 			skill.increaseMultiplier();
 		}
@@ -175,9 +181,10 @@ public class Summoner extends Occupation{
 		list.add(gameSkillList.get(0));
 		list.add(gameSkillList.get(1));
 		list.add(gameSkillList.get(2));
-		list.add(gameSkillList.get(5));
-		list.add(gameSkillList.get(8));
-		list.add(gameSkillList.get(11));
+		list.add(gameSkillList.get(3));
+		list.add(gameSkillList.get(7));
+		list.add(gameSkillList.get(10));
+		list.add(gameSkillList.get(12));
 		return list;
 	}
 
@@ -236,26 +243,29 @@ public class Summoner extends Occupation{
 			case SKILLTWO: 
 				skill = gameSkillList.get(1);
 				break;
-			case SKILLTHREE:
-				number = random.nextInt(4 - 2 + 1) + 2;
-				System.out.println(number);
-				skill = getRandomActiveSkill(number);
-				System.out.println(skill.getName());
+			case SKILLTHREE: 
+				skill = gameSkillList.get(2);
 				break;
 			case SKILLFOUR:
-				number = random.nextInt(7 - 5 + 1) + 5;
+				number = random.nextInt(5 - 3 + 1) + 3;
 				System.out.println(number);
 				skill = getRandomActiveSkill(number);
 				System.out.println(skill.getName());
 				break;
-			case SKILLFIVE: 
-				number = random.nextInt(10 - 8 + 1) + 8;
+			case SKILLFIVE:
+				number = random.nextInt(8 - 6 + 1) + 6;
 				System.out.println(number);
 				skill = getRandomActiveSkill(number);
 				System.out.println(skill.getName());
 				break;
 			case SKILLSIX: 
-				skill = gameSkillList.get(11);
+				number = random.nextInt(11 - 9 + 1) + 9;
+				System.out.println(number);
+				skill = getRandomActiveSkill(number);
+				System.out.println(skill.getName());
+				break;
+			case SKILLSEVEN: 
+				skill = gameSkillList.get(12);
 				break;
 			default: return null;
 			}

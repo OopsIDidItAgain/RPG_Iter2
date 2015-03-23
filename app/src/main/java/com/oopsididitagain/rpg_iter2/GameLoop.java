@@ -23,6 +23,7 @@ public class GameLoop {
 	public GameLoop(){   
 		controller = MainMenuController.getInstance();
 		this.modelViewInteraction = controller.populateInteraction();
+
 		keyboardInput = KeyBoardInput.getInstance();
 		this.view = new View();
 		view.addKeyListener(keyboardInput);
@@ -42,9 +43,9 @@ public class GameLoop {
 		Controller temp = controller;
 		Command command = CustomControlsHandler.getInstance().getKeyboardKeyCommand(keyboardInput.getInput()); 
 		controller = controller.takeInputAndUpdate(command);
-		if(!controller.equals(temp)) {
+		//if(!controller.equals(temp)) {
 			modelViewInteraction = controller.populateInteraction();
-		}
+		//}
 		
 	}
 

@@ -62,6 +62,8 @@ public abstract class Entity extends PositionedGameObject implements Positionabl
 		return position.getDirection();
 	}
 
+    public void setDirection(Direction dir){ this.position.setDirection(dir);}
+
 	public void changeStatus(EntityStatusModifier entityStatusModifier){
 		entityStatusModifier.changeStatus(this);
 	}

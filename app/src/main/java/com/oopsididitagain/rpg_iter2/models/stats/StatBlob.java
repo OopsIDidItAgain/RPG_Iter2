@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class StatBlob {
 
-	public final static StatBlob SNEAK_DEFAULT = new StatBlob(0, 10, 50, 20, 20, 0, 50, 0, 0);
-	public final static StatBlob SMASHER_DEFAULT = new StatBlob(0, 50, 20, 10, 40, 0, 25, 0, 0);
-	public final static StatBlob SUMMONER_DEFAULT = new StatBlob(0, 15, 20, 50, 10, 0, 25, 0, 0);
+	public final static StatBlob SNEAK_DEFAULT = new StatBlob(0, 10, 50, 20, 20, 0, 50, 20, 0);
+	public final static StatBlob SMASHER_DEFAULT = new StatBlob(0, 50, 20, 10, 40, 0, 25, 20, 0);
+	public final static StatBlob SUMMONER_DEFAULT = new StatBlob(0, 15, 20, 50, 10, 0, 25, 20, 0);
 	
 	//primary stats
 	private Stat livesLeft;
@@ -238,6 +238,17 @@ public class StatBlob {
 		statMap.put(9, this.manaAmount);
 		statStringMap.put(9,"Mana Amount");
 		
+	}
+
+	public void lowerMovementSpeedBy(int speedDifference) {
+		if(movement.getValue() - speedDifference < 0 ){
+			this.movement.setValue(1);
+		}
+		this.movement.subtract(speedDifference);
+	}
+	
+	public void raiseMovementSpeedBy(int speedDifference) {
+		this.movement.add(speedDifference);
 	}
 	
 }

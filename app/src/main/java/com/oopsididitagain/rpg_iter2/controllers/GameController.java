@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
+import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.AvatarCreationMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
 import com.oopsididitagain.rpg_iter2.model_view_interaction.GameViewInteraction;
-import com.oopsididitagain.rpg_iter2.models.Game;
-import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.models.Position;
-import com.oopsididitagain.rpg_iter2.models.Skill;
-import com.oopsididitagain.rpg_iter2.models.Tile;
+import com.oopsididitagain.rpg_iter2.models.*;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.EntityStatus;
 import com.oopsididitagain.rpg_iter2.models.entities.Npc;
@@ -35,8 +33,8 @@ public class GameController extends Controller {
 	private Avatar avatar;
 	private GameMap gameMap;
 	private EntityMapInteraction entityMapInteraction;
-	private boolean isFlying = false;
 	private boolean canMove = true;
+	private static SoundAssets sa = new SoundAssets();
 
 	private GameController() {
 
@@ -47,13 +45,13 @@ public class GameController extends Controller {
 		this.avatar = g.getAvatar();
 		this.gameMap = g.getGameMap();
 		createEntityMapInteraction();
-
 	}
 
 	public static GameController getInstance() {
 		if (instance == null) {
 			instance = new GameController();
 		}
+		sa.playBgClip("main");
 		return instance;
 	}
 
@@ -70,44 +68,60 @@ public class GameController extends Controller {
 		switch (command) {
 		case MOVE_SOUTH:
 			targetDirection = Direction.SOUTH;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTH:
 			targetDirection = Direction.NORTH;
+			sa.playClip("beep");
 			break;
 		case MOVE_WEST:
 			targetDirection = Direction.WEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_EAST:
 			targetDirection = Direction.EAST;
+			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHWEST:
 			targetDirection = Direction.SOUTHWEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_SOUTHEAST:
 			targetDirection = Direction.SOUTHEAST;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTHWEST:
 			targetDirection = Direction.NORTHWEST;
+			sa.playClip("beep");
 			break;
 		case MOVE_NORTHEAST:
 			targetDirection = Direction.NORTHEAST;
+			sa.playClip("beep");
 			break;
 		case INVENTORY:
-			c = InventoryController.getInstance();
+			sa.playClip("inventory");
+            InventoryController ic = InventoryController.getInstance();
+            ic.setCurrentTile(gameMap.getTileAt(avatar.getPosition()));
+			ic.setAvatar(avatar);
+			c = ic;
 			break;
 		case PAUSE:
 			c = PauseMenuController.getInstance();
 			break;
 		case SKILLALLOCATION:
 			c = SkillPointAllocationController.getInstance();
+			break;
 		case FLIGHT:
-			avatar.setFlying(isFlying);
-			isFlying = !isFlying;
+            if(avatar.isCurrentlyFlying()){
+                if(gameMap.getTileAt(avatar.getPosition()).getTerrain() != Terrain.WATER)
+			        avatar.setFlying(true);
+            }else{
+                avatar.setFlying(false);
+            }
 			break;
 		default:
 			break;
 		}
-
 
 		if (targetDirection != null
 				&& canMove
@@ -117,6 +131,7 @@ public class GameController extends Controller {
 																					// a
 																					// directional
 																				// button
+            avatar.setDirection(targetDirection);																		// button
 			// check if we can move in the requested direction
 			Position toPosition = avatar.getPosition()
 					.createPositionAtDirection(targetDirection);
@@ -124,12 +139,12 @@ public class GameController extends Controller {
 					toPosition);
 			
 			// check if teleporter is there
-			for (Tileable tev: gameMap.getTileAt(toPosition).getTilebles()) {
-				if (tev.getId().equals("teleporter")) {
-					Position o = new Position(0,0);
-					avatar.move(gameMap.getTileAt(avatar.getPosition()), gameMap.getTileAt(o), o);
-					incrementLevel();
-				}
+				// teleporter is always at the bottom right corner
+			if (avatar.getX() == gameMap.getWidth()-1 &&
+					avatar.getY() == gameMap.getHeight()-1) {
+				Position o = new Position(0,0);
+				avatar.move(gameMap.getTileAt(avatar.getPosition()), gameMap.getTileAt(o), o);
+				return incrementLevel();
 			}
 
 			if (!successfulMove) {
@@ -160,13 +175,22 @@ public class GameController extends Controller {
 	}
 	
 	private GameController incrementLevel() {
-		GameController temp = this;
+		
+		Position o = new Position(0,0,Direction.SOUTH);
+		
+		
 		int currentLevel = game.getLevel();
-		Game newGame = new Game(avatar, currentLevel + 1);
-		game = newGame;
-		gameMap = newGame.getGameMap();
-		isFlying = false;
-		entityMapInteraction = new EntityMapInteraction(gameMap);
+
+		Game newgame = new Game(this.avatar, ++currentLevel);
+		this.setGame(newgame);
+		avatar.move(gameMap.getTileAt(avatar.getPosition()), 
+				gameMap.getTileAt(o), o);
+		
+		// gameMap = newgame.getGameMap();
+		// isFlying = false;
+		// entityMapInteraction = new EntityMapInteraction(gameMap);
+		// takeInputAndUpdate(Command.MOVE_NORTH);
+		populateInteraction();
 		return this;
 	}
 

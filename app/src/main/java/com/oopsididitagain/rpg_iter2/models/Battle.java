@@ -6,13 +6,10 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oopsididitagain.rpg_iter2.assets.SoundAssets;
 import com.oopsididitagain.rpg_iter2.controllers.BattleController;
 import com.oopsididitagain.rpg_iter2.controllers.Controller;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.ActionMenuController;
 import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.GameOverController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.InventoryController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.PauseMenuController;
-import com.oopsididitagain.rpg_iter2.controllers.menu_controllers.SkillPointAllocationController;
 import com.oopsididitagain.rpg_iter2.models.entities.AttackingNPC;
 import com.oopsididitagain.rpg_iter2.models.entities.Avatar;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
@@ -35,6 +32,9 @@ public class Battle {
 	private Position oldPosition;
 	private boolean canMove = true;
 	private EntityMapInteraction entityMapInteraction;
+	//private SoundAssets sa = new SoundAssets();
+
+	private Projectile p;
 
 	public Battle() {
 		monsters = new LinkedList<Npc>();
@@ -49,6 +49,8 @@ public class Battle {
 		battleground = new GameMap(tiles);
 
 		entityMapInteraction = new EntityMapInteraction(battleground);
+		
+		//sa.playClip("battle");
 
 	} // use this constructor if you want to set monsters and party using
 		// setMonsters() and setParty()
@@ -309,8 +311,6 @@ public class Battle {
 				if (e != null) {// if we did run into an npc...
 					AvatarEntityInteraction.avatarAttack(newAvatar, e);
 					AvatarEntityInteraction.entityAttack(newAvatar, e);
-					if (e.statBlob().getLifeAmount() <= 0)
-						monsters.remove(e);
 					if (newAvatar.isDead())
 						controller = GameOverController.getInstance();
 				}
@@ -374,30 +374,57 @@ public class Battle {
 	}
 
 	public boolean isDone() {
-		if (monsters.isEmpty())
+		LinkedList<Npc> toRemove = new LinkedList<Npc>();
+		for (Npc npc : monsters) {
+			if (npc.statBlob().getLifeAmount() <= 0)
+				toRemove.add(npc);
+		}
+		for (Npc npc : toRemove) {
+			monsters.remove(npc);
+		}
+		if (monsters.isEmpty()) {
 			return true;
+		}
 		return false;
 	}
 
+	public Projectile getP() {
+		return p;
+	}
+
 	public Controller use() {
-		// TODO
+		Position pos = newAvatar.getPosition();
+		p = new Projectile(pos);
+		do {
+			if (battleground.tileInbounds(p.getPosition())) {
+				Tile t = battleground.getTileAt(p.getPosition());
+				Entity e = t.getEntity();
+				if (e != null) {
+					e.statBlob().merge(p.getStatBlob());
+					break;
+				}
+				p.doLogic();
+			} else {
+				break;
+			}
+		} while (battleground.tileInbounds(p.getPosition()));
 		return BattleController.getInstance();
 	}
-	
+
 	public int[] getHearts() {
 		// String heartcount = "";
 		int[] hearts = new int[2];
-		
+
 		Iterator<Entity> entityIterator = party.iterator();
-		while(entityIterator.hasNext()) {
+		while (entityIterator.hasNext()) {
 			Entity entity = entityIterator.next();
-			hearts[0] = (int)entity.statBlob().getLifeAmount();
+			hearts[0] = (int) entity.statBlob().getLifeAmount();
 		}
-		
+
 		Iterator<Npc> monsterIterator = monsters.iterator();
 		while (monsterIterator.hasNext()) {
 			Npc monster = monsterIterator.next();
-			hearts[1] = (int)monster.statBlob().getLifeAmount();
+			hearts[1] = (int) monster.statBlob().getLifeAmount();
 		}
 
 		return hearts;

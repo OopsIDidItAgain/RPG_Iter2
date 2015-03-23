@@ -26,6 +26,7 @@ public class Game {
 	int level;
 	
 	public Game(Avatar avatar, int level){
+		System.out.println("\nCreating game from level "+Integer.toString(level));
 		this.avatar = avatar;
 		this.level = level;
 		gameMap = new GameMap(new MapDatabase(level));
@@ -73,18 +74,18 @@ public class Game {
 		shopkeeper.setStoryline(new Storyline(" >> Hey, I haven't seen you around before... "));
 		shopkeeper.getInventory().add(pgo);
 		Position position10 = new Position(10, 0);
-		Trap trap1 = new Trap("trap",position10);
+		//Trap trap1 = new Trap("trap",position10);
 		gameMap.getTileAt(position).add(buddy);
 		gameMap.getTileAt(position5).add(sheep);
 		gameMap.getTileAt(position7).add(shopkeeper);
-		gameMap.getTileAt(position10).add(trap1);
+		//gameMap.getTileAt(position10).add(trap1);
 		
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);
 		listOfNpcs.add(shopkeeper);
 		
 		// TELEPORTER!
-		Position p = new Position(1,1);
+		Position p = new Position(gameMap.getHeight()-1,gameMap.getWidth()-1);
 		Teleporter door = new Teleporter("teleporter", p);
 		gameMap.getTileAt(p).add(door);
 	}
