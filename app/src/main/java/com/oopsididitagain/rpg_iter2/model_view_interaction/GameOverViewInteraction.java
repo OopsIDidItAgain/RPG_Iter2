@@ -44,12 +44,28 @@ public class GameOverViewInteraction extends ModelViewInteraction{
         for(int i =0; i<options.length; i++){
         	Option option = options[i];
             if (option.equals(gameOverMenu.getCurrentOption())){
-                g.setColor(Color.WHITE);
+                switch(option) {
+	                case StartOver:
+	                	g.setColor(Color.RED);
+	                	break;
+	                case ExitGame:
+	                	g.setColor(Color.BLUE);
+	                default:
+	                	break;
+                }
                 g2d.fillRect(buttonX,buttonY,200,50);
                 g.setColor(Color.BLACK);
                 g.drawString(option.toString(), buttonX+30, buttonY+35);
             }else{
-                g.setColor(Color.WHITE);
+                switch(option) {
+	                case StartOver:
+	                	g.setColor(Color.RED);
+	                	break;
+	                case ExitGame:
+	                	g.setColor(Color.BLUE);
+	                default:
+	                	break;
+	            }                
                 g2d.drawRect(buttonX,buttonY,200,50);
                 g.drawString(option.toString(), buttonX+30, buttonY+35);
             }

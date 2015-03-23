@@ -31,6 +31,7 @@ public class MainMenu {
 	public void previousOption() {
 		switch (currentOption) {
 		case New:
+			currentOption = Option.ExitGame;
 			break;
 		case Load:
 			currentOption = Option.New;
@@ -52,6 +53,7 @@ public class MainMenu {
 			currentOption = Option.ExitGame;
 			break;
 		case ExitGame:
+			currentOption = Option.New;
 			break;
 		default:
 			break;
