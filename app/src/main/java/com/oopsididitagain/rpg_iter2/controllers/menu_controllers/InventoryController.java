@@ -47,7 +47,7 @@ public class InventoryController extends Controller {
 		case MOVE_SOUTH: 
 		case MOVE_NORTH: 
 		case MOVE_WEST: {
-			inventoryMenu.changeMenuOption(command, inventory.size());
+			inventoryMenu.changeMenuOption(command, inventory.size()-1);
 			break;
 		}
 		case USE:
