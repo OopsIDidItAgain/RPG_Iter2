@@ -14,6 +14,7 @@ import com.oopsididitagain.rpg_iter2.models.PositionedGameObject;
 import com.oopsididitagain.rpg_iter2.models.Terrain;
 import com.oopsididitagain.rpg_iter2.models.Tile;
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
+import com.oopsididitagain.rpg_iter2.models.items.InteractiveItem;
 
 /**
  * Created by parango on 3/11/15.
@@ -55,6 +56,7 @@ public class IOUtil {
 		StringBuilder sb = new StringBuilder("Items\n");
 
 		Queue<Entity> entities = new LinkedList<Entity>();
+		Queue<InteractiveItem> interactiveItems = new LinkedList<InteractiveItem>();
 		for (int i = 0; i < gameMap.getHeight(); ++i) {
 			for (int j = 0; j < gameMap.getWidth(); ++j) {
 				Tile tile = gameMap.getTileAt(new Position(i, j));
@@ -64,6 +66,8 @@ public class IOUtil {
 						PositionedGameObject positionedGameObject = (PositionedGameObject) tileable;
 						if (positionedGameObject instanceof Entity) 
 							entities.offer((Entity)positionedGameObject);
+						else if (positionedGameObject instanceof InteractiveItem)
+							interactiveItems.offer((InteractiveItem) positionedGameObject);
 						else
 							sb.append(positionedGameObject.toSaveableFormat() + "\n");
 					} catch (Exception ex) {
@@ -72,6 +76,11 @@ public class IOUtil {
 				}
 			}
 		}
+		// Delete last newline
+		sb.deleteCharAt(sb.length() - 1);
+		for (InteractiveItem item: interactiveItems)
+			sb.append(item.toSaveableFormat() + "\n");
+		sb.append("\n");
 		for (Entity e: entities)
 			sb.append(e.toSaveableFormat());
 		
