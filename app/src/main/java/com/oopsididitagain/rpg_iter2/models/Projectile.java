@@ -1,5 +1,6 @@
 package com.oopsididitagain.rpg_iter2.models;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
@@ -21,8 +22,8 @@ public class Projectile {
 		// this.start = new Position(position.getY(), position.getX(),
 		// position.getDirection());
 		this.start = position;
-		this.x = 50 * start.getX() + 40;
-		this.y = 50 * start.getY() + 40;
+		this.x = 50 * start.getX() + 25;
+		this.y = 50 * start.getY() + 25;
 		this.speed = 20;
 		switch (position.getDirection()) {
 		case EAST:
@@ -79,7 +80,8 @@ public class Projectile {
 	}
 
 	public void render(Graphics g) {
-		g.drawOval((int) x, (int) y, 3, 3);
+		g.setColor(Color.RED);
+		g.fillOval((int) x, (int) y, 10, 10);
 	}
 
 	public Position getStart() {
@@ -91,17 +93,17 @@ public class Projectile {
 	}
 
 	public StatBlob getStatBlob() {
-		return new StatBlob(0, 0, 0, 0, 0, 0, 0, -10, 0);
+		return new StatBlob(0, 0, 0, 0, 0, 0, 0, -1, 0);
 	}
 
 	public boolean inBounds(float x, float y) {
 
 		float startx, starty, endx, endy;
 
-		startx = start.getX() * 50 + 40;
-		endx = end.getX() * 50 + 40;
-		starty = start.getY() * 50 + 40;
-		endy = end.getY() * 50 + 40;
+		startx = start.getX() * 50 + 25;
+		endx = end.getX() * 50 + 25;
+		starty = start.getY() * 50 + 25;
+		endy = end.getY() * 50 + 25;
 		System.out.println(this.x+" "+this.y+" "+x + " " + y + " " + startx + " " + endx + " " + starty
 				+ " " + endy);
 		if (start.getX() > end.getX()) {
@@ -119,7 +121,7 @@ public class Projectile {
 				return false;
 			}
 		} else {
-			if (start.getY() > start.getY()) {
+			if (start.getY() > end.getY()) {
 				if ((this.x <= endx && this.x >= startx)
 						&& (this.y <= starty && this.y >= endy)) {
 					return true;

@@ -311,8 +311,6 @@ public class Battle {
 				if (e != null) {// if we did run into an npc...
 					AvatarEntityInteraction.avatarAttack(newAvatar, e);
 					AvatarEntityInteraction.entityAttack(newAvatar, e);
-					if (e.statBlob().getLifeAmount() <= 0)
-						monsters.remove(e);
 					if (newAvatar.isDead())
 						controller = GameOverController.getInstance();
 				}
@@ -376,8 +374,15 @@ public class Battle {
 	}
 
 	public boolean isDone() {
-		if (monsters.isEmpty()) {
-			//sa.stopClip("battle");
+		LinkedList<Npc> toRemove = new LinkedList<Npc>();
+		for (Npc npc : monsters) {
+			if (npc.statBlob().getLifeAmount() <= 0)
+				toRemove.add(npc);
+		}
+		for (Npc npc : toRemove) {
+			monsters.remove(npc);
+		}
+		if (monsters.isEmpty())
 			return true;
 		}
 		return false;
@@ -405,21 +410,21 @@ public class Battle {
 		} while (battleground.tileInbounds(p.getPosition()));
 		return BattleController.getInstance();
 	}
-	
+
 	public int[] getHearts() {
 		// String heartcount = "";
 		int[] hearts = new int[2];
-		
+
 		Iterator<Entity> entityIterator = party.iterator();
-		while(entityIterator.hasNext()) {
+		while (entityIterator.hasNext()) {
 			Entity entity = entityIterator.next();
-			hearts[0] = (int)entity.statBlob().getLifeAmount();
+			hearts[0] = (int) entity.statBlob().getLifeAmount();
 		}
-		
+
 		Iterator<Npc> monsterIterator = monsters.iterator();
 		while (monsterIterator.hasNext()) {
 			Npc monster = monsterIterator.next();
-			hearts[1] = (int)monster.statBlob().getLifeAmount();
+			hearts[1] = (int) monster.statBlob().getLifeAmount();
 		}
 
 		return hearts;
