@@ -15,6 +15,7 @@ import com.oopsididitagain.rpg_iter2.models.items.WeaponTakeableItem;
 import com.oopsididitagain.rpg_iter2.models.stats.StatBlob;
 import com.oopsididitagain.rpg_iter2.utils.AreaEffectType;
 import com.oopsididitagain.rpg_iter2.utils.ArmorItemType;
+import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 import com.oopsididitagain.rpg_iter2.utils.WeaponItemType;
 
 public class Game {
@@ -79,6 +80,8 @@ public class Game {
 		listOfNpcs.add(buddy);
 		listOfNpcs.add(sheep);
 		listOfNpcs.add(shopkeeper);
+		
+		IOUtil.saveOnMapItems(gameMap);
 	}
 	public Game( Avatar avatar, GameMap gameMap){
 	

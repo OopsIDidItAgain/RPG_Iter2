@@ -1,7 +1,7 @@
 package com.oopsididitagain.rpg_iter2.models;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Collections;
+import java.util.LinkedList;
 
 import com.oopsididitagain.rpg_iter2.models.entities.Entity;
 import com.oopsididitagain.rpg_iter2.utils.Assetable;
@@ -14,14 +14,14 @@ import com.oopsididitagain.rpg_iter2.utils.TiledEntityVisitable;
 import com.oopsididitagain.rpg_iter2.utils.TiledProbeVisitable;
 
 public class Tile implements Assetable, Positionable {
-	private SortedSet<TiledEntityVisitable> entityVisitables;
-	private SortedSet<TiledProbeVisitable> probeVisitables;
+	private LinkedList<TiledEntityVisitable> entityVisitables;
+	private LinkedList<TiledProbeVisitable> probeVisitables;
 	private Position position;
 	private Terrain terrain;
 
 	public Tile(Position position, Terrain terrain) {
-		this.entityVisitables = new TreeSet<>();
-		this.probeVisitables = new TreeSet<>();
+		this.entityVisitables = new LinkedList<TiledEntityVisitable>();
+		this.probeVisitables = new LinkedList<TiledProbeVisitable>();
 		this.position = position;
 		this.terrain = terrain;
 	}
@@ -78,6 +78,7 @@ public class Tile implements Assetable, Positionable {
 	}
 
 	public void add(TiledProbeVisitable tileable) {
+		if (tileable instanceof Entity) System.out.println(((Entity)tileable).toSaveableFormat());
 		probeVisitables.add(tileable);
 	}
 	
@@ -102,11 +103,15 @@ public class Tile implements Assetable, Positionable {
 		return terrain;
 	}
 	
-	public SortedSet<Tileable> getTilebles()	 {
-		SortedSet<Tileable> tileables = new TreeSet<Tileable>();
+	public LinkedList<Tileable> getTilebles()	 {
+		LinkedList<Tileable> tileables = new LinkedList<Tileable>();
 		tileables.add(terrain);
 		tileables.addAll(entityVisitables);
 		tileables.addAll(probeVisitables);
+		Collections.sort(tileables);
+		//for (Tileable t: tileables)
+			//if (t instanceof Entity)
+				//System.out.println("Entity found: " + ((Entity)t).toSaveableFormat());
 		return tileables;
 	}
 	public void setTerrain(Terrain terrain) {

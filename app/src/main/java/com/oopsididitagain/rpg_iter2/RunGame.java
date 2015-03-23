@@ -1,11 +1,8 @@
 package com.oopsididitagain.rpg_iter2;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-
-import com.oopsididitagain.rpg_iter2.assets.MapDatabase;
-import com.oopsididitagain.rpg_iter2.models.GameMap;
-import com.oopsididitagain.rpg_iter2.utils.IOUtil;
 
 /**
  *
@@ -17,7 +14,7 @@ public class RunGame extends JFrame{
 	private static GameLoop loop;
 
 	public static void main(String[] args) throws InterruptedException {
-		/*loop = new GameLoop();
+		loop = new GameLoop();
 	    SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -27,8 +24,7 @@ public class RunGame extends JFrame{
 	    });
 
 		loop.runGame();
-		System.exit(NORMAL);*/
-		IOUtil.saveMap(new GameMap(new MapDatabase(1)));
+		System.exit(NORMAL);
 	}
 	
 	private void initialize() {
