@@ -1,7 +1,5 @@
 package com.oopsididitagain.rpg_iter2.models.menus;
 
-// import com.oopsididitagain.rpg_iter2.models.menus.MainMenu.Option;
-
 public class GameOverMenu {
 	
 	public enum Option {

@@ -12,10 +12,6 @@ import com.oopsididitagain.rpg_iter2.views.View;
 public class GameOverViewInteraction extends ModelViewInteraction{
 	private GameOverMenu gameOverMenu;
 	
-	//private MenuButton newGameButton;
-	//private MenuButton loadGameButton;
-	//private MenuButton controlsButton;
-	
 	public  GameOverViewInteraction(GameOverMenu gameOverMenu) { //constructor
 		int width = 600;
 		int height = 700;
