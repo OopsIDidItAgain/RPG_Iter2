@@ -59,6 +59,7 @@ public class MapDatabase {
 	String[][] mapGrid;
 	int mapX;
 	int mapY;
+	private Avatar avatar;
 
 	public MapDatabase(int level) {
 		tiledEntityVisitables = new ArrayList<TiledEntityVisitable>();
@@ -375,13 +376,13 @@ public class MapDatabase {
 						break;
 					}
 				}
-				Avatar avatar = new Avatar(id, position, statBlob, armory);
+				avatar = new Avatar(id, position, statBlob, armory);
 				avatar.setEntityStatus(entityStatus);
 				avatar.setFlying(isFlying);
 				avatar.setBank(bank);
 				avatar.setOccupation(occupation);
 				avatar.setInventory(inventory);
-				tiledProbeVisitables.add(avatar);
+				// tiledProbeVisitables.add(avatar);
 				// line is at empty row after last item in inventory
 				// end of Avatar load
 				break;
@@ -803,5 +804,9 @@ public class MapDatabase {
 
 	public Tile[][] getTiles() {
 		return tiles;
+	}
+
+	public Avatar getAvatar() {
+		return avatar;
 	}
 }
