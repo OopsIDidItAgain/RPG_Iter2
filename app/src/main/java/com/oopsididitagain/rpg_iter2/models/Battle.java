@@ -437,94 +437,12 @@ public class Battle {
 	public Controller useShotgun() {
 
 		Position pos = newAvatar.getPosition();
-<<<<<<< HEAD
+
 		
 		Shotgun s = new Shotgun(pos, newAvatar.getDirection());
 		
 		shotguns.add(s);
 	
-        
-		if (s.getDirection() == Direction.NORTH) {
-			for(int i = -3; i <=  3; i++){
-				for(int j = -4; j <= 0; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
-
-					Tile t = battleground.getTileAt(position);
-					Entity e = t.getEntity();
-					if (e != null  ) {
-						
-						if(!e.getId().equals("avatar")){
-							
-							e.statBlob().merge(s.getStatBlob( i ,  j));
-							
-						}
-					}
-				}
-				
-				
-			}
-			
-			
-		} else if(s.getDirection() == Direction.SOUTH) {
-			for(int i = -3; i <=  3; i++){
-				for(int j = 0; j <= 4; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
-
-					Tile t = battleground.getTileAt(position);
-					Entity e = t.getEntity();
-					if (e != null  ) {
-						
-						if(!e.getId().equals("avatar")){
-							
-							e.statBlob().merge(s.getStatBlob( i ,  j));
-							
-						}
-					}
-				}
-				
-				
-			}
-			
-		}else if(s.getDirection() == Direction.EAST) {
-			for(int i = 0; i <=  4; i++){
-				for(int j = -3; j <= 3; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
-
-					Tile t = battleground.getTileAt(position);
-					Entity e = t.getEntity();
-					if (e != null  ) {
-						
-						if(!e.getId().equals("avatar")){
-							
-							e.statBlob().merge(s.getStatBlob( i ,  j));
-							
-						}
-					}
-				}
-				
-				
-			}
-				
-				
-		}	else if(s.getDirection() == Direction.WEST) {
-			for(int i = -4; i <=  0; i++){
-				for(int j = -3; j <= 3; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
-
-					Tile t = battleground.getTileAt(position);
-					Entity e = t.getEntity();
-					if (e != null  ) {
-						
-						if(!e.getId().equals("avatar")){
-							
-							e.statBlob().merge(s.getStatBlob( i ,  j));
-							
-						}
-					}
-=======
-
-		Shotgun s = new Shotgun(pos);
-		shotguns.add(s);
 
 		Position position = position = new Position(s.getPosition().getY(), s
 				.getPosition().getX());
@@ -561,33 +479,97 @@ public class Battle {
 					break;
 
 				}
+			}
+		}
+	
+        
+		if (s.getDirection() == Direction.NORTH) {
+			for(int i = -3; i <=  3; i++){
+				for(int j = -4; j <= 0; j++){
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-				if (battleground.tileInbounds(position)) {
-					Tile t = battleground.getTileAt(position);
+					Tile t = battleground.getTileAt(p);
 					Entity e = t.getEntity();
-					if (e != null) {
+					if (e != null  ) {
+						
+						if(!e.getId().equals("avatar")){
+							
+							e.statBlob().merge(s.getStatBlob( i ,  j));
+							
+						}
+					}
+				}
+				
+				
+			}
+			
+			
+		} else if(s.getDirection() == Direction.SOUTH) {
+			for(int i = -3; i <=  3; i++){
+				for(int j = 0; j <= 4; j++){
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-						if (!e.getId().equals("avatar")) {
-							e.statBlob().merge(s.getStatBlob());
-							break;
+					Tile t = battleground.getTileAt(p);
+					Entity e = t.getEntity();
+					if (e != null  ) {
+						
+						if(!e.getId().equals("avatar")){
+							
+							e.statBlob().merge(s.getStatBlob( i ,  j));
+							
+						}
+					}
+				}
+				
+				
+			}
+			
+		}else if(s.getDirection() == Direction.EAST) {
+			for(int i = 0; i <=  4; i++){
+				for(int j = -3; j <= 3; j++){
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+
+					Tile t = battleground.getTileAt(p);
+					Entity e = t.getEntity();
+					if (e != null  ) {
+						
+						if(!e.getId().equals("avatar")){
+							
+							e.statBlob().merge(s.getStatBlob( i ,  j));
+							
+						}
+					}
+				}
+				
+				
+			}
+				
+				
+		}	else if(s.getDirection() == Direction.WEST) {
+			for(int i = -4; i <=  0; i++){
+				for(int j = -3; j <= 3; j++){
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+
+					Tile t = battleground.getTileAt(p);
+					Entity e = t.getEntity();
+					if (e != null  ) {
+						
+						if(!e.getId().equals("avatar")){
+							
+							e.statBlob().merge(s.getStatBlob( i ,  j));
+							
 						}
 					}
 
-				} else {
-					break;
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
 				}
-
 			}
-<<<<<<< HEAD
-				
-				
+			
 		}else if(s.getDirection() == Direction.NORTHWEST) {
 			for(int i = -4; i <=  -1; i++){
 				for(int j = -4; j <= -1; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-					Tile t = battleground.getTileAt(position);
+					Tile t = battleground.getTileAt(p);
 					Entity e = t.getEntity();
 					if (e != null  ) {
 						
@@ -606,9 +588,9 @@ public class Battle {
 		}else if(s.getDirection() == Direction.SOUTHWEST) {
 			for(int i = -4; i <=  -1; i++){
 				for(int j = 1; j <= 4; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-					Tile t = battleground.getTileAt(position);
+					Tile t = battleground.getTileAt(p);
 					Entity e = t.getEntity();
 					if (e != null  ) {
 						
@@ -627,9 +609,9 @@ public class Battle {
 		}else if(s.getDirection() == Direction.NORTHEAST) {
 			for(int i = 1; i <=  4; i++){
 				for(int j = -4; j <= -1; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-					Tile t = battleground.getTileAt(position);
+					Tile t = battleground.getTileAt(p);
 					Entity e = t.getEntity();
 					if (e != null  ) {
 						
@@ -648,9 +630,9 @@ public class Battle {
 		}else if(s.getDirection() == Direction.SOUTHEAST) {
 			for(int i = 1; i <=  4; i++){
 				for(int j = 1; j <= 4; j++){
-					Position position = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
+					Position p = new Position(s.getPosition().getY() + j,s.getPosition().getX() + i);
 
-					Tile t = battleground.getTileAt(position);
+					Tile t = battleground.getTileAt(p);
 					Entity e = t.getEntity();
 					if (e != null  ) {
 						
@@ -671,11 +653,7 @@ public class Battle {
 	
 			
 		
-=======
 
-		}
-
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
 		return BattleController.getInstance();
 
 	}
@@ -693,11 +671,7 @@ public class Battle {
 				Position position = new Position(b.getPosition().getY() + j, b
 						.getPosition().getX() + i);
 				if (battleground.tileInbounds(position)) {
-<<<<<<< HEAD
-=======
-					System.out
-							.println(position.getX() + " ," + position.getY());
->>>>>>> f570a547ede1a76e21b7ac14f85fc1ad444cb5b0
+
 
 					Tile t = battleground.getTileAt(position);
 					Entity e = t.getEntity();
