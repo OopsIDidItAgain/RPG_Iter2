@@ -22,6 +22,7 @@ public class Projectile {
 		// this.start = new Position(position.getY(), position.getX(),
 		// position.getDirection());
 		this.start = position;
+		this.end = position;
 		this.x = 50 * start.getX() + 25;
 		this.y = 50 * start.getY() + 25;
 		this.speed = 20;

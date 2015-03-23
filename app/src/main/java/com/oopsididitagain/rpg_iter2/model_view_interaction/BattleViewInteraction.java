@@ -3,6 +3,7 @@ package com.oopsididitagain.rpg_iter2.model_view_interaction;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.SortedSet;
 
 import com.oopsididitagain.rpg_iter2.assets.Assets;
@@ -56,11 +57,18 @@ public class BattleViewInteraction extends ModelViewInteraction {
 	}
 
 	private void drawProjectile(Graphics g) {
-		if ((battle.getP() != null)
-				&& (battle.getP().inBounds(battleground.getWidth() * 50,
-						battleground.getHeight() * 50))) {
-			battle.getP().update();
-			battle.getP().render(g);
+		LinkedList<Projectile> toRemove = new LinkedList<Projectile>();
+		for (Projectile p : battle.getProjectiles()) {
+			if (p.inBounds(battleground.getWidth() * 50,
+					battleground.getHeight() * 50)) {
+				p.update();
+				p.render(g);
+			} else {
+				toRemove.add(p);
+			}
+		}
+		for (Projectile projectile : toRemove) {
+			battle.removeProjectile(p);
 		}
 	}
 
@@ -113,7 +121,7 @@ public class BattleViewInteraction extends ModelViewInteraction {
 
 		}
 	}
-	
+
 	private void drawHearts(Graphics g) {
 		int[] hearts = battle.getHearts();
 
@@ -121,14 +129,22 @@ public class BattleViewInteraction extends ModelViewInteraction {
 		// avatar
 		Image heart = assets.getImage("heart_decal");
 		for (int i = 0; i < hearts[0]; i++) {
-			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
-			if (i % 7 == 6) { height += 20; next = 0;}
+			g.drawImage(heart, width + (20 * next++), height, 20, 20, null);
+			if (i % 7 == 6) {
+				height += 20;
+				next = 0;
+			}
 		}
-		
-		height = 420; width = 330; next = 0;
+
+		height = 420;
+		width = 330;
+		next = 0;
 		for (int i = 0; i < hearts[1]; i++) {
-			g.drawImage(heart, width + (20*next++), height, 20, 20, null);
-			if (i % 7 == 6) { height += 20; next = 0;}
+			g.drawImage(heart, width + (20 * next++), height, 20, 20, null);
+			if (i % 7 == 6) {
+				height += 20;
+				next = 0;
+			}
 		}
 	}
 

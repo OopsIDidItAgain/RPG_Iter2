@@ -18,6 +18,7 @@ public class TradingNPC extends NonAttackingNPC{
 		String question = " >> Wanna trade some stuff?!";
 		QuestionMenuController qmc = QuestionMenuController.getInstance();
 		qmc.setQuestion(question);
+		qmc.setNpc(this);
 		return qmc;
 		
 	}
